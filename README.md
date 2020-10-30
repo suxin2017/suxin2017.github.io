@@ -4,14 +4,6 @@
 
 *立志成为一名轮子哥的小菜鸟*
 
-## 仓库
-
-[![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=suxin2017&repo=is&show_owner=true)](https://github.com/anuraghazra/github-readme-stats)
-[![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=suxin2017&repo=markdown-website&show_owner=true)](https://github.com/anuraghazra/github-readme-stats)
-[![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=suxin2017&repo=bxer-ui&show_owner=true)](https://github.com/anuraghazra/github-readme-stats)
-[![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=suxin2017&repo=javascript-design-pattern&show_owner=true)](https://github.com/anuraghazra/github-readme-stats)
-
-
 ## 统计
 
 ### github生涯
