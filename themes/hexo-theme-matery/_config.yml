@@ -66,8 +66,8 @@ cover:
 dream:
   enable: true
   showTitle: true
-  title: 我的梦想
-  text: 不是每个人都应该像我这样去建造一座水晶大教堂，但是每个人都应该拥有自己的梦想，设计自己的梦想，追求自己的梦想，实现自己的梦想。梦想是生命的灵魂，是心灵的灯塔，是引导人走向成功的信仰。有了崇高的梦想，只要矢志不渝地追求，梦想就会成为现实，奋斗就会变成壮举，生命就会创造奇迹。——罗伯·舒乐
+  title: 智慧的奥秘
+  text: 打雷要下雨 雷欧。 什么? 下雨要打伞 雷欧。 这我也知道! 天冷穿棉袄 雷欧 雷诶欧。 天热扇扇子。 智慧就是. 说啊! 为什么会打雷下雨. 为什么? 为什么有冬天夏天? 是个难题。 不知道的奥秘万万千千， 智慧简单又不简单。 ——海尔兄弟
 
 # Whether to display the musics.
 # 是否在首页显示音乐.
@@ -203,7 +203,7 @@ clicklove:
 # profile in about page, including avatars, career, and personal introductions.
 # 在”关于”页面中配置个人信息，包括头像、职业和个人介绍.
 profile:
-  avatar: https://avatars3.githubusercontent.com/u/28481035?s=460&u=a021c71b1438a20f6218bb121fc1bab7f3dc39f4&v=4
+  avatar: /medias/avatar.jpeg
   career: 中国花式搬砖冠军
   introduction: 一个喜欢写玩具给自己玩的小孩子
 
@@ -574,8 +574,8 @@ banner:
 #ICP备案信息尾部显示
 icp:
   enable: false
-  url: # 备案链接
-  text: # 备案信息
+  url: http://beian.miit.gov.cn
+  text: 京ICP备2020041991号
 
 # CDN访问加速
 # 第一次使用本功能，一定要先配置url，再`hexo cl && hexo g && hexo d`部署到GitHub的仓库，注意！必须是GitHub的仓库！
