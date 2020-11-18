@@ -393,7 +393,7 @@ busuanziStatistics:
 # 添加 Google Analytics 配置
 googleAnalytics:
   enable: false
-  id:
+  id: G-RFGTVED02M
 
 # Add baidu analytics configuration
 # 添加 baidu Analytics 配置
