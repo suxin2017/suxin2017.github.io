@@ -399,7 +399,7 @@ googleAnalytics:
 # 添加 baidu Analytics 配置
 baiduAnalytics:
   enable: false
-  id:
+  id: code-rUvhL1QyD3
 
 # 百度搜索资源平台提交链接
 baiduPush: true
