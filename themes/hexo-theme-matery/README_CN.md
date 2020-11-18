@@ -2,7 +2,7 @@
 
 [![HitCount](http://hits.dwyl.io/blinkfox/hexo-theme-matery.svg)](http://hits.dwyl.io/blinkfox/hexo-theme-matery) [![Gitter](https://img.shields.io/gitter/room/blinkfox/hexo-theme-matery.svg)](https://gitter.im/hexo-theme-matery/Lobby?utm_source=badge) [![GitHub issues](https://img.shields.io/github/issues/blinkfox/hexo-theme-matery.svg)](https://github.com/blinkfox/hexo-theme-matery/issues) [![GitHub license](https://img.shields.io/github/license/blinkfox/hexo-theme-matery.svg)](https://github.com/blinkfox/hexo-theme-matery/blob/master/LICENSE) [![Download](https://img.shields.io/badge/downloads-master-green.svg)](https://codeload.github.com/blinkfox/hexo-theme-matery/zip/master) [![Hexo Version](https://img.shields.io/badge/hexo-%3E%3D%203.0-blue.svg)](http://hexo.io) [![GitHub forks](https://img.shields.io/github/forks/blinkfox/hexo-theme-matery.svg)](https://github.com/blinkfox/hexo-theme-matery/network) [![GitHub stars](https://img.shields.io/github/stars/blinkfox/hexo-theme-matery.svg)](https://github.com/blinkfox/hexo-theme-matery/stargazers)
 
-[🇺🇸English Document](README.md) | [国内访问示例 (http://blinkfox.com)](http://blinkfox.com) | [Github 部署演示示例 (https://blinkfox.github.io)](https://blinkfox.github.io) | QQ 交流群1（已满）: [`926552981`](https://jq.qq.com/?_wv=1027&k=5zMDYHT) | QQ 交流群2（推荐）: [`971887688`](https://jq.qq.com/?_wv=1027&k=53q2Ayp)
+[🇺🇸English Document](README.md) | [国内访问示例 (http://blinkfox.com)](http://blinkfox.com) | [Github 部署演示示例 (https://blinkfox.github.io)](https://blinkfox.github.io) | QQ 交流群 1（已满）: [`926552981`](https://jq.qq.com/?_wv=1027&k=5zMDYHT) | QQ 交流群 2（推荐）: [`971887688`](https://jq.qq.com/?_wv=1027&k=53q2Ayp)
 
 > 这是一个采用 `Material Design` 和响应式设计的 Hexo 博客主题。
 
@@ -53,7 +53,7 @@ git clone https://github.com/blinkfox/hexo-theme-matery.git
 
 ### 切换主题
 
-修改 Hexo 根目录下的 `_config.yml` 的  `theme` 的值：`theme: hexo-theme-matery`
+修改 Hexo 根目录下的 `_config.yml` 的 `theme` 的值：`theme: hexo-theme-matery`
 
 #### `_config.yml` 文件的其它修改建议:
 
@@ -78,6 +78,7 @@ date: 2018-09-30 17:25:30
 type: "categories"
 layout: "categories"
 ---
+
 ```
 
 ### 新建标签 tags 页
@@ -97,6 +98,7 @@ date: 2018-09-30 18:23:38
 type: "tags"
 layout: "tags"
 ---
+
 ```
 
 ### 新建关于我 about 页
@@ -116,6 +118,7 @@ date: 2018-09-30 17:25:30
 type: "about"
 layout: "about"
 ---
+
 ```
 
 ### 新建留言板 contact 页（可选的）
@@ -135,6 +138,7 @@ date: 2018-09-30 17:25:30
 type: "contact"
 layout: "contact"
 ---
+
 ```
 
 > **注**：本留言板功能依赖于第三方评论系统，请**激活**你的评论系统才有效果。并且在主题的 `_config.yml` 文件中，第 `19` 至 `21` 行的“**菜单**”配置，取消关于留言板的注释即可。
@@ -156,31 +160,37 @@ date: 2018-12-12 21:25:30
 type: "friends"
 layout: "friends"
 ---
+
 ```
 
 同时，在你的博客 `source` 目录下新建 `_data` 目录，在 `_data` 目录中新建 `friends.json` 文件，文件内容如下所示：
 
 ```json
-[{
+[
+  {
     "avatar": "http://image.luokangyuan.com/1_qq_27922023.jpg",
     "name": "码酱",
     "introduction": "我不是大佬，只是在追寻大佬的脚步",
     "url": "http://luokangyuan.com/",
     "title": "前去学习"
-}, {
+  },
+  {
     "avatar": "http://image.luokangyuan.com/4027734.jpeg",
     "name": "闪烁之狐",
     "introduction": "编程界大佬，技术牛，人还特别好，不懂的都可以请教大佬",
     "url": "https://blinkfox.github.io/",
     "title": "前去学习"
-}, {
+  },
+  {
     "avatar": "http://image.luokangyuan.com/avatar.jpg",
     "name": "ja_rome",
     "introduction": "平凡的脚步也可以走出伟大的行程",
     "url": "https://me.csdn.net/jlh912008548",
     "title": "前去学习"
-}]
+  }
+]
 ```
+
 ### 新建 404 页
 
 如果在你的博客 `source` 目录下还没有 `404.md` 文件，那么你就需要新建一个
@@ -195,14 +205,14 @@ type: "404"
 layout: "404"
 description: "Oops～，我崩溃了！找不到你想要的页面 :("
 ---
+
 ```
 
 ### 菜单导航配置
 
-#### 配置基本菜单导航的名称、路径url和图标icon.
+#### 配置基本菜单导航的名称、路径 url 和图标 icon.
 
-1.菜单导航名称可以是中文也可以是英文(如：`Index`或`主页`) 
-2.图标icon 可以在[Font Awesome](https://fontawesome.com/icons) 中查找   
+1.菜单导航名称可以是中文也可以是英文(如：`Index`或`主页`) 2.图标 icon 可以在[Font Awesome](https://fontawesome.com/icons) 中查找
 
 ```yaml
 menu:
@@ -227,11 +237,12 @@ menu:
 ```
 
 #### 二级菜单配置方法
-如果你需要二级菜单则可以在原基本菜单导航的基础上如下操作     
-1.在需要添加二级菜单的一级菜单下添加`children`关键字(如:`About`菜单下添加`children`)     
-2.在`children`下创建二级菜单的 名称name,路径url和图标icon.      
-3.注意每个二级菜单模块前要加 `-`.     
-4.注意缩进格式  
+
+如果你需要二级菜单则可以在原基本菜单导航的基础上如下操作  
+1.在需要添加二级菜单的一级菜单下添加`children`关键字(如:`About`菜单下添加`children`)  
+2.在`children`下创建二级菜单的 名称 name,路径 url 和图标 icon.  
+3.注意每个二级菜单模块前要加 `-`.  
+4.注意缩进格式
 
 ```yaml
 menu:
@@ -287,9 +298,9 @@ highlight:
   enable: false
 
 prism_plugin:
-  mode: 'preprocess'    # realtime/preprocess
-  theme: 'tomorrow'
-  line_number: false    # default false
+  mode: "preprocess" # realtime/preprocess
+  theme: "tomorrow"
+  line_number: false # default false
   custom_css:
 ```
 
@@ -324,7 +335,7 @@ npm i hexo-permalink-pinyin --save
 ```yaml
 permalink_pinyin:
   enable: true
-  separator: '-' # default: '-'
+  separator: "-" # default: '-'
 ```
 
 > **注**：除了此插件外，[hexo-abbrlink](https://github.com/rozbo/hexo-abbrlink) 插件也可以生成非中文的链接。
@@ -351,7 +362,7 @@ postInfo:
   readCount: false # 阅读次数.
 ```
 
-### 添加emoji表情支持（可选的）
+### 添加 emoji 表情支持（可选的）
 
 本主题新增了对`emoji`表情的支持，使用到了 [hexo-filter-github-emojis](https://npm.taobao.org/package/hexo-filter-github-emojis) 的 Hexo 插件来支持 `emoji`表情的生成，把对应的`markdown emoji`语法（`::`,例如：`:smile:`）转变成会跳跃的`emoji`表情，安装命令如下：
 
@@ -388,7 +399,7 @@ feed:
   hub:
   content:
   content_limit: 140
-  content_limit_delim: ' '
+  content_limit_delim: " "
   order_by: -date
 ```
 
@@ -412,9 +423,16 @@ feed:
 
 ```html
 <% if (theme.socialLink.github) { %>
-    <a href="<%= theme.socialLink.github %>" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github"></i>
-    </a>
+<a
+  href="<%= theme.socialLink.github %>"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="访问我的GitHub"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-github"></i>
+</a>
 <% } %>
 ```
 
@@ -440,29 +458,29 @@ feed:
 
 ### 配置音乐播放器（可选的）
 
-要支持音乐播放，在主题的 `_config.yml` 配置文件中激活music配置即可：
+要支持音乐播放，在主题的 `_config.yml` 配置文件中激活 music 配置即可：
 
 ```yaml
 # 是否在首页显示音乐
 music:
   enable: true
-  title:     	    # 非吸底模式有效
+  title: # 非吸底模式有效
     enable: true
     show: 听听音乐
-  server: netease   # require music platform: netease, tencent, kugou, xiami, baidu
-  type: playlist    # require song, playlist, album, search, artist
-  id: 503838841     # require song id / playlist id / album id / search keyword
-  fixed: false      # 开启吸底模式
-  autoplay: false   # 是否自动播放
-  theme: '#42b983'
-  loop: 'all'       # 音频循环播放, 可选值: 'all', 'one', 'none'
-  order: 'random'   # 音频循环顺序, 可选值: 'list', 'random'
-  preload: 'auto'   # 预加载，可选值: 'none', 'metadata', 'auto'
-  volume: 0.7       # 默认音量，请注意播放器会记忆用户设置，用户手动设置音量后默认音量即失效
-  listFolded: true  # 列表默认折叠
+  server: netease # require music platform: netease, tencent, kugou, xiami, baidu
+  type: playlist # require song, playlist, album, search, artist
+  id: 503838841 # require song id / playlist id / album id / search keyword
+  fixed: false # 开启吸底模式
+  autoplay: false # 是否自动播放
+  theme: "#42b983"
+  loop: "all" # 音频循环播放, 可选值: 'all', 'one', 'none'
+  order: "random" # 音频循环顺序, 可选值: 'list', 'random'
+  preload: "auto" # 预加载，可选值: 'none', 'metadata', 'auto'
+  volume: 0.7 # 默认音量，请注意播放器会记忆用户设置，用户手动设置音量后默认音量即失效
+  listFolded: true # 列表默认折叠
 ```
 
-> `server`可选`netease`（网易云音乐），`tencent`（QQ音乐），`kugou`（酷狗音乐），`xiami`（虾米音乐），
+> `server`可选`netease`（网易云音乐），`tencent`（QQ 音乐），`kugou`（酷狗音乐），`xiami`（虾米音乐），
 >
 > `baidu`（百度音乐）。
 >
@@ -472,37 +490,36 @@ music:
 >
 > 即为这串数字。
 
-
-
 ## 文章 Front-matter 介绍
 
 ### Front-matter 选项详解
 
 `Front-matter` 选项中的所有内容均为**非必填**的。但我仍然建议至少填写 `title` 和 `date` 的值。
 
-| 配置选项   | 默认值                      | 描述                                                         |
-| ---------- | --------------------------- | ------------------------------------------------------------ |
-| title      | `Markdown` 的文件标题        | 文章标题，强烈建议填写此选项                                 |
-| date       | 文件创建时的日期时间          | 发布时间，强烈建议填写此选项，且最好保证全局唯一             |
-| author     | 根 `_config.yml` 中的 `author` | 文章作者                                                     |
-| img        | `featureImages` 中的某个值   | 文章特征图，推荐使用图床(腾讯云、七牛云、又拍云等)来做图片的路径.如: `http://xxx.com/xxx.jpg` |
-| top        | `true`                      | 推荐文章（文章是否置顶），如果 `top` 值为 `true`，则会作为首页推荐文章 |
-| cover      | `false`                     | `v1.0.2`版本新增，表示该文章是否需要加入到首页轮播封面中 |
-| coverImg   | 无                          | `v1.0.2`版本新增，表示该文章在首页轮播封面需要显示的图片路径，如果没有，则默认使用文章的特色图片 |
-| password   | 无                          | 文章阅读密码，如果要对文章设置阅读验证密码的话，就可以设置 `password` 的值，该值必须是用 `SHA256` 加密后的密码，防止被他人识破。前提是在主题的 `config.yml` 中激活了 `verifyPassword` 选项 |
-| toc        | `true`                      | 是否开启 TOC，可以针对某篇文章单独关闭 TOC 的功能。前提是在主题的 `config.yml` 中激活了 `toc` 选项 |
-| mathjax    | `false`                     | 是否开启数学公式支持 ，本文章是否开启 `mathjax`，且需要在主题的 `_config.yml` 文件中也需要开启才行 |
-| summary    | 无                          | 文章摘要，自定义的文章摘要内容，如果这个属性有值，文章卡片摘要就显示这段文字，否则程序会自动截取文章的部分内容作为摘要 |
-| categories | 无                          | 文章分类，本主题的分类表示宏观上大的分类，只建议一篇文章一个分类 |
-| tags       | 无                          | 文章标签，一篇文章可以多个标签                              |
-| keywords   | 文章标题                     | 文章关键字，SEO 时需要                              |
-| reprintPolicy | cc_by                    | 文章转载规则， 可以是 cc_by, cc_by_nd, cc_by_sa, cc_by_nc, cc_by_nc_nd, cc_by_nc_sa, cc0, noreprint 或 pay 中的一个 |
+| 配置选项      | 默认值                         | 描述                                                                                                                                                                                       |
+| ------------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| title         | `Markdown` 的文件标题          | 文章标题，强烈建议填写此选项                                                                                                                                                               |
+| date          | 文件创建时的日期时间           | 发布时间，强烈建议填写此选项，且最好保证全局唯一                                                                                                                                           |
+| author        | 根 `_config.yml` 中的 `author` | 文章作者                                                                                                                                                                                   |
+| img           | `featureImages` 中的某个值     | 文章特征图，推荐使用图床(腾讯云、七牛云、又拍云等)来做图片的路径.如: `http://xxx.com/xxx.jpg`                                                                                              |
+| top           | `true`                         | 推荐文章（文章是否置顶），如果 `top` 值为 `true`，则会作为首页推荐文章                                                                                                                     |
+| cover         | `false`                        | `v1.0.2`版本新增，表示该文章是否需要加入到首页轮播封面中                                                                                                                                   |
+| coverImg      | 无                             | `v1.0.2`版本新增，表示该文章在首页轮播封面需要显示的图片路径，如果没有，则默认使用文章的特色图片                                                                                           |
+| password      | 无                             | 文章阅读密码，如果要对文章设置阅读验证密码的话，就可以设置 `password` 的值，该值必须是用 `SHA256` 加密后的密码，防止被他人识破。前提是在主题的 `config.yml` 中激活了 `verifyPassword` 选项 |
+| toc           | `true`                         | 是否开启 TOC，可以针对某篇文章单独关闭 TOC 的功能。前提是在主题的 `config.yml` 中激活了 `toc` 选项                                                                                         |
+| mathjax       | `false`                        | 是否开启数学公式支持 ，本文章是否开启 `mathjax`，且需要在主题的 `_config.yml` 文件中也需要开启才行                                                                                         |
+| summary       | 无                             | 文章摘要，自定义的文章摘要内容，如果这个属性有值，文章卡片摘要就显示这段文字，否则程序会自动截取文章的部分内容作为摘要                                                                     |
+| categories    | 无                             | 文章分类，本主题的分类表示宏观上大的分类，只建议一篇文章一个分类                                                                                                                           |
+| tags          | 无                             | 文章标签，一篇文章可以多个标签                                                                                                                                                             |
+| keywords      | 文章标题                       | 文章关键字，SEO 时需要                                                                                                                                                                     |
+| reprintPolicy | cc_by                          | 文章转载规则， 可以是 cc_by, cc_by_nd, cc_by_sa, cc_by_nc, cc_by_nc_nd, cc_by_nc_sa, cc0, noreprint 或 pay 中的一个                                                                        |
 
 > **注意**:
+>
 > 1. 如果 `img` 属性不填写的话，文章特色图会根据文章标题的 `hashcode` 的值取余，然后选取主题中对应的特色图片，从而达到让所有文章的特色图**各有特色**。
 > 2. `date` 的值尽量保证每篇文章是唯一的，因为本主题中 `Gitalk` 和 `Gitment` 识别 `id` 是通过 `date` 的值来作为唯一标识的。
 > 3. 如果要对文章设置阅读验证密码的功能，不仅要在 Front-matter 中设置采用了 SHA256 加密的 password 的值，还需要在主题的 `_config.yml` 中激活了配置。有些在线的 SHA256 加密的地址，可供你使用：[开源中国在线工具](http://tool.oschina.net/encrypt?type=2)、[chahuo](http://encode.chahuo.com/)、[站长工具](http://tool.chinaz.com/tools/hash.aspx)。
-> 4. 您可以在文章md文件的 front-matter 中指定 reprintPolicy 来给单个文章配置转载规则
+> 4. 您可以在文章 md 文件的 front-matter 中指定 reprintPolicy 来给单个文章配置转载规则
 
 以下为文章的 `Front-matter` 示例。
 
@@ -513,6 +530,7 @@ music:
 title: typora-vue-theme主题介绍
 date: 2018-09-07 09:25:00
 ---
+
 ```
 
 ### 最全示例
@@ -535,6 +553,7 @@ tags:
   - Typora
   - Markdown
 ---
+
 ```
 
 ## 效果截图
@@ -581,15 +600,15 @@ tags:
 ```css
 /* 整体背景颜色，包括导航、移动端的导航、页尾、标签页等的背景颜色. */
 .bg-color {
-    background-image: linear-gradient(to right, #4cbf30 0%, #0f9d58 100%);
+  background-image: linear-gradient(to right, #4cbf30 0%, #0f9d58 100%);
 }
 
 @-webkit-keyframes rainbow {
-   /* 动态切换背景颜色. */
+  /* 动态切换背景颜色. */
 }
 
 @keyframes rainbow {
-    /* 动态切换背景颜色. */
+  /* 动态切换背景颜色. */
 }
 ```
 
@@ -598,7 +617,10 @@ tags:
 你可以直接在 `/source/medias/banner` 文件夹中更换你喜欢的 `banner` 图片，主题代码中是每天动态切换一张，只需 `7` 张即可。如果你会 `JavaScript` 代码，可以修改成你自己喜欢切换逻辑，如：随机切换等，`banner` 切换的代码位置在 `/layout/_partial/bg-cover-content.ejs` 文件的 `<script></script>` 代码中：
 
 ```javascript
-$('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay() + '.jpg)');
+$(".bg-cover").css(
+  "background-image",
+  "url(/medias/banner/" + new Date().getDay() + ".jpg)"
+);
 ```
 
 在 `/source/medias/featureimages` 文件夹中默认有 24 张特色图片，你可以再增加或者减少，并需要在 `_config.yml` 做同步修改。
@@ -636,7 +658,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
   - 修复了音乐及吸底模式、视频、推荐文章等不激活时仍然生成首页卡片的问题；
   - 修复 wordCount 插件未安装的问题，修改了部分配置；
   - 修复音乐的 JSON 配置中有单引号的情况页面不显示的音乐的问题
-  - 修复标签云在Hexo4.0下链接失效的问题；
+  - 修复标签云在 Hexo4.0 下链接失效的问题；
 - v1.2.0
   - 新增了 [DaoVoice](http://www.daovoice.io/)、[Tidio](https://www.tidio.com/) 的在线聊天功能；
   - 新增了两级菜单的功能；
