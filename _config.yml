@@ -127,11 +127,15 @@ neat_html:
 neat_css:
   enable: true
   exclude:
-    - '*.min.css'
+    - "*.min.css"
 neat_js:
   enable: true
   mangle: true
   output:
   compress:
   exclude:
-    - '*.min.js'
+    - "*.min.js"
+
+permalink_pinyin:
+  enable: true
+  separator: "-" # default: '-'
