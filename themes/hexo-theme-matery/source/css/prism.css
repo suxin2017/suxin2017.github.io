@@ -130,6 +130,7 @@ pre[class*="language-"] {
   top: -6px;
   font-size: 100%;
   left: -3.8em;
+  line-height: 2.1;
   width: 3em; /* works for line-numbers below 1000 lines */
   letter-spacing: -1px;
   border-right: 1px solid #999;

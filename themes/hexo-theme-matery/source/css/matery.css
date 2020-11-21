@@ -1472,11 +1472,7 @@ thead {
 
 .chip-container .chip-active {
   color: #fff !important;
-  background: linear-gradient(
-    to bottom right,
-    #ff5e3a 0%,
-    #ff2a68 100%
-  ) !important;
+  background: #ff5656 !important;
   box-shadow: 2px 5px 10px #aaa !important;
 }
 
@@ -1495,7 +1491,7 @@ thead {
 
 .chip-container .chip:hover {
   color: #fff;
-  background: linear-gradient(to right, #4cbf30 0%, #0f9d58 100%) !important;
+  background: #ff8eaf !important;
 }
 
 .chip .tag-length {
