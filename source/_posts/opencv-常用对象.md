@@ -9,6 +9,7 @@ date: 2020-11-22 08:47:39
 # 创建Mat对象的方法
 
 - 构造函数Mat()
+
 ```cpp
 Mat M(2,2,CV_8UC3,Scalar(0,0,255));
 
@@ -81,6 +82,8 @@ Point3f p3(6,2,5);
 ```
 - 向量 vector
 
+和数组差不多
+
 ```cpp
 vector<float> v;
 v.push_back(3);
@@ -118,6 +121,7 @@ Size(width, height);
 ```
 
 - 矩形 Rect
+
 ```cpp
 int x = 0, y = 0,width = 200, height = 200;
 Rect rect1(x, y, width, height);
