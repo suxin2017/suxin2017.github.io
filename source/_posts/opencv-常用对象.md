@@ -2,14 +2,14 @@
 title: opencv 常用对象
 tags:
   - opencv
-  - c++
+  - C++
 date: 2020-11-22 08:47:39
 ---
 
 # 创建Mat对象的方法
 
 - 构造函数Mat()
-```c++
+```cpp
 Mat M(2,2,CV_8UC3,Scalar(0,0,255));
 
 cout << "M = " << M << endl;
@@ -28,7 +28,7 @@ unsigned 是 0-255
 
 - 通过构造函数
 
-```c++
+```cpp
 int sz[3] = {2,2,2};
 Mat L(3,sz,CV_8UC,Scalar::all(0));
 
@@ -45,7 +45,7 @@ Scalar::all(0) 会返回一个```[0,0,0,0]```
 
 直接用python格式的，因为很舒服
 
-```c++
+```cpp
  Mat r(10,4,CV_8UC3);
 randu(r,Scalar::all(0),Scalar::all(255));
 cout<< format(r,Formatter::FMT_PYTHON) << endl;
@@ -67,7 +67,7 @@ cout<< format(r,Formatter::FMT_PYTHON) << endl;
 
 - 点 Point
 
-```c++
+```cpp
 // 二维
 Point2f p(6,2);
 // 三维
@@ -81,7 +81,7 @@ Point3f p3(6,2,5);
 ```
 - 向量 vector
 
-```c++
+```cpp
 vector<float> v;
 v.push_back(3);
 v.push_back(5);
@@ -101,7 +101,7 @@ cout << Mat(v) << endl;
 
 Scalar 是一个四个元素的数组
 
-```c++
+```cpp
 Scalar s(0,0,0,0);
 //可以是
 
@@ -112,13 +112,13 @@ Scalar(r,g,b);
 - 大小 Size
 
 width 和 height
-```c++
+```cpp
 int width = 100, height = 200;
 Size(width, height);
 ```
 
 - 矩形 Rect
-```c++
+```cpp
 int x = 0, y = 0,width = 200, height = 200;
 Rect rect1(x, y, width, height);
 Rect rect2(x + 50, y + 50, width, height);
