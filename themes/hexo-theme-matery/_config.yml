@@ -216,18 +216,23 @@ myProjects:
     bxer-ui 组件库:
       icon: fas fa-file-alt
       iconBackground: "linear-gradient(to bottom right, #66BB6A 0%, #81C784 100%)"
-      url: https://github.com/suxin2017/bxer-ui
+      url: https://suxin2017.github.io/bxer-ui
       desc: 练手的react组件库
     算法学习笔记:
       icon: fas fa-database
       iconBackground: "linear-gradient(to bottom right, #F06292 0%, #EF5350 100%)"
-      url: https://github.com/suxin2017/algorithm-learn
+      url: https://suxin2017.github.io/algorithm-learn
       desc: 可能后续启动的算法学习笔记
     js设计模式学习笔记:
       icon: fas fa-file-alt
       iconBackground: "linear-gradient(to bottom right, #29B6F6 0%, #1E88E5 100%)"
-      url: https://github.com/suxin2017/javascript-design-pattern
-      desc: This is a typora theme inspired by Vue document style.
+      url: https://suxin2017.github.io/javascript-design-pattern
+      desc: js设计模式学习笔记
+    马克在线排版:
+      icon: fas fa-address-card
+      iconBackground: "linear-gradient(to bottom right, #66BB6A 0%, #81C784 100%)"
+      url: https://suxin2017.github.io/markdown-website
+      desc: 可以把makdown转化成富文本编辑器的在线编辑器
 
 # config my skills informations in about page.
 # If you don't want to display this `My Skills` content, you can deactivate or delete this configuration.
