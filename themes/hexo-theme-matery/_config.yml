@@ -214,31 +214,36 @@ myProjects:
   enable: true
   data:
     bxer-ui 组件库:
-      icon: fas fa-file-alt
+      icon: fas fa-otter
       iconBackground: "linear-gradient(to bottom right, #66BB6A 0%, #81C784 100%)"
       url: https://suxin2017.github.io/bxer-ui
       desc: 练手的react组件库
     算法学习笔记:
-      icon: fas fa-database
+      icon: fas fa-hippo
       iconBackground: "linear-gradient(to bottom right, #F06292 0%, #EF5350 100%)"
       url: https://suxin2017.github.io/algorithm-learn
       desc: 可能后续启动的算法学习笔记
     js设计模式学习笔记:
-      icon: fas fa-file-alt
+      icon: fas fa-dog
       iconBackground: "linear-gradient(to bottom right, #29B6F6 0%, #1E88E5 100%)"
       url: https://suxin2017.github.io/javascript-design-pattern
       desc: js设计模式学习笔记
     马克在线排版:
-      icon: fas fa-address-card
+      icon: fas fa-spider
       iconBackground: "linear-gradient(to bottom right, #66BB6A 0%, #81C784 100%)"
       url: https://suxin2017.github.io/markdown-website
-      desc: 可以把makdown转化成富文本编辑器的在线编辑器
+      desc: 在线makdown转化成富文本编辑器的在线编辑器
+    渐变色代码生成:
+      icon: fas fa-fish
+      iconBackground: "linear-gradient(to bottom right,#6690bb 0,#81c1c7 100%)"
+      url: https://suxin2017.github.io/gradient-online
+      desc: 在线生成渐变色样式
 
 # config my skills informations in about page.
 # If you don't want to display this `My Skills` content, you can deactivate or delete this configuration.
 # 在“关于”页面配置"我的技能"信息，如果你不需要这些信息则可以将其设置为不激活或者将其删除.
 mySkills:
-  enable: false
+  enable: true
   data:
     JavaScript:
       background: "linear-gradient(to right, #FF0066 0%, #FF00CC 100%)"
@@ -252,12 +257,12 @@ mySkills:
     CSS:
       background: "linear-gradient(to right, #00BCD4 0%, #80DEEA 100%)"
       percent: 70%
-    SQL:
+    code:
       background: "linear-gradient(to right, #4CAF50 0%, #81C784 100%)"
-      percent: 90%
-    程序设计:
+      percent: 60%
+    Vue,React:
       background: "linear-gradient(to right, #FFEB3B 0%, #FFF176 100%)"
-      percent: 75%
+      percent: 65%
 
 # config gallery of my photos in about page.
 # If you don't want to display this `Gallery` content, you can deactivate or delete this configuration.
