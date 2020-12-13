@@ -2124,8 +2124,7 @@ footer .copy-right {
 }
 
 .img-shadow {
-  box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.2),
-    0 10px 30px -11px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 5px 7px 0 rgb(76 76 76 / 15%), 0 2px 9px 0px rgb(29 29 29 / 22%);
 }
 
 .img-margin {
