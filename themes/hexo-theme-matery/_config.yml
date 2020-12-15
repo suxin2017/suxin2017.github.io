@@ -584,7 +584,7 @@ banner:
 
 #ICP备案信息尾部显示
 icp:
-  enable: false
+  enable: true
   url: http://beian.miit.gov.cn
   text: 京ICP备2020041991号
 
