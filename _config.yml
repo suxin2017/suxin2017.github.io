@@ -6,7 +6,7 @@
 title: 苏鑫2017
 subtitle: "苏鑫的个人博客"
 description: "苏鑫的个人博客"
-keywords:
+keywords: 前端技术，个人博客，程序员
 author: suxin2017
 language: zh-CN
 timezone: ""
@@ -102,6 +102,7 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: hexo-theme-matery
+# theme: one-day
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
