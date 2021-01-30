@@ -72,6 +72,10 @@ function createState(reducer, initState,)
 }
 ```
 
+# 自己动手搞一个
+
+跟我想的差不太多
+
 首先创造一个观察者
 
 ```javascript
