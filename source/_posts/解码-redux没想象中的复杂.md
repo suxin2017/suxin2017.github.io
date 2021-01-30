@@ -5,7 +5,7 @@ tags:
   - js
   - redux
 category:
-  - 前端:
+  - 前端
 ---
 
 ## redux
