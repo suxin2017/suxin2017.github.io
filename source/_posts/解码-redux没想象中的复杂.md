@@ -1,5 +1,5 @@
 ---
-title: "解码:redux没想象中的复杂"
+title: "解码:redux的奥秘"
 date: 2021-01-30 11:31:41
 tags:
   - js
