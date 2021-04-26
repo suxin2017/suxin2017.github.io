@@ -5,8 +5,8 @@
 # Site
 title: 苏鑫2017
 subtitle: "苏鑫的个人博客"
-description: "苏鑫的个人博客"
-keywords: 前端技术，个人博客，程序员
+description: "用于记录感悟，前端技术，编程技巧，各种奇奇怪怪的新的体会"
+keywords: 码农，搬砖工
 author: suxin2017
 language: zh-CN
 timezone: ""
@@ -48,17 +48,13 @@ marked:
 relative_link: false
 future: true
 highlight:
-  enable: false
-  auto_detect: true
-  line_number: true
-  tab_replace: "  "
-  wrap: true
-  hljs: false
-prismjs:
   enable: true
-  preprocess: true
-  line_number: true
-  tab_replace: ""
+  auto_detect: true
+  line_number: false
+  tab_replace: "  "
+  wrap: false
+  hljs: true
+
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
@@ -101,7 +97,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: hexo-theme-matery
+theme: water
 # theme: one-day
 
 # Deployment

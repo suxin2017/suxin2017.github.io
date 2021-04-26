@@ -1,0 +1,9 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 384.5 283.4" style="enable-background:new 0 0 384.5 283.4;" xml:space="preserve"  width="100%" height="100%">
+  <path d="M100,100 L100,0 A100,100 0 1,0 100,200 z" fill="#002b36"></path>
+  <path d="M100,100 L100,0 A100,100 0 0,1 100,200 z" fill="#fdf6e3"></path>
+  <circle cx="100" cy="100" r="100" fill="none" id="circle2" stroke="none"></circle>
+  <circle cx="100" cy="50" r="50" fill="#fdf6e3" stroke="none"></circle>
+  <circle cx="100" cy="150" r="50" fill="#002b36" stroke="none"></circle>
+  <circle cx="100" cy="50" r="20" fill="#002b36" stroke="none"></circle>
+  <circle cx="100" cy="150" r="20" fill="#fdf6e3" stroke="none"></circle>
+</svg>

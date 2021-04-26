@@ -8,7 +8,7 @@ category:
   - 前端
 ---
 
-## 如果向一个空的 iframe 直接执行
+### 如果向一个空的 iframe 直接执行
 
 ```javascrpt
 document.appendChild(document.createElement('div'))
@@ -16,7 +16,7 @@ document.appendChild(document.createElement('div'))
 
 会不好使,但是页面不会报错，没有警告
 
-## 解决方案
+### 解决方案
 
 监听 iframe onload 事件
 再 onload 事件中执行 dom 操作比较安全

@@ -1,0 +1,31 @@
+# less config 
+less:
+  paths: ['source/css/**/*']
+  # options:
+
+
+menus:
+  - name: '首页'
+    path: '/'
+  - name: '关于'
+    path: '/about'
+  # - name: 'rss'
+  #   path: '/rss'
+
+# 备案信息
+icp:
+  enable: true
+  url: http://beian.miit.gov.cn
+  text: 京ICP备2020041991号
+  
+cdn:
+  url: ''
+
+
+rss:
+  - url: https://cprss.s3.amazonaws.com/javascriptweekly.com.xml
+
+
+about:
+  github: https://github.com/suxin2017
+  email: 1107178482@qq.com

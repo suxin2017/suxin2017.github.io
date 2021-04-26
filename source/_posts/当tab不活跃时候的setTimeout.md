@@ -14,7 +14,7 @@ category:
 
 </script>
 
-# setTimeout 当 tab 不活跃时候
+## setTimeout 当 tab 不活跃时候
 
 当 tab 不活跃的时候，setTimeout 和 setInterval 的运行时间出现延迟
 
@@ -66,7 +66,7 @@ category:
     }
 </script>
 
-# requrestAnimationFrameAPI 当 tab 不活跃时候
+## requrestAnimationFrameAPI 当 tab 不活跃时候
 
 requrestAnimationFrameAPI 当 tab 不活跃时候，执行会被暂停
 注意 requrestAnimationFrameAPI 只是能够满足 1 秒 60 帧，所以会和比 setTimeout 慢一些
@@ -222,7 +222,7 @@ function clearRafInterval(id){
     }
 </script>
 
-# WebWorker
+## WebWorker
 
 webworker 不会受浏览器切换 tab 影响，能够正常运行
 

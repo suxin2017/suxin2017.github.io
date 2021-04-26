@@ -1,0 +1,44 @@
+<div class="about">
+    <div class="about-me">
+        <div class="about-me-avatar">
+            <img src=<%=url_for('/imgs/avatar.jpeg') %> width=128 height=128 alt="头像" >
+        </div>
+        <div class="about-me-desc">
+            <div class="about-me-desc-name">
+                <p>
+                    <%= config.author %>
+                </p>
+            </div>
+            <div class="about-me-desc-desc">
+                <p>
+                    <%= config.description %>
+                </p>
+            </div>
+            <div class="about-me-desc-keywords">
+                <p>
+                    <%= config.keywords %>
+                </p>
+            </div>
+            <div class="about-me-desc-icon-group">
+                <div class="about-me-desc-github about-me-desc-icon">
+                    <a href=<%= theme.about.github %> target="_blank" rel="noreferrer">
+                    <img src=<%=url_for('/imgs/github.svg') %> width=20 height=20 alt="github" >
+                    <span>github</span>
+                </a>
+                  
+                </div>
+                <div class="about-me-desc-github about-me-desc-icon">
+                    <a href='mailto:<%= theme.about.email %>'>
+                        <img src=<%=url_for('/imgs/email.svg') %> width=20 height=20 alt="github" >
+                        <span>email</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="about-content">
+        <%- page.content %>
+    </div>
+
+
+</div>

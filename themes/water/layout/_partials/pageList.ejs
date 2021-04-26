@@ -1,0 +1,44 @@
+<div class="page-list">
+    <% page.posts.forEach(post=> { %>
+        <div class="page-list-item">
+            <div class="page-item-title"> 
+                <a href=<%= url_for(post.path) %> >
+                    <h3> <%= post.title %> </h3> </div>
+                </a>
+            <div class="page-list-item-create-date">
+                <span>
+
+                    发表于：<%= date(post.date,"YYYY-MM-DD") %>
+                </span>
+                <% if (post.tags.length> 0) { %>
+                    <span>
+                        |
+                    </span>
+                    <span>
+                        分类：
+                        <span>
+                            <% post.tags.forEach(tag=> { %>
+                                <span class="tag">
+                                    <%= tag.name %>
+                                </span>
+                                <% }) %>
+                        </span>
+                    </span>
+                    <% } %>
+            </div>
+
+            <div class="page-list-item-excerpt">
+                <p>
+                    <%= post.excerpt %>
+                </p>
+            </div>
+            <div class="page-list-item-info">
+
+                <span>
+                    <a href=<%=url_for(post.path) %> >查看更多 » </a>
+                </span>
+            </div>
+        </div>
+        <% }) %>
+
+</div>

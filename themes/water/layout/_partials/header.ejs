@@ -1,0 +1,27 @@
+<header class="header">
+    <div class="header-icon-wrapper">
+        <h2>
+            <a href=<%=url_for('/') %> >
+                <%= config.title %>
+            </a>
+        </h2>
+    </div>
+    <div class="header-right">
+        <nav class="header-menu-wrapper">
+            <ul class="header-menu">
+                <% theme.menus.forEach(menu=> { %>
+                    <li class="header-menu-item">
+                        <a class="header-menu-item-link" href=<%=url_for(menu.path)%> >
+                            <%= menu.name %>
+                        </a>
+                    </li>
+                    <% }) %>
+                        <li class="header-menu-item">
+
+                            <%- partial('./switchTheme') %>
+                        </li>
+            </ul>
+        </nav>
+
+    </div>
+</header>

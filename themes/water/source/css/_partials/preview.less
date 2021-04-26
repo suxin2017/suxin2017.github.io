@@ -1,0 +1,36 @@
+.preview {
+  margin: 20px 0;
+
+  &-box {
+    position: relative;
+    padding: 20px;
+    box-shadow: 0px 0px 2px 0px var(--shadowColor);
+    &-util {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      &-code {
+        width: 24px;
+        height: 24px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        cursor: pointer;
+        display: inline-block;
+      }
+    }
+  }
+  &-code {
+    display: none;
+    pre {
+      margin-top: 0;
+      .xml{
+          margin: -20px 0;
+      }
+    }
+  }
+  &-code-active {
+    display: block;
+    right: 0;
+    bottom: 0px;
+  }
+}

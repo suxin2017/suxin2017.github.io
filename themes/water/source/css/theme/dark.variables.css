@@ -1,0 +1,12 @@
+:root {
+  --defaultColor: var(--base0);
+  --emColor: var(--base1);
+  --secondaryColor: var(--base01);
+  --shadowColor: var(--base04);
+  --backgroundHighlightsColor: var(--base02);
+  --backgroundColor: var(--base03);
+}
+
+ img{
+  filter: contrast(0.7);
+}

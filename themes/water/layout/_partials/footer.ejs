@@ -1,0 +1,18 @@
+<footer>
+    <p>
+        Copyright © 2019-2021 suxin2017
+    </p>
+    
+    <% if (theme.icp.enable) { %>
+        <p class="icp">
+            <span>
+                <img src=<%= url_for('/imgs/icp.png') %>  width='17px' height='17px' alt="icp">
+            </span>
+                <a href=<%=theme.icp.url %> class="icp-link">
+                    <span>
+                        <%= theme.icp.text %>
+                    </span>
+                </a>
+        </p>
+    <% } %>
+</footer>

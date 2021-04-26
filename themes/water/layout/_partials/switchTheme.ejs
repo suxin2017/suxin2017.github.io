@@ -1,0 +1,66 @@
+<div id="switchThemeButton">
+    <%- image_tag('/imgs/icon.svg',{alt:'switchThemeIcon',width:'100%',height:'100%'}) %> 
+</div>
+<style>
+    #switchThemeButton {
+        width: 40px;
+        height: 26px;
+        margin: 0;
+        border: 0;
+        background: none;
+        outline: none;
+        cursor: pointer;
+        margin-top: 6px;
+    }
+</style>
+<script async>
+    const btn = document.getElementById('switchThemeButton');
+    let darkTheme = false;
+    const themeStyleVarId = "themeStyleVar";
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // dark mode
+        darkTheme = true;
+    }
+    if(localStorageTheme === 'dark'){
+        darkTheme = true
+    }
+    function loadTheme() {
+        let themeLink = document.getElementById(themeStyleVarId);
+        if (!themeLink) {
+            themeLink = document.createElement('link')
+            themeLink.rel = "stylesheet"
+            themeLink.id = "themeStyleVar"
+        }
+        darkTheme = !darkTheme;
+        themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${darkTheme ? 'dark' : 'light'}.variables.css`)
+        document.head.appendChild(themeLink)
+        localStorage.setItem('theme',darkTheme?'dark':'light');
+    }
+
+    btn.onclick = function() {
+        loadTheme();
+        codeTheme();
+    }
+  
+</script>
+
+<% if (is_post()) { %>
+    <script>
+        function codeTheme(){
+            const localStorageTheme = localStorage.getItem('theme');
+            let codeThemeLink = document.getElementById("codeTheme");
+            if(!codeThemeLink){
+                codeThemeLink = document.createElement('link');
+                codeThemeLink.rel = "stylesheet"
+                codeThemeLink.id = "codeTheme"
+                document.head.appendChild(codeThemeLink)
+            }
+            if(localStorageTheme){
+                codeThemeLink.href = `//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/solarized-${localStorageTheme}.min.css`
+            }else{
+                codeThemeLink.href = `//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/solarized-${darkTheme ? 'dark': 'light'}.min.css`
+            }
+        }
+        codeTheme()
+    </script>
+<% } %>

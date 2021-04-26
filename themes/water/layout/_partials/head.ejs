@@ -1,0 +1,46 @@
+<head>
+
+    <meta charset="utf-8">
+
+    <link rel="icon"  sizes="any" type="image/svg+xml" href="/imgs/icon.svg">
+    <!-- theme start -->
+    <%- css('css/theme/color.variables') %>
+    <%- css({href:'css/theme/default.variables',id:'themeStyleVar'}) %>
+    <script>
+        const localStorageTheme = localStorage.getItem('theme');
+        function loadTheme(){
+            let themeLink = document.getElementById('themeStyleVar');
+            if(localStorageTheme){
+                themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${localStorageTheme}.variables.css`)
+            }
+        }
+        if(localStorage){
+            loadTheme()
+        }
+    </script>
+
+
+    <!-- theme end -->
+
+    <!-- common reset... -->
+    <%- css('css/index') %>
+    
+    <!-- home -->
+    <% if (is_home()) { %>
+        <%- css('css/home') %> 
+    <% } %>
+    <!-- post -->
+    <% if (is_post()) { %>
+        <%- css('css/post') %> 
+    <% } %>
+    <!-- about -->
+    <% if (is_current('/about')) { %>
+        <%- css('css/about') %> 
+    <% } %>
+
+    <title><%= config.title %> </title>
+
+    <meta name="description" content=<%= config.description %> >
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
