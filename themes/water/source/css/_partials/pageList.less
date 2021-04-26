@@ -1,25 +1,28 @@
-.page-list{
-    margin-bottom: 24px;
+.page-list {
+  margin-bottom: 24px;
 
-    &-item{
-        h3{
-            margin: 16px 0;
-        }
-        p{
-            font-size: 14px;
-            line-height: 2em;
-        }
-        margin-bottom: 20px;
-        & + &{
-            border-top: 1px solid var(--shadowColor,transparent)
-        }
-
-        &-create-date{
-            font-size: 12px;
-        }
-
-        &-info{
-            font-size: 14px;
-        }
+  &-item {
+    .page-item-title:hover h3 {
+      text-decoration-style: wavy;
     }
+    h3 {
+      margin: 16px 0;
+    }
+    p {
+      font-size: 14px;
+      line-height: 2em;
+    }
+    margin-bottom: 20px;
+    & + & {
+      border-top: 1px solid var(--shadowColor, transparent);
+    }
+
+    &-create-date {
+      font-size: 12px;
+    }
+
+    &-info {
+      font-size: 14px;
+    }
+  }
 }

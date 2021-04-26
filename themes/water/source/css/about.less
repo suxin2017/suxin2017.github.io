@@ -2,8 +2,8 @@
   &-me {
     display: flex;
     margin: 24px;
-    gap: 24px;
     &-avatar {
+      margin: 0 12px;
       border-radius: 50%;
       width: 128px;
       height: 128px;
@@ -15,11 +15,13 @@
     }
 
     &-desc {
+      margin: 0 12px;
       &-icon-group {
         display: flex;
-        gap: 24px;
+        margin: 0 -12px;
       }
       &-icon {
+        padding: 0 12px;
         a {
           text-decoration: none;
         }
@@ -28,7 +30,7 @@
           margin-left: 4px;
           text-decoration: underline;
           &:hover{
-            text-decoration: underline wavy;
+            text-decoration-style: wavy;
           }
         }
         img {
