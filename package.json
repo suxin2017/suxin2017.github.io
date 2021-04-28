@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "hexo generate",
+    "build": "NODE_ENV=production hexo generate",
     "clean": "hexo clean",
     "deploy": "sh ./deploy.sh",
     "server": "hexo server"
