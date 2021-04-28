@@ -8,6 +8,7 @@
       width: 128px;
       height: 128px;
       overflow: hidden;
+    
       img {
         width: 100%;
         height: 100%;
@@ -43,5 +44,17 @@
   }
   &-content{
       text-align: center;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .about{
+    font-size: 14px;
+  }
+  .about-me{
+    flex-direction: column;
+  }
+  .about-me-avatar{
+    align-self: center;
   }
 }
