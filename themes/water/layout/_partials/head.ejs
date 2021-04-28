@@ -4,8 +4,8 @@
 
     <link rel="icon"  sizes="any" type="image/svg+xml" href="/imgs/icon.svg">
     <!-- theme start -->
-    <%- css('css/theme/color.variables') %>
-    <%- css({href:'css/theme/default.variables',id:'themeStyleVar'}) %>
+    <link rel="stylesheet" href='<%- theme.cdn.url %><%- url_for("css/theme/color.variables.css") %>'' >
+    <link id="themeStyleVar" rel="stylesheet" href=<%- theme.cdn.url %><%- url_for('css/theme/default.variables.css') %> >
     <script>
         const localStorageTheme = localStorage.getItem('theme');
         function loadTheme(){
@@ -23,19 +23,19 @@
     <!-- theme end -->
 
     <!-- common reset... -->
-    <%- css('css/index') %>
+    <link rel="stylesheet" href=<%- theme.cdn.url %><%- url_for('css/index.css') %> >
     
     <!-- home -->
     <% if (is_home()) { %>
-        <%- css('css/home') %> 
+        <link rel="stylesheet" href=<%- theme.cdn.url %><%- url_for('css/home.css') %> >
     <% } %>
     <!-- post -->
     <% if (is_post()) { %>
-        <%- css('css/post') %> 
+    <link rel="stylesheet" href=<%- theme.cdn.url %><%- url_for('css/post.css') %> >
     <% } %>
     <!-- about -->
     <% if (is_current('/about')) { %>
-        <%- css('css/about') %> 
+    <link rel="stylesheet" href='<%- theme.cdn.url %><%- url_for('/css/about.css') %>' >
     <% } %>
 
     <title><%= config.title %> </title>

@@ -19,7 +19,7 @@ icp:
   text: 京ICP备2020041991号
   
 cdn:
-  url: ''
+  url: https://cdn.jsdelivr.net/gh/suxin2017/suxin2017.github.io@gh-pages
 
 
 rss:
