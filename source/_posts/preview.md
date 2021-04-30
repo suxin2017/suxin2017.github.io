@@ -1,5 +1,6 @@
 ---
 title: 测试
+date: 2021-04-27
 ---
 
 ```javascript preview 请打开console查看结果
