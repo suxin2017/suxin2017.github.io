@@ -12,7 +12,9 @@
     "version": "5.4.0"
   },
   "husky": {
-    "pre-push": "npm run deploy"
+    "hooks":{
+      "pre-push": "npm run deploy"
+    }
   },
   "dependencies": {
     "hexo": "^5.0.0",
