@@ -11,7 +11,9 @@
   "hexo": {
     "version": "5.4.0"
   },
-  "husky": {},
+  "husky": {
+    "pre-push": "npm run deploy"
+  },
   "dependencies": {
     "hexo": "^5.0.0",
     "hexo-browsersync": "^0.3.0",
