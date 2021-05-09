@@ -56,9 +56,9 @@
                 document.head.appendChild(codeThemeLink)
             }
             if(localStorageTheme){
-                codeThemeLink.href = `//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/solarized-${localStorageTheme}.min.css`
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${localStorageTheme}.min.css`
             }else{
-                codeThemeLink.href = `//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/solarized-${darkTheme ? 'dark': 'light'}.min.css`
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarizeds-${darkTheme ? 'dark': 'light'}.min.css`
             }
         }
         codeTheme()
