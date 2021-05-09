@@ -56,9 +56,9 @@
                 document.head.appendChild(codeThemeLink)
             }
             if(localStorageTheme){
-                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${localStorageTheme}.min.css`
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${localStorageTheme}.css`
             }else{
-                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarizeds-${darkTheme ? 'dark': 'light'}.min.css`
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarizeds-${darkTheme ? 'dark': 'light'}.css`
             }
         }
         codeTheme()
