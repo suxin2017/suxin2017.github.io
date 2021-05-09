@@ -32,9 +32,9 @@
             themeLink.id = "themeStyleVar"
         }
         darkTheme = !darkTheme;
-        themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${darkTheme ? 'dark' : 'light'}.variables.css`)
+        themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${!darkTheme ? 'dark' : 'light'}.variables.css`)
         document.head.appendChild(themeLink)
-        localStorage.setItem('theme',darkTheme?'dark':'light');
+        localStorage.setItem('theme',!darkTheme?'dark':'light');
     }
 
     btn.onclick = function() {
@@ -58,7 +58,7 @@
             if(localStorageTheme){
                 codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${localStorageTheme}.css`
             }else{
-                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarizeds-${darkTheme ? 'dark': 'light'}.css`
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${!darkTheme ? 'dark': 'light'}.css`
             }
         }
         codeTheme()
