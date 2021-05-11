@@ -12,6 +12,17 @@
 
     .hljs{
         padding: 20px;
+        position: relative;
+        &:hover{
+            &::after{
+                content: '点击复制';
+                font-size: 12px;
+                position: absolute;
+                top: 0;
+                right: 0;
+            }
+        }
+     
     }
 
     strong,code{

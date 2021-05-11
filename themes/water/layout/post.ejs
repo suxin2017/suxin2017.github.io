@@ -1,4 +1,21 @@
 <div class="post">
-    <h2><%= page.title %> </h2>
-    <%- page.content %> 
+    <h2>
+        <%= page.title %>
+    </h2>
+    <%- page.content %>
+        <script async>
+            let codes = document.getElementsByClassName('hljs');
+            Array.from(codes).forEach(code => {
+                code.addEventListener('click', function copy(e) {
+                    const textContent = e.currentTarget.textContent;
+                    e.currentTarget.focus()
+                    const node = e.currentTarget;
+                    navigator.clipboard.writeText(textContent).then(()=>{
+                        alert('复制成功')
+                        node.blur()
+                    });
+                   
+                })
+            })
+        </script>
 </div>
