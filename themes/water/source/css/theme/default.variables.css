@@ -7,7 +7,7 @@
   --shadowColor: var(--base4,transparent);
 }
 
-@media (prefers-color-scheme: dark,transparent) {
+@media (prefers-color-scheme: dark) {
   :root {
     --defaultColor: var(--base0,transparent);
     --emColor: var(--base1,transparent);
