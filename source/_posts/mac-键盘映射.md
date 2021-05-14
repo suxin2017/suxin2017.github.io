@@ -17,6 +17,238 @@ category:
     "title": "my mac key mapping",
     "rules": [
         {
+            "description": "rk61 mapping",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "application"
+                    },
+                    "to": [
+                        {
+                            "set_variable": {
+                                "name": "application pressed",
+                                "value": 1
+                            }
+                        }
+                    ],
+                    "to_after_key_up": [
+                        {
+                            "set_variable": {
+                                "name": "application pressed",
+                                "value": 0
+                            }
+                        }
+                      ]
+                },
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "equal_sign"
+                    },
+                    "to": [
+                        {
+                            "repeat": false,
+                            "key_code": "f12"
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "variable_if",
+                            "name": "application pressed",
+                            "value": 1
+                        }
+                    ]
+                },
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "hyphen"
+                    },
+                    "to": [
+                        {
+                            "repeat": false,
+                            "key_code": "f11"
+                        }
+                    ],     "conditions": [
+                        {
+                            "type": "variable_if",
+                            "name": "application pressed",
+                            "value": 1
+                        }
+                    ]
+                },
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "0"
+                    },
+                    "to": [
+                        {
+                            "repeat": false,
+                            "key_code": "f10"
+                        }
+                    ],     "conditions": [
+                        {
+                            "type": "variable_if",
+                            "name": "application pressed",
+                            "value": 1
+                        }
+                    ]
+                },
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "9"
+                    },
+                    "to": [
+                        {
+                            "repeat": false,
+                            "key_code": "f9"
+                        }
+                    ],     "conditions": [
+                        {
+                            "type": "variable_if",
+                            "name": "application pressed",
+                            "value": 1
+                        }
+                    ]
+                },
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "8"
+                    },
+                    "to": [
+                        {
+                            "repeat": false,
+                            "key_code": "f8"
+                        }
+                    ],     "conditions": [
+                        {
+                            "type": "variable_if",
+                            "name": "application pressed",
+                            "value": 1
+                        }
+                    ]
+                },
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "7"
+                    },
+                    "to": [
+                        {
+                            "repeat": false,
+                            "key_code": "f7"
+                        }
+                    ],     "conditions": [
+                        {
+                            "type": "variable_if",
+                            "name": "application pressed",
+                            "value": 1
+                        }
+                    ]
+                },
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "6"
+                    },
+                    "to": [
+                        {
+                            "repeat": false,
+                            "key_code": "f6"
+                        }
+                    ],     "conditions": [
+                        {
+                            "type": "variable_if",
+                            "name": "application pressed",
+                            "value": 1
+                        }
+                    ]
+                },
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "5"
+                    },
+                    "to": [
+                        {
+                            "repeat": false,
+                            "key_code": "f5"
+                        }
+                    ],     "conditions": [
+                        {
+                            "type": "variable_if",
+                            "name": "application pressed",
+                            "value": 1
+                        }
+                    ]
+                },
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "4"
+                    },
+                    "to": [
+                        {
+                            "repeat": false,
+                            "key_code": "f4"
+                        }
+                    ],     "conditions": [
+                        {
+                            "type": "variable_if",
+                            "name": "application pressed",
+                            "value": 1
+                        }
+                    ]
+                },
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "3"
+                    },
+                    "to": [
+                        {
+                            "repeat": false,
+                            "key_code": "f3"
+                        }
+                    ],     "conditions": [
+                        {
+                            "type": "variable_if",
+                            "name": "application pressed",
+                            "value": 1
+                        }
+                    ]
+                },
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "2"
+                    },
+                    "to": [
+                        {
+                            "repeat": false,
+                            "key_code": "f2"
+                        }
+                    ]
+                },
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "1"
+                    },
+                    "to": [
+                        {
+                            "repeat": false,
+                            "key_code": "f1"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             "description": "capslock",
             "manipulators": [
                 {
@@ -35,19 +267,23 @@ category:
         },
         {
             "description": "shift",
-            "manipulators":[
+            "manipulators": [
                 {
                     "type": "basic",
                     "from": {
                         "key_code": "left_shift",
                         "modifiers": {
-                            "optional": ["any"]
+                            "optional": [
+                                "any"
+                            ]
                         }
                     },
                     "to": [
                         {
                             "key_code": "p",
-                            "modifiers": ["left_gui"]
+                            "modifiers": [
+                                "left_gui"
+                            ]
                         }
                     ],
                     "conditions": [
@@ -57,8 +293,8 @@ category:
                             "value": 1
                         },
                         {
-                            "type":"frontmost_application_if",
-                            "bundle_identifiers":[
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
                                 "com\\.microsoft\\.VSCode"
                             ]
                         }
@@ -69,7 +305,9 @@ category:
                     "from": {
                         "key_code": "left_shift",
                         "modifiers": {
-                            "optional": ["any"]
+                            "optional": [
+                                "any"
+                            ]
                         }
                     },
                     "to_if_alone": [
@@ -109,8 +347,9 @@ category:
                     }
                 }
             ]
-        },{
-            "description":"hjkl",
+        },
+        {
+            "description": "hjkl",
             "manipulators": [
                 {
                     "type": "basic",
@@ -118,54 +357,57 @@ category:
                         "key_code": "h",
                         "modifiers": {
                             "mandatory": [
-                              "left_control"
+                                "left_control"
                             ]
-                          }
+                        }
                     },
                     "to": [
                         {
                             "key_code": "left_arrow"
                         }
                     ]
-                },  {
+                },
+                {
                     "type": "basic",
                     "from": {
                         "key_code": "j",
                         "modifiers": {
                             "mandatory": [
-                              "left_control"
+                                "left_control"
                             ]
-                          }
+                        }
                     },
                     "to": [
                         {
                             "key_code": "down_arrow"
                         }
                     ]
-                },  {
+                },
+                {
                     "type": "basic",
                     "from": {
                         "key_code": "k",
                         "modifiers": {
                             "mandatory": [
-                              "left_control"
+                                "left_control"
                             ]
-                          }
+                        }
                     },
                     "to": [
                         {
                             "key_code": "up_arrow"
                         }
                     ]
-                },  {
+                },
+                {
                     "type": "basic",
                     "from": {
                         "key_code": "l",
                         "modifiers": {
                             "mandatory": [
-                              "left_control"
+                                "left_control"
                             ]
-                          }
+                        }
                     },
                     "to": [
                         {
