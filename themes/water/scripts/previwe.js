@@ -27,7 +27,8 @@ hexo.extend.filter.register('markdown-it:renderer', function (md) {
         md.renderer.rules.fence = function (tokens, idx, options, env, slf) {
             const token = tokens[idx];
             const code = token.content
-            const placeholder = token.info.split(' ')[2] || '';
+            const placeholder = token.info.split(' ')[2] !== 'open' ?  token.info.split(' ')[2] : '' ;
+            const defaultOpen = token.info.split(' ')[2] === 'open';
             const hasPreview = token.info.indexOf('preview') !== -1;
             const codeHighlight = `<pre><code class="hljs">${hljs.highlightAuto(code).value}</code></pre>`
             if (!hasPreview) {
@@ -37,10 +38,10 @@ hexo.extend.filter.register('markdown-it:renderer', function (md) {
             let demo = '暂不支持该语言预览'
             if (jsPreview) {
                 demo = `<script type="module">
-                    (function(){
-                        ${code}
-                    })(document.getElementById('preview-${idx}'))
-                </script>`
+    (function(){
+        ${code}
+    })(${idx}))
+</script>`
             }
             const htmlPreview = token.info.indexOf('html') !== -1;
             if (htmlPreview) {
@@ -53,13 +54,13 @@ hexo.extend.filter.register('markdown-it:renderer', function (md) {
         <span id="expand-${idx}" class="preview-box-util-code" style="background-image:url(${url_for('/imgs/code.svg')})"></span>
     </div>
 </div>
-<div id="code-${idx}" class="preview-code">
+<div id="code-${idx}" class="preview-code ${defaultOpen && 'preview-code-active'}">
 ${codeHighlight}
 </div>
 <script>
     const expandCode_${idx} = document.getElementById('expand-${idx}');
     const bindCode_${idx} = document.getElementById('code-${idx}');
-    let flag_${idx} = true;
+    let flag_${idx} = ${defaultOpen ? 'false':'true'};
     expandCode_${idx}.onclick = function (){
         if(flag_${idx}){
             bindCode_${idx}.classList.add('preview-code-active')
