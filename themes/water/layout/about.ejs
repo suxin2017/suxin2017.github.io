@@ -19,13 +19,22 @@
                     <%= config.keywords %>
                 </p>
             </div>
+            <div class="about-me-code-age">
+                <p>
+                    码龄: <span id="age"></span>天
+                </p>
+                <script>
+                    const age = document.getElementById('age');
+                    age.textContent = Math.floor((Date.now() - new Date(2017, 0)) / (24 * 3600 * 1000))
+                </script>
+            </div>
             <div class="about-me-desc-icon-group">
                 <div class="about-me-desc-github about-me-desc-icon">
-                    <a href=<%= theme.about.github %> target="_blank" rel="noreferrer">
-                    <img src=<%=url_for('/imgs/github.svg') %> width=20 height=20 alt="github" >
-                    <span>github</span>
-                </a>
-                  
+                    <a href=<%=theme.about.github %> target="_blank" rel="noreferrer">
+                        <img src=<%=url_for('/imgs/github.svg') %> width=20 height=20 alt="github" >
+                        <span>github</span>
+                    </a>
+
                 </div>
                 <div class="about-me-desc-github about-me-desc-icon">
                     <a href='mailto:<%= theme.about.email %>'>
