@@ -49,7 +49,7 @@ hexo.extend.filter.register('markdown-it:renderer', function (md) {
             }
             return `<div id="preview-${idx}" class="preview">
 <div class="preview-box">    
-    ${placeholder}${demo}
+    ${placeholder ? placeholder : ''}${demo}
     <div class="preview-box-util">
         <span id="expand-${idx}" class="preview-box-util-code" style="background-image:url(${url_for('/imgs/code.svg')})"></span>
     </div>
