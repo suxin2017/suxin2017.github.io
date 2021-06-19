@@ -6,7 +6,7 @@ category: node
 ---
 
 <style>
-.dark img{
+.dark .post img{
 	filter: contrast(0);
 }
 </style>

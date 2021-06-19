@@ -34,6 +34,7 @@
         darkTheme = !darkTheme;
         themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${darkTheme ? 'dark' : 'light'}.variables.css`)
         document.head.appendChild(themeLink)
+        document.body.className = darkTheme?'dark':'light'
         localStorage.setItem('theme',darkTheme?'dark':'light');
     }
 
