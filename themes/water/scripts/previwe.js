@@ -19,9 +19,10 @@ function escapeHtml(str) {
 }
 const hljs = require('highlight.js')
 const url_for = require('hexo-util').url_for.bind(hexo)
-
+const imgSize = require('markdown-it-imsize');
 hexo.extend.filter.register('markdown-it:renderer', function (md) {
     const { config } = this; // Optional, parse user 
+    md.use(imgSize)
     md.use(function (md) {
         const oldCodeRule = md.renderer.rules.fence;
         md.renderer.rules.fence = function (tokens, idx, options, env, slf) {
