@@ -16,6 +16,9 @@
         }
         if(localStorage){
             loadTheme()
+            setTimeout(()=>{
+             document.body.className = localStorageTheme
+            })
         }
     </script>
 
