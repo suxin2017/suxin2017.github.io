@@ -1,6 +1,5 @@
 .post{
     img{
-        width: 80%;
         padding: 20px;
         text-align: center;
         background-color: var(--backgroundLightColor);
@@ -28,8 +27,10 @@
     strong,code{
         color: var(--cyan);
     }
-
-    p{
+    img{
+        max-width: 80%;
+    }
+    p,li,ul,a{
         font-size: 14px;
     }
  
@@ -38,6 +39,9 @@
     .post{
         p{
             line-height: 2em;
+        }
+        img{
+            width: 100%;
         }
     }
 }
