@@ -8,8 +8,7 @@ category:
     function $(id) {
         return document.getElementById(id)
     }
-    let countNode;
-    let addButton;
+  x
 </script>
 简单的代理对象
 
@@ -17,7 +16,9 @@ category:
 ```html preview open
 <div id="count_0"> </div>
 <button id="add_0">add</button>
-<script>
+<script type="module">
+    let countNode;
+    let addButton;
     countNode = $('count_0');
     addButton = $('add_0');
     let value = { count: 1 };
@@ -35,7 +36,9 @@ category:
 <div id="count_1"> </div>
 <button id="add_1">add</button>
 <!-- proxy 方式 -->
-<script>
+<script type="module">
+    let countNode;
+    let addButton;
     countNode = $('count_1');
     addButton = $('add_1');
     let value1 = new Proxy({ count: 1 }, {
@@ -64,7 +67,7 @@ category:
     <div id="count_3"></div>
     <button id="add_2">add</button>
 </div>
-<script>
+<script type="module">
     const app = $("app")
     const map = new WeakMap();
 
@@ -80,8 +83,9 @@ category:
                 if (target[prop] === value) {
                     return;
                 }
-                Reflect.set(target, prop, value);
+                const result = Reflect.set(target, prop, value);
                 vm.render()
+                return result;
             }
         })
         map.set(proxy, obj)
