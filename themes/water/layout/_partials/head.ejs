@@ -40,6 +40,11 @@
     <% if (is_current('/about')) { %>
     <link rel="stylesheet" href='<%- theme.cdn.url %><%- url_for('/css/about.css') %>' >
     <% } %>
+    <!-- resume -->
+    <% if (is_current('/resume')) { %>
+    <link rel="stylesheet" href='<%- theme.cdn.url %><%- url_for('/css/about.css') %>' >
+    <link rel="stylesheet" href='<%- theme.cdn.url %><%- url_for('/css/resume.css') %>' >
+    <% } %>
 
     <title><%= config.title %> </title>
 

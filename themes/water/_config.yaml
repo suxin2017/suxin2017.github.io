@@ -9,6 +9,8 @@ menus:
     path: '/'
   - name: '关于'
     path: '/about'
+  - name: '简历'
+    path: '/resume'
   # - name: 'rss'
   #   path: '/rss'
 

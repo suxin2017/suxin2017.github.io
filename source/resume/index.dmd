@@ -1,0 +1,219 @@
+---
+title: resume
+date: 2020-11-16 13:42:55
+type: "resume"
+layout: "resume"
+---
+<style>
+    .company {
+        display: inline-block;
+        font-size: 16px;
+        font-weight: 600;
+        margin-right: 12px !important;
+    }
+
+    .tag {
+        font-size: 10px;
+        margin-left: 4px;
+        display: inline-block;
+        padding: 0px 4px;
+        border-radius: 4px;
+        border: 1px solid var(--shadowColor)
+    }
+
+    .tag-yellow {
+        color: var(--yellow);
+    }
+
+    .tag-orange {
+        color: var(--orange);
+    }
+
+    .tag-red {
+        color: var(--red);
+    }
+
+    .tag-magenta {
+        color: var(--magenta);
+    }
+
+    .tag-violet {
+        color: var(--violet);
+    }
+
+    .tag-blue {
+        color: var(--blue);
+    }
+
+    .tag-cyan {
+        color: var(--cyan);
+    }
+
+    .tag-green {
+        color: var(--green);
+    }
+
+
+    .time {
+        font-size: 12px;
+    }
+
+    .container {
+        position: relative;
+        margin-left: 1em;
+
+    }
+
+    .container div {
+        margin: 8px 0;
+    }
+
+    .container::after {
+        content: '';
+        position: absolute;
+        background-color: var(--cyan);
+        width: 6px;
+        height: 6px;
+        display: block;
+        border-radius: 50%;
+        left: -20px;
+        top: 7.5px;
+        bottom: 0;
+        z-index: 1;
+    }
+
+    .container::before {
+        content: '';
+        position: absolute;
+        background-color: var(--shadowColor);
+        width: 2px;
+        display: block;
+        left: -18px;
+        top: 0;
+        bottom: 0;
+    }
+
+    .list {}
+
+    .list .item .name {
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .list .item .desc {
+        font-size: 14px;
+        margin: 14px;
+        margin-left: 28px;
+    }
+
+    .list .item .desc::before {
+        font-size: 14px;
+        margin-left: -14px;
+        margin-bottom: 8px;
+        display: block;
+        content: '项目描述：';
+    }
+
+    .list .item .me {
+        font-size: 14px;
+        margin: 14px;
+        margin-left: 28px;
+    }
+
+    .list .item .me::before {
+        font-size: 14px;
+        margin-left: -14px;
+        margin-bottom: 8px;
+        content: '项目责任：';
+        display: block;
+    }
+</style>
+
+
+<h3>
+    技能
+</h3> 
+
+<p>熟悉 React 开发框架. 掌握 vue 开发</p>
+<p>熟悉 antd 组件使用方法</p>
+<p>熟悉 JS,CSS.网络请求方式,浏览器工作过程. 熟悉 umi-request、aixo 中间件和拦截器的使用</p>
+<p>熟悉 Less css 编译库. 熟悉 echart 图形库的使用</p>
+<p>熟悉 webpack 配置 </p>
+<p>熟练操作 git 进行规范提交,代码合并. 掌握 nginx 基础配置,掌握 linux 命令</p>
+
+<h3>
+    工作经历&项目经历
+</h3>
+
+<div class="container">
+    <div class="info">
+        <div class="time">2020.04 - 至今</div>
+        <div class="company">快手 </div>
+        <div class="tag">前端研发</div>
+    </div>
+    <div class="list">
+        <div class="item">
+            <div class="name">海外 dsp 投放平台</div>
+            <div class="desc">进行广告投放计划组创意创建，广告预算维护，消耗展示的平台</div>
+            <div class="me">负责平台维护，翻译提取，国际化工作</div>
+        </div>
+        <div class="item">
+            <div class="name">jinx 前端部署平台</div>
+            <div class="desc">jinx 是一个多分支开发的前端部署服务，负责公司前端资源测试环境部署，服务代理，域名解析。</div>
+            <div class="me">整体页面设计，技术实现，后期客服等工作</div>
+        </div>
+        <div class="item">
+            <div class="name">魔力建站</div>
+            <div class="desc">魔力建站是快手一个商业的</div>
+            <div class="me">常规业务迭代，参考线实现，字体压缩服务。</div>
+        </div>
+        <div class="item">
+            <div class="name">快手视频web端一期</div>
+            <div class="desc">web 端的快手短视频</div>
+            <div class="me">参与一期开发</div>
+        </div>
+        <div class="item">
+            <div class="name">bit 组件市场</div>
+            <div class="desc">解析bit组件存储规则，web端可视化组件api，文档服务</div>
+            <div class="me">整体页面设计，技术实现</div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="info">
+        <div class="time">2019.06 - 2020.04</div>
+        <div class="company">百分点信息有限公司 </div>
+        <div class="tag">前端研发</div>
+    </div>
+    <div class="list">
+        <div class="item">
+            <div class="name">资产平台</div>
+            <div class="desc">大数据能力平台是一个数据处理平台,包含数据接入,数据治理,数据开发,数据监控(接入,治理,开发,硬件
+                资源的监控),权限管理,等功能</div>
+            <div class="me">完成新需求的页面开发,对老代码的 bug 进行修改.,报表页面开发,用 G6 开发组织结构图. 隔代升级老项目的 webpack 到新版,优化项目打包构建速度,构建速度从 40 多秒到
+                10 多秒,引入 g6 库
+                开发树状图. </div>
+            <div class="key">
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">React</span>
+                <span class="tag">echarts</span>
+                <span class="tag">g6</span>
+                <span class="tag">webpack</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3>个人项目</h3>
+
+<ul>
+    <li>pixel-editor 像素建站</li>
+    <li>slow 类 spring 后端框架</li>
+    <li>马克在线 markdown 转富文本工具</li>
+    <li>playground 在线编辑预览工具</li>
+    <li>bxer ui 一套自己搞得组件库</li>
+    <li>...</li>
+</ul>

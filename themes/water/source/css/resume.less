@@ -1,0 +1,19 @@
+.resume {
+  &-content{
+    h3{
+      position: relative;
+      &::after{
+        content: '';
+        position: absolute;
+        background-color: var(--cyan);
+        width: 13px;
+        height: 13px;
+        display: block;
+        border-radius: 50%;
+        left: -20px;
+        top: 7.5px;
+        bottom: 0;
+      }
+    }
+  }
+}
