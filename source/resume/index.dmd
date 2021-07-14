@@ -5,6 +5,10 @@ type: "resume"
 layout: "resume"
 ---
 <style>
+    .resume-content {
+        padding: 0 24px;
+    }
+
     .company {
         display: inline-block;
         font-size: 16px;
@@ -61,7 +65,8 @@ layout: "resume"
     .container {
         position: relative;
         margin-left: 1em;
-
+        margin-bottom: -14px;
+        padding-top: 2px;
     }
 
     .container div {
@@ -77,7 +82,7 @@ layout: "resume"
         display: block;
         border-radius: 50%;
         left: -20px;
-        top: 7.5px;
+        top: 15px;
         bottom: 0;
         z-index: 1;
     }
@@ -127,12 +132,65 @@ layout: "resume"
         content: '项目责任：';
         display: block;
     }
+
+    .list .item .key {
+        font-size: 14px;
+        margin: 14px;
+        margin-left: 28px;
+    }
+
+    .list .item .key::before {
+        font-size: 14px;
+        margin-left: -14px;
+        margin-bottom: 8px;
+        content: 'keyword：';
+        display: block;
+    }
+
+    h3 {
+        position: relative;
+        margin-top: 32px;
+    }
+
+    h3::after {
+        content: '';
+        position: absolute;
+        background-color: var(--cyan);
+        width: 13px;
+        height: 13px;
+        display: block;
+        border-radius: 50%;
+        left: -20px;
+        top: 4.5px;
+        bottom: 0;
+    }
+
+    .private {
+        display: flex;
+        flex-wrap: wrap;
+        font-size: 14px;
+        padding: 0;
+    }
+
+    .private li {
+        list-style: none;
+        width: 327px;
+        border: 1px solid var(--defaultColor);
+        border-radius: 8px;
+        padding: 24px;
+        margin: 12px;
+        cursor: pointer;
+    }
+
+    .private li:hover {
+        box-shadow: 0px 0px 6px 4px var(--shadowColor);
+    }
 </style>
 
 
 <h3>
     技能
-</h3> 
+</h3>
 
 <p>熟悉 React 开发框架. 掌握 vue 开发</p>
 <p>熟悉 antd 组件使用方法</p>
@@ -153,29 +211,87 @@ layout: "resume"
     </div>
     <div class="list">
         <div class="item">
-            <div class="name">海外 dsp 投放平台</div>
+            <div class="name">海外 dsp 投放平台
+                <div class="tag">核心开发人员</div>
+            </div>
             <div class="desc">进行广告投放计划组创意创建，广告预算维护，消耗展示的平台</div>
-            <div class="me">负责平台维护，翻译提取，国际化工作</div>
+            <div class="me">
+                <ul>
+                    <li>从0到1构建项目</li>
+                    <li>负责平台维护，文案提取平台，国际化工作</li>
+                    <li>完成页面布局构建</li>
+                </ul>
+            </div>
+            <div class="key">
+                <span class="tag">React</span>
+                <span class="tag">Redux</span>
+                <span class="tag">React Query</span>
+                <span class="tag">React Intl</span>
+            </div>
         </div>
         <div class="item">
-            <div class="name">jinx 前端部署平台</div>
+            <div class="name">jinx 前端部署平台
+                <div class="tag">项目负责人</div>
+            </div>
             <div class="desc">jinx 是一个多分支开发的前端部署服务，负责公司前端资源测试环境部署，服务代理，域名解析。</div>
-            <div class="me">整体页面设计，技术实现，后期客服等工作</div>
+            <div class="me">
+                <ul>
+                    <li>整体框架、ui设计</li>
+                    <li>接口代理，脚本注入，静态资源管理，域名规则解析功能开发</li>
+                    <li>日常客服，解决用户疑难问题。</li>
+                </ul>
+            </div>
+            <div class="key">
+                <span class="tag">Koa</span>
+                <span class="tag">React</span>
+                <span class="tag">Antd</span>
+                <span class="tag">Sqlite</span>
+            </div>
         </div>
         <div class="item">
-            <div class="name">魔力建站</div>
+            <div class="name">魔力建站
+                <div class="tag">核心开发人员</div>
+            </div>
             <div class="desc">魔力建站是快手一个商业的</div>
-            <div class="me">常规业务迭代，参考线实现，字体压缩服务。</div>
+            <div class="me">
+                <ul>
+                    <li>常规业务迭代，参考线实现，字体压缩服务。</li>
+                    <li>完成富有技术挑战的参考线、字体压缩服务的实现。</li>
+                    <li></li>
+                </ul>
+            </div>
+            <div class="key">
+                <span class="tag">React</span>
+                <span class="tag">Redux</span>
+                <span class="tag">Koa</span>
+                <span class="tag">Wings</span>
+            </div>
         </div>
         <div class="item">
-            <div class="name">快手视频web端一期</div>
+            <div class="name">快手视频web端一期
+
+            </div>
             <div class="desc">web 端的快手短视频</div>
             <div class="me">参与一期开发</div>
+            <div class="key">
+                <span class="tag">graphql</span>
+                <span class="tag">vue</span>
+            </div>
         </div>
         <div class="item">
             <div class="name">bit 组件市场</div>
             <div class="desc">解析bit组件存储规则，web端可视化组件api，文档服务</div>
-            <div class="me">整体页面设计，技术实现</div>
+            <div class="me">
+                <ul>
+                    <li>整体页面设计，技术实现</li>
+                </ul>
+            </div>
+            <div class="key">
+                <span class="tag">egg</span>
+                <span class="tag">typeorm</span>
+                <span class="tag">mysql</span>
+                <span class="tag">React</span>
+            </div>
         </div>
     </div>
 </div>
@@ -209,11 +325,12 @@ layout: "resume"
 
 <h3>个人项目</h3>
 
-<ul>
-    <li>pixel-editor 像素建站</li>
-    <li>slow 类 spring 后端框架</li>
-    <li>马克在线 markdown 转富文本工具</li>
-    <li>playground 在线编辑预览工具</li>
-    <li>bxer ui 一套自己搞得组件库</li>
+<ul class="private">
+    <li><a href="https://suxin2017.github.io/pixel-editor/">pixel-editor 像素建站</a></li>
+    <li><a href="https://github.com/suxin2017/slow">slow 类 spring 后端框架</a></li>
+    <li><a href="https://suxin2017.github.io/markdown-website/#/">马克在线 markdown 转富文本工具</a></li>
+    <li><a href="https://github.com/suxin2017/code-playground">playground 在线编辑预览工具</a></li>
+    <li><a href="https://suxin2017.github.io/bxer-ui/?path=/docs/%E4%BB%8B%E7%BB%8D--page">
+            bxer ui 一套自己搞得组件库</a></li>
     <li>...</li>
 </ul>

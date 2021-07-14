@@ -1,91 +1,99 @@
 <div class="about">
-	<div class="about-me">
-		<div class="about-me-avatar">
-			<img src=<%=url_for('/imgs/avatar.jpeg') %> width=128 height=128 alt="头像" >
-		</div>
-		<div class="about-me-desc">
-			<div class="about-me-desc-name">
-				<p>
-					<%= config.author %>
-				</p>
-			</div>
-			<div class="about-me-desc-keywords">
-				<p>
-					<%= config.keywords %>
-				</p>
-			</div>
-			<div class="about-me-code-age">
-				<p>
-					码龄: <span id="age"></span>天
-				</p>
-				<script>
-					const age = document.getElementById('age');
-					age.textContent = Math.floor((Date.now() - new Date(2017, 0)) / (24 * 3600 * 1000))
-				</script>
-			</div>
-			<div class="about-me-desc-icon-group">
-				<div class="about-me-desc-github about-me-desc-icon">
-					<a href=<%=theme.about.github %> target="_blank" rel="noreferrer">
-						<img src=<%=url_for('/imgs/github.svg') %> width=20 height=20
-						alt="github" >
-						<span>github</span>
-					</a>
+    <div class="about-me">
+        <div class="about-me-avatar">
+            <img src=<%=url_for('/imgs/avatar.jpeg') %> width=128 height=128 alt="头像" >
+        </div>
+        <div class="about-me-desc">
+            <div class="about-me-desc-name">
+                <p>
+                    <%= config.author %>
+                </p>
+            </div>
+            <div class="about-me-desc-keywords">
+                <p>
+                    <%= config.keywords %>
+                </p>
+            </div>
+            <div class="about-me-code-age">
+                <p>
+                    码龄: <span id="age"></span>天
+                </p>
+                <script>
+                    const age = document.getElementById('age');
+                    age.textContent = Math.floor((Date.now() - new Date(2017, 0)) / (24 * 3600 * 1000))
+                </script>
+            </div>
+            <div class="about-me-desc-icon-group">
+                <div class="about-me-desc-github about-me-desc-icon">
+                    <a href=<%=theme.about.github %> target="_blank" rel="noreferrer">
+                        <img src=<%=url_for('/imgs/github.svg') %> width=20 height=20
+                        alt="github" >
+                        <span>github</span>
+                    </a>
 
-				</div>
-				<div class="about-me-desc-github about-me-desc-icon">
-					<a href='mailto:<%= theme.about.email %>'>
-						<img src=<%=url_for('/imgs/email.svg') %> width=20 height=20
-						alt="github" >
-						<span>email</span>
-					</a>
-				</div>
-			</div>
-		</div>
-	</div>
-   
-	<div class="resume-content" id="content"><%- page.content %></div>
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/crypto-js@4.0.0/crypto-js.js"></script>
-	
-<script>
-    var text = ''
-function decrypt (){
- 
-    const data = window.prompt('输入密码查看此页面');
-    if(data == null){
-        return;
-    }
-   
-	try{
-		var bytes  = CryptoJS.AES.decrypt(`<%= page.content %>`, data);
-        text = bytes.toString(CryptoJS.enc.Utf8);
-    }catch(e){
-        decrypt()
-    }
-}
-decrypt()
-window.addEventListener('load',()=>{
-    if(text){
-        document.getElementById('content').innerHTML = text
+                </div>
+                <div class="about-me-desc-github about-me-desc-icon">
+                    <a href='mailto:<%= theme.about.email %>'>
+                        <img src=<%=url_for('/imgs/email.svg') %> width=20 height=20
+                        alt="github" >
+                        <span>email</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    }
-    const tags = document.getElementsByClassName('tag');
-    const tagsArray = Array.from(tags);
-    const colors = ['yellow', 'orange', 'red', 'magenta', 'violet', 'blue', 'cyan', 'green']
-    function selectColor(text) {
-        let hash = 0;
+    <div class="resume-content" id="content">
+        <%- page.content %>
+    </div>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/crypto-js@4.0.0/crypto-js.js"></script>
 
-        for (let i = 0; i < text.length; i++) {
-            hash = ((hash << 5) - hash) + text.charCodeAt(i);
-            hash |= 0; // Convert to 32bit integer
+    <script>
+        var text = ''
+        function decrypt() {
+            let data;
+            if (location.search) {
+                data = location.search.split("=")[1];
+            }
+            if (!data) {
+                data = window.prompt('输入密码查看此页面');
+            }
+
+            if (data == null) {
+                return;
+            }
+            try {
+                var bytes = CryptoJS.AES.decrypt(`<%= page.content %>`, decodeURI(data));
+                text = bytes.toString(CryptoJS.enc.Utf8);
+            } catch (e) {
+                if (!location.search) {
+                    decrypt()
+                }
+            }
         }
+        decrypt()
+        window.addEventListener('load', () => {
+            if (text) {
+                document.getElementById('content').innerHTML = text
+            }
+            const tags = document.getElementsByClassName('tag');
+            const tagsArray = Array.from(tags);
+            const colors = ['yellow', 'orange', 'red', 'magenta', 'violet', 'blue', 'cyan', 'green']
+            function selectColor(text) {
+                let hash = 0;
 
-        return colors[Math.abs(hash) % colors.length];
-    }
-    tagsArray.map(tag => {
-        const text = tag.textContent;
-        const selectedColor = selectColor(text);
-        tag.classList.add(`tag-${selectedColor}`)
-    })
-})
-</script>
+                for (let i = 0; i < text.length; i++) {
+                    hash = ((hash << 5) - hash) + text.charCodeAt(i);
+                    hash |= 0; // Convert to 32bit integer
+                }
+
+                return colors[Math.abs(hash) % colors.length];
+            }
+            tagsArray.map(tag => {
+                const text = tag.textContent;
+                const selectedColor = selectColor(text);
+                tag.classList.add(`tag-${selectedColor}`)
+            })
+        })
+    </script>
 </div>
