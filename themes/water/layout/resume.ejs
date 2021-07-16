@@ -46,7 +46,7 @@
     <div class="resume-content" id="content">
         <%- page.content %>
     </div>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/crypto-js@4.0.0/crypto-js.js"></script>
+    <script type="text/javascript" src=<%=url_for('/js/crypto-js.js') %>  ></script>
 
     <script>
         var text = ''
@@ -72,7 +72,7 @@
             }
         }
         decrypt()
-        window.addEventListener('load', () => {
+        function injectText(){
             if (text) {
                 document.getElementById('content').innerHTML = text
             }
@@ -94,6 +94,14 @@
                 const selectedColor = selectColor(text);
                 tag.classList.add(`tag-${selectedColor}`)
             })
-        })
+        }
+        if (!location.search) {
+            window.addEventListener('load', () => {
+                injectText()
+            })
+            }else{
+                injectText()
+            }
+       
     </script>
 </div>
