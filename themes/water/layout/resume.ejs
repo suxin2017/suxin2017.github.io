@@ -23,6 +23,15 @@
                     age.textContent = Math.floor((Date.now() - new Date(2017, 0)) / (24 * 3600 * 1000))
                 </script>
             </div>
+            <div class="about-me-code-age">
+                <p>
+                    工龄: <span id="age1"></span>年
+                </p>
+                <script>
+                    const age1 = document.getElementById('age1');
+                    age1.textContent = Math.floor((Date.now() - new Date(2019, 0)) / (24 * 3600 * 1000 * 365))
+                </script>
+            </div>
             <div class="about-me-desc-icon-group">
                 <div class="about-me-desc-github about-me-desc-icon">
                     <a href=<%=theme.about.github %> target="_blank" rel="noreferrer">
