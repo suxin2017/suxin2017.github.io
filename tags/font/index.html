@@ -1,0 +1,43 @@
+<!DOCTYPE html><html lang="zh_CN"><head><meta charset="utf-8"><link rel="icon" sizes="any" type="image/svg+xml" href="/imgs/icon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/suxin2017/suxin2017.github.io@gh-pages/css/theme/color.variables.css"><link id="themeStyleVar" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/suxin2017/suxin2017.github.io@gh-pages/css/theme/default.variables.css"><script>const localStorageTheme = localStorage.getItem('theme');
+        function loadTheme(){
+            let themeLink = document.getElementById('themeStyleVar');
+            if(localStorageTheme){
+                themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${localStorageTheme}.variables.css`)
+            }
+        }
+        if(localStorage){
+            loadTheme()
+            setTimeout(()=>{
+                document.body.className = localStorageTheme ? localStorageTheme : 'dark'
+            })
+        }</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/suxin2017/suxin2017.github.io@gh-pages/css/index.css"><title>苏鑫2017</title><meta name="description" content="用于记录感悟，前端技术，编程技巧，各种奇奇怪怪的新的体会"><meta name="viewport" content="width=device-width,initial-scale=1"><script async>console.log(`%c真巧，你打开了devtool`,"color:#b58900")
+        console.log(`%c真巧，你看了我的文章`,"color:#859900")
+        console.log('%c简单介绍，道法自然，做人要顺其自然，不要有太多欲望',"color:#268bd2")
+        console.log('%c不要目的性太强,这就是我的主题想强调的',"color:#dc322f")</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-RFGTVED02M"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-RFGTVED02M")</script><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?ce46d6101f33ba04b74fbe8bbe509590";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="苏鑫2017" type="application/atom+xml"></head><body><div class="body"><header class="header"><div class="header-icon-wrapper"><h2><a href="/">苏鑫2017</a></h2></div><div class="header-right"><nav class="header-menu-wrapper"><ul class="header-menu"><li class="header-menu-item"><a class="header-menu-item-link" href="/">首页</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/about">关于</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/resume">简历</a></li><li class="header-menu-item"><div id="switchThemeButton"><img src="/imgs/icon.svg" alt="switchThemeIcon" width="100%" height="100%"></div><style>#switchThemeButton{width:40px;height:26px;margin:0;border:0;background:0 0;outline:0;cursor:pointer;margin-top:6px}</style><script async>const btn = document.getElementById('switchThemeButton');
+    let darkTheme = false;
+    const themeStyleVarId = "themeStyleVar";
+    
+    if(localStorageTheme === 'dark'){
+        darkTheme = true
+    }else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // dark mode
+        darkTheme = true;
+    }
+    function loadTheme() {
+        let themeLink = document.getElementById(themeStyleVarId);
+        if (!themeLink) {
+            themeLink = document.createElement('link')
+            themeLink.rel = "stylesheet"
+            themeLink.id = "themeStyleVar"
+        }
+        darkTheme = !darkTheme;
+        themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${darkTheme ? 'dark' : 'light'}.variables.css`)
+        document.head.appendChild(themeLink)
+        document.body.className = darkTheme?'dark':'light'
+        localStorage.setItem('theme',darkTheme?'dark':'light');
+    }
+
+    btn.onclick = function() {
+        loadTheme();
+        codeTheme();
+    }</script></li></ul></nav></div></header><main class="main"><div class="page-list"><div class="page-list-item"><div class="page-item-title"><a href="/2020/12/13/you-qu-de-zi-ti-wen-jian/"><h3>有趣的字体文件</h3></a></div><div class="page-list-item-create-date"><span>发表于：2020-12-13 </span><span>| </span><span>分类： <span><span class="tag">font </span><span class="tag">ttf </span><span class="tag">TrueType </span><span class="tag">OpenType</span></span></span></div><div class="page-list-item-excerpt"><p>字体历史 话说在计算机市场刚刚开辟的时候，字体市场 Adobe 一家独大，通过贩卖格式认证赚了很多钱，但是苹果想白嫖 Adobe 自然不干。 于是苹果公司另起炉灶搞起了自己的 TrueType，但是当时已经有了一大批 Adobe 付费用户，自然没必要支持苹果。 然后苹果拉起了同盟，微软，两人情投意合，眉来眼去一起搞起了字体协议。 两人联手把 Adobe 搞的不行，目前市场上最常见的就是 T...</p></div><div class="page-list-item-info"><span><a href="/2020/12/13/you-qu-de-zi-ti-wen-jian/">查看更多 »</a></span></div></div></div><div class="pagination"><div class="pagination-prev" style="background-image:url(/imgs/left.svg)"></div><div class="pagination-content">1/1</div><div class="pagination-next" style="background-image:url(/imgs/right.svg)"></div></div></main><footer><p>Copyright © 2019-2021 suxin2017</p><p class="icp"><span><img src="/imgs/icp.png" width="17px" height="17px" alt="icp"> </span><a href="http://beian.miit.gov.cn" class="icp-link"><span>京ICP备2020041991号</span></a></p><p><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></p></footer></div></body></html>

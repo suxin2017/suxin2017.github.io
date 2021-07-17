@@ -1,0 +1,273 @@
+<!DOCTYPE html><html lang="zh_CN"><head><meta charset="utf-8"><link rel="icon" sizes="any" type="image/svg+xml" href="/imgs/icon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/suxin2017/suxin2017.github.io@gh-pages/css/theme/color.variables.css"><link id="themeStyleVar" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/suxin2017/suxin2017.github.io@gh-pages/css/theme/default.variables.css"><script>const localStorageTheme = localStorage.getItem('theme');
+        function loadTheme(){
+            let themeLink = document.getElementById('themeStyleVar');
+            if(localStorageTheme){
+                themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${localStorageTheme}.variables.css`)
+            }
+        }
+        if(localStorage){
+            loadTheme()
+            setTimeout(()=>{
+                document.body.className = localStorageTheme ? localStorageTheme : 'dark'
+            })
+        }</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/suxin2017/suxin2017.github.io@gh-pages/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/suxin2017/suxin2017.github.io@gh-pages/css/post.css"><title>苏鑫2017</title><meta name="description" content="用于记录感悟，前端技术，编程技巧，各种奇奇怪怪的新的体会"><meta name="viewport" content="width=device-width,initial-scale=1"><script async>console.log(`%c真巧，你打开了devtool`,"color:#b58900")
+        console.log(`%c真巧，你看了我的文章`,"color:#859900")
+        console.log('%c简单介绍，道法自然，做人要顺其自然，不要有太多欲望',"color:#268bd2")
+        console.log('%c不要目的性太强,这就是我的主题想强调的',"color:#dc322f")</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-RFGTVED02M"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-RFGTVED02M")</script><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?ce46d6101f33ba04b74fbe8bbe509590";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="苏鑫2017" type="application/atom+xml"></head><body><div class="body"><header class="header"><div class="header-icon-wrapper"><h2><a href="/">苏鑫2017</a></h2></div><div class="header-right"><nav class="header-menu-wrapper"><ul class="header-menu"><li class="header-menu-item"><a class="header-menu-item-link" href="/">首页</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/about">关于</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/resume">简历</a></li><li class="header-menu-item"><div id="switchThemeButton"><img src="/imgs/icon.svg" alt="switchThemeIcon" width="100%" height="100%"></div><style>#switchThemeButton{width:40px;height:26px;margin:0;border:0;background:0 0;outline:0;cursor:pointer;margin-top:6px}</style><script async>const btn = document.getElementById('switchThemeButton');
+    let darkTheme = false;
+    const themeStyleVarId = "themeStyleVar";
+    
+    if(localStorageTheme === 'dark'){
+        darkTheme = true
+    }else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // dark mode
+        darkTheme = true;
+    }
+    function loadTheme() {
+        let themeLink = document.getElementById(themeStyleVarId);
+        if (!themeLink) {
+            themeLink = document.createElement('link')
+            themeLink.rel = "stylesheet"
+            themeLink.id = "themeStyleVar"
+        }
+        darkTheme = !darkTheme;
+        themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${darkTheme ? 'dark' : 'light'}.variables.css`)
+        document.head.appendChild(themeLink)
+        document.body.className = darkTheme?'dark':'light'
+        localStorage.setItem('theme',darkTheme?'dark':'light');
+    }
+
+    btn.onclick = function() {
+        loadTheme();
+        codeTheme();
+    }</script><script>function codeTheme(){
+            const localStorageTheme = localStorage.getItem('theme');
+            let codeThemeLink = document.getElementById("codeTheme");
+            if(!codeThemeLink){
+                codeThemeLink = document.createElement('link');
+                codeThemeLink.rel = "stylesheet"
+                codeThemeLink.id = "codeTheme"
+                document.head.appendChild(codeThemeLink)
+            }
+            if(localStorageTheme){
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${localStorageTheme}.css`
+            }else{
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${darkTheme ? 'dark': 'light'}.css`
+            }
+        }
+        codeTheme()</script></li></ul></nav></div></header><main class="main"><div class="post"><h2>simple-proxy</h2><script>function $(e){return document.getElementById(e)}x</script><p>简单的代理对象</p><p>给count 最原始的方式绑定数据</p><div id="preview-7" class="preview"><div class="preview-box"><div id="count_0"></div><button id="add_0">add</button><script type="module">let countNode;
+    let addButton;
+    countNode = $('count_0');
+    addButton = $('add_0');
+    let value = { count: 1 };
+
+    countNode.textContent = value.count;
+    addButton.onclick = () => {
+        value.count++;
+        countNode.textContent = value.count;
+    }</script><div class="preview-box-util"><span id="expand-7" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-7" class="preview-code preview-code-active"><pre><code class="hljs"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;count_0&quot;</span>&gt;</span> <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;add_0&quot;</span>&gt;</span>add<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;module&quot;</span>&gt;</span><span class="javascript">
+    <span class="hljs-keyword">let</span> countNode;
+    <span class="hljs-keyword">let</span> addButton;
+    countNode = $(<span class="hljs-string">&#x27;count_0&#x27;</span>);
+    addButton = $(<span class="hljs-string">&#x27;add_0&#x27;</span>);
+    <span class="hljs-keyword">let</span> value = </span></span><span class="xquery">&#123;<span class="hljs-built_in"> count</span>: <span class="hljs-number">1</span> &#125;</span><span class="xml"><span class="javascript">;
+
+    countNode.textContent = value.count;
+    addButton.onclick = <span class="hljs-function">() =&gt;</span> </span></span><span class="xquery">&#123;
+        <span class="hljs-keyword">value</span><span class="hljs-built_in">.count</span>++;
+        countNode.textContent = <span class="hljs-keyword">value</span><span class="hljs-built_in">.count</span>;
+    &#125;</span><span class="xml">
+
+<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span>
+</code></pre></div><script>const expandCode_7 = document.getElementById('expand-7');
+    const bindCode_7 = document.getElementById('code-7');
+    let flag_7 = false;
+    expandCode_7.onclick = function (){
+        if(flag_7){
+            bindCode_7.classList.add('preview-code-active')
+        }else{
+            bindCode_7.classList.remove('preview-code-active') 
+        }
+        flag_7 = !flag_7
+    }</script></div><p>通过set绑定数据</p><div id="preview-11" class="preview"><div class="preview-box"><div id="count_1"></div><button id="add_1">add</button><script type="module">let countNode;
+    let addButton;
+    countNode = $('count_1');
+    addButton = $('add_1');
+    let value1 = new Proxy({ count: 1 }, {
+        set(target, prop, value, receiver) {
+            target[prop] = value;
+            countNode.textContent = value;
+        }
+    });
+    // mount
+    countNode.textContent = value1.count;
+
+    // update
+    addButton.onclick = () => {
+        value1.count++;
+    }</script><div class="preview-box-util"><span id="expand-11" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-11" class="preview-code preview-code-active"><pre><code class="hljs"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;count_1&quot;</span>&gt;</span> <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;add_1&quot;</span>&gt;</span>add<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-comment">&lt;!-- proxy 方式 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;module&quot;</span>&gt;</span><span class="javascript">
+    <span class="hljs-keyword">let</span> countNode;
+    <span class="hljs-keyword">let</span> addButton;
+    countNode = $(<span class="hljs-string">&#x27;count_1&#x27;</span>);
+    addButton = $(<span class="hljs-string">&#x27;add_1&#x27;</span>);
+    <span class="hljs-keyword">let</span> value1 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Proxy</span>(&#123; <span class="hljs-attr">count</span>: <span class="hljs-number">1</span> &#125;, &#123;
+        <span class="hljs-function"><span class="hljs-title">set</span>(<span class="hljs-params">target, prop, value, receiver</span>)</span> &#123;
+            target[prop] = value;
+            countNode.textContent = value;
+        &#125;
+    &#125;);
+    <span class="hljs-comment">// mount</span>
+    countNode.textContent = value1.count;
+
+    <span class="hljs-comment">// update</span>
+    addButton.onclick = <span class="hljs-function">() =&gt;</span> &#123;
+        value1.count++;
+    &#125;
+
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre></div><script>const expandCode_11 = document.getElementById('expand-11');
+    const bindCode_11 = document.getElementById('code-11');
+    let flag_11 = false;
+    expandCode_11.onclick = function (){
+        if(flag_11){
+            bindCode_11.classList.add('preview-code-active')
+        }else{
+            bindCode_11.classList.remove('preview-code-active') 
+        }
+        flag_11 = !flag_11
+    }</script></div><p>循环代理+动态渲染</p><div id="preview-15" class="preview"><div class="preview-box"><div id="app"><div>data.count</div><div id="count_2"></div><div>data.data.count</div><div id="count_3"></div><button id="add_2">add</button></div><script type="module">const app = $("app")
+    const map = new WeakMap();
+
+    function generatorProxy(obj, vm) {
+        const proxy = map.get(obj) ?? new Proxy(obj, {
+            get: (target, prop) => {
+                if (typeof target[prop] === 'object') {
+                    return generatorProxy(target[prop], vm)
+                }
+                return Reflect.get(target, prop);
+            },
+            set: (target, prop, value, receiver) => {
+                if (target[prop] === value) {
+                    return;
+                }
+                const result = Reflect.set(target, prop, value);
+                vm.render()
+                return result;
+            }
+        })
+        map.set(proxy, obj)
+        return proxy;
+    }
+
+    const count_2 = $('count_2');
+    const count_3 = $('count_3');
+    const add_2 = $('add_2');
+
+
+    function Component() {
+        const data = generatorProxy({
+            count: 0, data: {
+                count: 0
+            }
+        }, this);
+        this.render = () => {
+            count_2.textContent = data.count;
+            count_3.textContent = data.data.count;
+            add_2.onclick = () => {
+                console.log('click', data)
+                ++data.count;
+                ++data.data.count;
+            }
+        }
+        this.render()
+    }
+ 
+    // 创建新的组件
+    new Component();</script><div class="preview-box-util"><span id="expand-15" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-15" class="preview-code preview-code-active"><pre><code class="hljs"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>data.count<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;count_2&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>data.data.count<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;count_3&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;add_2&quot;</span>&gt;</span>add<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;module&quot;</span>&gt;</span><span class="javascript">
+    <span class="hljs-keyword">const</span> app = $(<span class="hljs-string">&quot;app&quot;</span>)
+    <span class="hljs-keyword">const</span> map = <span class="hljs-keyword">new</span> <span class="hljs-built_in">WeakMap</span>();
+
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">generatorProxy</span>(<span class="hljs-params">obj, vm</span>) </span>&#123;
+        <span class="hljs-keyword">const</span> proxy = map.get(obj) ?? <span class="hljs-keyword">new</span> <span class="hljs-built_in">Proxy</span>(obj, &#123;
+            <span class="hljs-attr">get</span>: <span class="hljs-function">(<span class="hljs-params">target, prop</span>) =&gt;</span> &#123;
+                <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> target[prop] === <span class="hljs-string">&#x27;object&#x27;</span>) &#123;
+                    <span class="hljs-keyword">return</span> generatorProxy(target[prop], vm)
+                &#125;
+                <span class="hljs-keyword">return</span> <span class="hljs-built_in">Reflect</span>.get(target, prop);
+            &#125;,
+            <span class="hljs-attr">set</span>: <span class="hljs-function">(<span class="hljs-params">target, prop, value, receiver</span>) =&gt;</span> &#123;
+                <span class="hljs-keyword">if</span> (target[prop] === value) &#123;
+                    <span class="hljs-keyword">return</span>;
+                &#125;
+                <span class="hljs-keyword">const</span> result = <span class="hljs-built_in">Reflect</span>.set(target, prop, value);
+                vm.render()
+                <span class="hljs-keyword">return</span> result;
+            &#125;
+        &#125;)
+        map.set(proxy, obj)
+        <span class="hljs-keyword">return</span> proxy;
+    &#125;
+
+    <span class="hljs-keyword">const</span> count_2 = $(<span class="hljs-string">&#x27;count_2&#x27;</span>);
+    <span class="hljs-keyword">const</span> count_3 = $(<span class="hljs-string">&#x27;count_3&#x27;</span>);
+    <span class="hljs-keyword">const</span> add_2 = $(<span class="hljs-string">&#x27;add_2&#x27;</span>);
+
+
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Component</span>(<span class="hljs-params"></span>) </span>&#123;
+        <span class="hljs-keyword">const</span> data = generatorProxy(&#123;
+            <span class="hljs-attr">count</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">data</span>: &#123;
+                <span class="hljs-attr">count</span>: <span class="hljs-number">0</span>
+            &#125;
+        &#125;, <span class="hljs-built_in">this</span>);
+        <span class="hljs-built_in">this</span>.render = <span class="hljs-function">() =&gt;</span> &#123;
+            count_2.textContent = data.count;
+            count_3.textContent = data.data.count;
+            add_2.onclick = <span class="hljs-function">() =&gt;</span> &#123;
+                <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;click&#x27;</span>, data)
+                ++data.count;
+                ++data.data.count;
+            &#125;
+        &#125;
+        <span class="hljs-built_in">this</span>.render()
+    &#125;
+ 
+    <span class="hljs-comment">// 创建新的组件</span>
+    <span class="hljs-keyword">new</span> Component();
+
+
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre></div><script>const expandCode_15 = document.getElementById('expand-15');
+    const bindCode_15 = document.getElementById('code-15');
+    let flag_15 = false;
+    expandCode_15.onclick = function (){
+        if(flag_15){
+            bindCode_15.classList.add('preview-code-active')
+        }else{
+            bindCode_15.classList.remove('preview-code-active') 
+        }
+        flag_15 = !flag_15
+    }</script></div><script async>let codes = document.getElementsByClassName('hljs');
+            Array.from(codes).forEach(code => {
+                code.addEventListener('click', function copy(e) {
+                    const textContent = e.currentTarget.textContent;
+                    e.currentTarget.focus()
+                    const node = e.currentTarget;
+                    navigator.clipboard.writeText(textContent).then(()=>{
+                        alert('复制成功')
+                        node.blur()
+                    });
+                   
+                })
+            })</script></div></main><footer><p>Copyright © 2019-2021 suxin2017</p><p class="icp"><span><img src="/imgs/icp.png" width="17px" height="17px" alt="icp"> </span><a href="http://beian.miit.gov.cn" class="icp-link"><span>京ICP备2020041991号</span></a></p><p><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></p></footer></div></body></html>

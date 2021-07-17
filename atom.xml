@@ -1,0 +1,631 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>苏鑫2017</title>
+  
+  <subtitle>苏鑫的个人博客</subtitle>
+  <link href="http://www.suxin2017.cn/atom.xml" rel="self"/>
+  
+  <link href="http://www.suxin2017.cn/"/>
+  <updated>2021-07-17T02:58:06.540Z</updated>
+  <id>http://www.suxin2017.cn/</id>
+  
+  <author>
+    <name>suxin2017</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>node进程管理集群</title>
+    <link href="http://www.suxin2017.cn/2021/06/19/node-jin-cheng-guan-li-ji-qun/"/>
+    <id>http://www.suxin2017.cn/2021/06/19/node-jin-cheng-guan-li-ji-qun/</id>
+    <published>2021-06-19T08:00:44.000Z</published>
+    <updated>2021-07-17T02:58:06.540Z</updated>
+    
+    
+    <summary type="html">&gt; 有人的地方就有江湖，有江湖的地方就有包工头
+&gt;                    --尼古拉斯张三
+
+
+单机进程管理的缺点
+
+一个人的力量毕竟是有限的，单机进程管理像下图这样。
+
+
+
+看这个图会发现两个问题：
+
+ 1. 任务分发和进程管理两个服务放在一块耦合过于严重，一上线某一个功能就需要重启所有进程
+ 2. 单机资源是有限的，随着进程增加，就会出现资源不够用的情况
+
+
+进程管理集群
+
+为...</summary>
+    
+    
+    
+    <category term="node" scheme="http://www.suxin2017.cn/categories/node/"/>
+    
+    
+    <category term="js" scheme="http://www.suxin2017.cn/tags/js/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>simple-proxy</title>
+    <link href="http://www.suxin2017.cn/2021/05/22/simple-prosy/"/>
+    <id>http://www.suxin2017.cn/2021/05/22/simple-prosy/</id>
+    <published>2021-05-22T14:55:16.000Z</published>
+    <updated>2021-07-17T02:58:06.540Z</updated>
+    
+    
+    <summary type="html">简单的代理对象
+
+给count 最原始的方式绑定数据
+
+
+add
+
+
+&lt;div id=&quot;count_0&quot;&gt; &lt;/div&gt;
+&lt;button id=&quot;add_0&quot;&gt;add&lt;/button&gt;
+&lt;script type=&quot;module&quot;&gt;
+    let countNode;
+    let addButton;
+    countNode = $(&#39;count_0&#39;);
+    addButton = ...</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>mac-键盘映射</title>
+    <link href="http://www.suxin2017.cn/2021/05/12/mac-jian-pan-ying-she/"/>
+    <id>http://www.suxin2017.cn/2021/05/12/mac-jian-pan-ying-she/</id>
+    <published>2021-05-12T07:24:05.000Z</published>
+    <updated>2021-07-17T02:58:06.540Z</updated>
+    
+    
+    <summary type="html">使用 karabiner-elemenet 进行mac键盘映射的修改
+
+修改 大写按键 -&gt; esc
+修改 control + hjkl -&gt; 方向按键
+修改 shift -&gt; 切换输入法
+修改 shift + shift vscode 下 -&gt; command + p...</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>koa动态中间件</title>
+    <link href="http://www.suxin2017.cn/2021/05/09/koa-dong-tai-zhong-jian-jian/"/>
+    <id>http://www.suxin2017.cn/2021/05/09/koa-dong-tai-zhong-jian-jian/</id>
+    <published>2021-05-09T18:19:54.000Z</published>
+    <updated>2021-07-17T02:58:06.540Z</updated>
+    
+    
+    <summary type="html">koa 动态加载删除中间件。
+
+当我们建立一个具有插件机制的应用的时候需要动态管理中间件。
+
+对于koa可以通过下面代码动态管理中间件。
+
+// pluginManages.ts
+import Koa from &#39;koa&#39;
+
+export class PluginManags {
+
+    static app: Koa&lt;Koa.DefaultContext, Koa.DefaultState&gt;;...</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>flex布局</title>
+    <link href="http://www.suxin2017.cn/2021/05/09/flex-bu-ju/"/>
+    <id>http://www.suxin2017.cn/2021/05/09/flex-bu-ju/</id>
+    <published>2021-05-09T18:03:12.000Z</published>
+    <updated>2021-07-17T02:58:06.540Z</updated>
+    
+    
+    <summary type="html">flex 布局有 align-self 进行垂直个体布局，但是justify-self只在 grid 布局上面生效
+
+通过查阅资料发现在flex 中可以通过 margin：auto 的方式实现单个元素的布局;
+
+实现单个元素相对剩余位置居中布局
+
+相对于后面位置居中
+
+
+&lt;div class=&quot;flex-box&quot;&gt;
+    &lt;div class=&quot;item &quot;&gt;&lt;/div&gt;
+    &lt;div cl...</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>前端代码规范</title>
+    <link href="http://www.suxin2017.cn/2021/04/29/qian-duan-dai-ma-gui-fan/"/>
+    <id>http://www.suxin2017.cn/2021/04/29/qian-duan-dai-ma-gui-fan/</id>
+    <published>2021-04-29T00:00:00.000Z</published>
+    <updated>2021-07-17T02:58:06.540Z</updated>
+    
+    
+    <summary type="html">随着开发累计时长的变长，愈发觉得写得快不是证明编程能力的好坏。
+
+代码质量也是非常需要注重的，写代码和写作文是一样的。
+
+所以需要回过头去看看代码怎么写，这个过程本身也是一种代码能力的提升。...</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>测试</title>
+    <link href="http://www.suxin2017.cn/2021/04/27/preview/"/>
+    <id>http://www.suxin2017.cn/2021/04/27/preview/</id>
+    <published>2021-04-27T00:00:00.000Z</published>
+    <updated>2021-07-17T02:58:06.540Z</updated>
+    
+    
+    <summary type="html">请打开console查看结果
+
+
+function sayHello(){
+    console.log(&#39;hello&#39;)
+}
+sayHello()
+
+
+button
+
+
+
+&lt;div id=&quot;btn&quot;&gt;button&lt;/div&gt;
+&lt;style&gt;
+    #btn{
+        width: 20px;
+        height: 20px;
+        background: red;...</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>解码:redux的奥秘</title>
+    <link href="http://www.suxin2017.cn/2021/01/30/jie-ma-redux-mei-xiang-xiang-zhong-de-fu-za/"/>
+    <id>http://www.suxin2017.cn/2021/01/30/jie-ma-redux-mei-xiang-xiang-zhong-de-fu-za/</id>
+    <published>2021-01-30T11:31:41.000Z</published>
+    <updated>2021-07-17T02:58:06.540Z</updated>
+    
+    
+    <summary type="html">redux
+
+redux 是一个函数式的数据流管理库，但是我一直都不了解其实现原理，之前一直用人家封装好的。
+
+根据官网大致理解其运行方式是下图这样的。通过 store dispatch 传入 action 然后经由 reducer 进行数据处理返回新的 state。
+
+
+
+我觉得这像观察者模式，然后在内部绑定了一个数据。
+
+
+验证
+
+为了验证我的想法我翻看了 redux 的源码，精简之后他的代码...</summary>
+    
+    
+    
+    <category term="前端" scheme="http://www.suxin2017.cn/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+    <category term="js" scheme="http://www.suxin2017.cn/tags/js/"/>
+    
+    <category term="redux" scheme="http://www.suxin2017.cn/tags/redux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>开源的中间件调度</title>
+    <link href="http://www.suxin2017.cn/2021/01/19/kai-yuan-de-zhong-jian-jian-diao-du/"/>
+    <id>http://www.suxin2017.cn/2021/01/19/kai-yuan-de-zhong-jian-jian-diao-du/</id>
+    <published>2021-01-19T22:04:05.000Z</published>
+    <updated>2021-07-17T02:58:06.540Z</updated>
+    
+    
+    <summary type="html">当下流行的轮子库，都会提供强大拓展能力。
+
+通常这种拓展能力以调度中间件或者拦截器的形式存在。
+
+为了方便下面统称这类拓展程序能力的代码叫做中间件。
+
+如何能写出一个拓展性强的轮子？
+
+通过学习开源库的代码来学习如何写一个符合自己轮子的中间件。
+
+
+核心概念
+
+计算机的本质就是进行数据输入和输出，千百年来这个本质一直没有变过，通过中间对数据的处理，获取到想要的数据结果。
+
+
+
+比如传入的数据可能是...</summary>
+    
+    
+    
+    <category term="前端" scheme="http://www.suxin2017.cn/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    <category term="架构设计" scheme="http://www.suxin2017.cn/categories/%E5%89%8D%E7%AB%AF/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"/>
+    
+    
+    <category term="javascript" scheme="http://www.suxin2017.cn/tags/javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>一种新的编写css思维</title>
+    <link href="http://www.suxin2017.cn/2021/01/09/yi-chong-xin-de-bian-xie-css-si-wei/"/>
+    <id>http://www.suxin2017.cn/2021/01/09/yi-chong-xin-de-bian-xie-css-si-wei/</id>
+    <published>2021-01-09T15:01:36.000Z</published>
+    <updated>2021-07-17T02:58:06.540Z</updated>
+    
+    
+    <summary type="html">每个前端开发者都经常根据业务的进行写着大量重复的 css 样式，写时一时爽，维护火葬场。
+
+随着业务的发展，css 代码会变得越来越多越来越难以维护。
+
+经常会出现 important 强行改变 css 的样式，这样做的唯一好处就是能够符合当前业务需求，但是自己挖的坑，可能是别人哭爹骂娘跪着填上的，而这一切仅仅是因为大量重复的垃圾代码。
+
+
+css 魔法数字
+
+在代码重构中有一点就是减少你代码中的...</summary>
+    
+    
+    
+    <category term="前端" scheme="http://www.suxin2017.cn/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+    <category term="tailwindcss" scheme="http://www.suxin2017.cn/tags/tailwindcss/"/>
+    
+    <category term="css" scheme="http://www.suxin2017.cn/tags/css/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2020年，我对人生的感悟</title>
+    <link href="http://www.suxin2017.cn/2021/01/01/2020-zong-jie/"/>
+    <id>http://www.suxin2017.cn/2021/01/01/2020-zong-jie/</id>
+    <published>2021-01-01T10:31:26.000Z</published>
+    <updated>2021-07-17T02:58:06.540Z</updated>
+    
+    
+    <summary type="html">2020年的不平凡
+
+
+错过了回家那趟火车
+
+2020年从2019年的春节开始，就似乎注定不那么平凡。
+
+我错过了回家的火车，那时候疫情初现，事情的一切仿佛不是那么清晰。
+
+我在做好严密的保护工作下，拿着我的行李箱，伴随着行李箱摩擦地面的低吼声，去往火车站。
+
+正当我坐地铁到火车站行程的一半的时候，看着地铁的到站灯，偶然间我又重新看了以下我的火车信息，我发现我的已经错过我的火车一整天。
+
+在这之前...</summary>
+    
+    
+    
+    <category term="人生" scheme="http://www.suxin2017.cn/categories/%E4%BA%BA%E7%94%9F/"/>
+    
+    
+    <category term="总结" scheme="http://www.suxin2017.cn/tags/%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2021关键字</title>
+    <link href="http://www.suxin2017.cn/2021/01/01/2021-guan-jian-zi/"/>
+    <id>http://www.suxin2017.cn/2021/01/01/2021-guan-jian-zi/</id>
+    <published>2021-01-01T08:40:16.000Z</published>
+    <updated>2021-07-17T02:58:06.540Z</updated>
+    
+    
+    <summary type="html">健康，自律
+
+本来以为进入大厂能够解决社会给我的经济压力，没想到只是缓解了我的社会压力，缩短了我承担社会压力的时间，然后却面临着高强度工作时间，高压下的身体健康成为了我唯一的资本。
+
+我一直觉得自律和健康是放在一起的，因为自律能带来健康，我需要保持健康的同时，创造经济价值。
+
+一定要控制住玩手机的时间，上班时间一定要定时休息眼睛，无论需求多忙，无论在干啥，因为身上的担子太重了，所以我不能出现问题。...</summary>
+    
+    
+    
+    <category term="人生" scheme="http://www.suxin2017.cn/categories/%E4%BA%BA%E7%94%9F/"/>
+    
+    
+    <category term="新年愿景" scheme="http://www.suxin2017.cn/tags/%E6%96%B0%E5%B9%B4%E6%84%BF%E6%99%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>基于next的全栈开发框架Blitz</title>
+    <link href="http://www.suxin2017.cn/2020/12/27/ji-yu-next-de-quan-zhan-kai-fa-kuang-jia-blitz/"/>
+    <id>http://www.suxin2017.cn/2020/12/27/ji-yu-next-de-quan-zhan-kai-fa-kuang-jia-blitz/</id>
+    <published>2020-12-27T13:05:37.000Z</published>
+    <updated>2021-07-17T02:58:06.540Z</updated>
+    
+    
+    <summary type="html">目的
+
+自从前端和后端分离之后，一个产品的实践好像变的不那么容易，因为你必须要找一个懂后端的人，通常是java PHP，这意味开发成本加大。
+
+不过有人可能会说我能力强，node性能太垃圾，然而产品初期最关键的是快速验证想法的可行性（现在觉得vue在这方面做的比react更好）。但是在两个语言之间切换编程总是很别扭。
+
+再谈ssr，刚开始一直不知道什么是ssr，因为想django,egg都会提供一...</summary>
+    
+    
+    
+    <category term="全栈" scheme="http://www.suxin2017.cn/categories/%E5%85%A8%E6%A0%88/"/>
+    
+    
+    <category term="next" scheme="http://www.suxin2017.cn/tags/next/"/>
+    
+    <category term="react" scheme="http://www.suxin2017.cn/tags/react/"/>
+    
+    <category term="ts" scheme="http://www.suxin2017.cn/tags/ts/"/>
+    
+    <category term="server" scheme="http://www.suxin2017.cn/tags/server/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>有趣的字体文件</title>
+    <link href="http://www.suxin2017.cn/2020/12/13/you-qu-de-zi-ti-wen-jian/"/>
+    <id>http://www.suxin2017.cn/2020/12/13/you-qu-de-zi-ti-wen-jian/</id>
+    <published>2020-12-13T09:56:03.000Z</published>
+    <updated>2021-07-17T02:58:06.540Z</updated>
+    
+    
+    <summary type="html">字体历史
+
+话说在计算机市场刚刚开辟的时候，字体市场 Adobe 一家独大，通过贩卖格式认证赚了很多钱，但是苹果想白嫖 Adobe 自然不干。
+
+于是苹果公司另起炉灶搞起了自己的 TrueType，但是当时已经有了一大批 Adobe 付费用户，自然没必要支持苹果。
+
+然后苹果拉起了同盟，微软，两人情投意合，眉来眼去一起搞起了字体协议。
+
+两人联手把 Adobe 搞的不行，目前市场上最常见的就是 T...</summary>
+    
+    
+    
+    <category term="前端" scheme="http://www.suxin2017.cn/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+    <category term="font" scheme="http://www.suxin2017.cn/tags/font/"/>
+    
+    <category term="ttf" scheme="http://www.suxin2017.cn/tags/ttf/"/>
+    
+    <category term="TrueType" scheme="http://www.suxin2017.cn/tags/TrueType/"/>
+    
+    <category term="OpenType" scheme="http://www.suxin2017.cn/tags/OpenType/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>github工作流到github page</title>
+    <link href="http://www.suxin2017.cn/2020/12/12/github-gong-zuo-liu-dao-github-page/"/>
+    <id>http://www.suxin2017.cn/2020/12/12/github-gong-zuo-liu-dao-github-page/</id>
+    <published>2020-12-12T20:38:56.000Z</published>
+    <updated>2021-07-17T02:58:06.540Z</updated>
+    
+    
+    <summary type="html">&gt; 大家应该都知道 github 是一个白嫖党的福利地，加上它的 GitHub Pages 简直是前端白嫖的圣地
+
+
+使用方法
+
+在项目根目录创建
+
+.github/workflows/node.js.ynl
+
+把下面的内容粘贴进入就可以快速构建部署到 GitHub Pages
+
+
+献上小弟的一份白嫖 workflow 文件
+
+name: Node.js CI
+
+on:
+  ## 触发时机
+  p...</summary>
+    
+    
+    
+    <category term="运维" scheme="http://www.suxin2017.cn/categories/%E8%BF%90%E7%BB%B4/"/>
+    
+    
+    <category term="github" scheme="http://www.suxin2017.cn/tags/github/"/>
+    
+    <category term="ci" scheme="http://www.suxin2017.cn/tags/ci/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>火狐开发者版 source map 不好使</title>
+    <link href="http://www.suxin2017.cn/2020/12/11/bu-hao-shi/"/>
+    <id>http://www.suxin2017.cn/2020/12/11/bu-hao-shi/</id>
+    <published>2020-12-11T21:04:03.000Z</published>
+    <updated>2021-07-17T02:58:06.540Z</updated>
+    
+    
+    <summary type="html">报错
+
+SyntaxError: JSON.parse: unexpected character at line 1 column 1 of the JSON data
+
+
+
+设置 about:config
+
+devtools.source-map.locations.enabled
+
+为 true
+
+具体原因 https://bugzilla.mozilla.org/show_bug.cgi?...</summary>
+    
+    
+    
+    <category term="前端" scheme="http://www.suxin2017.cn/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+    <category term="js" scheme="http://www.suxin2017.cn/tags/js/"/>
+    
+    <category term="firefox" scheme="http://www.suxin2017.cn/tags/firefox/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>火狐浏览器空的iframe操作dom不好使</title>
+    <link href="http://www.suxin2017.cn/2020/12/11/huo-hu-liu-lan-qi-kong-de-iframe-cao-zuo-dom-bu-hao-shi/"/>
+    <id>http://www.suxin2017.cn/2020/12/11/huo-hu-liu-lan-qi-kong-de-iframe-cao-zuo-dom-bu-hao-shi/</id>
+    <published>2020-12-11T21:02:59.000Z</published>
+    <updated>2021-07-17T02:58:06.540Z</updated>
+    
+    
+    <summary type="html">如果向一个空的 iframe 直接执行
+
+document.appendChild(document.createElement(&#39;div&#39;))
+
+
+会不好使,但是页面不会报错，没有警告
+
+
+解决方案
+
+监听 iframe onload 事件
+再 onload 事件中执行 dom 操作比较安全
+
+// win 是 iframe 的引用
+const root = win.document.creat...</summary>
+    
+    
+    
+    <category term="前端" scheme="http://www.suxin2017.cn/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+    <category term="js" scheme="http://www.suxin2017.cn/tags/js/"/>
+    
+    <category term="firefox" scheme="http://www.suxin2017.cn/tags/firefox/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>成为最好的程序员的迷茫</title>
+    <link href="http://www.suxin2017.cn/2020/12/11/cheng-wei-zui-hao-de-cheng-xu-yuan-de-mi-mang/"/>
+    <id>http://www.suxin2017.cn/2020/12/11/cheng-wei-zui-hao-de-cheng-xu-yuan-de-mi-mang/</id>
+    <published>2020-12-11T20:53:39.000Z</published>
+    <updated>2021-07-17T02:58:06.540Z</updated>
+    
+    
+    <summary type="html">去年的 10 月份我写了致迷茫的我，去年的这个时候我就很迷茫。
+
+似乎一到年底我就很迷茫 :neckbeard:
+
+不过去年的迷茫是没有方向，不知前方的灯塔在何方，今年的迷茫是虽见迷雾中的亮光，却不知道怎样前行。
+
+去年心想如果进大厂就好了，今年如愿进入了大厂。
+
+很高兴从事一个能让我喜欢的职业，我喜欢编程。
+
+我觉得写代码的时候就好像再玩我的世界一样，成为了这个世界的造物主，每一个细节自己都可创...</summary>
+    
+    
+    
+    <category term="感悟" scheme="http://www.suxin2017.cn/categories/%E6%84%9F%E6%82%9F/"/>
+    
+    
+    <category term="人生" scheme="http://www.suxin2017.cn/tags/%E4%BA%BA%E7%94%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>当tab不活跃时候怎样搞一个定时器</title>
+    <link href="http://www.suxin2017.cn/2020/12/06/dang-tab-bu-huo-yue-shi-hou-de-settimeout/"/>
+    <id>http://www.suxin2017.cn/2020/12/06/dang-tab-bu-huo-yue-shi-hou-de-settimeout/</id>
+    <published>2020-12-06T10:04:51.000Z</published>
+    <updated>2021-07-17T02:58:06.540Z</updated>
+    
+    
+    <summary type="html">&gt; ps: 下面的脚本使用了 script module 请打开原文或者使用非 IE 浏览器浏览
+
+
+setTimeout 当 tab 不活跃时候
+
+当 tab 不活跃的时候，setTimeout 和 setInterval 的运行时间出现延迟
+
+当未被激活的 tabs 的 setInterval 的最小延迟&gt;=1000ms.浏览器这样做的原因是为了省电.
+
+点击下面按钮，网页的 document...</summary>
+    
+    
+    
+    <category term="前端" scheme="http://www.suxin2017.cn/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+    <category term="js" scheme="http://www.suxin2017.cn/tags/js/"/>
+    
+    <category term="setTimeout" scheme="http://www.suxin2017.cn/tags/setTimeout/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>opencv 常用对象</title>
+    <link href="http://www.suxin2017.cn/2020/11/22/opencv-chang-yong-dui-xiang/"/>
+    <id>http://www.suxin2017.cn/2020/11/22/opencv-chang-yong-dui-xiang/</id>
+    <published>2020-11-22T08:47:39.000Z</published>
+    <updated>2021-07-17T02:58:06.540Z</updated>
+    
+    
+    <summary type="html">创建Mat对象的方法
+
+ * 构造函数Mat()
+
+Mat M(2,2,CV_8UC3,Scalar(0,0,255));
+
+cout &lt;&lt; &quot;M = &quot; &lt;&lt; M &lt;&lt; endl;
+
+// output
+//  M = [  0,   0, 255,   0,   0, 255;
+//   0,   0, 255,   0,   0, 255]
+
+
+
+这段代码创建了2*2的标量(Scalar)（...</summary>
+    
+    
+    
+    
+    <category term="opencv" scheme="http://www.suxin2017.cn/tags/opencv/"/>
+    
+    <category term="C++" scheme="http://www.suxin2017.cn/tags/C/"/>
+    
+  </entry>
+  
+</feed>
