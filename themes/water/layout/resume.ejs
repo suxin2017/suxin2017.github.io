@@ -1,63 +1,12 @@
 <div class="about">
-    <div class="about-me">
-        <div class="about-me-avatar">
-            <img src=<%=url_for('/imgs/avatar.jpeg') %> width=128 height=128 alt="头像" >
-        </div>
-        <div class="about-me-desc">
-            <div class="about-me-desc-name">
-                <p>
-                    <%= config.author %>
-                </p>
-            </div>
-            <div class="about-me-desc-keywords">
-                <p>
-                    <%= config.keywords %>
-                </p>
-            </div>
-            <div class="about-me-code-age">
-                <p>
-                    码龄: <span id="age"></span>天
-                </p>
-                <script>
-                    const age = document.getElementById('age');
-                    age.textContent = Math.floor((Date.now() - new Date(2017, 0)) / (24 * 3600 * 1000))
-                </script>
-            </div>
-            <div class="about-me-code-age">
-                <p>
-                    工龄: <span id="age1"></span>年
-                </p>
-                <script>
-                    const age1 = document.getElementById('age1');
-                    age1.textContent = Math.floor((Date.now() - new Date(2019, 0)) / (24 * 3600 * 1000 * 365))
-                </script>
-            </div>
-            <div class="about-me-desc-icon-group">
-                <div class="about-me-desc-github about-me-desc-icon">
-                    <a href=<%=theme.about.github %> target="_blank" rel="noreferrer">
-                        <img src=<%=url_for('/imgs/github.svg') %> width=20 height=20
-                        alt="github" >
-                        <span>github</span>
-                    </a>
-
-                </div>
-                <div class="about-me-desc-github about-me-desc-icon">
-                    <a href='mailto:<%= theme.about.email %>'>
-                        <img src=<%=url_for('/imgs/email.svg') %> width=20 height=20
-                        alt="github" >
-                        <span>email</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+ 
 
     <div class="resume-content" id="content">
         <%- page.content %>
     </div>
-    <script type="text/javascript" src=<%=url_for('/js/crypto-js.js') %>  ></script>
+    <!-- <script type="text/javascript" src=<%=url_for('/js/crypto-js.js') %> ></script> -->
 
-    <script>
+    <!-- <script>
         var text = ''
         function decrypt() {
             let data;
@@ -112,5 +61,5 @@
                 injectText()
             }
        
-    </script>
+    </script> -->
 </div>

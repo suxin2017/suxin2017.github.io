@@ -4,6 +4,51 @@ date: 2020-11-16 13:42:55
 type: "resume"
 layout: "resume"
 ---
+<div class="about-me">
+    <div class="about-me-avatar">
+        <img src="/imgs/avatar.jpeg" width=128 height=128 alt="头像" >
+    </div>
+    <div class="about-me-desc">
+        <div class="about-me-desc-name">
+            <p>
+                温鑫
+            </p>
+        </div>
+        <div class="about-me-code-age">
+            <p>
+                年龄: <span id="age2"></span>
+            </p>
+            <script>
+                const age2 = document.getElementById('age2');
+                age2.textContent = Math.floor((Date.now() - new Date(1996, 0)) / (24 * 3600 * 1000 * 365))
+            </script>
+        </div>
+        <div class="about-me-code-age">
+            <p>
+                学历: 本科
+            </p>
+        </div>
+        <div class="about-me-code-age">
+            <p>
+                工龄: <span id="age1"></span>年
+            </p>
+            <script>
+                const age1 = document.getElementById('age1');
+                age1.textContent = Math.floor((Date.now() - new Date(2019, 0)) / (24 * 3600 * 1000 * 365))
+            </script>
+        </div>
+        <div class="about-me-code-age">
+            <p>
+                电话: 13833568436 
+            </p>
+        </div>
+        <div class="about-me-code-age">
+            <p>
+                email: 1107178482@qq.com 
+            </p>
+        </div>
+    </div>
+</div>
 <style>
     .resume-content {
         padding: 0 24px;
@@ -166,17 +211,12 @@ layout: "resume"
     }
 
     .private {
-        display: flex;
-        flex-wrap: wrap;
-        font-size: 14px;
-        padding: 0;
     }
 
     .private li {
-        list-style: none;
         width: 327px;
-        padding: 12px;
         margin: 8px;
+        font-size: 14px;
         cursor: pointer;
     }
 

@@ -1,19 +1,22 @@
-.header{
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &-right {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    &-right{
-        display: flex;
+  }
+  &-menu-wrapper {
+    .header-menu {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      margin: 0 -16px;
+      &-item {
+        padding: 0 8px;
+      }
     }
-    &-menu-wrapper{
-        .header-menu{
-            list-style: none;
-            display: flex;  
-            align-items: center;
-            margin: 0 -16px;
-            &-item{
-                padding: 0 8px;
-            }
-        }
-    }
+  }
+  @media print {
+    display: none;
+  }
 }
