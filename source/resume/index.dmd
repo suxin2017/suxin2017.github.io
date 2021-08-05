@@ -4,11 +4,11 @@ date: 2020-11-16 13:42:55
 type: "resume"
 layout: "resume"
 ---
-<div class="about-me">
-    <div class="about-me-avatar">
-        <img src="/imgs/avatar.jpeg" width=128 height=128 alt="头像" >
-    </div>
-    <div class="about-me-desc">
+<div class="about-me" style="margin:24px 0px">
+    <!-- <div class="about-me-avatar"> -->
+        <!-- <img src="/imgs/avatar.jpeg" width=128 height=128 alt="头像" > -->
+    <!-- </div> -->
+    <div class="about-me-desc" style="margin:0">
         <div class="about-me-desc-name">
             <p>
                 温鑫
@@ -26,6 +26,11 @@ layout: "resume"
         <div class="about-me-code-age">
             <p>
                 学历: 本科
+            </p>
+        </div>
+        <div class="about-me-code-age">
+            <p>
+                学校: 华北理工大学轻工学院
             </p>
         </div>
         <div class="about-me-code-age">
@@ -271,7 +276,7 @@ layout: "resume"
                     <li>负责平台维护，文案提取平台，国际化工作</li>
                     <li>从0到1构建项目</li>
                     <li>完成页面布局搭建</li>
-                    <li>文案提取： 通过eslint 自动fix代码中未被国际化标签包裹的中文</li>
+                    <li>文案提取： 通过eslint解析 ast 自动fix代码中未被国际化标签包裹的中文</li>
                     <li>文案替换： 通过eslint 自动替换代码中中文到英文节省大量人力成本</li>
                 </ul>
             </div>
@@ -306,13 +311,13 @@ layout: "resume"
             <div class="name">魔力建站
                 <div class="tag">核心开发人员</div>
             </div>
-            <div class="desc">魔力建站是快手一个商业的</div>
+            <div class="desc">魔力建站是一个无代码的落地页搭建项目</div>
             <div class="me">
                 <ul>
                     <li>
                         业务跟进：常规业务迭代，比如组件开发等业务需求。</li>
                     <li>
-                        技术难点：复杂逻辑实现：参考线实现，字体压缩服务
+                        技术难点：编辑器部分功能开发比如参考线实现，字体压缩服务等功能
                     </li>
                     <li>
                         服务他方：封装快聊转跳sdk，供多个业务方使用
