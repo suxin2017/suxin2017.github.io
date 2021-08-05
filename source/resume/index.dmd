@@ -270,14 +270,14 @@ layout: "resume"
             <div class="name">海外 dsp 投放平台
                 <div class="tag">核心开发人员</div>
             </div>
-            <div class="desc">进行广告投放计划组创意创建，广告预算维护，消耗展示的平台</div>
+            <div class="desc">进行广告投放计划组创意创建，广告预算维护，数据统计平台。</div>
             <div class="me">
                 <ul>
                     <li>负责平台维护，文案提取平台，国际化工作</li>
                     <li>从0到1构建项目</li>
                     <li>完成页面布局搭建</li>
-                    <li>文案提取： 通过eslint解析 ast 自动fix代码中未被国际化标签包裹的中文</li>
-                    <li>文案替换： 通过eslint 自动替换代码中中文到英文节省大量人力成本</li>
+                    <li>文案提取： 通过eslint ast分析自动fix代码中未被国际化标签包裹的中文</li>
+                    <li>文案替换： 通过eslint ast分析自动替换全部代码中中文到英文节省大量人力成本</li>
                 </ul>
             </div>
             <div class="key">
@@ -292,7 +292,7 @@ layout: "resume"
                 <div class="tag">项目负责人</div>
                 <div class="tag">核心开发人员</div>
             </div>
-            <div class="desc">jinx 是一个多分支开发的前端部署服务，负责公司前端资源测试环境部署，服务代理，域名解析。</div>
+            <div class="desc">jinx 是一个多分支开发的前端部署服务，负责公司前端资源测试环境部署，服务代理，域名解析等功能。服务内部前端项目80+。</div>
             <div class="me">
                 <ul>
                     <li>项目设计：完成整体架构设计、ui设计与实现</li>
@@ -338,7 +338,7 @@ layout: "resume"
             <div class="desc">web 端的快手短视频</div>
             <div class="me">
                 <ul>
-                    <li>跨部门协作：与主站同学一起完成从0到1的开发</li>
+                    <li>与主站同学一起完成从0到1的开发</li>
                 </ul>
             </div>
             <div class="key">
@@ -351,7 +351,7 @@ layout: "resume"
                 <div class="tag">核心开发人员</div>
                 <div class="tag">项目负责人</div>
             </div>
-            <div class="desc">解析bit组件存储规则，web端可视化组件api，文档服务</div>
+            <div class="desc">解析bit组件存储规则，web端可视化组件api，文档服务，收录组件400+。</div>
             <div class="me">
                 <ul>
                     <li>项目设计：整体页面设计，技术实现</li>
@@ -411,11 +411,11 @@ layout: "resume"
 <h3>个人项目</h3>
 
 <ul class="private">
-    <li><a href="https://suxin2017.github.io/pixel-editor/">pixel-editor 像素建站</a></li>
+    <li><a href="https://suxin2017.github.io/pixel-editor/">pixel-editor 像素风格建站</a></li>
     <li><a href="https://suxin2017.github.io/markdown-website/#/">马克在线 markdown 转富文本工具</a></li>
     <li><a href="https://github.com/suxin2017/code-playground">playground 在线编辑预览工具</a></li>
     <li><a href="https://suxin2017.github.io/bxer-ui/?path=/docs/%E4%BB%8B%E7%BB%8D--page">
-            bxer ui 一套自己搞得组件库</a></li>
+            bxer ui 一套精简级组件库</a></li>
 </ul>
 
 
