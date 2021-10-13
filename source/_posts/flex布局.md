@@ -3,7 +3,7 @@ title: flex布局
 date: 2021-05-09 18:03:12
 tags:
 category:
-- 文章
+- post
 ---
 
 **flex** 布局有 `align-self` 进行垂直个体布局，但是`justify-self`只在 **grid** 布局上面生效

@@ -1,6 +1,6 @@
 <div class="page-list">
     <% page.posts.filter(post=>{
-        return post.categories.find({name: '文章'}).length
+        return post.categories.find({name: 'post'}).length
     }).forEach(post=> {
         %>
         <div class="page-list-item">

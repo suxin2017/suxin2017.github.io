@@ -8,7 +8,7 @@ tags:
   - server
 category:
   - 全栈
-  - 文章
+  - post
 ---
 ### 目的
 

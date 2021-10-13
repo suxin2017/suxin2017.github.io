@@ -1,7 +1,7 @@
-<% if (is_category('微博')) { %>
+<% if (is_category('weibo')) { %>
 	<%- partial('_partials/miniList') %>
 <% } %>
-<% if (is_category('文章') || is_home()) {%>
+<% if (is_category('post') || is_home()) {%>
 	<%- partial('_partials/pageList') %>
 <% } %>
 <%- partial('_partials/pagination') %>

@@ -8,7 +8,7 @@ menus:
   - name: '首页'
     path: '/'
   - name: '微博'
-    path: '/categories/微博'
+    path: '/categories/weibo'
   - name: '关于'
     path: '/about'
   # - name: 'rss'

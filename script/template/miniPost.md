@@ -1,6 +1,6 @@
 ---
 date: {{ date }}
 category: 
-- 微博
+- weibo
 ---
 {{ content }}
