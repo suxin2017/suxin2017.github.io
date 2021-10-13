@@ -38,7 +38,8 @@
     "highlight.js": "^10.7.2",
     "html-to-text": "^7.1.1",
     "markdown-it-imsize": "^2.0.1",
-    "moment": "^2.29.1"
+    "moment": "^2.29.1",
+    "timsort": "^0.3.0"
   },
   "devDependencies": {
     "husky": "^4.3.0"

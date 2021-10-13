@@ -1,8 +1,5 @@
 <div class="page-list">
-    <% page.posts.filter(post=>{
-        return post.categories.find({name: 'post'}).length
-    }).forEach(post=> {
-        %>
+    <% page.posts.forEach(post=> { %>
         <div class="page-list-item">
             <div class="page-item-title"> 
                 <a href=<%= url_for(post.path) %> >
