@@ -3,6 +3,7 @@ title: mac-键盘映射
 date: 2021-05-12 07:24:05
 tags:
 category:
+- 文章
 ---
 
 使用 karabiner-elemenet 进行mac键盘映射的修改

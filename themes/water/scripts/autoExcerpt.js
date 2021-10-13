@@ -14,6 +14,7 @@ const sanitize = function (post) {
 }
 
 hexo.extend.filter.register('after_post_render', function (data) {
+    console.log(data)
     const excerptLength = hexo.config.excerpt_length || 200;
     const post = sanitize(data.content);
     const excerpt = post.substr(0, excerptLength)+'...';

@@ -6,6 +6,7 @@ tags:
   - redux
 category:
   - 前端
+  - 文章
 ---
 
 ### redux

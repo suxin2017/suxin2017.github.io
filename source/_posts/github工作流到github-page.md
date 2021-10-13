@@ -6,6 +6,7 @@ tags:
   - ci
 category:
   - 运维
+  - 文章
 ---
 
 > 大家应该都知道 github 是一个白嫖党的福利地，加上它的 GitHub Pages 简直是前端白嫖的圣地

@@ -58,29 +58,6 @@
     <script type="text/javascript" src=<%=url_for('/js/crypto-js.js') %>  ></script>
 
     <script>
-        var text = ''
-        function decrypt() {
-            let data;
-            if (location.search) {
-                data = location.search.split("=")[1];
-            }
-            if (!data) {
-                data = window.prompt('输入密码查看此页面');
-            }
-
-            if (data == null) {
-                return;
-            }
-            try {
-                var bytes = CryptoJS.AES.decrypt(`<%= page.content %>`, decodeURI(data));
-                text = bytes.toString(CryptoJS.enc.Utf8);
-            } catch (e) {
-                if (!location.search) {
-                    decrypt()
-                }
-            }
-        }
-        decrypt()
         function injectText(){
             if (text) {
                 document.getElementById('content').innerHTML = text

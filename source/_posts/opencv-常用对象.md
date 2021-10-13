@@ -4,6 +4,8 @@ tags:
   - opencv
   - C++
 date: 2020-11-22 08:47:39
+category:
+- 文章
 ---
 
 ## 创建Mat对象的方法

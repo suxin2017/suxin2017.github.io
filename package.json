@@ -6,14 +6,15 @@
     "build": "NODE_ENV=production hexo generate",
     "clean": "hexo clean",
     "deploy": "sh ./deploy.sh",
-    "server": "hexo server"
+    "server": "hexo server",
+    "weibo": "node ./script/weibo.js",
+    "post": "node ./script/post.js"
   },
   "hexo": {
     "version": "5.4.0"
   },
   "husky": {
-    "hooks": {
-    }
+    "hooks": {}
   },
   "dependencies": {
     "crypto-js": "^4.0.0",
@@ -36,7 +37,8 @@
     "hexo-wordcount": "^6.0.1",
     "highlight.js": "^10.7.2",
     "html-to-text": "^7.1.1",
-    "markdown-it-imsize": "^2.0.1"
+    "markdown-it-imsize": "^2.0.1",
+    "moment": "^2.29.1"
   },
   "devDependencies": {
     "husky": "^4.3.0"
