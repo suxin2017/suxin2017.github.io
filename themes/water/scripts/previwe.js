@@ -38,19 +38,17 @@ hexo.extend.filter.register('markdown-it:renderer', function (md) {
             const jsPreview = token.info.indexOf('js') !== -1 || token.info.indexOf('javascript') !== -1;
             let demo = '暂不支持该语言预览'
             if (jsPreview) {
-                demo = `
-<script type="module">
+                demo = `<script type="module">
     (function(){
         ${code}
-    })(${idx}))
+    })(${idx})
 </script>`
             }
             const htmlPreview = token.info.indexOf('html') !== -1;
             if (htmlPreview) {
                 demo = code
             }
-            return `
-<div id="preview-${idx}" class="preview">
+            return `<div id="preview-${idx}" class="preview">
 <div class="preview-box">    
     ${placeholder ? placeholder : ''}${demo}
     <div class="preview-box-util">

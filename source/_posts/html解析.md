@@ -9,7 +9,8 @@ category:
 var string = `
 <div >
 	fff ddd
-	<span style="123 fff" >123</span>
+	<span style="123 fff"
+	data-size=12 data-width='20px' >123</span>
 	<br style="fff" />
 	ddd
 </div>
@@ -105,7 +106,7 @@ function parse(str) {
         }
         offset++;
     }
-    console.log(root);
+    console.log(stack);
 }
 // parseAttribute(' style= "123 1ff" data-v = 123')
 function parseAttribute(str) {
