@@ -71,8 +71,8 @@ category:
 				canvasCtx.strokeStyle = "rgb(0, 0, 0)";
 
 				canvasCtx.beginPath();
-
-				var sliceWidth = canvas.width * 1.0 / bufferLength;
+				let skip = 2 ** 4;
+				var sliceWidth = canvas.width * 1.0 / bufferLength * skip;
 				var x = 0;
 
 				for (let i = 0; i < bufferLength; i++) {
@@ -97,7 +97,7 @@ category:
 
 				canvas1Ctx.fillStyle = 'rgb(220, 220, 220)';
 				canvas1Ctx.fillRect(0, 0, canvas1.width, canvas1.height);
-				var barWidth = (canvas1.width / bufferLength) * 2.5;
+				var barWidth = (canvas1.width / bufferLength * skip) * 2.5;
 				var barHeight;
 				var x = 0;
 
