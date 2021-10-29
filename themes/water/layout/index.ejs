@@ -1,3 +1,7 @@
-<%- partial('_partials/pageList') %>
-
+<% if (is_category('weibo')) { %>
+	<%- partial('_partials/miniList') %>
+<% } %>
+<% if (is_category('post') || is_home()) {%>
+	<%- partial('_partials/pageList') %>
+<% } %>
 <%- partial('_partials/pagination') %>

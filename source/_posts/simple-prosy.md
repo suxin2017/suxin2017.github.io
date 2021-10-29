@@ -3,6 +3,7 @@ title: simple-proxy
 date: 2021-05-22 14:55:16
 tags:
 category:
+- post
 ---
 <script>
     function $(id) {

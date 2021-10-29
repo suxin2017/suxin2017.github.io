@@ -6,6 +6,7 @@ tags:
   - js
 category:
   - 前端
+  - post
 ---
 
 > ps: 下面的脚本使用了 script module 请打开原文或者使用非 IE 浏览器浏览

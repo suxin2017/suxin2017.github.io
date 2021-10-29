@@ -6,6 +6,7 @@ tags:
   - firefox
 category:
   - 前端
+  - post
 ---
 
 ### 如果向一个空的 iframe 直接执行

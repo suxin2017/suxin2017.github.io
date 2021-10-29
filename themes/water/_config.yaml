@@ -7,10 +7,10 @@ less:
 menus:
   - name: '首页'
     path: '/'
+  - name: '微博'
+    path: '/categories/weibo'
   - name: '关于'
     path: '/about'
-  - name: '简历'
-    path: '/resume'
   # - name: 'rss'
   #   path: '/rss'
 

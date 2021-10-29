@@ -41,7 +41,7 @@ hexo.extend.filter.register('markdown-it:renderer', function (md) {
                 demo = `<script type="module">
     (function(){
         ${code}
-    })(${idx}))
+    })(${idx})
 </script>`
             }
             const htmlPreview = token.info.indexOf('html') !== -1;

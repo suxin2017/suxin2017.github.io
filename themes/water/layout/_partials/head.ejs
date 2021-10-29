@@ -29,7 +29,7 @@
     <link rel="stylesheet" href=<%- theme.cdn.url %><%- url_for('css/index.css') %> >
     
     <!-- home -->
-    <% if (is_home()) { %>
+    <% if (is_home() || is_category()) { %>
         <link rel="stylesheet" href=<%- theme.cdn.url %><%- url_for('css/home.css') %> >
     <% } %>
     <!-- post -->
