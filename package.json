@@ -5,7 +5,6 @@
   "scripts": {
     "build": "NODE_ENV=production hexo generate",
     "clean": "hexo clean",
-    "deploy": "sh ./deploy.sh",
     "server": "hexo server",
     "weibo": "node ./script/weibo.js",
     "post": "node ./script/post.js"
