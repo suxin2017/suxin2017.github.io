@@ -18,15 +18,15 @@ function escapeHtml(str) {
     return str;
 }
 const hljs = require('highlight.js')
-import javascript from 'highlight.js/lib/languages/javascript';
+const javascript = require('highlight.js/lib/languages/javascript');
 hljs.registerLanguage('javascript', javascript);
 hljs.registerLanguage('js', javascript);
-import typescript from 'highlight.js/lib/languages/typescript';
+const typescript = require('highlight.js/lib/languages/typescript');
 hljs.registerLanguage('typescript', typescript);
 hljs.registerLanguage('ts', typescript);
-import css from 'highlight.js/lib/languages/css';
+const css = require('highlight.js/lib/languages/css');
 hljs.registerLanguage('css', css);
-import xml from 'highlight.js/lib/languages/xml';
+const xml = require('highlight.js/lib/languages/xml');
 hljs.registerLanguage('xml', xml);
 hljs.registerLanguage('html', xml);
 
@@ -52,6 +52,7 @@ hexo.extend.filter.register('markdown-it:renderer', function (md) {
                     codeHighlight = `<pre><code class="hljs">${hljs.highlightAuto(code).value}</code></pre>`
                 }
             } else {
+                codeHighlight = `<pre><code class="hljs">${hljs.highlightAuto(code).value}</code></pre>`
             }
             if (!hasPreview) {
                 return codeHighlight;
