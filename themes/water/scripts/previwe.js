@@ -18,6 +18,18 @@ function escapeHtml(str) {
     return str;
 }
 const hljs = require('highlight.js')
+import javascript from 'highlight.js/lib/languages/javascript';
+hljs.registerLanguage('javascript', javascript);
+hljs.registerLanguage('js', javascript);
+import typescript from 'highlight.js/lib/languages/typescript';
+hljs.registerLanguage('typescript', typescript);
+hljs.registerLanguage('ts', typescript);
+import css from 'highlight.js/lib/languages/css';
+hljs.registerLanguage('css', css);
+import xml from 'highlight.js/lib/languages/xml';
+hljs.registerLanguage('xml', xml);
+hljs.registerLanguage('html', xml);
+
 const url_for = require('hexo-util').url_for.bind(hexo)
 const imgSize = require('markdown-it-imsize');
 hexo.extend.filter.register('markdown-it:renderer', function (md) {
@@ -28,11 +40,19 @@ hexo.extend.filter.register('markdown-it:renderer', function (md) {
         md.renderer.rules.fence = function (tokens, idx, options, env, slf) {
             const token = tokens[idx];
             const code = token.content
-            const placeholder = token.info.split(' ')[2] !== 'open' ?  token.info.split(' ')[2] : '' ;
+            const placeholder = token.info.split(' ')[2] !== 'open' ? token.info.split(' ')[2] : '';
             const defaultOpen = token.info.split(' ')[2] === 'open';
             const hasPreview = token.info.indexOf('preview') !== -1;
             const lang = token.info.split(' ')[0] || '';
-            const codeHighlight = `<pre><code class="hljs">${hljs.highlight(lang,code).value}</code></pre>`
+            let codeHighlight = '';
+            if (lang) {
+                try {
+                    codeHighlight = `<pre><code class="hljs">${hljs.highlight(lang, code).value}</code></pre>`
+                } catch (e) {
+                    codeHighlight = `<pre><code class="hljs">${hljs.highlightAuto(code).value}</code></pre>`
+                }
+            } else {
+            }
             if (!hasPreview) {
                 return codeHighlight;
             }
@@ -62,7 +82,7 @@ ${codeHighlight}
 <script>
     const expandCode_${idx} = document.getElementById('expand-${idx}');
     const bindCode_${idx} = document.getElementById('code-${idx}');
-    let flag_${idx} = ${defaultOpen ? 'false':'true'};
+    let flag_${idx} = ${defaultOpen ? 'false' : 'true'};
     expandCode_${idx}.onclick = function (){
         if(flag_${idx}){
             bindCode_${idx}.classList.add('preview-code-active')
