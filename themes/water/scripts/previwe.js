@@ -31,7 +31,8 @@ hexo.extend.filter.register('markdown-it:renderer', function (md) {
             const placeholder = token.info.split(' ')[2] !== 'open' ?  token.info.split(' ')[2] : '' ;
             const defaultOpen = token.info.split(' ')[2] === 'open';
             const hasPreview = token.info.indexOf('preview') !== -1;
-            const codeHighlight = `<pre><code class="hljs">${hljs.highlightAuto(code).value}</code></pre>`
+            const lang = token.info.split(' ')[0] || '';
+            const codeHighlight = `<pre><code class="hljs">${hljs.highlight(lang,code).value}</code></pre>`
             if (!hasPreview) {
                 return codeHighlight;
             }
