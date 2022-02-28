@@ -93,7 +93,7 @@ class Component {
     };
     text.textContent = state;
 
-	this.afterDomRender()
+    this.afterDomRender();
   }
 }
 new Component().render();
@@ -126,9 +126,12 @@ function useReducer(reducer, initState) {
       (action) => {
         const nextValue = reducer(hookState.__value[0], action);
         hookState.__value[0] = nextValue;
-        currentComponent.update();
+                hookState._component.update()
       },
     ];
+    if (!hookState._component) {
+      hookState._component = currentComponent;
+    }
   }
 
   return hookState.__value;
