@@ -6,7 +6,11 @@ category:
   - post
 ---
 
-```javascript preview open
+```html preview hook的使用，实现了useState，useReduce，useEffect
+<div id="app"></div>
+```
+
+```javascript preview 代码
 let currentComponent;
 let currentIndex;
 const components = [];
@@ -126,7 +130,7 @@ function useReducer(reducer, initState) {
       (action) => {
         const nextValue = reducer(hookState.__value[0], action);
         hookState.__value[0] = nextValue;
-                hookState._component.update()
+        hookState._component.update();
       },
     ];
     if (!hookState._component) {
@@ -164,8 +168,4 @@ function isChange(oldArgs, newArgs) {
     newArgs.some((arg, index) => arg !== oldArgs[index])
   );
 }
-```
-
-```html preview hook的使用，实现了useState，useReduce，useEffect
-<div id="app"></div>
 ```
