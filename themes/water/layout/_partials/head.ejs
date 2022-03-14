@@ -18,7 +18,7 @@
             loadTheme()
             setTimeout(()=>{
                 document.body.className = localStorageTheme ? localStorageTheme : 'dark'
-            })
+            },2)
         }
     </script>
 
@@ -79,5 +79,12 @@
         s.parentNode.insertBefore(hm, s);
         })();
     </script>
-    
+    <!-- post module request -->
+    <% if (is_post()) { %>
+        <script>
+            const moduleMap = new Map();
+            var define = (moduleName, module) => { moduleMap.set(moduleName, module) };
+            var require = (moduleName) => moduleMap.get(moduleName);
+        </script>
+        <% } %>
 </head>
