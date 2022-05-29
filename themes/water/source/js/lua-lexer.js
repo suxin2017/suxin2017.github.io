@@ -182,7 +182,7 @@ const reIdentifier = /^[_\d\w]+/; //标识符字母数字下划线开头
 
 // 转义字符
 const reDecEscapeSeq = /^\\[0-9]{1,3}/; // ascii 转义
-const reHexEscapeSeq = /^\x[0-9a-fA-F]{2}/; // 16进制转移
+const reHexEscapeSeq = /^\\x[0-9a-fA-F]{2}/; // 16进制转移
 const reUnicodeEscapeSeq = /^\\u\{[0-9-a-f-A-F]+\}/; // unicode 转义
 
 // https://regexper.com/#%2F%5E0%5BxX%5D%5B0-9a-fA-F%5D*%28%5C.%5B0-9a-fA-F%5D*%29%3F%28%5BpP%5D%5B%2B%5C-%5D%3F%5B0-9%5D%2B%29%3F%7C%5E%5B0-9%5D*%28%5C.%5B0-9%5D*%29%3F%28%5BeE%5D%5B%2B%5C-%5D%3F%5B0-9%5D%2B%29%3F%2F
@@ -350,7 +350,7 @@ class Lexer {
         let code = str.match(reDecEscapeSeq)?.[0];
         let d = parseInt(code.substring(1), 10);
         if (d <= 0xff) {
-          result += String.fromCharCode(d);
+          result += String.fromCodePoint(d);
           str = str.substring(code.length);
           continue;
         }
@@ -358,7 +358,7 @@ class Lexer {
       }
       if (hexEscape.includes(str[1])) {
         let code = str.match(reHexEscapeSeq)?.[0];
-        result += String.fromCharCode(parseInt(code.substring(2), 16));
+        result += String.fromCodePoint(parseInt(code.substring(2), 16));
         str = str.substring(code.length);
         continue;
       }
@@ -366,7 +366,7 @@ class Lexer {
         let code = str.match(reUnicodeEscapeSeq)?.[0];
         let d = parseInt(code.substring(3, code.length - 1), 16);
         if (d <= 0x10ffff) {
-          result += String.fromCharCode(d);
+          result += String.fromCodePoint(d);
           str = str.substring(code.length);
           continue;
         }

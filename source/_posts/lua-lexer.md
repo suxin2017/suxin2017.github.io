@@ -30,6 +30,17 @@ category:
 </style>
 <div>
   <textarea rows="20" style="width:100%" id="input" autofocus>
+  '\u{1f481}'
+  '\x61'
+  '\97'
+  'a'
+  [[a]]
+
+  1
+  1.1
+  1.1e-1
+  1.1e+1
+  .1
 local abc = 123;
 if(abc="123"){
   print(abc)
