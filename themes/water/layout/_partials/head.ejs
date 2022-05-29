@@ -17,7 +17,10 @@
         if(localStorage){
             loadTheme()
             setTimeout(()=>{
-                document.body.className = localStorageTheme ? localStorageTheme : 'dark'
+                if(document.body){
+                    document.body.className = localStorageTheme ? localStorageTheme : 'dark'
+                }
+
             },2)
         }
     </script>

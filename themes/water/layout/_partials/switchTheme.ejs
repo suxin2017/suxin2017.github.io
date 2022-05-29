@@ -17,7 +17,6 @@
     const btn = document.getElementById('switchThemeButton');
     let darkTheme = false;
     const themeStyleVarId = "themeStyleVar";
-    
     if(localStorageTheme === 'dark'){
         darkTheme = true
     }else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
