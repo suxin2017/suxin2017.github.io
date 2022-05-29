@@ -261,7 +261,7 @@ class Lexer {
         return;
       }
     }
-    while (this.chunk.length < this.pos && this.isNewLine()) {
+    while (this.chunk.length > this.pos && !this.isNewLine()) {
       this.next(1);
     }
   }

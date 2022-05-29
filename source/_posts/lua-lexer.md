@@ -112,6 +112,7 @@ longString = [[too long]]
       let start = event.target.dataset["start"];
       let end = event.target.dataset["end"];
       setTimeout(() => {
+        input.setAttribute("readonly", true);
         input.focus();
         input.setSelectionRange(start, end);
       }, 10);
@@ -124,6 +125,8 @@ longString = [[too long]]
     "mouseout",
     function (event) {
       event.target.style.borderColor = "";
+
+      input.removeAttribute("readonly");
     },
     false
   );
