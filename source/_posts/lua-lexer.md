@@ -97,10 +97,9 @@ longString = [[too long]]
   function gt(token) {
     let [kind, tok, location] = token;
     let printStr = `[${kindToCategory(kind)}] ${tok}`;
-
     return `<div class="token" style="color:var(--${colorRandom()})" data-start=${
-      location?.start
-    } data-end=${location?.end}>${printStr}</div>`;
+      location?.start.offset
+    } data-end=${location?.end.offset}>${printStr}</div>`;
   }
 
   // This handler will be executed every time the cursor

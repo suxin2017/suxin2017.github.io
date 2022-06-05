@@ -29,6 +29,81 @@ hljs.registerLanguage("css", css);
 const xml = require("highlight.js/lib/languages/xml");
 hljs.registerLanguage("xml", xml);
 hljs.registerLanguage("html", xml);
+hljs.registerLanguage("ebnf", function ebnf(hljs) {
+  const commentMode = hljs.COMMENT(/\(\*/, /\*\)/);
+  const commentLineMode = hljs.COMMENT(/\/\//, /[\r\n]/);
+  const nonTerminalMode = {
+    className: "attribute",
+    begin: /^[ ]*[a-zA-Z0-9]+([\s_-]+[a-zA-Z]+)*/,
+  };
+
+  const specialSequenceMode = {
+    className: "meta",
+    begin: /\?.*\?/,
+  };
+
+  const ruleBodyMode = {
+    begin: /::=/,
+    beginScope: "operator",
+    end: /[\r\n]/,
+    scope: "body",
+    contains: [
+      commentMode,
+      specialSequenceMode,
+
+      {
+        scope: "string",
+        begin: /['"]/,
+        end: /['"]/,
+      },
+      {
+        scope: "string",
+        begin: /\//,
+        end: /\//,
+      },
+      {
+        scope: "built_in",
+        begin: /[\[\]\{\}\|]/,
+      },
+    ],
+  };
+
+  return {
+    name: "Extended Backus-Naur Form",
+    illegal: /\S/,
+    contains: [
+      commentLineMode,
+      commentMode,
+      nonTerminalMode,
+      ruleBodyMode,
+      {
+        begin: [/^\s+/, /\|/],
+        beginScope: { 2: "built_in" },
+        end: /[\r\n]/,
+        scope: "body",
+        contains: [
+          commentMode,
+          specialSequenceMode,
+
+          {
+            scope: "string",
+            begin: /['"]/,
+            end: /['"]/,
+          },
+          {
+            scope: "string",
+            begin: /\//,
+            end: /\//,
+          },
+          {
+            scope: "built_in",
+            begin: /[\[\]\{\}\|]/,
+          },
+        ],
+      },
+    ],
+  };
+});
 
 const url_for = require("hexo-util").url_for.bind(hexo);
 const imgSize = require("markdown-it-imsize");
@@ -87,7 +162,9 @@ ${code}</script>`;
       }
       return `<div id="preview-${idx}" class="preview">
 <div class="preview-box">    
+<div id="draw-${idx}">
     ${placeholder ? placeholder : ""}${demo}
+    </div>
     <div class="preview-box-util">
         <span id="expand-${idx}" class="preview-box-util-code" style="background-image:url(${url_for(
         "/imgs/code.svg"
