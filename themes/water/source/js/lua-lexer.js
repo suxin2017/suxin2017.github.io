@@ -154,7 +154,7 @@ function kindToCategory(kind) {
 }
 const keywords = {
   and: TOKEN_OP_ADD,
-  bread: TOKEN_KW_BREAK,
+  break: TOKEN_KW_BREAK,
   do: TOKEN_KW_DO,
   else: TOKEN_KW_ELSE,
   elseif: TOKEN_KW_ELSEIF,
@@ -384,7 +384,6 @@ class Lexer {
   }
   escape(str) {
     let result = "";
-    console.log("escape");
     while (str.length) {
       if (str[0] != "\\") {
         result += str[0];

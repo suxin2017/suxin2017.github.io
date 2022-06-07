@@ -93,11 +93,11 @@ function drawNode(node) {
   }
   let mini = "";
   if (endName !== "") {
-    if (node._n) {
-      name = `${node._n}:`;
-    }
     mini = `<span class="mini"> ${Object.keys(node)} </span>`;
     endName = `<span>${endName}</span>`;
+  }
+  if (node._n) {
+    name = `${node._n}:${name}`;
   }
 
   let keys = Object.keys(node);
@@ -231,7 +231,7 @@ draw(
 ```javascript preview
 let idx = arguments[0];
 let code = `
-function () end
+function ()  end
 function (...) end
 function (a,b,c) end
 function (d,e,...) end
@@ -283,4 +283,121 @@ let code = `
 let lexer = new Lexer(code);
 let parser = new Parser(lexer);
 draw(code, [parser.parseExp(), parser.parseExp()], idx);
+```
+
+```javascript preview
+let idx = arguments[0];
+let code = `
+-- 注释
+;
+break
+::label::
+goto preLabel
+while 1 do end
+repeat until 1
+`;
+let lexer = new Lexer(code);
+let parser = new Parser(lexer);
+draw(
+  code,
+  [
+    parser.parseState(),
+    parser.parseState(),
+    parser.parseState(),
+    parser.parseState(),
+    parser.parseState(),
+    parser.parseState(),
+  ],
+  idx
+);
+```
+
+```javascript preview
+let idx = arguments[0];
+let code = `
+if true then end
+if true then  elseif true then end
+if true then  elseif true then  else  end
+`;
+let lexer = new Lexer(code);
+let parser = new Parser(lexer);
+draw(
+  code,
+  [parser.parseState(), parser.parseState(), parser.parseState()],
+  idx
+);
+```
+
+```javascript preview
+let idx = arguments[0];
+let code = `
+for i=10,1 do end
+for i=10,1,2 do end
+for i,v in "a" do end
+`;
+let lexer = new Lexer(code);
+let parser = new Parser(lexer);
+draw(
+  code,
+  [parser.parseState(), parser.parseState(), parser.parseState()],
+  idx
+);
+```
+
+```javascript preview
+let idx = arguments[0];
+let code = `
+local a = 123
+local a,b=1,2
+local a
+local function f() end
+`;
+let lexer = new Lexer(code);
+let parser = new Parser(lexer);
+draw(
+  code,
+  [
+    parser.parseState(),
+    parser.parseState(),
+    parser.parseState(),
+    parser.parseState(),
+  ],
+  idx
+);
+```
+
+```javascript preview
+let idx = arguments[0];
+let code = `
+name[1]
+name.name1
+name:name1(1)(2)(3)
+("name")[1]
+("name").name1
+("name"):name(1)
+`;
+let lexer = new Lexer(code);
+let parser = new Parser(lexer);
+draw(
+  code,
+  [
+    parser.parseExp(),
+    parser.parseExp(),
+    parser.parseExp(),
+    parser.parseExp(),
+    parser.parseExp(),
+    parser.parseExp(),
+  ],
+  idx
+);
+```
+
+```javascript preview
+let idx = arguments[0];
+let code = `
+print("Hello World！")
+`;
+let lexer = new Lexer(code);
+let parser = new Parser(lexer);
+draw(code, parser.parse(), idx);
 ```
