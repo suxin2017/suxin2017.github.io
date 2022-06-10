@@ -13,6 +13,7 @@ function copyTemplate(type, title = '标题', content = '内容') {
 		.replace('{{ title }}', title)
 		.replace('{{ content }}', content)
 	fs.writeFileSync(join(postDir, fileName), file)
+	console.log(join(postDir, fileName))
 }
 
 exports.copyTemplate = copyTemplate;
