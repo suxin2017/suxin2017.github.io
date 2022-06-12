@@ -242,11 +242,21 @@ class Lexer {
   }
 
   next(num) {
+    this.linePos += num;
     return (this.pos += num);
   }
   get currentChar() {
     return this.chunk[this.pos];
   }
+
+  getLocation() {
+    return {
+      offset: this.pos,
+      line: this.line,
+      column: this.linePos,
+    };
+  }
+
   isNewLine() {
     return this.currentChar === "\r" || this.currentChar === "\n";
   }
@@ -291,7 +301,7 @@ class Lexer {
   nextTokenOfKind(kind) {
     const [_kind, token, location] = this.nextToken();
     if (_kind !== kind) {
-      this.error(`syntax error near ${token}`);
+      this.error(`expected ${kind} but got ${_kind} token: ${token}`);
     }
     return [_kind, token, location];
   }
@@ -352,8 +362,11 @@ class Lexer {
       openingLongBracket.length + str.length + closingLongBracket.length
     );
     location.end.column = this.getCurrentColumn();
-
-    this.line += str.split(reNewLine).length;
+    let newLines = str.split(reNewLine);
+    this.line += newLines;
+    if (newLines.length) {
+      this.linePos = newLines[newLines.length - 1].length;
+    }
     // this.linePos += this.pos;
 
     if (str.length && str[0] === "\n") {
@@ -369,12 +382,12 @@ class Lexer {
         this.skipComment();
       } else if (this.isNewLine()) {
         this.next(1);
-        this.linePos = this.pos - 1;
         this.line++;
+        this.linePos = 0;
       } else if (this.test("\r\n") || this.test("\n\r")) {
         this.next(2);
-        this.linePos = this.pos - 1;
         this.line++;
+        this.linePos = 0;
       } else if (this.isWhiteSpace()) {
         this.next(1);
       } else {
@@ -394,10 +407,16 @@ class Lexer {
       if (str.length === 1) {
         this.error("unfinished string end \\");
       }
+      let newLines = ["\r", "\n"];
       let commonEscape = ["a", "b", "f", "n", "r", "t", "v", '"', "'", "\\"];
       let asciiEscape = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
       let hexEscape = ["x"];
       let unicodeEscape = ["u"];
+      // 忽略换行
+      if (newLines.includes(str[1])) {
+        str = str.substring(2);
+        continue;
+      }
 
       if (commonEscape.includes(str[1])) {
         result += str.substring(1, 2);
@@ -452,12 +471,15 @@ class Lexer {
       location.end.offset = this.next(str.length);
       str = str.substring(1, str.length - 1); // remove ' or "
       if (str.indexOf("\\") >= 0) {
-        this.line += str.match(reNewLine)?.length ?? 0;
-        location.end.line = this.line;
-        if (str.lastIndexOf(reNewLine) !== -1) {
-          this.linePos =
-            this.location.start.offset + str.lastIndexOf(reNewLine);
+        let reNewlines = str.split(reNewLine);
+        this.line += reNewlines.length - 1;
+        if (reNewlines.length > 1) {
+          // str"
+          this.linePos = reNewlines[reNewlines.length - 1].length + 1;
+        } else {
+          this.linePos = str.length;
         }
+        location.end.line = this.line;
         str = this.escape(str);
       }
       location.end.column = this.getCurrentColumn();
@@ -473,7 +495,7 @@ class Lexer {
   }
 
   getCurrentColumn() {
-    return this.pos - this.linePos;
+    return this.linePos;
   }
   scan(re) {
     let str = this.execString(re);
@@ -481,7 +503,7 @@ class Lexer {
       start: {
         line: this.line,
         column: this.getCurrentColumn(),
-        offset: this.pos,
+        offset: this.pos-1,
       },
       end: {
         line: this.line,
@@ -490,7 +512,7 @@ class Lexer {
       },
     };
     if (str) {
-      location.end.offset = this.next(str.length);
+      location.end.offset = this.next(str.length)-1;
       location.end.column = this.getCurrentColumn();
       return [str, location];
     }
@@ -501,12 +523,12 @@ class Lexer {
   }
 
   /**
-   * 
+   *
    * @returns {[string,string,Location]}
    */
   nextToken() {
     if (this.nextCacheToken) {
-      const nextCacheToken= this.nextCacheToken;
+      const nextCacheToken = this.nextCacheToken;
       this.pos = this.nextPos;
       this.linePos = this.nextLinePos;
       this.line = this.nextLine;
@@ -514,7 +536,7 @@ class Lexer {
       return nextCacheToken;
     }
     this.skipWhiteSpace();
-    
+
     if (this.pos >= this.chunk.length) {
       return [TOKEN_EOF, "EOF"];
     }
@@ -522,7 +544,7 @@ class Lexer {
       start: {
         line: this.line,
         column: this.getCurrentColumn(),
-        offset: this.pos,
+        offset: this.pos - 1,
       },
       end: {
         line: this.line,
@@ -532,144 +554,154 @@ class Lexer {
     };
     switch (this.currentChar) {
       case ";":
-        location.end.offset = this.next(1);
+        this.next(1);
         location.end.column = this.getCurrentColumn();
         return [TOKEN_SEP_SEMI, ";", location];
       case ",":
-        location.end.offset = this.next(1);
+        this.next(1);
         location.end.column = this.getCurrentColumn();
         return [TOKEN_SEP_COMMA, ",", location];
       case "(":
-        location.end.offset = this.next(1);
+        this.next(1);
         location.end.column = this.getCurrentColumn();
         return [TOKEN_SEP_LPAREN, "(", location];
       case ")":
-        location.end.offset = this.next(1);
+        this.next(1);
         location.end.column = this.getCurrentColumn();
         return [TOKEN_SEP_RPAREN, ")", location];
       case "]":
-        location.end.offset = this.next(1);
+        this.next(1);
         location.end.column = this.getCurrentColumn();
         return [TOKEN_SEP_RBRACK, "]", location];
       case "{":
-        location.end.offset = this.next(1);
+        this.next(1);
         location.end.column = this.getCurrentColumn();
         return [TOKEN_SEP_LCURLY, "{", location];
       case "}":
-        location.end.offset = this.next(1);
+        this.next(1);
         location.end.column = this.getCurrentColumn();
         return [TOKEN_SEP_RCURLY, "}", location];
       case "+":
-        location.end.offset = this.next(1);
+        this.next(1);
         location.end.column = this.getCurrentColumn();
         return [TOKEN_OP_ADD, "+", location];
       case "-":
-        location.end.offset = this.next(1);
+        this.next(1);
         location.end.column = this.getCurrentColumn();
         return [TOKEN_OP_MINUS, "-", location];
       case "*":
-        location.end.offset = this.next(1);
+        this.next(1);
         location.end.column = this.getCurrentColumn();
         return [TOKEN_OP_MUL, "*", location];
       case "^":
-        location.end.offset = this.next(1);
+        this.next(1);
         location.end.column = this.getCurrentColumn();
         return [TOKEN_OP_POW, "^", location];
       case "%":
-        location.end.offset = this.next(1);
+        this.next(1);
         location.end.column = this.getCurrentColumn();
         return [TOKEN_OP_MOD, "%", location];
       case "&":
-        location.end.offset = this.next(1);
+        this.next(1);
         location.end.column = this.getCurrentColumn();
         return [TOKEN_OP_BAND, "&", location];
       case "|":
-        location.end.offset = this.next(1);
+        this.next(1);
         location.end.column = this.getCurrentColumn();
         return [TOKEN_OP_BOR, "|", location];
       case "#":
-        location.end.offset = this.next(1);
+        this.next(1);
         location.end.column = this.getCurrentColumn();
         return [TOKEN_OP_LEN, "#", location];
       case ":":
         if (this.test("::")) {
-          location.end.offset = this.next(2);
+          location.end.offset = this.pos + 1;
+          this.next(2);
           location.end.column = this.getCurrentColumn();
           return [TOKEN_SEP_LABEL, "::", location];
         } else {
-          location.end.offset = this.next(1);
+          this.next(1);
           location.end.column = this.getCurrentColumn();
           return [TOKEN_SEP_COLON, ":", location];
         }
       case "/":
         if (this.test("//")) {
-          location.end.offset = this.next(2);
+          location.end.offset = this.pos + 1;
+          this.next(2);
           location.end.column = this.getCurrentColumn();
           return [TOKEN_OP_IDIV, "//", location];
         } else {
-          location.end.offset = this.next(1);
+          this.next(1);
           location.end.column = this.getCurrentColumn();
           return [TOKEN_OP_DIV, "/", location];
         }
       case "~":
         if (this.test("~=")) {
-          location.end.offset = this.next(2);
+          location.end.offset = this.pos + 1;
+          this.next(2);
           location.end.column = this.getCurrentColumn();
           return [TOKEN_OP_NE, "~=", location];
         } else {
-          location.end.offset = this.next(1);
+          this.next(1);
           location.end.column = this.getCurrentColumn();
           return [TOKEN_OP_WAVE, "~", location];
         }
       case "=":
         if (this.test("==")) {
-          location.end.offset = this.next(2);
+          location.end.offset = this.pos + 1;
+          this.next(2);
           location.end.column = this.getCurrentColumn();
           return [TOKEN_OP_EQ, "==", location];
         } else {
-          location.end.offset = this.next(1);
+          this.next(1);
           location.end.column = this.getCurrentColumn();
           return [TOKEN_OP_ASSIGN, "=", location];
         }
       case "<":
         if (this.test("<<")) {
-          location.end.offset = this.next(2);
+          location.end.offset = this.pos + 1;
+          this.next(2);
           location.end.column = this.getCurrentColumn();
           return [TOKEN_OP_SHL, "<<", location];
         } else if (this.test("<=")) {
-          location.end.offset = this.next(2);
+          location.end.offset = this.pos + 1;
+          this.next(2);
           location.end.column = this.getCurrentColumn();
           return [TOKEN_OP_LE, "<=", location];
         } else {
-          location.end.offset = this.next(1);
+          this.next(1);
           location.end.column = this.getCurrentColumn();
           return [TOKEN_OP_LT, "<", location];
         }
       case ">":
         if (this.test(">>")) {
-          location.end.offset = this.next(2);
+          location.end.offset = this.pos + 1;
+          this.next(2);
           location.end.column = this.getCurrentColumn();
           return [TOKEN_OP_SHR, ">>", location];
         } else if (this.test(">=")) {
-          location.end.offset = this.next(2);
+          location.end.offset = this.pos + 1;
+          this.next(2);
           location.end.column = this.getCurrentColumn();
           return [TOKEN_OP_GE, ">=", location];
         } else {
-          location.end.offset = this.next(1);
+          this.next(1);
           location.end.column = this.getCurrentColumn();
           return [TOKEN_OP_GT, ">", location];
         }
       case ".":
         if (this.test("...")) {
-          location.end.offset = this.next(3);
+          location.end.offset = this.pos + 2;
+          this.next(3)
           location.end.column = this.getCurrentColumn();
           return [TOKEN_VARARG, "...", location];
         } else if (this.test("..")) {
-          location.end.offset = this.next(2);
+          location.end.offset = this.pos + 1;
+          this.next(2);
           location.end.column = this.getCurrentColumn();
           return [TOKEN_OP_CONCAT, "..", location];
         } else if (!isDigit(this.chunk[this.pos + 1])) {
-          location.end.offset = this.next(1);
+          this.next(1);
           location.end.column = this.getCurrentColumn();
           return [TOKEN_SEP_DOT, ".", location];
         }
@@ -678,7 +710,7 @@ class Lexer {
         if (this.test("[[") || this.test("[=")) {
           return [TOKEN_STRING, ...this.scanLongString()];
         } else {
-          location.end.offset = this.next(1);
+          this.next(1);
           location.end.column = this.getCurrentColumn();
           return [TOKEN_SEP_LBARCK, "[", location];
         }
@@ -707,4 +739,46 @@ class Lexer {
     console.error(msg);
     throw new Error(msg);
   }
+}
+
+if (typeof window === "undefined") {
+  const lodash = require("lodash");
+  let lexer = new Lexer(`
+local
+"abc\\
+def"
+"abff"
+`);
+
+  const t = (a, b) => {
+    if (!lodash.isEqual(a, b)) {
+      console.log(a, b);
+      throw Error("not equal");
+    }
+  };
+
+  t(lexer.nextToken(), [
+    TOKEN_KW_LOCAL,
+    "local",
+    {
+      start: { offset: 1, line: 1, column: 0 },
+      end: { offset: 6, line: 1, column: 5 },
+    },
+  ]);
+  t(lexer.nextToken(), [
+    TOKEN_STRING,
+    "abcdef",
+    {
+      start: { offset: 7, line: 2, column: 0 },
+      end: { offset: 17, line: 3, column: 4 },
+    },
+  ]);
+  t(lexer.nextToken(), [
+    TOKEN_STRING,
+    "abff",
+    {
+      start: { offset: 18, line: 4, column: 0 },
+      end: { offset: 24, line: 4, column: 6 },
+    },
+  ]);
 }

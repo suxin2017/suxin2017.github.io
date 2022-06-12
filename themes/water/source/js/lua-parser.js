@@ -20,16 +20,20 @@ class Parser {
 
   // block ::= { stat } [retStat]
   parseBlock() {
-    return new Block(this.parseStates(), this.parseRetExps(), null);
+    let startLoc = this.lexer.getLocation();
+    let stats = this.parseStates();
+    let retExps = this.parseRetExps();
+    let endLoc = this.lexer.getLocation();
+    return new Block(stats, retExps, { start: startLoc, end: endLoc });
   }
 
   parseStates() {
     let stats = [];
     while (!this.isReturnOrBlockEnd(this.lexer.lookAhead())) {
       let stat = this.parseState();
-      if (!(stat instanceof EmptyStat)) {
-        stats.push(stat);
-      }
+      // if (!(stat instanceof EmptyStat)) {
+      stats.push(stat);
+      // }
     }
     return stats;
   }
@@ -74,7 +78,6 @@ class Parser {
    * Statement
    */
   parseState() {
-    console.log(this.lexer.lookAhead());
     switch (this.lexer.lookAhead()) {
       case TOKEN_SEP_SEMI:
         return this.parseEmptyStat();
@@ -104,55 +107,70 @@ class Parser {
   }
 
   parseEmptyStat() {
-    this.lexer.nextTokenOfKind(TOKEN_SEP_SEMI);
-    return new EmptyStat();
+    let [, , location] = this.lexer.nextTokenOfKind(TOKEN_SEP_SEMI);
+    return new EmptyStat(location);
   }
   parseBreakStat() {
-    this.lexer.nextTokenOfKind(TOKEN_KW_BREAK);
-    return new BreakStat();
+    let [, , location] = this.lexer.nextTokenOfKind(TOKEN_KW_BREAK);
+    return new BreakStat(location);
   }
   parseLabelStat() {
+    let startLoc = this.lexer.getLocation();
     this.lexer.nextTokenOfKind(TOKEN_SEP_LABEL);
-    let [name, _, location] = this.lexer.nextTokenOfKind(TOKEN_IDENTIFIER);
+    let [_, name, location] = this.lexer.nextTokenOfKind(TOKEN_IDENTIFIER);
     this.lexer.nextTokenOfKind(TOKEN_SEP_LABEL);
-    return new LabelStat(name);
+    let endLoc = this.lexer.getLocation();
+    return new LabelStat(name, { start: startLoc, end: endLoc });
   }
   parseGotoStat() {
+    let startLoc = this.lexer.getLocation();
     this.lexer.nextTokenOfKind(TOKEN_KW_GOTO);
-    let [name, _, location] = this.lexer.nextTokenOfKind(TOKEN_IDENTIFIER);
-    return new GotoStat(name);
+    let [_, name, location] = this.lexer.nextTokenOfKind(TOKEN_IDENTIFIER);
+    let endLoc = this.lexer.getLocation();
+    return new GotoStat(name, { start: startLoc, end: endLoc });
+  }
+  parseDoStat() {
+    let startLoc = this.lexer.getLocation();
+    this.lexer.nextTokenOfKind(TOKEN_KW_DO);
+    let block = this.parseBlock();
+    this.lexer.nextTokenOfKind(TOKEN_KW_END);
+    let endLoc = this.lexer.getLocation();
+    return new DoStat(block, { start: startLoc, end: endLoc });
   }
   parseWhileStat() {
+    let startLoc = this.lexer.getLocation();
     this.lexer.nextTokenOfKind(TOKEN_KW_WHILE);
     let exp = this.parseExp();
     this.lexer.nextTokenOfKind(TOKEN_KW_DO);
     let block = this.parseBlock();
     this.lexer.nextTokenOfKind(TOKEN_KW_END);
-    return new WhileStat(exp, block);
+    let endLoc = this.lexer.getLocation();
+    return new WhileStat(exp, block, { start: startLoc, end: endLoc });
   }
   parseRepeatStat() {
+    let startLoc = this.lexer.getLocation();
     this.lexer.nextTokenOfKind(TOKEN_KW_REPEAT);
     let block = this.parseBlock();
     this.lexer.nextTokenOfKind(TOKEN_KW_UNTIL);
     let exp = this.parseExp();
-    return new RepeatStat(block, exp);
+    let endLoc = this.lexer.getLocation();
+
+    return new RepeatStat(block, exp, { start: startLoc, end: endLoc });
   }
   parseIfStat() {
+    let startLoc = this.lexer.getLocation();
     let exps = [];
     let blocks = [];
     this.lexer.nextTokenOfKind(TOKEN_KW_IF);
-
     exps.push(this.parseExp());
     this.lexer.nextTokenOfKind(TOKEN_KW_THEN);
     blocks.push(this.parseBlock());
-
     while (this.lexer.lookAhead() === TOKEN_KW_ELSEIF) {
       this.lexer.nextTokenOfKind(TOKEN_KW_ELSEIF);
       exps.push(this.parseExp());
       this.lexer.nextTokenOfKind(TOKEN_KW_THEN);
       blocks.push(this.parseBlock());
     }
-
     if (this.lexer.lookAhead() === TOKEN_KW_ELSE) {
       this.lexer.nextToken();
       exps.push(new TrueExp(this.lexer.line));
@@ -160,7 +178,8 @@ class Parser {
     }
 
     this.lexer.nextTokenOfKind(TOKEN_KW_END);
-    return new IfStat(exps, blocks);
+    let endLoc = this.lexer.getLocation();
+    return new IfStat(exps, blocks, { start: startLoc, end: endLoc });
   }
 
   parseForStat() {
@@ -187,7 +206,7 @@ class Parser {
 
     let [, , doLocation] = this.lexer.nextTokenOfKind(TOKEN_KW_DO);
     let block = this.parseBlock();
-    this.lexer.nextTokenOfKind(TOKEN_KW_END);
+    let [, , endLoc] = this.lexer.nextTokenOfKind(TOKEN_KW_END);
 
     return new ForNumStat({
       locationOfDo: doLocation,
@@ -197,20 +216,29 @@ class Parser {
       limitExp,
       stepExp,
       block,
+      location: {
+        start: location.start,
+        end: endLoc.end,
+      },
     });
   }
-  finishForInStat(name) {
+  finishForInStat(name, location) {
     let names = this.finishNameList(name);
     this.lexer.nextTokenOfKind(TOKEN_KW_IN);
     let expsList = this.parseExpList();
     let [, , locationOfDo] = this.lexer.nextTokenOfKind(TOKEN_KW_DO);
     let block = this.parseBlock();
-    this.lexer.nextTokenOfKind(TOKEN_KW_END);
+    let [, , endLoc] = this.lexer.nextTokenOfKind(TOKEN_KW_END);
+
     return new ForInStat({
       locationOfDo,
       nameList: names,
       expsList,
       block,
+      location: {
+        start: location.start,
+        end: endLoc.end,
+      },
     });
   }
   finishNameList(name0) {
@@ -224,19 +252,23 @@ class Parser {
   }
 
   parseLocalAssignOrFuncDefStat() {
-    this.lexer.nextTokenOfKind(TOKEN_KW_LOCAL);
+    let [, , startLoc] = this.lexer.nextTokenOfKind(TOKEN_KW_LOCAL);
+    console.log(startLoc);
     if (this.lexer.lookAhead() === TOKEN_KW_FUNCTION) {
-      return this.finishLocalFuncDeclStat();
+      return this.finishLocalFuncDeclStat(startLoc);
     } else {
-      return this.finishLocalVarDeclStat();
+      return this.finishLocalVarDeclStat(startLoc);
     }
   }
 
-  finishLocalFuncDeclStat() {
+  finishLocalFuncDeclStat(startLoc) {
     this.lexer.nextTokenOfKind(TOKEN_KW_FUNCTION);
     let [, name, location] = this.lexer.nextIdentifier();
     let fdExp = this.parseFuncDefExp();
-    return new LocalFuncDeclStat(name, fdExp);
+    return new LocalFuncDeclStat(name, fdExp, {
+      start: startLoc.start,
+      end: fdExp.location.end,
+    });
   }
 
   finishLocalVarDeclStat() {
@@ -266,7 +298,7 @@ class Parser {
     let varList = this.finishVarList(var0);
     this.lexer.nextTokenOfKind(TOKEN_OP_ASSIGN);
     let expList = this.parseExpList();
-    return new AssignStat(null, varList, expList);
+    return new AssignStat(varList, expList);
   }
   finishVarList(var0) {
     let vars = [var0];
@@ -286,13 +318,17 @@ class Parser {
   }
 
   parseFuncDefStat() {
+    let startLoc = this.lexer.getLocation();
     this.lexer.nextTokenOfKind(TOKEN_KW_FUNCTION);
     let { fnExp, hasColon } = this.parseFuncName();
     let fdExp = this.parseFuncDefExp();
     if (hasColon) {
       fdExp.parList.unshift("self");
     }
-    return new AssignStat(null, [fnExp], [fdExp]);
+    return new AssignStat([fnExp], [fdExp], {
+      start: startLoc,
+      end: fdExp.location.end,
+    });
   }
   parseFuncName() {
     let [, name, location] = this.lexer.nextIdentifier();
@@ -452,7 +488,6 @@ class Parser {
   }
   parseExp0() {
     let location, token;
-    console.log(this.lexer.lookAhead());
     switch (this.lexer.lookAhead()) {
       case TOKEN_VARARG:
         [, , location] = this.lexer.nextToken();
@@ -540,13 +575,21 @@ class Parser {
     if (this.lexer.lookAhead() === TOKEN_KW_FUNCTION) {
       [, , location] = this.lexer.nextToken();
     }
-
-    this.lexer.nextTokenOfKind(TOKEN_SEP_LPAREN);
+    if (location) {
+      this.lexer.nextTokenOfKind(TOKEN_SEP_LPAREN);
+    } else {
+      [, , location] = this.lexer.nextTokenOfKind(TOKEN_SEP_LPAREN);
+    }
     let { parList, isVarArg } = this.parseParList();
     this.lexer.nextTokenOfKind(TOKEN_SEP_RPAREN);
     let block = this.parseBlock();
     let [, , lastLocation] = this.lexer.nextTokenOfKind(TOKEN_KW_END);
-    return new FuncDefExp(location, lastLocation, parList, isVarArg, block);
+    return new FuncDefExp(
+      { start: location.start, end: lastLocation.end },
+      parList,
+      isVarArg,
+      block
+    );
   }
   parseParList() {
     switch (this.lexer.lookAhead()) {
@@ -600,6 +643,10 @@ class Parser {
   }
 
   parseParensExp() {
+    console.log(
+      "parseParensExp",
+      this.lexer.chunk.substring(this.lexer.pos - 3, this.lexer.pos + 3)
+    );
     this.lexer.nextTokenOfKind(TOKEN_SEP_LPAREN);
     let exp = this.parseExp();
     this.lexer.nextTokenOfKind(TOKEN_SEP_RPAREN);
@@ -619,9 +666,6 @@ class Parser {
     let location;
     let line = this.lexer.line;
     while (true) {
-      if (line !== this.lexer.nextLine) {
-        return exp;
-      }     
       switch (this.lexer.lookAhead()) {
         case TOKEN_SEP_LBARCK: {
           this.lexer.nextToken();
@@ -685,13 +729,3 @@ class Parser {
     return args;
   }
 }
-
-window.mixin = function (target, source) {
-  Object.assign(target.prototype, {
-    a() {
-      console.log("a");
-    },
-  });
-  console.log(target.prototype);
-};
-mixin(Parser);

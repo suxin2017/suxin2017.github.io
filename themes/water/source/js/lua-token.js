@@ -1,23 +1,25 @@
-class Block {
-  constructor(stats, retStat, location) {
-    this.stats = stats;
-    this.retStat = retStat;
-    this.location = location;
-  }
-}
-
-class EmptyStat {} // ;
-class BreakStat {
+class Node {
   constructor(location) {
     this.location = location;
   }
-} // bread
+}
+class Block extends Node {
+  constructor(stats, retStat, location) {
+    super(location);
+    this.stats = stats;
+    this.retStat = retStat;
+  }
+}
+
+class EmptyStat extends Node {} // ;
+class BreakStat extends Node {} // bread
 
 /**
  * '::' Name '::'
  */
-class LabelStat {
-  constructor(name) {
+class LabelStat extends Node {
+  constructor(name, location) {
+    super(location);
     this.name = name;
   }
 }
@@ -25,8 +27,9 @@ class LabelStat {
 /**
  * goto Name
  */
-class GotoStat {
-  constructor(name) {
+class GotoStat extends Node {
+  constructor(name, location) {
+    super(location);
     this.name = name;
   }
 }
@@ -34,8 +37,9 @@ class GotoStat {
 /**
  * do block end
  */
-class DoStat {
-  constructor(block) {
+class DoStat extends Node {
+  constructor(block, location) {
+    super(location);
     this.block = block;
   }
 }
@@ -43,8 +47,9 @@ class DoStat {
 /**
  * while exp do blok end
  */
-class WhileStat {
-  constructor(exp, block) {
+class WhileStat extends Node {
+  constructor(exp, block, location) {
+    super(location);
     this.exp = exp;
     this.block = block;
   }
@@ -53,8 +58,9 @@ class WhileStat {
 /**
  * repeat block until exp
  */
-class RepeatStat {
-  constructor(block, exp) {
+class RepeatStat extends Node {
+  constructor(block, exp, location) {
+    super(location);
     this.block = block;
     this.exp = exp;
   }
@@ -63,8 +69,9 @@ class RepeatStat {
 /**
  * if exp then block {elseif exp then block} end
  */
-class IfStat {
-  constructor(exps, blocks) {
+class IfStat extends Node {
+  constructor(exps, blocks, location) {
+    super(location);
     this.exps = exps ?? [];
     this.block = blocks ?? [];
   }
@@ -73,7 +80,7 @@ class IfStat {
 /**
  * for Name '=' exp ',' exp [',' exp] do block end
  */
-class ForNumStat {
+class ForNumStat extends Node {
   constructor({
     locationOfDo,
     locationOfFor,
@@ -82,7 +89,9 @@ class ForNumStat {
     limitExp,
     stepExp,
     block,
+    location,
   }) {
+    super(location);
     this.locationOfFor = locationOfFor;
     this.locationOfDo = locationOfDo;
     this.varName = varName;
@@ -96,8 +105,9 @@ class ForNumStat {
 /**
  * for nameList in expList do block end
  */
-class ForInStat {
-  constructor({ locationOfDo, nameList, expList, block }) {
+class ForInStat extends Node {
+  constructor({ locationOfDo, nameList, expList, block, location }) {
+    super(location);
     this.locationOfDo = locationOfDo;
     this.nameList = nameList;
     this.expList = expList;
@@ -116,16 +126,17 @@ class LocalVarDeclStat {
   }
 }
 
-class AssignStat {
-  constructor(lastLocation, varList, expList) {
-    this.lastLocation = lastLocation;
+class AssignStat extends Node {
+  constructor(varList, expList, location) {
+    super(location);
     this.varList = varList;
     this.expList = expList;
   }
 }
 
-class LocalFuncDeclStat {
-  constructor(name, exp) {
+class LocalFuncDeclStat extends Node {
+  constructor(name, exp, location) {
+    super(location)
     this.name = name;
     this.exp = exp;
   }
@@ -135,11 +146,7 @@ class LocalFuncDeclStat {
  * Exp
  */
 
-class Exp {
-  constructor(location) {
-    this.location = location;
-  }
-}
+class Exp extends Node {}
 class NilExp extends Exp {}
 class TrueExp extends Exp {}
 class FalseExp extends Exp {}
@@ -203,9 +210,8 @@ class TableConstructorExp extends Exp {
 }
 
 class FuncDefExp extends Exp {
-  constructor(location, endLocation, parList, isVarArg, block) {
+  constructor(location, parList, isVarArg, block) {
     super(location);
-    this.endLocation = endLocation;
     this.parList = parList;
     this.isVarArg = isVarArg;
     this.block = block;

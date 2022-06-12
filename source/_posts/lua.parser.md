@@ -61,6 +61,7 @@ category:
 	}
   .box{
     display:flex;
+    flex-wrap:wrap;
     max-height: 400px;
     overflow:auto;
   }
@@ -76,7 +77,7 @@ function drawAttrs(attrs) {
   }
   return attrStr + "</ul>";
 }
-function drawNode(node) {
+function drawNode(node,idx) {
   let name = "";
   if (node?.constructor?.name) {
     name = node.constructor.name;
@@ -120,16 +121,23 @@ function drawNode(node) {
   }
   let childrenStr = "";
   if (childrenToken.length) {
-    childrenStr = drawTree(childrenToken);
+    childrenStr = drawTree(childrenToken,idx);
   }
+  const printLocation = (node) => {
+    if (node instanceof Node) {
+      return `onclick="selectCode(event,${idx})" data-start=${node.location?.start?.offset} data-end=${node.location?.end?.offset}`;
+    }
+  };
 
-  return `<li class='node' data-active="false">${name}${startTag}${attrStr}${childrenStr}${mini}${endName}</li>`;
+  return `<li class='node' data-active="false"   ${printLocation(
+    node
+  )}>${name}${startTag}${attrStr}${childrenStr}${mini}${endName}</li>`;
 }
 
-function drawTree(nodes) {
+function drawTree(nodes,idx) {
   let children = [];
   for (let node of nodes) {
-    children.push(drawNode(node));
+    children.push(drawNode(node,idx));
   }
   return `<ul class="tree"  >${children.join("\n")}</ul>`;
 }
@@ -142,7 +150,7 @@ function toggle(e) {
   }
 }
 function drawJson(obj, dom, idx) {
-  let str = drawTree([obj], true);
+  let str = drawTree([obj], idx);
   dom.addEventListener(
     "click",
     (e) => {
@@ -161,8 +169,8 @@ window.drawJson = drawJson;
 ```
 
 ```javascript preview
-function drawCode(code, dom) {
-  let str = `<textarea class="code" rows=6 cols=60 readonly>${code}</textarea>`;
+function drawCode(code, dom, idx) {
+  let str = `<textarea id="code-${idx}" class="code" rows=6 cols=60 readonly>${code}</textarea>`;
   dom.innerHTML = str;
 }
 function expandAll(idx) {
@@ -172,6 +180,13 @@ function expandAll(idx) {
   Array.from(nodes).forEach((node) => {
     node.dataset["active"] = true;
   });
+}
+function selectCode(event,idx) {
+  let start = event.target.dataset["start"];
+  let end = event.target.dataset["end"];
+  let input = document.getElementById(`code-${idx}`);
+  input.focus();
+  input.setSelectionRange(start, end);
 }
 function foldAll(idx) {
   let nodes = document
@@ -184,6 +199,7 @@ function foldAll(idx) {
 window.drawCode = drawCode;
 window.expandAll = expandAll;
 window.foldAll = foldAll;
+window.selectCode = selectCode;
 ```
 
 ```javascript preview
@@ -259,7 +275,6 @@ let code = `
 `;
 let lexer = new Lexer(code);
 let parser = new Parser(lexer);
-parser.a();
 draw(code, [parser.parseExp0(), parser.parseExp0(), parser.parseExp0()], idx);
 ```
 
@@ -395,9 +410,29 @@ draw(
 ```javascript preview
 let idx = arguments[0];
 let code = `
-print("Hello World！")
+;
+break
+::label::
+goto label
+do print('hello') end
+while true do print('hello') end
+repeat print('hello') until false
 `;
 let lexer = new Lexer(code);
 let parser = new Parser(lexer);
-draw(code, parser.parse(), idx);
+let ast =  parser.parse();
+console.log(ast)
+draw(code,ast, idx);
+```
+
+```javascript preview
+let idx = arguments[0];
+let code = `
+local function f() end
+`;
+let lexer = new Lexer(code);
+let parser = new Parser(lexer);
+let ast =  parser.parse();
+console.log(ast)
+draw(code,ast, idx);
 ```
