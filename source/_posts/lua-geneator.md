@@ -28,7 +28,7 @@ category:
 
 ```javascript preview drawCode
 function drawCode(code, dom, idx) {
-  let str = `<textarea id="code-${idx}" class="code" rows=6 cols=80 readonly>${code}</textarea>`;
+  let str = `<textarea id="code-${idx}" class="code" rows=6 style="width:100%" readonly>${code}</textarea>`;
   dom.innerHTML = str;
 }
 
@@ -47,13 +47,13 @@ function draw(code, ast, idx) {
 window.draw = draw;
 ```
 
-<pre>
+<pre >
 // 生成的js代码
-<div id="js-code"></div>
+<div style="    white-space: pre-wrap;" id="js-code"></div>
 <div>
 //eval 执行结果
 </div>
-<div id="js-eval"></div>
+<div id="js-eval" ></div>
 </pre>
 
 <div>source code 👇👇👇</div>
@@ -75,6 +75,7 @@ document.getElementById("js-code").textContent = jsCode.split(";").join(";\n");
 console.log(jsCode);
 
 eval(jsCode);
+```
 
 ```
 
