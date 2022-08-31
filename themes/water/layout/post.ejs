@@ -18,4 +18,12 @@
                 })
             })
         </script>
+        <% if (theme.mermaid.enable) { %>
+            <script src='https://unpkg.com/mermaid/dist/mermaid.min.js'></script>
+            <script>
+              if (window.mermaid) {
+               mermaid.initialize({startOnLoad:true});
+              }
+            </script>
+          <% } %>
 </div>

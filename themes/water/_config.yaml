@@ -32,3 +32,6 @@ rss:
 about:
   github: https://github.com/suxin2017
   email: 1107178482@qq.com
+
+mermaid:
+  enable: true

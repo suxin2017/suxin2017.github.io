@@ -1,13 +1,13 @@
 <div class="pagination">
-    <div class="pagination-prev" style='background-image:url(<%= url_for("/imgs/left.svg") %>)'>
-        <% if (page.prev> 0) { %><a href=<%=url_for(page.prev_link) %> ></a>
+    <div class="pagination-prev" >
+        <% if (page.prev> 0) { %><a href=<%=url_for(page.prev_link) %>> 上一页</a>
             <% } %>
     </div>
     <div class="pagination-content">
         <%= page.current %>/<%= page.total %>
     </div>
-    <div class="pagination-next" style='background-image:url(<%= url_for("/imgs/right.svg") %>)'>
-        <% if (page.next> 0) { %> <a href=<%=url_for(page.next_link) %> ></a>
+    <div class="pagination-next" >
+        <% if (page.next> 0) { %> <a href=<%=url_for(page.next_link) %>> 下一页</a>
             <% } %>
     </div>
 </div>

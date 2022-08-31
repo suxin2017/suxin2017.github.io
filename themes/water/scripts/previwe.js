@@ -117,24 +117,24 @@ hexo.extend.filter.register("markdown-it:renderer", function (md) {
       const code = token.content;
       const placeholder =
         token.info.split(" ")[2] !== "open" ? token.info.split(" ")[2] : "";
+      if (token.info.indexOf('mermaid') !== -1) {
+        return `<pre class="mermaid">${code}</pre>`
+      }
       const defaultOpen = token.info.split(" ")[2] === "open";
       const hasPreview = token.info.indexOf("preview") !== -1;
       const lang = token.info.split(" ")[0] || "";
       let codeHighlight = "";
       if (lang) {
         try {
-          codeHighlight = `<pre><code class="hljs">${
-            hljs.highlight(lang, code).value
-          }</code></pre>`;
+          codeHighlight = `<pre><code class="hljs">${hljs.highlight(lang, code).value
+            }</code></pre>`;
         } catch (e) {
-          codeHighlight = `<pre><code class="hljs">${
-            hljs.highlightAuto(code).value
-          }</code></pre>`;
+          codeHighlight = `<pre><code class="hljs">${hljs.highlightAuto(code).value
+            }</code></pre>`;
         }
       } else {
-        codeHighlight = `<pre><code class="hljs">${
-          hljs.highlightAuto(code).value
-        }</code></pre>`;
+        codeHighlight = `<pre><code class="hljs">${hljs.highlightAuto(code).value
+          }</code></pre>`;
       }
       if (!hasPreview) {
         return codeHighlight;
@@ -171,9 +171,8 @@ ${code}</script>`;
       )})"></span>
     </div>
 </div>
-<div id="code-${idx}" class="preview-code ${
-        defaultOpen && "preview-code-active"
-      }">
+<div id="code-${idx}" class="preview-code ${defaultOpen && "preview-code-active"
+        }">
 ${codeHighlight}
 </div>
 <script>
