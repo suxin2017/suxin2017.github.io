@@ -10,7 +10,7 @@
     "post": "node ./script/post.js"
   },
   "hexo": {
-    "version": "5.4.0"
+    "version": "5.4.2"
   },
   "husky": {
     "hooks": {}
