@@ -1,0 +1,156 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><link rel="icon" sizes="any" type="image/svg+xml" href="/imgs/icon.svg"><link rel="stylesheet" href="/css/theme/color.variables.css"><link id="themeStyleVar" rel="stylesheet" href="/css/theme/default.variables.css"><script>const localStorageTheme = localStorage.getItem('theme');
+        function loadTheme(){
+            let themeLink = document.getElementById('themeStyleVar');
+            if(localStorageTheme){
+                themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${localStorageTheme}.variables.css`)
+            }
+        }
+        if(localStorage){
+            loadTheme()
+            setTimeout(()=>{
+                if(document.body){
+                    document.body.className = localStorageTheme ? localStorageTheme : 'dark'
+                }
+
+            },2)
+        }</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/css/post.css"><title>苏鑫2017</title><meta name="description" content="用于记录感悟，前端技术，编程技巧，各种奇奇怪怪的新的体会"><meta name="viewport" content="width=device-width,initial-scale=1"><script async>console.log(`%c真巧，你打开了devtool`,"color:#b58900")
+        console.log(`%c真巧，你看了我的文章`,"color:#859900")
+        console.log('%c简单介绍，道法自然，做人要顺其自然，不要有太多欲望',"color:#268bd2")
+        console.log('%c不要目的性太强,这就是我的主题想强调的',"color:#dc322f")</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-RFGTVED02M"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-RFGTVED02M")</script><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?ce46d6101f33ba04b74fbe8bbe509590";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><script>const moduleMap = new Map();
+            var define = (moduleName, module) => { moduleMap.set(moduleName, module) };
+            var require = (moduleName) => moduleMap.get(moduleName);</script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="苏鑫2017" type="application/atom+xml"></head><body><div class="body"><header class="header"><div class="header-icon-wrapper"><h2><a href="/">苏鑫2017</a></h2></div><div class="header-right"><nav class="header-menu-wrapper"><ul class="header-menu"><li class="header-menu-item"><a class="header-menu-item-link" href="/">首页</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/categories/weibo">微博</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/about">关于</a></li><li class="header-menu-item"><div id="switchThemeButton"><img src="/imgs/icon.svg" alt="switchThemeIcon" width="100%" height="100%"></div><style>#switchThemeButton{width:40px;height:26px;margin:0;border:0;background:0 0;outline:0;cursor:pointer;margin-top:6px}</style><script async>const btn = document.getElementById('switchThemeButton');
+    let darkTheme = false;
+    const themeStyleVarId = "themeStyleVar";
+    if(localStorageTheme === 'dark'){
+        darkTheme = true
+    }else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // dark mode
+        darkTheme = true;
+    }
+    function loadTheme() {
+        let themeLink = document.getElementById(themeStyleVarId);
+        if (!themeLink) {
+            themeLink = document.createElement('link')
+            themeLink.rel = "stylesheet"
+            themeLink.id = "themeStyleVar"
+        }
+        darkTheme = !darkTheme;
+        themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${darkTheme ? 'dark' : 'light'}.variables.css`)
+        document.head.appendChild(themeLink)
+        document.body.className = darkTheme?'dark':'light'
+        localStorage.setItem('theme',darkTheme?'dark':'light');
+    }
+
+    btn.onclick = function() {
+        loadTheme();
+        codeTheme();
+    }</script><script>function codeTheme(){
+            const localStorageTheme = localStorage.getItem('theme');
+            let codeThemeLink = document.getElementById("codeTheme");
+            if(!codeThemeLink){
+                codeThemeLink = document.createElement('link');
+                codeThemeLink.rel = "stylesheet"
+                codeThemeLink.id = "codeTheme"
+                document.head.appendChild(codeThemeLink)
+            }
+            if(localStorageTheme){
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${localStorageTheme}.css`
+            }else{
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${darkTheme ? 'dark': 'light'}.css`
+            }
+        }
+        codeTheme()</script></li></ul></nav></div></header><main class="main"><div class="post"><h2>opencv 常用对象</h2><h2 id="创建Mat对象的方法">创建Mat对象的方法</h2><ul><li>构造函数Mat()</li></ul><pre><code class="hljs"><span class="hljs-function">Mat <span class="hljs-title">M</span><span class="hljs-params">(<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,CV_8UC3,Scalar(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">255</span>))</span></span>;
+
+cout &lt;&lt; <span class="hljs-string">&quot;M = &quot;</span> &lt;&lt; M &lt;&lt; endl;
+
+<span class="hljs-comment">// output</span>
+<span class="hljs-comment">//  M = [  0,   0, 255,   0,   0, 255;</span>
+<span class="hljs-comment">//   0,   0, 255,   0,   0, 255]</span>
+
+</code></pre><p>这段代码创建了2*2的标量(Scalar)（只有大小没有方向）[0,255,255]</p><p>CV_8UC3 表示 unsigned char 类型<br>char 是一个字节 -128-127<br>unsigned 是 0-255</p><ul><li>通过构造函数</li></ul><pre><code class="hljs"><span class="hljs-type">int</span> sz[<span class="hljs-number">3</span>] = &#123;<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>&#125;;
+<span class="hljs-function">Mat <span class="hljs-title">L</span><span class="hljs-params">(<span class="hljs-number">3</span>,sz,CV_8UC,Scalar::all(<span class="hljs-number">0</span>))</span></span>;
+
+cout &lt;&lt; M &lt;&lt; endl;
+<span class="hljs-comment">// error 输出会报错</span>
+</code></pre><p>Scalar::all(0) 会返回一个<code>[0,0,0,0]</code></p><p>构造函数有点多用到一个再写一个吧。</p><h2 id="格式化输出">格式化输出</h2><p>直接用python格式的，因为很舒服</p><pre><code class="hljs"> <span class="hljs-function">Mat <span class="hljs-title">r</span><span class="hljs-params">(<span class="hljs-number">10</span>,<span class="hljs-number">4</span>,CV_8UC3)</span></span>;
+<span class="hljs-built_in">randu</span>(r,Scalar::<span class="hljs-built_in">all</span>(<span class="hljs-number">0</span>),Scalar::<span class="hljs-built_in">all</span>(<span class="hljs-number">255</span>));
+cout&lt;&lt; format(r,Formatter::FMT_PYTHON) &lt;&lt; endl;
+
+<span class="hljs-comment">//output </span>
+[[[ <span class="hljs-number">91</span>,   <span class="hljs-number">2</span>,  <span class="hljs-number">79</span>], [<span class="hljs-number">179</span>,  <span class="hljs-number">52</span>, <span class="hljs-number">205</span>], [<span class="hljs-number">236</span>,   <span class="hljs-number">8</span>, <span class="hljs-number">181</span>]],
+ [[<span class="hljs-number">239</span>,  <span class="hljs-number">26</span>, <span class="hljs-number">248</span>], [<span class="hljs-number">207</span>, <span class="hljs-number">218</span>,  <span class="hljs-number">45</span>], [<span class="hljs-number">183</span>, <span class="hljs-number">158</span>, <span class="hljs-number">101</span>]],
+ [[<span class="hljs-number">102</span>,  <span class="hljs-number">18</span>, <span class="hljs-number">118</span>], [ <span class="hljs-number">68</span>, <span class="hljs-number">210</span>, <span class="hljs-number">139</span>], [<span class="hljs-number">198</span>, <span class="hljs-number">207</span>, <span class="hljs-number">211</span>]],
+ [[<span class="hljs-number">181</span>, <span class="hljs-number">162</span>, <span class="hljs-number">197</span>], [<span class="hljs-number">191</span>, <span class="hljs-number">196</span>,  <span class="hljs-number">40</span>], [  <span class="hljs-number">7</span>, <span class="hljs-number">243</span>, <span class="hljs-number">230</span>]],
+ [[ <span class="hljs-number">45</span>,   <span class="hljs-number">6</span>,  <span class="hljs-number">48</span>], [<span class="hljs-number">173</span>, <span class="hljs-number">242</span>, <span class="hljs-number">125</span>], [<span class="hljs-number">175</span>,  <span class="hljs-number">90</span>,  <span class="hljs-number">63</span>]],
+ [[ <span class="hljs-number">90</span>,  <span class="hljs-number">22</span>, <span class="hljs-number">112</span>], [<span class="hljs-number">221</span>, <span class="hljs-number">167</span>, <span class="hljs-number">224</span>], [<span class="hljs-number">113</span>, <span class="hljs-number">208</span>, <span class="hljs-number">123</span>]],
+ [[<span class="hljs-number">214</span>,  <span class="hljs-number">35</span>, <span class="hljs-number">229</span>], [  <span class="hljs-number">6</span>, <span class="hljs-number">143</span>, <span class="hljs-number">138</span>], [ <span class="hljs-number">98</span>,  <span class="hljs-number">81</span>, <span class="hljs-number">118</span>]],
+ [[<span class="hljs-number">187</span>, <span class="hljs-number">167</span>, <span class="hljs-number">140</span>], [<span class="hljs-number">218</span>, <span class="hljs-number">178</span>,  <span class="hljs-number">23</span>], [ <span class="hljs-number">43</span>, <span class="hljs-number">133</span>, <span class="hljs-number">154</span>]],
+ [[<span class="hljs-number">150</span>,  <span class="hljs-number">76</span>, <span class="hljs-number">101</span>], [  <span class="hljs-number">8</span>,  <span class="hljs-number">38</span>, <span class="hljs-number">238</span>], [ <span class="hljs-number">84</span>,  <span class="hljs-number">47</span>,   <span class="hljs-number">7</span>]],
+ [[<span class="hljs-number">117</span>, <span class="hljs-number">246</span>, <span class="hljs-number">163</span>], [<span class="hljs-number">237</span>,  <span class="hljs-number">69</span>, <span class="hljs-number">129</span>], [ <span class="hljs-number">60</span>, <span class="hljs-number">101</span>,  <span class="hljs-number">41</span>]]]
+</code></pre><p>#常用数据结构</p><ul><li>点 Point</li></ul><pre><code class="hljs"><span class="hljs-comment">// 二维</span>
+<span class="hljs-function">Point2f <span class="hljs-title">p</span><span class="hljs-params">(<span class="hljs-number">6</span>,<span class="hljs-number">2</span>)</span></span>;
+<span class="hljs-comment">// 三维</span>
+<span class="hljs-function">Point3f <span class="hljs-title">p3</span><span class="hljs-params">(<span class="hljs-number">6</span>,<span class="hljs-number">2</span>,<span class="hljs-number">5</span>)</span></span>;
+
+
+
+<span class="hljs-comment">// output </span>
+[<span class="hljs-number">6</span>,<span class="hljs-number">2</span>]
+[<span class="hljs-number">6</span>,<span class="hljs-number">2</span>,<span class="hljs-number">5</span>]
+</code></pre><ul><li>向量 vector</li></ul><p>和数组差不多</p><pre><code class="hljs">vector&lt;<span class="hljs-type">float</span>&gt; v;
+v.<span class="hljs-built_in">push_back</span>(<span class="hljs-number">3</span>);
+v.<span class="hljs-built_in">push_back</span>(<span class="hljs-number">5</span>);
+v.<span class="hljs-built_in">push_back</span>(<span class="hljs-number">7</span>);
+
+cout &lt;&lt; <span class="hljs-built_in">Mat</span>(v) &lt;&lt; endl;
+
+<span class="hljs-comment">//output</span>
+[<span class="hljs-number">3</span>;
+ <span class="hljs-number">5</span>;
+ <span class="hljs-number">7</span>]
+</code></pre><p>这个vector 是标准库的向量，可以自动改变自己的长度</p><ul><li>颜色 Scalar</li></ul><p>Scalar 是一个四个元素的数组</p><pre><code class="hljs"><span class="hljs-function">Scalar <span class="hljs-title">s</span><span class="hljs-params">(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>)</span></span>;
+<span class="hljs-comment">//可以是</span>
+
+<span class="hljs-type">int</span> r = <span class="hljs-number">255</span>,g=<span class="hljs-number">0</span>,b=<span class="hljs-number">0</span>;
+<span class="hljs-built_in">Scalar</span>(r,g,b);
+</code></pre><ul><li>大小 Size</li></ul><p>width 和 height</p><pre><code class="hljs"><span class="hljs-type">int</span> width = <span class="hljs-number">100</span>, height = <span class="hljs-number">200</span>;
+<span class="hljs-built_in">Size</span>(width, height);
+</code></pre><ul><li>矩形 Rect</li></ul><pre><code class="hljs"><span class="hljs-type">int</span> x = <span class="hljs-number">0</span>, y = <span class="hljs-number">0</span>,width = <span class="hljs-number">200</span>, height = <span class="hljs-number">200</span>;
+<span class="hljs-function">Rect <span class="hljs-title">rect1</span><span class="hljs-params">(x, y, width, height)</span></span>;
+<span class="hljs-function">Rect <span class="hljs-title">rect2</span><span class="hljs-params">(x + <span class="hljs-number">50</span>, y + <span class="hljs-number">50</span>, width, height)</span></span>;
+
+<span class="hljs-comment">// 矩形交集</span>
+Rect rect = rect1 &amp; rect2;
+<span class="hljs-comment">// output</span>
+[<span class="hljs-number">150</span> x <span class="hljs-number">150</span> <span class="hljs-built_in">from</span> (<span class="hljs-number">50</span>, <span class="hljs-number">50</span>)]
+<span class="hljs-comment">// 矩形并集</span>
+Rect rect = rect1 | rect2;
+[<span class="hljs-number">250</span> x <span class="hljs-number">250</span> <span class="hljs-built_in">from</span> (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)]
+
+<span class="hljs-comment">// 移动矩形</span>
+<span class="hljs-function">Point2f <span class="hljs-title">point</span><span class="hljs-params">(<span class="hljs-number">10</span>, <span class="hljs-number">10</span>)</span></span>;
+Rect rectShift = rect + point;
+
+<span class="hljs-comment">// 添加</span>
+Rect rectShift = rect1 - <span class="hljs-built_in">Size</span>(<span class="hljs-number">20</span>,<span class="hljs-number">20</span>);
+<span class="hljs-comment">//output</span>
+[<span class="hljs-number">180</span> x <span class="hljs-number">180</span> <span class="hljs-built_in">from</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)]
+
+
+<span class="hljs-comment">//  移动</span>
+Rect rectShift = rect1 - <span class="hljs-built_in">Point</span>(<span class="hljs-number">20</span>,<span class="hljs-number">20</span>);
+<span class="hljs-comment">// output</span>
+[<span class="hljs-number">200</span> x <span class="hljs-number">200</span> <span class="hljs-built_in">from</span>(<span class="hljs-number">-20</span>, <span class="hljs-number">-20</span>)]
+</code></pre><ul><li>颜色空间转换 cvtColor</li></ul><p>void cvtColor(InputArray src, OutputArray output ,int code, int dstCn=0);</p><p>常用颜色</p><ul><li>RGB</li><li>HSV 色调 饱和度 明度</li><li>HLS 色调 亮度 饱和度</li><li>Gray 灰度</li><li>5X5 5X5颜色矩阵，开发板</li><li>YCrCb(YUV) Y 明亮度 U和V色度，描述色彩及饱和度 JPEG会用</li><li>CIE L<em>a</em>b L 亮度 a 和 b 色彩对立唯独</li><li>CIE L<em>u</em>v 未知</li><li>Bayer 拜尔滤色镜 多用于数字图像传感器</li><li>YUV420 YUV的一种<br>常量都在COLOR_XXX2XXX 定义</li></ul><blockquote><p>ps: OpenCV 默认图片通道存储孙旭是BGR即蓝绿红，而不是RGB</p></blockquote><script async>let codes = document.getElementsByClassName('hljs');
+            Array.from(codes).forEach(code => {
+                code.addEventListener('click', function copy(e) {
+                    const textContent = e.currentTarget.textContent;
+                    e.currentTarget.focus()
+                    const node = e.currentTarget;
+                    navigator.clipboard.writeText(textContent).then(()=>{
+                        alert('复制成功')
+                        node.blur()
+                    });
+                   
+                })
+            })</script><script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script><script>window.mermaid&&mermaid.initialize({startOnLoad:!0})</script></div></main><footer><p>Copyright © 2019-2022 suxin2017</p><p class="icp"><span><img src="/imgs/icp.png" width="17px" height="17px" alt="icp"> </span><a href="http://beian.miit.gov.cn" class="icp-link"><span>京ICP备2020041991号</span></a></p><p><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></p></footer></div></body></html>
