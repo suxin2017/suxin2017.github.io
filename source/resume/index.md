@@ -4,6 +4,7 @@ date: 2020-11-16 13:42:55
 type: "resume"
 layout: "resume"
 ---
+
 <div class="about-me" style="margin:24px 0px">
     <!-- <div class="about-me-avatar"> -->
         <!-- <img src="/imgs/avatar.jpeg" width=128 height=128 alt="头像" > -->
@@ -57,14 +58,12 @@ layout: "resume"
     .resume-content {
         padding: 0 24px;
     }
-
     .company {
         display: inline-block;
         font-size: 16px;
         font-weight: 600;
         margin-right: 12px !important;
     }
-
     .tag {
         font-size: 10px;
         margin-left: 4px;
@@ -73,55 +72,42 @@ layout: "resume"
         border-radius: 4px;
         border: 1px solid var(--shadowColor)
     }
-
     .tag-yellow {
         color: var(--yellow);
     }
-
     .tag-orange {
         color: var(--orange);
     }
-
     .tag-red {
         color: var(--red);
     }
-
     .tag-magenta {
         color: var(--magenta);
     }
-
     .tag-violet {
         color: var(--violet);
     }
-
     .tag-blue {
         color: var(--blue);
     }
-
     .tag-cyan {
         color: var(--cyan);
     }
-
     .tag-green {
         color: var(--green);
     }
-
-
     .time {
         font-size: 12px;
     }
-
     .container {
         position: relative;
         margin-left: 1em;
         margin-bottom: -14px;
         padding-top: 2px;
     }
-
     .container div {
         margin: 8px 0;
     }
-
     .container::after {
         content: '';
         position: absolute;
@@ -135,7 +121,6 @@ layout: "resume"
         bottom: 0;
         z-index: 1;
     }
-
     .container::before {
         content: '';
         position: absolute;
@@ -146,20 +131,16 @@ layout: "resume"
         top: 0;
         bottom: 0;
     }
-
     .list {}
-
     .list .item .name {
         font-size: 14px;
         font-weight: 500;
     }
-
     .list .item .desc {
         font-size: 14px;
         margin: 14px;
         margin-left: 28px;
     }
-
     .list .item .desc::before {
         font-size: 14px;
         margin-left: -14px;
@@ -167,13 +148,11 @@ layout: "resume"
         display: block;
         content: '项目描述：';
     }
-
     .list .item .me {
         font-size: 14px;
         margin: 14px;
         margin-left: 28px;
     }
-
     .list .item .me::before {
         font-size: 14px;
         margin-left: -14px;
@@ -181,13 +160,11 @@ layout: "resume"
         content: '项目责任：';
         display: block;
     }
-
     .list .item .key {
         font-size: 14px;
         margin: 14px;
         margin-left: 28px;
     }
-
     .list .item .key::before {
         font-size: 14px;
         margin-left: -14px;
@@ -195,12 +172,10 @@ layout: "resume"
         content: 'keyword：';
         display: block;
     }
-
     h3 {
         position: relative;
         margin-top: 32px;
     }
-
     h3::after {
         content: '';
         position: absolute;
@@ -213,35 +188,28 @@ layout: "resume"
         top: 4.5px;
         bottom: 0;
     }
-
     .private {
     }
-
     .private li {
         width: 327px;
         margin: 8px;
         font-size: 14px;
         cursor: pointer;
     }
-
     .evaluation {
         font-size: 14px;
     }
-
     @media only screen and (max-width: 768px) {
-
         .desc,
         .me,
         li {
             line-height: 2;
         }
-
         ul {
             padding: 0 12px;
         }
     }
 </style>
-
 
 <h3>
     技能
@@ -252,7 +220,8 @@ layout: "resume"
 <p>熟悉 JS,CSS.网络请求方式,浏览器工作过程. 熟悉 umi-request、aixo 中间件和拦截器的使用</p>
 <p>熟悉 Less css 编译库. 熟悉 echart 图形库的使用</p>
 <p>熟练操作 git 进行规范提交,代码合并. 掌握 nginx 基础配置,掌握 linux 命令</p>
-<p>掌握node。js,及其后端框架，koa，egg有实际应用的经验</p>
+<p>掌握nodejs,及其后端框架，koa，egg有实际应用的经验</p>
+<p>了解golang，rust，java等后端开发</p>
 
 <h3>
     工作经历&项目经历
@@ -291,7 +260,7 @@ layout: "resume"
                 <div class="tag">项目负责人</div>
                 <div class="tag">核心开发人员</div>
             </div>
-            <div class="desc">jinx 是一个多分支开发的前端部署服务，负责公司前端资源测试环境部署，服务代理，域名解析等功能。服务内部前端项目80+。</div>
+            <div class="desc">jinx 是一个多分支开发的前端部署服务，负责公司前端资源测试环境部署，服务代理，域名解析等功能。服务内部前端项目100+,跨3个部门使用</div>
             <div class="me">
                 <ul>
                     <li>项目设计：完成整体架构设计、ui设计与实现</li>
@@ -415,8 +384,11 @@ layout: "resume"
     <li><a href="https://github.com/suxin2017/code-playground">playground 在线编辑预览工具</a></li>
     <li><a href="https://suxin2017.github.io/bxer-ui/?path=/docs/%E4%BB%8B%E7%BB%8D--page">
             bxer ui 一套精简级组件库</a></li>
+    <li><a href="https://github.com/suxin2017/css-tutorial">
+           rust 写的css ast解析器</a></li>
+    <li><a href="https://github.com/suxin2017/ng-m">
+           golang 实现的ng配置管理平台</a></li>
 </ul>
-
 
 <h3>个人自评</h3>
 

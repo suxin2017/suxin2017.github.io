@@ -4,10 +4,10 @@ const sanitize = function (post) {
     const content = htmlToText.htmlToText(
         post,
         {
-            ignoreImage: true,
             ignoreHref: true,
-            wordwrap: false,
-            uppercaseHeadings: false
+            ignoreImage: true,
+            uppercaseHeadings: false,
+            wordwrap: false
         }
     );
     return content;
