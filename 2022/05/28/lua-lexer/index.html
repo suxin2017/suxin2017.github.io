@@ -1,0 +1,299 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><link rel="icon" sizes="any" type="image/svg+xml" href="/imgs/icon.svg"><link rel="stylesheet" href="/css/theme/color.variables.css"><link id="themeStyleVar" rel="stylesheet" href="/css/theme/default.variables.css"><script>const localStorageTheme = localStorage.getItem('theme');
+        function loadTheme(){
+            let themeLink = document.getElementById('themeStyleVar');
+            if(localStorageTheme){
+                themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${localStorageTheme}.variables.css`)
+            }
+        }
+        if(localStorage){
+            loadTheme()
+            setTimeout(()=>{
+                if(document.body){
+                    document.body.className = localStorageTheme ? localStorageTheme : 'dark'
+                }
+
+            },2)
+        }</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/css/post.css"><title>苏鑫2017</title><meta name="description" content="用于记录感悟，前端技术，编程技巧，各种奇奇怪怪的新的体会"><meta name="viewport" content="width=device-width,initial-scale=1"><script async>console.log(`%c真巧，你打开了devtool`,"color:#b58900")
+        console.log(`%c真巧，你看了我的文章`,"color:#859900")
+        console.log('%c简单介绍，道法自然，做人要顺其自然，不要有太多欲望',"color:#268bd2")
+        console.log('%c不要目的性太强,这就是我的主题想强调的',"color:#dc322f")</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-RFGTVED02M"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-RFGTVED02M")</script><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?ce46d6101f33ba04b74fbe8bbe509590";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><script>const moduleMap = new Map();
+            var define = (moduleName, module) => { moduleMap.set(moduleName, module) };
+            var require = (moduleName) => moduleMap.get(moduleName);</script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="苏鑫2017" type="application/atom+xml"></head><body><div class="body"><header class="header"><div class="header-icon-wrapper"><h2><a href="/">苏鑫2017</a></h2></div><div class="header-right"><nav class="header-menu-wrapper"><ul class="header-menu"><li class="header-menu-item"><a class="header-menu-item-link" href="/">首页</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/categories/weibo">微博</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/about">关于</a></li><li class="header-menu-item"><div id="switchThemeButton"><img src="/imgs/icon.svg" alt="switchThemeIcon" width="100%" height="100%"></div><style>#switchThemeButton{width:40px;height:26px;margin:0;border:0;background:0 0;outline:0;cursor:pointer;margin-top:6px}</style><script async>const btn = document.getElementById('switchThemeButton');
+    let darkTheme = false;
+    const themeStyleVarId = "themeStyleVar";
+    if(localStorageTheme === 'dark'){
+        darkTheme = true
+    }else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // dark mode
+        darkTheme = true;
+    }
+    function loadTheme() {
+        let themeLink = document.getElementById(themeStyleVarId);
+        if (!themeLink) {
+            themeLink = document.createElement('link')
+            themeLink.rel = "stylesheet"
+            themeLink.id = "themeStyleVar"
+        }
+        darkTheme = !darkTheme;
+        themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${darkTheme ? 'dark' : 'light'}.variables.css`)
+        document.head.appendChild(themeLink)
+        document.body.className = darkTheme?'dark':'light'
+        localStorage.setItem('theme',darkTheme?'dark':'light');
+    }
+
+    btn.onclick = function() {
+        loadTheme();
+        codeTheme();
+    }</script><script>function codeTheme(){
+            const localStorageTheme = localStorage.getItem('theme');
+            let codeThemeLink = document.getElementById("codeTheme");
+            if(!codeThemeLink){
+                codeThemeLink = document.createElement('link');
+                codeThemeLink.rel = "stylesheet"
+                codeThemeLink.id = "codeTheme"
+                document.head.appendChild(codeThemeLink)
+            }
+            if(localStorageTheme){
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${localStorageTheme}.css`
+            }else{
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${darkTheme ? 'dark': 'light'}.css`
+            }
+        }
+        codeTheme()</script></li></ul></nav></div></header><main class="main"><div class="post"><h2>lua-lexer</h2><p>动手写个词法解析器，词法解析非常简单其关键处理问题在于</p><ul><li>字符串</li><li>数字</li><li>关键字与符号</li></ul><h3 id="定义关键字及符号映射">定义关键字及符号映射</h3><div id="preview-23" class="preview"><div class="preview-box"><div id="draw-23">src=lua-lexer.js<script src="/js/lua-lexer.js"></script></div><div class="preview-box-util"><span id="expand-23" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-23" class="preview-code false"><pre><code class="hljs">
+</code></pre></div><script>const expandCode_23 = document.getElementById('expand-23');
+    const bindCode_23 = document.getElementById('code-23');
+    let flag_23 = true;
+    expandCode_23.onclick = function (){
+        if(flag_23){
+            bindCode_23.classList.add('preview-code-active')
+        }else{
+            bindCode_23.classList.remove('preview-code-active') 
+        }
+        flag_23 = !flag_23
+    }</script></div><div id="preview-24" class="preview"><div class="preview-box"><div id="draw-24"><style>.token{display:inline-block;padding:4px;border:1px solid var(--base00,transparent);margin:2px;border-radius:4px}</style><div><textarea rows="20" style="width:100%" id="input" autofocus>
+  '\u{1f481}'
+  '\x61'
+  '\97'
+  'a'
+  [[a]]
+
+  1
+  1.1
+  1.1e-1
+  1.1e+1
+  .1
+local abc = 123;
+if(abc="123"){
+  print(abc)
+}
+string='123'
+-- abc
+-- [[
+comment
+]]--
+longString = [[too long]]
+</textarea> <button id="generate">generate</button></div><div id="tag" style="width:100%;min-height:200px;font-size:14px"></div><script>const input = document.getElementById("input");
+  const g = document.getElementById("generate");
+  const t = document.getElementById("tag");
+  const lexerCom = () => {
+    console.log("start..");
+    t.innerHTML = "";
+    let err = "";
+    try {
+      const lexer = new Lexer(input.value, "main.lua");
+      let d = "";
+      let token = lexer.nextToken();
+      while (token[0] !== TOKEN_EOF) {
+        d += gt(token);
+        token = lexer.nextToken();
+      }
+      d += gt(token);
+      t.innerHTML = d;
+    } catch (e) {
+      console.error(e);
+      t.innerHTML = `<div style="color:red;font-size:14px;">${e.message}</div>`;
+    }
+  };
+  g.onclick = lexerCom;
+  lexerCom();
+  function colorRandom() {
+    const color = [
+      "yellow",
+      "orange",
+      "red",
+      "magenta",
+      "violet",
+      "blue",
+      "cyan",
+      "green",
+    ];
+    return color[Math.floor(Math.random() * color.length)];
+  }
+  function gt(token) {
+    let [kind, tok, location] = token;
+    let printStr = `[${kindToCategory(kind)}] ${tok}`;
+    return `<div class="token" style="color:var(--${colorRandom()})" data-start=${
+      location?.start.offset
+    } data-end=${location?.end.offset}>${printStr}</div>`;
+  }
+
+  // This handler will be executed every time the cursor
+  // is moved over a different list item
+  t.addEventListener(
+    "mouseover",
+    function (event) {
+      event.target.style.borderColor = "orange";
+      let start = event.target.dataset["start"];
+      let end = event.target.dataset["end"];
+      setTimeout(() => {
+        input.setAttribute("readonly", true);
+        input.focus();
+        input.setSelectionRange(start, end);
+      }, 10);
+
+      event.preventDefault();
+    },
+    false
+  );
+  t.addEventListener(
+    "mouseout",
+    function (event) {
+      event.target.style.borderColor = "";
+
+      input.removeAttribute("readonly");
+    },
+    false
+  );</script></div><div class="preview-box-util"><span id="expand-24" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-24" class="preview-code false"><pre><code class="hljs"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css">
+  <span class="hljs-selector-class">.token</span> &#123;
+    <span class="hljs-attribute">display</span>: inline-block;
+    <span class="hljs-attribute">padding</span>: <span class="hljs-number">4px</span>;
+    <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid <span class="hljs-built_in">var</span>(--base00, transparent);
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">2px</span>;
+    <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">4px</span>;
+  &#125;
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">textarea</span> <span class="hljs-attr">rows</span>=<span class="hljs-string">&quot;20&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;width:100%&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;input&quot;</span> <span class="hljs-attr">autofocus</span>&gt;</span>
+  &#x27;\u&#123;1f481&#125;&#x27;
+  &#x27;\x61&#x27;
+  &#x27;\97&#x27;
+  &#x27;a&#x27;
+  [[a]]
+
+  1
+  1.1
+  1.1e-1
+  1.1e+1
+  .1
+local abc = 123;
+if(abc=&quot;123&quot;)&#123;
+  print(abc)
+&#125;
+string=&#x27;123&#x27;
+-- abc
+-- [[
+comment
+]]--
+longString = [[too long]]
+&lt;/textarea
+  &gt;
+  <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;generate&quot;</span>&gt;</span>generate<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;tag&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;width:100%;min-height:200px;font-size:14px;&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
+  <span class="hljs-keyword">const</span> input = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;input&quot;</span>);
+  <span class="hljs-keyword">const</span> g = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;generate&quot;</span>);
+  <span class="hljs-keyword">const</span> t = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;tag&quot;</span>);
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">lexerCom</span> = (<span class="hljs-params"></span>) =&gt; &#123;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;start..&quot;</span>);
+    t.<span class="hljs-property">innerHTML</span> = <span class="hljs-string">&quot;&quot;</span>;
+    <span class="hljs-keyword">let</span> err = <span class="hljs-string">&quot;&quot;</span>;
+    <span class="hljs-keyword">try</span> &#123;
+      <span class="hljs-keyword">const</span> lexer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Lexer</span>(input.<span class="hljs-property">value</span>, <span class="hljs-string">&quot;main.lua&quot;</span>);
+      <span class="hljs-keyword">let</span> d = <span class="hljs-string">&quot;&quot;</span>;
+      <span class="hljs-keyword">let</span> token = lexer.<span class="hljs-title function_">nextToken</span>();
+      <span class="hljs-keyword">while</span> (token[<span class="hljs-number">0</span>] !== <span class="hljs-variable constant_">TOKEN_EOF</span>) &#123;
+        d += <span class="hljs-title function_">gt</span>(token);
+        token = lexer.<span class="hljs-title function_">nextToken</span>();
+      &#125;
+      d += <span class="hljs-title function_">gt</span>(token);
+      t.<span class="hljs-property">innerHTML</span> = d;
+    &#125; <span class="hljs-keyword">catch</span> (e) &#123;
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(e);
+      t.<span class="hljs-property">innerHTML</span> = <span class="hljs-string">`&lt;div style=&quot;color:red;font-size:14px;&quot;&gt;<span class="hljs-subst">$&#123;e.message&#125;</span>&lt;/div&gt;`</span>;
+    &#125;
+  &#125;;
+  g.<span class="hljs-property">onclick</span> = lexerCom;
+  <span class="hljs-title function_">lexerCom</span>();
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">colorRandom</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-keyword">const</span> color = [
+      <span class="hljs-string">&quot;yellow&quot;</span>,
+      <span class="hljs-string">&quot;orange&quot;</span>,
+      <span class="hljs-string">&quot;red&quot;</span>,
+      <span class="hljs-string">&quot;magenta&quot;</span>,
+      <span class="hljs-string">&quot;violet&quot;</span>,
+      <span class="hljs-string">&quot;blue&quot;</span>,
+      <span class="hljs-string">&quot;cyan&quot;</span>,
+      <span class="hljs-string">&quot;green&quot;</span>,
+    ];
+    <span class="hljs-keyword">return</span> color[<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>() * color.<span class="hljs-property">length</span>)];
+  &#125;
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">gt</span>(<span class="hljs-params">token</span>) &#123;
+    <span class="hljs-keyword">let</span> [kind, tok, location] = token;
+    <span class="hljs-keyword">let</span> printStr = <span class="hljs-string">`[<span class="hljs-subst">$&#123;kindToCategory(kind)&#125;</span>] <span class="hljs-subst">$&#123;tok&#125;</span>`</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-string">`&lt;div class=&quot;token&quot; style=&quot;color:var(--<span class="hljs-subst">$&#123;colorRandom()&#125;</span>)&quot; data-start=<span class="hljs-subst">$&#123;
+      location?.start.offset
+    &#125;</span> data-end=<span class="hljs-subst">$&#123;location?.end.offset&#125;</span>&gt;<span class="hljs-subst">$&#123;printStr&#125;</span>&lt;/div&gt;`</span>;
+  &#125;
+
+  <span class="hljs-comment">// This handler will be executed every time the cursor</span>
+  <span class="hljs-comment">// is moved over a different list item</span>
+  t.<span class="hljs-title function_">addEventListener</span>(
+    <span class="hljs-string">&quot;mouseover&quot;</span>,
+    <span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) &#123;
+      event.<span class="hljs-property">target</span>.<span class="hljs-property">style</span>.<span class="hljs-property">borderColor</span> = <span class="hljs-string">&quot;orange&quot;</span>;
+      <span class="hljs-keyword">let</span> start = event.<span class="hljs-property">target</span>.<span class="hljs-property">dataset</span>[<span class="hljs-string">&quot;start&quot;</span>];
+      <span class="hljs-keyword">let</span> end = event.<span class="hljs-property">target</span>.<span class="hljs-property">dataset</span>[<span class="hljs-string">&quot;end&quot;</span>];
+      <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;
+        input.<span class="hljs-title function_">setAttribute</span>(<span class="hljs-string">&quot;readonly&quot;</span>, <span class="hljs-literal">true</span>);
+        input.<span class="hljs-title function_">focus</span>();
+        input.<span class="hljs-title function_">setSelectionRange</span>(start, end);
+      &#125;, <span class="hljs-number">10</span>);
+
+      event.<span class="hljs-title function_">preventDefault</span>();
+    &#125;,
+    <span class="hljs-literal">false</span>
+  );
+  t.<span class="hljs-title function_">addEventListener</span>(
+    <span class="hljs-string">&quot;mouseout&quot;</span>,
+    <span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) &#123;
+      event.<span class="hljs-property">target</span>.<span class="hljs-property">style</span>.<span class="hljs-property">borderColor</span> = <span class="hljs-string">&quot;&quot;</span>;
+
+      input.<span class="hljs-title function_">removeAttribute</span>(<span class="hljs-string">&quot;readonly&quot;</span>);
+    &#125;,
+    <span class="hljs-literal">false</span>
+  );
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre></div><script>const expandCode_24 = document.getElementById('expand-24');
+    const bindCode_24 = document.getElementById('code-24');
+    let flag_24 = true;
+    expandCode_24.onclick = function (){
+        if(flag_24){
+            bindCode_24.classList.add('preview-code-active')
+        }else{
+            bindCode_24.classList.remove('preview-code-active') 
+        }
+        flag_24 = !flag_24
+    }</script></div><script async>let codes = document.getElementsByClassName('hljs');
+            Array.from(codes).forEach(code => {
+                code.addEventListener('click', function copy(e) {
+                    const textContent = e.currentTarget.textContent;
+                    e.currentTarget.focus()
+                    const node = e.currentTarget;
+                    navigator.clipboard.writeText(textContent).then(()=>{
+                        alert('复制成功')
+                        node.blur()
+                    });
+                   
+                })
+            })</script><script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script><script>window.mermaid&&mermaid.initialize({startOnLoad:!0})</script></div></main><footer><p>Copyright © 2019-2022 suxin2017</p><p class="icp"><span><img src="/imgs/icp.png" width="17px" height="17px" alt="icp"> </span><a href="http://beian.miit.gov.cn" class="icp-link"><span>京ICP备2020041991号</span></a></p><p><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></p></footer></div></body></html>

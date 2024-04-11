@@ -1,0 +1,319 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><link rel="icon" sizes="any" type="image/svg+xml" href="/imgs/icon.svg"><link rel="stylesheet" href="/css/theme/color.variables.css"><link id="themeStyleVar" rel="stylesheet" href="/css/theme/default.variables.css"><script>const localStorageTheme = localStorage.getItem('theme');
+        function loadTheme(){
+            let themeLink = document.getElementById('themeStyleVar');
+            if(localStorageTheme){
+                themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${localStorageTheme}.variables.css`)
+            }
+        }
+        if(localStorage){
+            loadTheme()
+            setTimeout(()=>{
+                if(document.body){
+                    document.body.className = localStorageTheme ? localStorageTheme : 'dark'
+                }
+
+            },2)
+        }</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/css/post.css"><title>苏鑫2017</title><meta name="description" content="用于记录感悟，前端技术，编程技巧，各种奇奇怪怪的新的体会"><meta name="viewport" content="width=device-width,initial-scale=1"><script async>console.log(`%c真巧，你打开了devtool`,"color:#b58900")
+        console.log(`%c真巧，你看了我的文章`,"color:#859900")
+        console.log('%c简单介绍，道法自然，做人要顺其自然，不要有太多欲望',"color:#268bd2")
+        console.log('%c不要目的性太强,这就是我的主题想强调的',"color:#dc322f")</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-RFGTVED02M"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-RFGTVED02M")</script><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?ce46d6101f33ba04b74fbe8bbe509590";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><script>const moduleMap = new Map();
+            var define = (moduleName, module) => { moduleMap.set(moduleName, module) };
+            var require = (moduleName) => moduleMap.get(moduleName);</script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="苏鑫2017" type="application/atom+xml"></head><body><div class="body"><header class="header"><div class="header-icon-wrapper"><h2><a href="/">苏鑫2017</a></h2></div><div class="header-right"><nav class="header-menu-wrapper"><ul class="header-menu"><li class="header-menu-item"><a class="header-menu-item-link" href="/">首页</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/categories/weibo">微博</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/about">关于</a></li><li class="header-menu-item"><div id="switchThemeButton"><img src="/imgs/icon.svg" alt="switchThemeIcon" width="100%" height="100%"></div><style>#switchThemeButton{width:40px;height:26px;margin:0;border:0;background:0 0;outline:0;cursor:pointer;margin-top:6px}</style><script async>const btn = document.getElementById('switchThemeButton');
+    let darkTheme = false;
+    const themeStyleVarId = "themeStyleVar";
+    if(localStorageTheme === 'dark'){
+        darkTheme = true
+    }else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // dark mode
+        darkTheme = true;
+    }
+    function loadTheme() {
+        let themeLink = document.getElementById(themeStyleVarId);
+        if (!themeLink) {
+            themeLink = document.createElement('link')
+            themeLink.rel = "stylesheet"
+            themeLink.id = "themeStyleVar"
+        }
+        darkTheme = !darkTheme;
+        themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${darkTheme ? 'dark' : 'light'}.variables.css`)
+        document.head.appendChild(themeLink)
+        document.body.className = darkTheme?'dark':'light'
+        localStorage.setItem('theme',darkTheme?'dark':'light');
+    }
+
+    btn.onclick = function() {
+        loadTheme();
+        codeTheme();
+    }</script><script>function codeTheme(){
+            const localStorageTheme = localStorage.getItem('theme');
+            let codeThemeLink = document.getElementById("codeTheme");
+            if(!codeThemeLink){
+                codeThemeLink = document.createElement('link');
+                codeThemeLink.rel = "stylesheet"
+                codeThemeLink.id = "codeTheme"
+                document.head.appendChild(codeThemeLink)
+            }
+            if(localStorageTheme){
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${localStorageTheme}.css`
+            }else{
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${darkTheme ? 'dark': 'light'}.css`
+            }
+        }
+        codeTheme()</script></li></ul></nav></div></header><main class="main"><div class="post"><h2>当tab不活跃时候怎样搞一个定时器</h2><blockquote><p>ps: 下面的脚本使用了 script module 请打开原文或者使用非 IE 浏览器浏览</p></blockquote><script id="common"></script><h2 id="setTimeout-当-tab-不活跃时候">setTimeout 当 tab 不活跃时候</h2><p>当 tab 不活跃的时候，setTimeout 和 setInterval 的运行时间出现延迟</p><p>当未被激活的 tabs 的 setInterval 的最小延迟&gt;=1000ms.浏览器这样做的原因是为了省电.</p><p>点击下面按钮，网页的 document title 会数字相加，闪烁间隔为 500ms,当 tab 切换为其他 tab 的时候就会变慢</p><p><button id="setTimeout">开启定时器</button></p><pre><code class="hljs"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;module&quot;</span>&gt;</span><span class="language-javascript">
+  <span class="hljs-keyword">let</span> button = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;setTimeout&quot;</span>);
+  <span class="hljs-keyword">let</span> id;
+  <span class="hljs-keyword">let</span> count = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">let</span> flag = <span class="hljs-literal">true</span>;
+  button.<span class="hljs-property">onclick</span> = <span class="hljs-function">() =&gt;</span> &#123;
+    <span class="hljs-keyword">if</span> (flag) &#123;
+      button.<span class="hljs-property">innerText</span> = <span class="hljs-string">&quot;关闭定时器&quot;</span>;
+      id = <span class="hljs-built_in">setInterval</span>(<span class="hljs-function">() =&gt;</span> &#123;
+        <span class="hljs-variable language_">document</span>.<span class="hljs-property">title</span> = <span class="hljs-string">`<span class="hljs-subst">$&#123;count++&#125;</span> setInterval`</span>;
+      &#125;, <span class="hljs-number">500</span>);
+      flag = !flag;
+    &#125; <span class="hljs-keyword">else</span> &#123;
+      button.<span class="hljs-property">innerText</span> = <span class="hljs-string">&quot;开启定时器&quot;</span>;
+      <span class="hljs-built_in">clearInterval</span>(id);
+      flag = !flag;
+    &#125;
+  &#125;;
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre><script type="module">let button = document.getElementById("setTimeout");
+    let id;
+    let count = 0;
+    let flag = true;
+    button.onclick = ()=>{
+        if(flag){
+            button.innerText = "关闭定时器"
+            id = setInterval(()=>{
+                document.title = `${count++} setInterval`;
+            },500);
+            flag = !flag
+        }else{
+            button.innerText = "开启定时器"
+            clearInterval(id);
+            flag = !flag
+        }
+    }</script><h2 id="requrestAnimationFrameAPI-当-tab-不活跃时候">requrestAnimationFrameAPI 当 tab 不活跃时候</h2><p>requrestAnimationFrameAPI 当 tab 不活跃时候，执行会被暂停<br>注意 requrestAnimationFrameAPI 只是能够满足 1 秒 60 帧，所以会和比 setTimeout 慢一些</p><p><button id="requestAnimation">开启 requestAnimation 定时器</button></p><pre><code class="hljs"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;module&quot;</span>&gt;</span><span class="language-javascript">
+  <span class="hljs-keyword">const</span> timerList = &#123;&#125;;
+
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">setRafTimeout</span>(<span class="hljs-params">cb, time</span>) &#123;
+    <span class="hljs-keyword">const</span> timer = &#123;
+      <span class="hljs-attr">id</span>: -<span class="hljs-number">1</span>,
+      <span class="hljs-attr">start</span>: -<span class="hljs-number">1</span>,
+      cb,
+    &#125;;
+    <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleNextTick</span> = (<span class="hljs-params">timestamp</span>) =&gt; &#123;
+      <span class="hljs-keyword">if</span> (timer.<span class="hljs-property">start</span> === -<span class="hljs-number">1</span>) &#123;
+        timer.<span class="hljs-property">start</span> = timestamp;
+      &#125;
+      <span class="hljs-keyword">const</span> elapsed = timestamp - timer.<span class="hljs-property">start</span>;
+      <span class="hljs-keyword">if</span> (!time || elapsed &gt; time) &#123;
+        <span class="hljs-title function_">cb</span>();
+        <span class="hljs-title function_">clearRafTimeout</span>(id);
+      &#125; <span class="hljs-keyword">else</span> &#123;
+        timer.<span class="hljs-property">id</span> = <span class="hljs-variable language_">window</span>.<span class="hljs-title function_">requestAnimationFrame</span>(handleNextTick);
+      &#125;
+    &#125;;
+    <span class="hljs-keyword">const</span> id = <span class="hljs-variable language_">window</span>.<span class="hljs-title function_">requestAnimationFrame</span>(handleNextTick);
+    timer.<span class="hljs-property">id</span> = id;
+    timerList[id] = timer;
+    <span class="hljs-keyword">return</span> id;
+  &#125;
+
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">clearRafTimeout</span>(<span class="hljs-params">id</span>) &#123;
+    <span class="hljs-keyword">const</span> timer = timerList[id];
+    <span class="hljs-keyword">if</span> (timer) &#123;
+      <span class="hljs-variable language_">window</span>.<span class="hljs-title function_">cancelAnimationFrame</span>(timer.<span class="hljs-property">id</span>);
+      <span class="hljs-keyword">delete</span> timerList[id];
+    &#125;
+  &#125;
+  <span class="hljs-keyword">let</span> intervalList = &#123;&#125;;
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">setRafInterval</span>(<span class="hljs-params">cb, time</span>) &#123;
+    <span class="hljs-keyword">let</span> intervalId = <span class="hljs-title function_">setRafTimeout</span>(<span class="hljs-keyword">function</span> <span class="hljs-title function_">fn</span>(<span class="hljs-params"></span>) &#123;
+      <span class="hljs-keyword">if</span> (!intervalList[intervalId]) <span class="hljs-keyword">return</span>;
+      <span class="hljs-title function_">cb</span>();
+      <span class="hljs-title function_">clearRafTimeout</span>(intervalList[intervalId]);
+      intervalList[intervalId] = <span class="hljs-title function_">setRafTimeout</span>(fn, time);
+    &#125;, time);
+    intervalList[intervalId] = intervalId;
+    <span class="hljs-keyword">return</span> intervalId;
+  &#125;
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">clearRafInterval</span>(<span class="hljs-params">id</span>) &#123;
+    <span class="hljs-keyword">const</span> timer = intervalList[id];
+    <span class="hljs-keyword">if</span> (timer) &#123;
+      <span class="hljs-variable language_">window</span>.<span class="hljs-title function_">cancelAnimationFrame</span>(timer);
+      <span class="hljs-keyword">delete</span> intervalList[id];
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(timer, id, intervalList);
+    &#125;
+  &#125;
+
+  <span class="hljs-keyword">let</span> requestButton = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;requestAnimation&quot;</span>);
+  <span class="hljs-keyword">let</span> requestId;
+  <span class="hljs-keyword">let</span> count = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">let</span> flag1 = <span class="hljs-literal">true</span>;
+  requestButton.<span class="hljs-property">onclick</span> = <span class="hljs-function">() =&gt;</span> &#123;
+    <span class="hljs-keyword">if</span> (flag1) &#123;
+      requestButton.<span class="hljs-property">innerText</span> = <span class="hljs-string">&quot;关闭requestAnimation定时器&quot;</span>;
+      requestId = <span class="hljs-title function_">setRafInterval</span>(<span class="hljs-function">() =&gt;</span> &#123;
+        <span class="hljs-variable language_">document</span>.<span class="hljs-property">title</span> = <span class="hljs-string">`<span class="hljs-subst">$&#123;count++&#125;</span> requestAnimation`</span>;
+      &#125;, <span class="hljs-number">1000</span>);
+      flag1 = !flag1;
+    &#125; <span class="hljs-keyword">else</span> &#123;
+      requestButton.<span class="hljs-property">innerText</span> = <span class="hljs-string">&quot;开启requestAnimation定时器&quot;</span>;
+      <span class="hljs-title function_">clearRafInterval</span>(requestId);
+      flag1 = !flag1;
+    &#125;
+  &#125;;
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre><script type="module">const timerList = {};
+
+function setRafTimeout(cb, time) {
+    const timer = {
+        id: -1,
+        start: -1,
+        cb,
+    };
+    const handleNextTick = (timestamp) => {
+        if (timer.start === -1) {
+            timer.start = timestamp;
+        }
+        const elapsed = timestamp - timer.start;
+        if (!time || elapsed > time) {
+            cb();
+            clearRafTimeout(id);
+        } else {
+            timer.id = window.requestAnimationFrame(handleNextTick);
+        }
+    };
+    const id = window.requestAnimationFrame(handleNextTick);
+    timer.id = id;
+    timerList[id] = timer;
+    return id;
+}
+
+function clearRafTimeout(id ) {
+    const timer = timerList[id];
+    if (timer) {
+        window.cancelAnimationFrame(timer.id);
+        delete timerList[id];
+    }
+} 
+let intervalList = {};
+function setRafInterval(cb,time){
+    let intervalId = setRafTimeout(function fn(){
+        if(!intervalList[intervalId])return;
+        cb();
+        clearRafTimeout(intervalList[intervalId])
+        intervalList[intervalId] = setRafTimeout(fn,time);
+    },time)
+    intervalList[intervalId] = intervalId;
+    return intervalId;
+}
+function clearRafInterval(id){
+    const timer = intervalList[id];
+    if (timer) {
+        window.cancelAnimationFrame(timer);
+        delete intervalList[id];
+        console.log(timer,id,intervalList)
+    }
+}
+
+    let requestButton = document.getElementById("requestAnimation");
+    let requestId;
+    let count = 0;
+    let flag1 = true;
+    requestButton.onclick = ()=>{
+        if(flag1){
+            requestButton.innerText = "关闭requestAnimation定时器"
+            requestId = setRafInterval(()=>{
+                document.title = `${count++} requestAnimation`;
+            },1000);
+            flag1 = !flag1
+        }else{
+            requestButton.innerText = "开启requestAnimation定时器"
+            clearRafInterval(requestId);
+            flag1 = !flag1
+        }
+    }</script><h2 id="WebWorker">WebWorker</h2><p>webworker 不会受浏览器切换 tab 影响，能够正常运行</p><p><button id="webwork">开启 WebWorker 定时器</button></p><pre><code class="hljs"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;module&quot;</span>&gt;</span><span class="language-javascript">
+  <span class="hljs-keyword">let</span> blob = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Blob</span>([
+    <span class="hljs-string">`
+    let timer;
+    onmessage = (&#123;data:flag&#125;)=&gt;&#123;
+        console.log(&quot;收到message&quot;,flag)
+        if(!flag)&#123;
+            clearInterval(timer);
+        &#125;else&#123;
+           timer = setInterval(function() &#123; postMessage(&#x27;&#x27;); &#125;, 500);
+        &#125;
+    &#125;
+    `</span>,
+  ]);
+  <span class="hljs-keyword">let</span> url = <span class="hljs-variable language_">window</span>.<span class="hljs-property">URL</span>.<span class="hljs-title function_">createObjectURL</span>(blob);
+  <span class="hljs-keyword">var</span> worker = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Worker</span>(url);
+  <span class="hljs-variable language_">window</span>.<span class="hljs-property">URL</span>.<span class="hljs-title function_">revokeObjectURL</span>(blob);
+  <span class="hljs-keyword">let</span> workerButton = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;webwork&quot;</span>);
+  <span class="hljs-keyword">let</span> requestId;
+  <span class="hljs-keyword">let</span> count = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">let</span> flag1 = <span class="hljs-literal">true</span>;
+  worker.<span class="hljs-property">onmessage</span> = <span class="hljs-function">() =&gt;</span> &#123;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(count, <span class="hljs-string">&quot;123&quot;</span>);
+
+    <span class="hljs-variable language_">document</span>.<span class="hljs-property">title</span> = <span class="hljs-string">`<span class="hljs-subst">$&#123;count++&#125;</span> WebWorker`</span>;
+  &#125;;
+  workerButton.<span class="hljs-property">onclick</span> = <span class="hljs-function">() =&gt;</span> &#123;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(flag1);
+    <span class="hljs-keyword">if</span> (flag1) &#123;
+      workerButton.<span class="hljs-property">innerText</span> = <span class="hljs-string">&quot;关闭web work定时器&quot;</span>;
+    &#125; <span class="hljs-keyword">else</span> &#123;
+      workerButton.<span class="hljs-property">innerText</span> = <span class="hljs-string">&quot;开启web work定时器&quot;</span>;
+    &#125;
+    worker.<span class="hljs-title function_">postMessage</span>(flag1);
+    flag1 = !flag1;
+  &#125;;
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre><script type="module">let blob = new Blob([`
+    let timer;
+    onmessage = ({data:flag})=>{
+        console.log("收到message",flag)
+        if(!flag){
+            clearInterval(timer);
+        }else{
+           timer = setInterval(function() { postMessage(''); }, 500); 
+        }
+    }
+    `]);
+    let url = window.URL.createObjectURL(blob);
+    var worker = new Worker(url);
+    window.URL.revokeObjectURL(blob)
+    let workerButton = document.getElementById("webwork");
+    let requestId;
+    let count = 0;
+    let flag1 = true;
+    worker.onmessage = ()=>{
+    console.log(count,'123')
+
+        document.title = `${count++} WebWorker`;
+    }
+    workerButton.onclick = ()=>{
+        console.log(flag1)
+        if(flag1){
+            workerButton.innerText = "关闭web work定时器"
+        }else{
+            workerButton.innerText = "开启web work定时器"
+        }
+        worker.postMessage(flag1);
+        flag1 = !flag1
+    }</script><script async>let codes = document.getElementsByClassName('hljs');
+            Array.from(codes).forEach(code => {
+                code.addEventListener('click', function copy(e) {
+                    const textContent = e.currentTarget.textContent;
+                    e.currentTarget.focus()
+                    const node = e.currentTarget;
+                    navigator.clipboard.writeText(textContent).then(()=>{
+                        alert('复制成功')
+                        node.blur()
+                    });
+                   
+                })
+            })</script><script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script><script>window.mermaid&&mermaid.initialize({startOnLoad:!0})</script></div></main><footer><p>Copyright © 2019-2022 suxin2017</p><p class="icp"><span><img src="/imgs/icp.png" width="17px" height="17px" alt="icp"> </span><a href="http://beian.miit.gov.cn" class="icp-link"><span>京ICP备2020041991号</span></a></p><p><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></p></footer></div></body></html>
