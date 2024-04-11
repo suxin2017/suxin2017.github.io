@@ -278,6 +278,7 @@ layout: "resume"
                 <span class="tag">React</span>
                 <span class="tag">Antd</span>
                 <span class="tag">Sqlite</span>
+                <span class="tag">Typeorm</span>
             </div>
         </div>
         <div class="item">
