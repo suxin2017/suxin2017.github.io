@@ -220,13 +220,13 @@ layout: "resume"
     技能
 </h3>
 
-<p>熟悉 React 开发框架. 掌握 vue 开发，了解React ssr</p>
+<p>熟悉 React 开发框架</p>
 <p>熟悉 antd 组件使用方法</p>
-<p>熟悉 JS,CSS.网络请求方式,浏览器工作过程. 熟悉 umi-request、aixo 中间件和拦截器的使用</p>
+<p>熟悉 JS,CSS.网络请求方式,浏览器工作过程.</p>
 <p>熟悉 Less css 编译库. 熟悉 echart 图形库的使用</p>
 <p>熟练操作 git 进行规范提交,代码合并. 掌握 nginx 基础配置,掌握 linux 命令</p>
-<p>掌握nodejs,及其后端框架，koa，egg有实际应用的经验</p>
-<p>了解golang，rust，java等后端开发</p>
+<p>掌握nodejs及其后端框架，koa 有实际应用的经验</p>
+<p>了解golang，rust，java等后端开发,对Java 与 NodeJs 有实际落地项目</p>
 
 <h3>
     工作经历&项目经历
@@ -239,18 +239,17 @@ layout: "resume"
         <div class="tag">前端研发</div>
     </div>
     <div class="list">
+    <div> <b>业务支持</b></div>
         <div class="item">
             <div class="name">海外 dsp 投放平台
-                <div class="tag">核心开发人员</div>
+                <div class="tag">主要负责人</div>
             </div>
-            <div class="desc">进行广告投放计划组创意创建，广告预算维护，数据统计平台。</div>
+            <div class="desc">广告投放平台是海外商业化主要收入平台，是广告主进行广告投放入口，其主要负责广告搭建，效果报表分析广告效果，提供人群定向等人群包，人群圈等能力，维护广告物料库等能力</div>
             <div class="me">
                 <ul>
-                    <li>负责平台维护，文案提取平台，国际化工作</li>
-                    <li>从0到1构建项目</li>
-                    <li>完成页面布局搭建</li>
-                    <li>文案提取： 通过eslint ast分析自动fix代码中未被国际化标签包裹的中文</li>
-                    <li>文案替换： 通过eslint ast分析自动替换全部代码中中文到英文节省大量人力成本</li>
+                    <li>从0到1完成平台建设，设计创编流程字段联动方案。</li>
+                    <li>负责日常平台维护，支撑全平台模块，推广列表，创编流程，数据报表，人群包，广告资产，操作记录等业务需求</li>
+                    <li>负责人才面试与初级人才培养</li>
                 </ul>
             </div>
             <div class="key">
@@ -259,11 +258,28 @@ layout: "resume"
                 <span class="tag">React Query</span>
                 <span class="tag">React Intl</span>
             </div>
+             <div class="name">海外建站
+                <div class="tag">主要负责人</div>
+            </div>
+            <div class="desc">海外首个动态化搭建平台，为广告主提供动态化建站能力，提供比广告主自身落地页300%上（fmp）性能提升的落地页，极大提高落地页触达率30%</div>
+            <div class="me">
+                <ul>
+                    <li>从0到1完成平台建设，设计整体无代码架构方案，通过分层设计，接口约束，支撑平台拓展性，满足丰富物料带来的平台压力</li>
+                    <li>做好落地页防裂化与性能优化建设</li>
+                    <li>支撑物料拓展，模板搭建等复杂需求</li>
+                </ul>
+            </div>
+            <div class="key">
+                <span class="tag">React Native</span>
+                <span class="tag">Redux</span>
+                <span class="tag">React Query</span>
+                <span class="tag">React Intl</span>
+            </div>
         </div>
+         <div> <b>技术提效</b></div>
         <div class="item">
             <div class="name">jinx 前端部署平台
-                <div class="tag">项目负责人</div>
-                <div class="tag">核心开发人员</div>
+                <div class="tag">主要负责人与开发</div>
             </div>
             <div class="desc">jinx 是一个多分支开发的前端部署服务，负责公司前端资源测试环境部署，服务代理，域名解析等功能。服务内部前端项目100+,跨3个部门使用</div>
             <div class="me">
@@ -277,130 +293,42 @@ layout: "resume"
                 <span class="tag">Koa</span>
                 <span class="tag">React</span>
                 <span class="tag">Antd</span>
-                <span class="tag">Sqlite</span>
+                <span class="tag">mysql</span>
                 <span class="tag">Typeorm</span>
             </div>
         </div>
-        <div class="item">
-            <div class="name">魔力建站
-                <div class="tag">核心开发人员</div>
+         <div class="item">
+            <div class="name">前端接口生成方案
+                <div class="tag">主要负责人与开发</div>
             </div>
-            <div class="desc">魔力建站是一个无代码的落地页搭建项目</div>
-            <div class="me">
-                <ul>
-                    <li>
-                        业务跟进：常规业务迭代，比如组件开发等业务需求。</li>
-                    <li>
-                        技术难点：编辑器部分功能开发比如参考线实现，字体压缩服务等功能
-                    </li>
-                    <li>
-                        服务他方：封装快聊转跳sdk，供多个业务方使用
-                    </li>
-                </ul>
-            </div>
-            <div class="key">
-                <span class="tag">React</span>
-                <span class="tag">Redux</span>
-                <span class="tag">Koa</span>
-                <span class="tag">Wings</span>
-            </div>
+            <div class="desc">通过解析swagger协议生成axios与react query代码，达到节约前端工作量，与开发时感知后端协议变更目的</div>
         </div>
-        <div class="item">
-            <div class="name">快手视频web端一期
-                <div class="tag">核心开发人员</div>
+         <div class="item">
+            <div class="name">多语言平台
+                <div class="tag">主要负责人与开发</div>
             </div>
-            <div class="desc">web 端的快手短视频</div>
-            <div class="me">
-                <ul>
-                    <li>与主站同学一起完成从0到1的开发</li>
-                </ul>
-            </div>
-            <div class="key">
-                <span class="tag">graphql</span>
-                <span class="tag">vue</span>
-            </div>
-        </div>
-        <div class="item">
-            <div class="name">bit 组件市场
-                <div class="tag">核心开发人员</div>
-                <div class="tag">项目负责人</div>
-            </div>
-            <div class="desc">解析bit组件存储规则，web端可视化组件api，文档服务，收录组件400+。</div>
-            <div class="me">
-                <ul>
-                    <li>项目设计：整体页面设计，技术实现</li>
-                    <li>探索源码：主动分析bit源码，发现bit版本存储的原理，并反解析，输出到组件市场</li>
-                    <li>代码分析：介入jsdoc，tsdoc完成代码分析，自动输出api文档</li>
-                    <li>周边生态：完成kbit封装，可在提交组件时，同步组件市场数据</li>
-                </ul>
-            </div>
-            <div class="key">
-                <span class="tag">egg</span>
-                <span class="tag">typeorm</span>
-                <span class="tag">mysql</span>
-                <span class="tag">React</span>
-            </div>
+            <div class="desc">为海外商业化提供多语言解决方案，通过平台维护文案，通过命令行工具进行文案对比与拉取，减少人工校验成本</div>
         </div>
     </div>
 </div>
 
-<div class="container">
-    <div class="info">
-        <div class="time">2019.06 - 2020.04</div>
-        <div class="company">百分点信息有限公司 </div>
-        <div class="tag">前端研发</div>
-    </div>
-    <div class="list">
-        <div class="item">
-            <div class="name">资产平台</div>
-            <div class="desc">大数据能力平台是一个数据处理平台,包含数据接入,数据治理,数据开发,数据监控(接入,治理,开发,硬件
-                资源的监控),权限管理,等功能</div>
-            <div class="me">
-                <ul>
-                    <li>
-                        完成新需求的页面开发,对老代码的 bug 进行修改.
-                    </li>
-                    <li>
-                        报表页面开发,用 G6 开发组织结构图.
-                    </li>
-                    <li>
-                        隔代升级老项目的 webpack 到新版,优化项目打包构建速度,构建速度从 40 多秒到
-                        10 多秒.
-                    </li>
-                    <li>
-                        通过使用 g6 库，开发自定义树状图.
-                    </li>
-                </ul>
-            </div>
-            <div class="key">
-                <span class="tag">React</span>
-                <span class="tag">echarts</span>
-                <span class="tag">g6</span>
-                <span class="tag">webpack</span>
-            </div>
-        </div>
-    </div>
-</div>
 
 <h3>个人项目</h3>
 
 <ul class="private">
-    <li><a href="https://suxin2017.github.io/pixel-editor/">pixel-editor 像素风格建站</a></li>
-    <li><a href="https://suxin2017.github.io/markdown-website/#/">马克在线 markdown 转富文本工具</a></li>
-    <li><a href="https://github.com/suxin2017/code-playground">playground 在线编辑预览工具</a></li>
-    <li><a href="https://suxin2017.github.io/bxer-ui/?path=/docs/%E4%BB%8B%E7%BB%8D--page">
-            bxer ui 一套精简级组件库</a></li>
     <li><a href="https://github.com/suxin2017/css-tutorial">
            rust 写的css ast解析器</a></li>
     <li><a href="https://github.com/suxin2017/ng-m">
            golang 实现的ng配置管理平台</a></li>
+    <li><a href="https://github.com/biomejs/biome">
+           biome的贡献者，在prettier挑战赛中获得400奖励</a></li>  
 </ul>
 
 <h3>个人自评</h3>
 
 <ul class="evaluation">
-    <li>能够落地项目从0到1的建设。</li>
-    <li>对技术充满好奇，对于新的技术接受能力较强，经常搞些小东西，享受技术带来的成就感</li>
+    <li>通过业务分析，能够做好架构设计，满足当下与未来业务诉求。</li>
+    <li>对技术充满好奇，对于新的技术接受能力较强，享受技术带来的成就感</li>
     <li>具有良好的沟通能力，问题分析解决能力</li>
-    <li>能够挖掘当前业务痛点，并做出实际行动改进</li>
+    <li>能够挖掘当前业务/效率痛点，并做出实际行动改进</li>
 </ul>
