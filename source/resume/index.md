@@ -276,6 +276,23 @@ layout: "resume"
                 <span class="tag">React Intl</span>
             </div>
         </div>
+          <div class="item">
+            <div class="name">魔力建站
+                <div class="tag">核心开发人员</div>
+            </div>
+            <div class="desc">魔力建站是一个无代码的落地页搭建项目,为广告主搭建落地页</div>
+            <div class="me">
+                <ul>
+                    <li>常规业务迭代，支撑业务开发</li>
+                    <li>实现编辑器部分功能复杂也如逻辑比如参考线实现，字体压缩服务等功能</li>
+                </ul>
+            </div>
+            <div class="key">
+                <span class="tag">React</span>
+                <span class="tag">Redux</span>
+                <span class="tag">Koa</span>
+            </div>
+         </div>
          <div> <b>技术提效</b></div>
         <div class="item">
             <div class="name">jinx 前端部署平台
