@@ -216,11 +216,17 @@ Educational qualifications: Graduates
     }
 </style>
 
-<h3>Skills</h3> <p>Proficient in the React development framework</p> <p>Experienced with Ant Design component usage</p> <p>Familiar with JavaScript, CSS, network request methods, and browser working mechanisms</p> <p>Skilled in using the Less CSS preprocessor and ECharts visualization library</p> <p>Proficient in using Git for standard commits and code merges; experienced with basic Nginx configuration and Linux commands</p> <p>Experienced with Node.js and its backend frameworks, particularly Koa, with hands-on application experience</p> <p>Knowledgeable in backend development with Go, Rust, and Java; have practical project experience with Java and Node.js</p> <h3>Work Experience & Projects</h3> <div class="container"> <div class="info"> <div class="time">April 2020 - Present</div> <div class="company">Kuaishou</div> <div class="tag">Frontend Developer</div> </div> <div class="list"> <div><b>Business Support</b></div> <div class="item"> <div class="name">Overseas DSP Advertising Platform <div class="tag">Lead Developer</div> </div> <div class="desc">The advertising platform is the main revenue source for overseas commercialization. It serves as the entry point for advertisers to launch campaigns, build ads, and analyze performance reports. It supports audience targeting, audience package management, and ad material library maintenance.</div> <div class="me"> <ul> <li>Built the platform from scratch, designed field linkage schemes in creative editing processes.</li> <li>Responsible for platform maintenance, supporting all platform modules including promotion lists, creative processes, data reports, audience packages, ad assets, and operation logs.</li> <li>Handled talent recruitment and junior talent development.</li> </ul> </div> <div class="key"> <span class="tag">React</span> <span class="tag">Redux</span> <span class="tag">React Query</span> <span class="tag">React Intl</span> </div>
+<h3>Skills</h3> <p>Proficient in the React development framework</p> <p>Experienced with Ant Design component usage</p> <p>Familiar with JavaScript, CSS, network request methods, and browser working mechanisms</p> <p>Skilled in using the Less CSS preprocessor and ECharts visualization library</p> <p>Proficient in using Git for standard commits and code merges; experienced with basic Nginx configuration and Linux commands</p> <p>Experienced with Node.js and its backend frameworks, particularly Koa, with hands-on application experience</p> <p>Knowledgeable in backend development with Go, Rust, and Java; have practical project experience with Java and Node.js</p> <h3>Work Experience & Projects</h3> <div class="container"> <div class="info"> <div class="time">April 2020 - Present</div> <div class="company">Kuaishou</div> <div class="tag">Frontend Developer</div> </div> <div class="list"> <div><b>Business Support</b></div> <div class="item"> 
+<div class="name">Overseas DSP Advertising Platform 
+<div class="tag">Team Owner</div> </div> 
+
+<div class="desc">Advertising platform is the main revenue platform for overseas commercialization, accounting for 80% of advertisement consumption, and is the entrance for advertisers to place advertisements, which is mainly responsible for advertisement construction, analysis of advertisement effect by effect report, provision of crowd targeting and other crowd packages, crowd circle, etc., as well as maintenance of the advertisement material library.</div>
+
+<div class="me"> <ul> <li>Built the platform from scratch, designed field linkage schemes in creative editing processes.</li> <li>Responsible for platform maintenance, supporting all platform modules including promotion lists, creative processes, data reports, audience packages, ad assets, and operation logs.</li> <li>Handled talent recruitment and junior talent development.</li> </ul> </div> <div class="key"> <span class="tag">React</span> <span class="tag">Redux</span> <span class="tag">React Query</span> <span class="tag">React Intl</span> </div>
         <div class="name">Overseas Website Builder
-            <div class="tag">Lead Developer</div>
+            <div class="tag">Team Owner</div>
         </div>
-        <div class="desc">Developed the first dynamic website builder for overseas advertisers, providing landing pages with 300% better performance (FMP) compared to their own. Increased landing page reach rate by 30%.</div>
+        <div class="desc">The first dynamic building platform overseas, providing advertisers with the ability to build stations dynamically, providing advertisers with 300% higher (fmp) performance than the advertiser's own landing page, and increasing the exposure rate of the landing page by 30%.</div>
         <div class="me">
             <ul>
                 <li>Built the platform from the ground up, designing a no-code architecture that ensured scalability through layered design and interface constraints.</li>
@@ -239,7 +245,7 @@ Educational qualifications: Graduates
         <div class="name">Magic Website Builder
             <div class="tag">Core Developer</div>
         </div>
-        <div class="desc">Magic Website Builder is a no-code project for creating landing pages for advertisers.</div>
+        <div class="desc">Magic site is a no-code landing page building project for advertisers to build landing pages, by building a font compression service to reduce the volume of 97% font resources</div>
         <div class="me">
             <ul>
                 <li>Supported business development through regular iterations.</li>
@@ -255,9 +261,9 @@ Educational qualifications: Graduates
     <div><b>Technical Efficiency</b></div>
     <div class="item">
         <div class="name">Jinx Frontend Deployment Platform
-            <div class="tag">Lead Developer</div>
+            <div class="tag">Project Owner</div>
         </div>
-        <div class="desc">Jinx is a multi-branch frontend deployment service responsible for deploying frontend resources in the testing environment, service proxies, and domain name resolution. It supports 617 internal frontend projects, over 20,000 extended branches, with a total of 250,000+ deployments, serving 600+ users across 3 departments.</div>
+        <div class="desc">Jinx is a multi-branch development front-end deployment services, services for internal front-end projects 600 +, expanding branch 2w +, total deployment times 25W +, daily deployment of 200 +, 600 + users, covering 3 departments 80% of the front-end staff , responsible for the company's front-end resources, test environment deployment, service agents, domain name resolution and other functions .</div>
         <div class="me">
             <ul>
                 <li>Designed the entire architecture and implemented the UI.</li>
@@ -275,15 +281,15 @@ Educational qualifications: Graduates
     </div>
     <div class="item">
         <div class="name">Frontend API Generation Solution
-            <div class="tag">Lead Developer</div>
+            <div class="tag">Project Owner</div>
         </div>
-        <div class="desc">Generated Axios and React Query code by parsing the Swagger protocol to reduce frontend workload and detect backend protocol changes during development.</div>
+        <div class="desc">Generate axios and react query code by parsing swagger protocol, save 15% workload on front-end, sense the purpose of protocol change on back-end, and ensure that protocol change causes 0 online accidents.</div>
     </div>
     <div class="item">
         <div class="name">Multilingual Platform
-            <div class="tag">Lead Developer</div>
+            <div class="tag">Project Owner</div>
         </div>
-        <div class="desc">Provided a multilingual solution for overseas commercialization, reducing manual verification costs by maintaining documentation through a platform and using CLI tools for document comparison and retrieval.</div>
+        <div class="desc">Provide multi-language solutions for overseas commercialization, comprehensively covering 13 projects for overseas commercialization, managing 10,000 lines of copy, maintaining copy through the platform, comparing and pulling copy through the command line tool, reducing manual checking costs by 50%.</div>
     </div>
 </div>
 </div> <h3>Personal Projects</h3> <ul class="private"> <li><a href="https://github.com/suxin2017/css-tutorial">CSS AST Parser written in Rust</a></li> <li><a href="https://github.com/suxin2017/ng-m">NG configuration management platform implemented in Go</a></li> <li><a href="https://github.com/biomejs/biome">Contributor to Biome, earned a $400 reward in the Prettier challenge</a></li> </ul> <h3>Self-Evaluation</h3> <ul class="evaluation"> <li>Capable of designing architectures that meet current and future business needs through thorough business analysis.</li> <li>Highly curious about new technologies and quick to adapt, enjoying the sense of achievement brought by technical solutions.</li> <li>Strong communication skills and problem-solving abilities.</li> <li>Proactive in identifying and addressing business inefficiencies and making tangible improvements.</li> </ul>
