@@ -1,0 +1,218 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><link rel="icon" sizes="any" type="image/svg+xml" href="/imgs/icon.svg"><link rel="stylesheet" href="/css/theme/color.variables.css"><link id="themeStyleVar" rel="stylesheet" href="/css/theme/default.variables.css"><script>const localStorageTheme = localStorage.getItem('theme');
+        function loadTheme(){
+            let themeLink = document.getElementById('themeStyleVar');
+            if(localStorageTheme){
+                themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${localStorageTheme}.variables.css`)
+            }
+        }
+        if(localStorage){
+            loadTheme()
+            setTimeout(()=>{
+                if(document.body){
+                    document.body.className = localStorageTheme ? localStorageTheme : 'dark'
+                }
+
+            },2)
+        }</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/css/post.css"><title>苏鑫2017</title><meta name="description" content="用于记录感悟，前端技术，编程技巧，各种奇奇怪怪的新的体会"><meta name="viewport" content="width=device-width,initial-scale=1"><script async>console.log(`%c真巧，你打开了devtool`,"color:#b58900")
+        console.log(`%c真巧，你看了我的文章`,"color:#859900")
+        console.log('%c简单介绍，道法自然，做人要顺其自然，不要有太多欲望',"color:#268bd2")
+        console.log('%c不要目的性太强,这就是我的主题想强调的',"color:#dc322f")</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-RFGTVED02M"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-RFGTVED02M")</script><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?ce46d6101f33ba04b74fbe8bbe509590";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><script>const moduleMap = new Map();
+            var define = (moduleName, module) => { moduleMap.set(moduleName, module) };
+            var require = (moduleName) => moduleMap.get(moduleName);</script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="苏鑫2017" type="application/atom+xml"></head><body><div class="body"><header class="header"><div class="header-icon-wrapper"><h2><a href="/">苏鑫2017</a></h2></div><div class="header-right"><nav class="header-menu-wrapper"><ul class="header-menu"><li class="header-menu-item"><a class="header-menu-item-link" href="/">首页</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/categories/weibo">微博</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/about">关于</a></li><li class="header-menu-item"><div id="switchThemeButton"><img src="/imgs/icon.svg" alt="switchThemeIcon" width="100%" height="100%"></div><style>#switchThemeButton{width:40px;height:26px;margin:0;border:0;background:0 0;outline:0;cursor:pointer;margin-top:6px}</style><script async>const btn = document.getElementById('switchThemeButton');
+    let darkTheme = false;
+    const themeStyleVarId = "themeStyleVar";
+    if(localStorageTheme === 'dark'){
+        darkTheme = true
+    }else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // dark mode
+        darkTheme = true;
+    }
+    function loadTheme() {
+        let themeLink = document.getElementById(themeStyleVarId);
+        if (!themeLink) {
+            themeLink = document.createElement('link')
+            themeLink.rel = "stylesheet"
+            themeLink.id = "themeStyleVar"
+        }
+        darkTheme = !darkTheme;
+        themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${darkTheme ? 'dark' : 'light'}.variables.css`)
+        document.head.appendChild(themeLink)
+        document.body.className = darkTheme?'dark':'light'
+        localStorage.setItem('theme',darkTheme?'dark':'light');
+    }
+
+    btn.onclick = function() {
+        loadTheme();
+        codeTheme();
+    }</script><script>function codeTheme(){
+            const localStorageTheme = localStorage.getItem('theme');
+            let codeThemeLink = document.getElementById("codeTheme");
+            if(!codeThemeLink){
+                codeThemeLink = document.createElement('link');
+                codeThemeLink.rel = "stylesheet"
+                codeThemeLink.id = "codeTheme"
+                document.head.appendChild(codeThemeLink)
+            }
+            if(localStorageTheme){
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${localStorageTheme}.css`
+            }else{
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${darkTheme ? 'dark': 'light'}.css`
+            }
+        }
+        codeTheme()</script></li></ul></nav></div></header><main class="main"><div class="post"><h2>lua-token</h2><p>一个变成语言基本分为 4 部分，入口，块，语句，表达式</p><p>其中入口便是程序开始部分</p><p>约定 :: 代表定义， {} 代表 0 次或者多次, [] 代表 0 - 1 次</p><p>人类自己制造的编程语言，不同于自然语言，相对简单的多，基本就是一个有穷状态机。</p><pre><code class="hljs"><span class="hljs-attribute">gammer</span> <span class="hljs-body"><span class="hljs-operator">::=</span> block
+</span><span class="hljs-attribute">block</span> <span class="hljs-body"><span class="hljs-operator">::=</span> <span class="hljs-built_in">&#123;</span>stat<span class="hljs-built_in">&#125;</span> <span class="hljs-built_in">[</span>retStat<span class="hljs-built_in">]</span>
+</span><span class="hljs-comment">// 返回
+</span><span class="hljs-attribute">retStat</span> <span class="hljs-body"><span class="hljs-operator">::=</span> return <span class="hljs-built_in">[</span>expList<span class="hljs-built_in">]</span> <span class="hljs-built_in">[</span><span class="hljs-string">&#x27;;&#x27;</span><span class="hljs-built_in">]</span>
+</span>
+<span class="hljs-comment">// 语句，一共有 15 种，语句只能执行，不能求值，比如 if
+</span><span class="hljs-attribute">stat</span> <span class="hljs-body"><span class="hljs-operator">::=</span> <span class="hljs-string">&#x27;;&#x27;</span>
+</span><span class="hljs-body">	<span class="hljs-built_in">|</span> varList <span class="hljs-string">&#x27;=&#x27;</span> expList
+</span><span class="hljs-body">	<span class="hljs-built_in">|</span> functionCall
+</span><span class="hljs-body">	<span class="hljs-built_in">|</span> label
+</span><span class="hljs-body">	<span class="hljs-built_in">|</span> break
+</span><span class="hljs-body">	<span class="hljs-built_in">|</span> goto Name
+</span><span class="hljs-body">	<span class="hljs-built_in">|</span> do block end
+</span><span class="hljs-body">	<span class="hljs-built_in">|</span> while exp do block end
+</span><span class="hljs-body">	<span class="hljs-built_in">|</span> repeat block until exp
+</span><span class="hljs-body">	<span class="hljs-built_in">|</span> if exp then block <span class="hljs-built_in">&#123;</span>elseif exp then block<span class="hljs-built_in">&#125;</span> <span class="hljs-built_in">[</span>else block<span class="hljs-built_in">]</span> end
+</span><span class="hljs-body">	<span class="hljs-built_in">|</span> for Name <span class="hljs-string">&#x27;=&#x27;</span> exp <span class="hljs-string">&#x27;,&#x27;</span> exp <span class="hljs-built_in">[</span><span class="hljs-string">&#x27;,&#x27;</span>,exp<span class="hljs-built_in">]</span> do block end
+</span><span class="hljs-body">	<span class="hljs-built_in">|</span> function funcName funcBody
+</span><span class="hljs-body">	<span class="hljs-built_in">|</span> local function Name funcBody
+</span><span class="hljs-body">	<span class="hljs-built_in">|</span> local nameList <span class="hljs-built_in">[</span><span class="hljs-string">&#x27;=&#x27;</span> expList<span class="hljs-built_in">]</span>
+</span>
+<span class="hljs-comment">// 表达式只能求值不能执行，比如 123  1 + 2
+</span><span class="hljs-attribute">expList</span> <span class="hljs-body"><span class="hljs-operator">::=</span> exp <span class="hljs-built_in">&#123;</span><span class="hljs-string">&#x27;,&#x27;</span> exp<span class="hljs-built_in">&#125;</span>
+</span><span class="hljs-attribute">exp</span> <span class="hljs-body"><span class="hljs-operator">::=</span> nil <span class="hljs-built_in">|</span> false <span class="hljs-built_in">|</span> true <span class="hljs-built_in">|</span> Numeral <span class="hljs-built_in">|</span> LiteralString <span class="hljs-built_in">|</span> <span class="hljs-string">&#x27;...&#x27;</span> <span class="hljs-built_in">|</span> functionDef ｜ prefixExp
+</span><span class="hljs-body">	<span class="hljs-built_in">|</span> tableConstructor <span class="hljs-built_in">|</span> exp binOp exp <span class="hljs-built_in">|</span> unOp exp
+</span>
+<span class="hljs-comment">// ps: 函数调用既可以是表达式也是语句
+</span><span class="hljs-comment">// hello() obg[key()] 这种都是合法的,前者属于语句，后者属于表达式
+</span></code></pre><p>针对语句进行拆分<br>语句部分 ast 结构</p><pre><code class="hljs"><span class="hljs-comment">// 拆分一下
+</span><span class="hljs-attribute">emptyStat</span> <span class="hljs-body"><span class="hljs-operator">::=</span> <span class="hljs-string">&#x27;;&#x27;</span>
+</span><span class="hljs-attribute">breakStat</span> <span class="hljs-body"><span class="hljs-operator">::=</span> break
+</span><span class="hljs-attribute">labelStat</span> <span class="hljs-body"><span class="hljs-operator">::=</span> <span class="hljs-string">&#x27;::&#x27;</span> Name <span class="hljs-string">&#x27;::&#x27;</span>
+</span><span class="hljs-attribute">gotoStat</span> <span class="hljs-body"><span class="hljs-operator">::=</span> goto Name
+</span><span class="hljs-attribute">doStat</span> <span class="hljs-body"><span class="hljs-operator">::=</span> do block end
+</span><span class="hljs-attribute">funcCallStat</span> <span class="hljs-body"><span class="hljs-operator">::=</span> FuncCallExp
+</span><span class="hljs-attribute">whileStat</span>  <span class="hljs-body"><span class="hljs-operator">::=</span> while exp do block end
+</span><span class="hljs-attribute">repeatStat</span> <span class="hljs-body"><span class="hljs-operator">::=</span> repeat block until exp
+</span><span class="hljs-comment">// ifStat 可以将else 简化
+</span><span class="hljs-attribute">ifStat</span> <span class="hljs-body"><span class="hljs-operator">::=</span> if exp then block <span class="hljs-built_in">&#123;</span>elseif exp then block<span class="hljs-built_in">&#125;</span> <span class="hljs-built_in">[</span>else block<span class="hljs-built_in">]</span> end
+</span><span class="hljs-comment">// ifStat ::= if exp then block &#123;elseif exp then block&#125; [elseif true then block] end
+</span><span class="hljs-comment">// ifStat ::= if exp then block &#123;elseif exp then block&#125; end
+</span>
+<span class="hljs-attribute">forNumStat</span> <span class="hljs-body"><span class="hljs-operator">::=</span> for Name <span class="hljs-string">&#x27;=&#x27;</span> exp <span class="hljs-string">&#x27;,&#x27;</span> exp <span class="hljs-built_in">[</span><span class="hljs-string">&#x27;,&#x27;</span>,exp<span class="hljs-built_in">]</span> do block end
+</span><span class="hljs-attribute">forInStat</span> <span class="hljs-body"><span class="hljs-operator">::=</span> for nameList in expList do block end
+</span><span class="hljs-attribute">localVarDeclStat</span> <span class="hljs-body"><span class="hljs-operator">::=</span> local nameList <span class="hljs-string">&#x27;=&#x27;</span> expList
+</span><span class="hljs-attribute">assignStat</span> <span class="hljs-body"><span class="hljs-operator">::=</span> varList <span class="hljs-string">&#x27;=&#x27;</span> expList
+</span><span class="hljs-comment">// 是 assignStat 的语法糖，所以返回结构和 也是AssignStat.
+</span><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> 没准我可以美化下
+</span><span class="hljs-attribute">funcDefStat</span> <span class="hljs-body"><span class="hljs-operator">::=</span> function funcName funcBody
+</span><span class="hljs-attribute">localFuncDefStat</span> <span class="hljs-body"><span class="hljs-operator">::=</span> local function Name funcBody
+</span>
+<span class="hljs-comment">// util
+</span><span class="hljs-attribute">nameList</span> <span class="hljs-body"><span class="hljs-operator">::=</span> Name <span class="hljs-built_in">&#123;</span><span class="hljs-string">&#x27;,&#x27;</span> Name<span class="hljs-built_in">&#125;</span>
+</span><span class="hljs-attribute">expList</span> <span class="hljs-body"><span class="hljs-operator">::=</span> exp <span class="hljs-built_in">&#123;</span><span class="hljs-string">&#x27;,&#x27;</span> exp<span class="hljs-built_in">&#125;</span>
+</span><span class="hljs-attribute">varList</span> <span class="hljs-body"><span class="hljs-operator">::=</span> var <span class="hljs-built_in">&#123;</span><span class="hljs-string">&#x27;,&#x27;</span> var<span class="hljs-built_in">&#125;</span>
+</span><span class="hljs-attribute">var</span> <span class="hljs-body"><span class="hljs-operator">::=</span> Name <span class="hljs-built_in">|</span> prefixExp <span class="hljs-string">&#x27;[&#x27;</span> exp <span class="hljs-string">&#x27;]&#x27;</span> <span class="hljs-built_in">|</span> prefixExp <span class="hljs-string">&#x27;.&#x27;</span> Name
+</span><span class="hljs-attribute">funcName</span> <span class="hljs-body"><span class="hljs-operator">::=</span> Name <span class="hljs-built_in">&#123;</span><span class="hljs-string">&#x27;.&#x27;</span> Name<span class="hljs-built_in">&#125;</span> <span class="hljs-built_in">[</span><span class="hljs-string">&#x27;:&#x27;</span> Name<span class="hljs-built_in">]</span>
+</span><span class="hljs-attribute">funcBody</span> <span class="hljs-body"><span class="hljs-operator">::=</span> <span class="hljs-string">&#x27;(&#x27;</span> <span class="hljs-built_in">[</span>parList<span class="hljs-built_in">]</span> <span class="hljs-string">&#x27;)&#x27;</span> block end
+</span><span class="hljs-attribute">parList</span> <span class="hljs-body"><span class="hljs-operator">::=</span> nameList <span class="hljs-built_in">[</span><span class="hljs-string">&#x27;,&#x27;</span> <span class="hljs-string">&#x27;...&#x27;</span><span class="hljs-built_in">]</span> <span class="hljs-built_in">|</span> <span class="hljs-string">&#x27;...&#x27;</span>
+</span>
+<span class="hljs-comment">// 最终
+</span><span class="hljs-attribute">tat</span> <span class="hljs-body"><span class="hljs-operator">::=</span> emptyStat
+</span><span class="hljs-body">	<span class="hljs-built_in">|</span> assignStat
+</span><span class="hljs-body">	<span class="hljs-built_in">|</span> funcCallStat
+</span><span class="hljs-body">	<span class="hljs-built_in">|</span> labelStat
+</span><span class="hljs-body">	<span class="hljs-built_in">|</span> breakStat
+</span><span class="hljs-body">	<span class="hljs-built_in">|</span> gotoStat
+</span><span class="hljs-body">	<span class="hljs-built_in">|</span> doStat
+</span><span class="hljs-body">	<span class="hljs-built_in">|</span> whileStat
+</span><span class="hljs-body">	<span class="hljs-built_in">|</span> repeatStat
+</span><span class="hljs-body">	<span class="hljs-built_in">|</span> ifStat
+</span><span class="hljs-body">	<span class="hljs-built_in">|</span> forNumStat
+</span><span class="hljs-body">	<span class="hljs-built_in">|</span> forInStat
+</span><span class="hljs-body">	<span class="hljs-built_in">|</span> funcDefStat
+</span><span class="hljs-body">	<span class="hljs-built_in">|</span> localFuncDefStat
+</span><span class="hljs-body">	<span class="hljs-built_in">|</span> localVarDeclStat
+</span></code></pre><p>表达式部分精简</p><pre><code class="hljs"><span class="hljs-attribute">nilExp</span> <span class="hljs-body"><span class="hljs-operator">::=</span> nil
+</span><span class="hljs-attribute">falseExp</span> <span class="hljs-body"><span class="hljs-operator">::=</span> false
+</span><span class="hljs-attribute">trueExp</span> <span class="hljs-body"><span class="hljs-operator">::=</span> true
+</span><span class="hljs-attribute">varArgExp</span> <span class="hljs-body"><span class="hljs-operator">::=</span> <span class="hljs-string">&#x27;...&#x27;</span>
+</span><span class="hljs-attribute">integerExp</span> <span class="hljs-body"><span class="hljs-operator">::=</span> Numeral
+</span><span class="hljs-attribute">floatExp</span> <span class="hljs-body"><span class="hljs-operator">::=</span> Numeral
+</span><span class="hljs-attribute">stringExp</span> <span class="hljs-body"><span class="hljs-operator">::=</span> LiteralString
+</span><span class="hljs-attribute">nameExp</span> <span class="hljs-body"><span class="hljs-operator">::=</span> Name
+</span><span class="hljs-attribute">concatExp</span> <span class="hljs-body"><span class="hljs-operator">::=</span> exp <span class="hljs-string">&#x27;...&#x27;</span> exp
+</span><span class="hljs-attribute">tableConstructorExp</span> <span class="hljs-body"><span class="hljs-operator">::=</span> <span class="hljs-string">&#x27;&#123;&#x27;</span> <span class="hljs-built_in">[</span>fieldList<span class="hljs-built_in">]</span> <span class="hljs-string">&#x27;&#125;&#x27;</span>
+</span><span class="hljs-attribute">funcDefExp</span> <span class="hljs-body"><span class="hljs-operator">::=</span> function funcBody
+</span>
+<span class="hljs-comment">// 原始版本
+</span><span class="hljs-attribute">prefixExp</span> <span class="hljs-body"><span class="hljs-operator">::=</span> var <span class="hljs-built_in">|</span> functionCall <span class="hljs-built_in">|</span> <span class="hljs-string">&#x27;(&#x27;</span> exp <span class="hljs-string">&#x27;)&#x27;</span>
+</span><span class="hljs-comment">// 赋值语句等号左侧、名字表达式、表访问表达式、记录访问表达式
+</span><span class="hljs-attribute">var</span> <span class="hljs-body"><span class="hljs-operator">::=</span> Name <span class="hljs-built_in">|</span> prefixExp <span class="hljs-string">&#x27;[&#x27;</span> exp <span class="hljs-string">&#x27;]&#x27;</span> <span class="hljs-built_in">|</span> prefixExp <span class="hljs-string">&#x27;.&#x27;</span> Name
+</span><span class="hljs-attribute">functionCall</span> <span class="hljs-body"><span class="hljs-operator">::=</span> prefixExp args <span class="hljs-built_in">|</span> prefixExp <span class="hljs-string">&#x27;:&#x27;</span> Name args
+</span>
+<span class="hljs-comment">// 精简版
+</span><span class="hljs-attribute">prefixExp</span> <span class="hljs-body"><span class="hljs-operator">::=</span> Name <span class="hljs-built_in">|</span> parentExp <span class="hljs-built_in">|</span> tableAccessExp <span class="hljs-built_in">|</span> prefixExp <span class="hljs-string">&#x27;.&#x27;</span> Name <span class="hljs-built_in">|</span> functionCallExp
+</span>
+<span class="hljs-attribute">parentExp</span> <span class="hljs-body"><span class="hljs-operator">::=</span> <span class="hljs-string">&#x27;(&#x27;</span> exp <span class="hljs-string">&#x27;)&#x27;</span>
+</span><span class="hljs-attribute">tableAccessExp</span> <span class="hljs-body"><span class="hljs-operator">::=</span> prefixExp <span class="hljs-string">&#x27;[&#x27;</span> exo <span class="hljs-string">&#x27;]&#x27;</span>
+</span><span class="hljs-attribute">functionCallExp</span> <span class="hljs-body"><span class="hljs-operator">::=</span> prefixExp <span class="hljs-built_in">[</span><span class="hljs-string">&#x27;:&#x27;</span> Name<span class="hljs-built_in">]</span> args
+</span>
+<span class="hljs-comment">// util
+</span><span class="hljs-attribute">Name</span> <span class="hljs-body"><span class="hljs-operator">::=</span> <span class="hljs-string">/^[_\d\w]+/</span>
+</span>
+
+<span class="hljs-attribute">LiteralString</span> <span class="hljs-body"><span class="hljs-operator">::=</span> <span class="hljs-string">/(^&#x27;(\\\\|\\&#x27;|\\\n|\\z\s*|[^&#x27;\n])*&#x27;)|(^&quot;(\\\\|\\&quot;|\\\n|\\z\s*|[^&quot;\n])*&quot;)/</span>;
+</span>
+<span class="hljs-attribute">Numeral</span> <span class="hljs-body"><span class="hljs-operator">::=</span> <span class="hljs-string">/^0[xX][0-9a-fA-F]*(\.[0-9a-fA-F]*)?([pP][+\-]?[0-9]+)?|^[0-9]*(\.[0-9]*)?([eE][+\-]?[0-9]+)?/</span>;
+</span>
+<span class="hljs-attribute">fieldList</span> <span class="hljs-body"><span class="hljs-operator">::=</span> field <span class="hljs-built_in">&#123;</span>fieldSep field<span class="hljs-built_in">&#125;</span> <span class="hljs-built_in">[</span>fieldSep<span class="hljs-built_in">]</span>
+</span><span class="hljs-attribute">field</span> <span class="hljs-body"><span class="hljs-operator">::=</span> <span class="hljs-string">&#x27;[&#x27;</span> exp <span class="hljs-string">&#x27;]&#x27;</span> <span class="hljs-string">&#x27;=&#x27;</span> exp <span class="hljs-built_in">|</span> Name <span class="hljs-string">&#x27;=&#x27;</span> exp <span class="hljs-built_in">|</span> exp
+</span><span class="hljs-attribute">fieldSep</span> <span class="hljs-body"><span class="hljs-operator">::=</span> <span class="hljs-string">&#x27;,&#x27;</span> <span class="hljs-built_in">|</span> <span class="hljs-string">&#x27;;&#x27;</span>
+</span>
+
+<span class="hljs-attribute">args</span> <span class="hljs-body"><span class="hljs-operator">::=</span> <span class="hljs-string">&#x27;&#123;&#x27;</span> <span class="hljs-built_in">[</span>expList<span class="hljs-built_in">]</span> <span class="hljs-string">&#x27;&#125;&#x27;</span> <span class="hljs-built_in">|</span> tableConstructorExp <span class="hljs-built_in">|</span> LiteralString
+</span>
+<span class="hljs-comment">// 通过优先级解决歧义问题
+</span><span class="hljs-attribute">exp</span> <span class="hljs-body"><span class="hljs-operator">::=</span> exp12
+</span><span class="hljs-attribute">exp12</span> <span class="hljs-body"><span class="hljs-operator">::=</span> epx11 <span class="hljs-built_in">&#123;</span>or exp11<span class="hljs-built_in">&#125;</span>
+</span><span class="hljs-attribute">exp11</span> <span class="hljs-body"><span class="hljs-operator">::=</span> exp10 <span class="hljs-built_in">&#123;</span>and exp10<span class="hljs-built_in">&#125;</span>
+</span><span class="hljs-attribute">exp10</span> <span class="hljs-body"><span class="hljs-operator">::=</span> exp9 <span class="hljs-built_in">&#123;</span>(<span class="hljs-string">&#x27;&lt;&#x27;</span> <span class="hljs-built_in">|</span> <span class="hljs-string">&#x27;&gt;&#x27;</span> <span class="hljs-built_in">|</span> <span class="hljs-string">&#x27;&lt;=&#x27;</span> <span class="hljs-built_in">|</span> <span class="hljs-string">&#x27;&gt;=&#x27;</span> <span class="hljs-built_in">|</span> <span class="hljs-string">&#x27;~=&#x27;</span> <span class="hljs-built_in">|</span> <span class="hljs-string">&#x27;==&#x27;</span>) exp9<span class="hljs-built_in">&#125;</span>
+</span><span class="hljs-attribute">exp9</span> <span class="hljs-body"><span class="hljs-operator">::=</span> exp8 <span class="hljs-built_in">&#123;</span><span class="hljs-string">&#x27;|&#x27;</span> exp8<span class="hljs-built_in">&#125;</span>
+</span><span class="hljs-attribute">exp8</span> <span class="hljs-body"><span class="hljs-operator">::=</span> exp7 <span class="hljs-built_in">&#123;</span><span class="hljs-string">&#x27;~&#x27;</span> exp7<span class="hljs-built_in">&#125;</span>
+</span><span class="hljs-attribute">exp7</span> <span class="hljs-body"><span class="hljs-operator">::=</span> exp6 <span class="hljs-built_in">&#123;</span><span class="hljs-string">&#x27;&amp;&#x27;</span> exp6<span class="hljs-built_in">&#125;</span>
+</span><span class="hljs-attribute">exp6</span> <span class="hljs-body"><span class="hljs-operator">::=</span> exp5 <span class="hljs-built_in">&#123;</span>(<span class="hljs-string">&#x27;&lt;&lt;&#x27;</span> <span class="hljs-built_in">|</span> <span class="hljs-string">&#x27;&gt;&gt;&#x27;</span>) exp5<span class="hljs-built_in">&#125;</span>
+</span><span class="hljs-attribute">exp5</span> <span class="hljs-body"><span class="hljs-operator">::=</span> exp4 <span class="hljs-built_in">&#123;</span><span class="hljs-string">&#x27;..&#x27;</span> exp4<span class="hljs-built_in">&#125;</span>
+</span><span class="hljs-attribute">exp4</span> <span class="hljs-body"><span class="hljs-operator">::=</span> exp3 <span class="hljs-built_in">&#123;</span>(<span class="hljs-string">&#x27;+&#x27;</span> <span class="hljs-built_in">|</span> <span class="hljs-string">&#x27;-&#x27;</span>) exp3<span class="hljs-built_in">&#125;</span>
+</span><span class="hljs-attribute">exp3</span> <span class="hljs-body"><span class="hljs-operator">::=</span> exp2 <span class="hljs-built_in">&#123;</span>( <span class="hljs-string">&#x27;*&#x27;</span> <span class="hljs-built_in">|</span> <span class="hljs-string">&#x27;/&#x27;</span> <span class="hljs-built_in">|</span> <span class="hljs-string">&#x27;//&#x27;</span> <span class="hljs-built_in">|</span> <span class="hljs-string">&#x27;&amp;&#x27;</span>) exp2<span class="hljs-built_in">&#125;</span>
+</span><span class="hljs-attribute">exp2</span> <span class="hljs-body"><span class="hljs-operator">::=</span> <span class="hljs-built_in">&#123;</span>(<span class="hljs-string">&#x27;not&#x27;</span> <span class="hljs-built_in">|</span> <span class="hljs-string">&#x27;#&#x27;</span> <span class="hljs-built_in">|</span> <span class="hljs-string">&#x27;-&#x27;</span> <span class="hljs-built_in">|</span> <span class="hljs-string">&#x27;~&#x27;</span>)<span class="hljs-built_in">&#125;</span> exp1
+</span><span class="hljs-attribute">exp1</span> <span class="hljs-body"><span class="hljs-operator">::=</span> exp0 (<span class="hljs-string">&#x27;^&#x27;</span> exp2)
+</span><span class="hljs-attribute">exp0</span> <span class="hljs-body"><span class="hljs-operator">::=</span> nil <span class="hljs-built_in">|</span> false <span class="hljs-built_in">|</span> true <span class="hljs-built_in">|</span> Numeral <span class="hljs-built_in">|</span> LiteralString <span class="hljs-built_in">|</span> <span class="hljs-string">&#x27;...&#x27;</span> <span class="hljs-built_in">|</span> funcDefExp ｜ prefixExp
+</span><span class="hljs-body">	<span class="hljs-built_in">|</span> tableConstructorExp
+</span>
+</code></pre><p><a target="_blank" rel="noopener" href="https://regexper.com/#%2F%28%5E'%28%5C%5C%5C%5C%7C%5C%5C'%7C%5C%5C%5Cn%7C%5C%5Cz%5Cs*%7C%5B%5E'%5Cn%5D%29*'%29%7C%28%5E%22%28%5C%5C%5C%5C%7C%5C%5C%22%7C%5C%5C%5Cn%7C%5C%5Cz%5Cs*%7C%5B%5E%22%5Cn%5D%29*%22%29%2F">LiteralString</a><br>LiteralString ::= /(^‘(\\|\’|\\n|\z\s*|[^'\n])<em>')|(^“(\\|\”|\\n|\z\s</em>|[^“\n])*”)/;</p><p><a target="_blank" rel="noopener" href="https://regexper.com/#%2F%5E0%5BxX%5D%5B0-9a-fA-F%5D*%28%5C.%5B0-9a-fA-F%5D*%29%3F%28%5BpP%5D%5B%2B%5C-%5D%3F%5B0-9%5D%2B%29%3F%7C%5E%5B0-9%5D*%28%5C.%5B0-9%5D*%29%3F%28%5BeE%5D%5B%2B%5C-%5D%3F%5B0-9%5D%2B%29%3F%2F">Numeral</a><br>Numeral ::= /^0[xX][0-9a-fa-f]<em>(.[0-9a-fA-F]</em>)?([pP][+-]?[0-9]+)?|^[0-9]<em>(.[0-9]</em>)?([eE][+-]?[0-9]+)?/;)</p><div id="preview-27" class="preview"><div class="preview-box"><div id="draw-27">src=lua-token.js<script src="/js/lua-token.js"></script></div><div class="preview-box-util"><span id="expand-27" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-27" class="preview-code false"><pre><code class="hljs">
+</code></pre></div><script>const expandCode_27 = document.getElementById('expand-27');
+    const bindCode_27 = document.getElementById('code-27');
+    let flag_27 = true;
+    expandCode_27.onclick = function (){
+        if(flag_27){
+            bindCode_27.classList.add('preview-code-active')
+        }else{
+            bindCode_27.classList.remove('preview-code-active') 
+        }
+        flag_27 = !flag_27
+    }</script></div><script async>let codes = document.getElementsByClassName('hljs');
+            Array.from(codes).forEach(code => {
+                code.addEventListener('click', function copy(e) {
+                    const textContent = e.currentTarget.textContent;
+                    e.currentTarget.focus()
+                    const node = e.currentTarget;
+                    navigator.clipboard.writeText(textContent).then(()=>{
+                        alert('复制成功')
+                        node.blur()
+                    });
+                   
+                })
+            })</script><script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script><script>window.mermaid&&mermaid.initialize({startOnLoad:!0})</script></div></main><footer><p>Copyright © 2019-2022 suxin2017</p><p class="icp"><span><img src="/imgs/icp.png" width="17px" height="17px" alt="icp"> </span><a href="http://beian.miit.gov.cn" class="icp-link"><span>京ICP备2020041991号</span></a></p><p><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></p></footer></div></body></html>

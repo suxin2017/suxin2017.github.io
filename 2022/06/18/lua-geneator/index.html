@@ -1,0 +1,224 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><link rel="icon" sizes="any" type="image/svg+xml" href="/imgs/icon.svg"><link rel="stylesheet" href="/css/theme/color.variables.css"><link id="themeStyleVar" rel="stylesheet" href="/css/theme/default.variables.css"><script>const localStorageTheme = localStorage.getItem('theme');
+        function loadTheme(){
+            let themeLink = document.getElementById('themeStyleVar');
+            if(localStorageTheme){
+                themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${localStorageTheme}.variables.css`)
+            }
+        }
+        if(localStorage){
+            loadTheme()
+            setTimeout(()=>{
+                if(document.body){
+                    document.body.className = localStorageTheme ? localStorageTheme : 'dark'
+                }
+
+            },2)
+        }</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/css/post.css"><title>苏鑫2017</title><meta name="description" content="用于记录感悟，前端技术，编程技巧，各种奇奇怪怪的新的体会"><meta name="viewport" content="width=device-width,initial-scale=1"><script async>console.log(`%c真巧，你打开了devtool`,"color:#b58900")
+        console.log(`%c真巧，你看了我的文章`,"color:#859900")
+        console.log('%c简单介绍，道法自然，做人要顺其自然，不要有太多欲望',"color:#268bd2")
+        console.log('%c不要目的性太强,这就是我的主题想强调的',"color:#dc322f")</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-RFGTVED02M"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-RFGTVED02M")</script><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?ce46d6101f33ba04b74fbe8bbe509590";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><script>const moduleMap = new Map();
+            var define = (moduleName, module) => { moduleMap.set(moduleName, module) };
+            var require = (moduleName) => moduleMap.get(moduleName);</script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="苏鑫2017" type="application/atom+xml"></head><body><div class="body"><header class="header"><div class="header-icon-wrapper"><h2><a href="/">苏鑫2017</a></h2></div><div class="header-right"><nav class="header-menu-wrapper"><ul class="header-menu"><li class="header-menu-item"><a class="header-menu-item-link" href="/">首页</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/categories/weibo">微博</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/about">关于</a></li><li class="header-menu-item"><div id="switchThemeButton"><img src="/imgs/icon.svg" alt="switchThemeIcon" width="100%" height="100%"></div><style>#switchThemeButton{width:40px;height:26px;margin:0;border:0;background:0 0;outline:0;cursor:pointer;margin-top:6px}</style><script async>const btn = document.getElementById('switchThemeButton');
+    let darkTheme = false;
+    const themeStyleVarId = "themeStyleVar";
+    if(localStorageTheme === 'dark'){
+        darkTheme = true
+    }else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // dark mode
+        darkTheme = true;
+    }
+    function loadTheme() {
+        let themeLink = document.getElementById(themeStyleVarId);
+        if (!themeLink) {
+            themeLink = document.createElement('link')
+            themeLink.rel = "stylesheet"
+            themeLink.id = "themeStyleVar"
+        }
+        darkTheme = !darkTheme;
+        themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${darkTheme ? 'dark' : 'light'}.variables.css`)
+        document.head.appendChild(themeLink)
+        document.body.className = darkTheme?'dark':'light'
+        localStorage.setItem('theme',darkTheme?'dark':'light');
+    }
+
+    btn.onclick = function() {
+        loadTheme();
+        codeTheme();
+    }</script><script>function codeTheme(){
+            const localStorageTheme = localStorage.getItem('theme');
+            let codeThemeLink = document.getElementById("codeTheme");
+            if(!codeThemeLink){
+                codeThemeLink = document.createElement('link');
+                codeThemeLink.rel = "stylesheet"
+                codeThemeLink.id = "codeTheme"
+                document.head.appendChild(codeThemeLink)
+            }
+            if(localStorageTheme){
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${localStorageTheme}.css`
+            }else{
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${darkTheme ? 'dark': 'light'}.css`
+            }
+        }
+        codeTheme()</script></li></ul></nav></div></header><main class="main"><div class="post"><h2>lua-geneator</h2><p>代码生成</p><h3 id="定义关键字及符号映射">定义关键字及符号映射</h3><div id="preview-6" class="preview"><div class="preview-box"><div id="draw-6">src=lua-lexer.js<script src="/js/lua-lexer.js"></script></div><div class="preview-box-util"><span id="expand-6" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-6" class="preview-code false"><pre><code class="hljs">
+</code></pre></div><script>const expandCode_6 = document.getElementById('expand-6');
+    const bindCode_6 = document.getElementById('code-6');
+    let flag_6 = true;
+    expandCode_6.onclick = function (){
+        if(flag_6){
+            bindCode_6.classList.add('preview-code-active')
+        }else{
+            bindCode_6.classList.remove('preview-code-active') 
+        }
+        flag_6 = !flag_6
+    }</script></div><div id="preview-7" class="preview"><div class="preview-box"><div id="draw-7">src=lua-token.js<script src="/js/lua-token.js"></script></div><div class="preview-box-util"><span id="expand-7" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-7" class="preview-code false"><pre><code class="hljs">
+</code></pre></div><script>const expandCode_7 = document.getElementById('expand-7');
+    const bindCode_7 = document.getElementById('code-7');
+    let flag_7 = true;
+    expandCode_7.onclick = function (){
+        if(flag_7){
+            bindCode_7.classList.add('preview-code-active')
+        }else{
+            bindCode_7.classList.remove('preview-code-active') 
+        }
+        flag_7 = !flag_7
+    }</script></div><div id="preview-8" class="preview"><div class="preview-box"><div id="draw-8">src=lua-parser.js<script src="/js/lua-parser.js"></script></div><div class="preview-box-util"><span id="expand-8" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-8" class="preview-code false"><pre><code class="hljs">
+</code></pre></div><script>const expandCode_8 = document.getElementById('expand-8');
+    const bindCode_8 = document.getElementById('code-8');
+    let flag_8 = true;
+    expandCode_8.onclick = function (){
+        if(flag_8){
+            bindCode_8.classList.add('preview-code-active')
+        }else{
+            bindCode_8.classList.remove('preview-code-active') 
+        }
+        flag_8 = !flag_8
+    }</script></div><div id="preview-9" class="preview"><div class="preview-box"><div id="draw-9">src=lua-gen-js.js<script src="/js/lua-gen-js.js"></script></div><div class="preview-box-util"><span id="expand-9" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-9" class="preview-code false"><pre><code class="hljs">
+</code></pre></div><script>const expandCode_9 = document.getElementById('expand-9');
+    const bindCode_9 = document.getElementById('code-9');
+    let flag_9 = true;
+    expandCode_9.onclick = function (){
+        if(flag_9){
+            bindCode_9.classList.add('preview-code-active')
+        }else{
+            bindCode_9.classList.remove('preview-code-active') 
+        }
+        flag_9 = !flag_9
+    }</script></div><div id="preview-10" class="preview"><div class="preview-box"><div id="draw-10">drawCode<script type="module">(function(){
+                        function drawCode(code, dom, idx) {
+  let str = `<textarea id="code-${idx}" class="code" rows=6 style="width:100%" readonly>${code}</textarea>`;
+  dom.innerHTML = str;
+}
+
+window.drawCode = drawCode;
+
+                    })(10)</script></div><div class="preview-box-util"><span id="expand-10" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-10" class="preview-code false"><pre><code class="hljs"><span class="hljs-keyword">function</span> <span class="hljs-title function_">drawCode</span>(<span class="hljs-params">code, dom, idx</span>) &#123;
+  <span class="hljs-keyword">let</span> str = <span class="hljs-string">`&lt;textarea id=&quot;code-<span class="hljs-subst">$&#123;idx&#125;</span>&quot; class=&quot;code&quot; rows=6 style=&quot;width:100%&quot; readonly&gt;<span class="hljs-subst">$&#123;code&#125;</span>&lt;/textarea&gt;`</span>;
+  dom.<span class="hljs-property">innerHTML</span> = str;
+&#125;
+
+<span class="hljs-variable language_">window</span>.<span class="hljs-property">drawCode</span> = drawCode;
+</code></pre></div><script>const expandCode_10 = document.getElementById('expand-10');
+    const bindCode_10 = document.getElementById('code-10');
+    let flag_10 = true;
+    expandCode_10.onclick = function (){
+        if(flag_10){
+            bindCode_10.classList.add('preview-code-active')
+        }else{
+            bindCode_10.classList.remove('preview-code-active') 
+        }
+        flag_10 = !flag_10
+    }</script></div><div id="preview-11" class="preview"><div class="preview-box"><div id="draw-11">draw<script type="module">(function(){
+                        function draw(code, ast, idx) {
+  let e = document.getElementById(`draw-${idx}`);
+  e.classList.add("box");
+  let c = document.createElement("div");
+  c.classList.add("code");
+  e.appendChild(c);
+  drawCode(code, c, idx);
+}
+window.draw = draw;
+
+                    })(11)</script></div><div class="preview-box-util"><span id="expand-11" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-11" class="preview-code false"><pre><code class="hljs"><span class="hljs-keyword">function</span> <span class="hljs-title function_">draw</span>(<span class="hljs-params">code, ast, idx</span>) &#123;
+  <span class="hljs-keyword">let</span> e = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">`draw-<span class="hljs-subst">$&#123;idx&#125;</span>`</span>);
+  e.<span class="hljs-property">classList</span>.<span class="hljs-title function_">add</span>(<span class="hljs-string">&quot;box&quot;</span>);
+  <span class="hljs-keyword">let</span> c = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">&quot;div&quot;</span>);
+  c.<span class="hljs-property">classList</span>.<span class="hljs-title function_">add</span>(<span class="hljs-string">&quot;code&quot;</span>);
+  e.<span class="hljs-title function_">appendChild</span>(c);
+  <span class="hljs-title function_">drawCode</span>(code, c, idx);
+&#125;
+<span class="hljs-variable language_">window</span>.<span class="hljs-property">draw</span> = draw;
+</code></pre></div><script>const expandCode_11 = document.getElementById('expand-11');
+    const bindCode_11 = document.getElementById('code-11');
+    let flag_11 = true;
+    expandCode_11.onclick = function (){
+        if(flag_11){
+            bindCode_11.classList.add('preview-code-active')
+        }else{
+            bindCode_11.classList.remove('preview-code-active') 
+        }
+        flag_11 = !flag_11
+    }</script></div><pre>
+// 生成的js代码
+<div style="white-space:pre-wrap" id="js-code"></div>
+<div>
+//eval 执行结果
+</div>
+<div id="js-eval"></div>
+</pre><div>source code 👇👇👇</div><div id="preview-14" class="preview"><div class="preview-box"><div id="draw-14"><script type="module">(function(){
+                        let idx = arguments[0];
+let code = `
+local name,age = "jack",18;
+local jsCode = document.getElementById("js-eval");
+jsCode.textContent = "hello world!!!, name is".." "..name.." age is "..age;
+`;
+let lexer = new Lexer(code);
+let parser = new Parser(lexer);
+let ast = parser.parse();
+draw(code, ast, idx);
+console.log(ast);
+let jsCode = gen(ast);
+document.getElementById("js-code").textContent = jsCode.split(";").join(";\n");
+console.log(jsCode);
+
+eval(jsCode);
+
+                    })(14)</script></div><div class="preview-box-util"><span id="expand-14" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-14" class="preview-code false"><pre><code class="hljs"><span class="hljs-keyword">let</span> idx = <span class="hljs-variable language_">arguments</span>[<span class="hljs-number">0</span>];
+<span class="hljs-keyword">let</span> code = <span class="hljs-string">`
+local name,age = &quot;jack&quot;,18;
+local jsCode = document.getElementById(&quot;js-eval&quot;);
+jsCode.textContent = &quot;hello world!!!, name is&quot;..&quot; &quot;..name..&quot; age is &quot;..age;
+`</span>;
+<span class="hljs-keyword">let</span> lexer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Lexer</span>(code);
+<span class="hljs-keyword">let</span> parser = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Parser</span>(lexer);
+<span class="hljs-keyword">let</span> ast = parser.<span class="hljs-title function_">parse</span>();
+<span class="hljs-title function_">draw</span>(code, ast, idx);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(ast);
+<span class="hljs-keyword">let</span> jsCode = <span class="hljs-title function_">gen</span>(ast);
+<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;js-code&quot;</span>).<span class="hljs-property">textContent</span> = jsCode.<span class="hljs-title function_">split</span>(<span class="hljs-string">&quot;;&quot;</span>).<span class="hljs-title function_">join</span>(<span class="hljs-string">&quot;;\n&quot;</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(jsCode);
+
+<span class="hljs-built_in">eval</span>(jsCode);
+</code></pre></div><script>const expandCode_14 = document.getElementById('expand-14');
+    const bindCode_14 = document.getElementById('code-14');
+    let flag_14 = true;
+    expandCode_14.onclick = function (){
+        if(flag_14){
+            bindCode_14.classList.add('preview-code-active')
+        }else{
+            bindCode_14.classList.remove('preview-code-active') 
+        }
+        flag_14 = !flag_14
+    }</script></div><pre><code class="hljs">
+</code></pre><script async>let codes = document.getElementsByClassName('hljs');
+            Array.from(codes).forEach(code => {
+                code.addEventListener('click', function copy(e) {
+                    const textContent = e.currentTarget.textContent;
+                    e.currentTarget.focus()
+                    const node = e.currentTarget;
+                    navigator.clipboard.writeText(textContent).then(()=>{
+                        alert('复制成功')
+                        node.blur()
+                    });
+                   
+                })
+            })</script><script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script><script>window.mermaid&&mermaid.initialize({startOnLoad:!0})</script></div></main><footer><p>Copyright © 2019-2022 suxin2017</p><p class="icp"><span><img src="/imgs/icp.png" width="17px" height="17px" alt="icp"> </span><a href="http://beian.miit.gov.cn" class="icp-link"><span>京ICP备2020041991号</span></a></p><p><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></p></footer></div></body></html>

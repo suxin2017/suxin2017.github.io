@@ -1,0 +1,507 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><link rel="icon" sizes="any" type="image/svg+xml" href="/imgs/icon.svg"><link rel="stylesheet" href="/css/theme/color.variables.css"><link id="themeStyleVar" rel="stylesheet" href="/css/theme/default.variables.css"><script>const localStorageTheme = localStorage.getItem('theme');
+        function loadTheme(){
+            let themeLink = document.getElementById('themeStyleVar');
+            if(localStorageTheme){
+                themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${localStorageTheme}.variables.css`)
+            }
+        }
+        if(localStorage){
+            loadTheme()
+            setTimeout(()=>{
+                if(document.body){
+                    document.body.className = localStorageTheme ? localStorageTheme : 'dark'
+                }
+
+            },2)
+        }</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/css/post.css"><title>苏鑫2017</title><meta name="description" content="用于记录感悟，前端技术，编程技巧，各种奇奇怪怪的新的体会"><meta name="viewport" content="width=device-width,initial-scale=1"><script async>console.log(`%c真巧，你打开了devtool`,"color:#b58900")
+        console.log(`%c真巧，你看了我的文章`,"color:#859900")
+        console.log('%c简单介绍，道法自然，做人要顺其自然，不要有太多欲望',"color:#268bd2")
+        console.log('%c不要目的性太强,这就是我的主题想强调的',"color:#dc322f")</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-RFGTVED02M"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-RFGTVED02M")</script><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?ce46d6101f33ba04b74fbe8bbe509590";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><script>const moduleMap = new Map();
+            var define = (moduleName, module) => { moduleMap.set(moduleName, module) };
+            var require = (moduleName) => moduleMap.get(moduleName);</script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="苏鑫2017" type="application/atom+xml"></head><body><div class="body"><header class="header"><div class="header-icon-wrapper"><h2><a href="/">苏鑫2017</a></h2></div><div class="header-right"><nav class="header-menu-wrapper"><ul class="header-menu"><li class="header-menu-item"><a class="header-menu-item-link" href="/">首页</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/categories/weibo">微博</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/about">关于</a></li><li class="header-menu-item"><div id="switchThemeButton"><img src="/imgs/icon.svg" alt="switchThemeIcon" width="100%" height="100%"></div><style>#switchThemeButton{width:40px;height:26px;margin:0;border:0;background:0 0;outline:0;cursor:pointer;margin-top:6px}</style><script async>const btn = document.getElementById('switchThemeButton');
+    let darkTheme = false;
+    const themeStyleVarId = "themeStyleVar";
+    if(localStorageTheme === 'dark'){
+        darkTheme = true
+    }else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // dark mode
+        darkTheme = true;
+    }
+    function loadTheme() {
+        let themeLink = document.getElementById(themeStyleVarId);
+        if (!themeLink) {
+            themeLink = document.createElement('link')
+            themeLink.rel = "stylesheet"
+            themeLink.id = "themeStyleVar"
+        }
+        darkTheme = !darkTheme;
+        themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${darkTheme ? 'dark' : 'light'}.variables.css`)
+        document.head.appendChild(themeLink)
+        document.body.className = darkTheme?'dark':'light'
+        localStorage.setItem('theme',darkTheme?'dark':'light');
+    }
+
+    btn.onclick = function() {
+        loadTheme();
+        codeTheme();
+    }</script><script>function codeTheme(){
+            const localStorageTheme = localStorage.getItem('theme');
+            let codeThemeLink = document.getElementById("codeTheme");
+            if(!codeThemeLink){
+                codeThemeLink = document.createElement('link');
+                codeThemeLink.rel = "stylesheet"
+                codeThemeLink.id = "codeTheme"
+                document.head.appendChild(codeThemeLink)
+            }
+            if(localStorageTheme){
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${localStorageTheme}.css`
+            }else{
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${darkTheme ? 'dark': 'light'}.css`
+            }
+        }
+        codeTheme()</script></li></ul></nav></div></header><main class="main"><div class="post"><h2>scheduler</h2><p>内容</p><div id="preview-3" class="preview"><div class="preview-box"><div id="draw-3">getCurrentTime<script type="module">(function(){
+                        const getCurrentTime = () => performance.now();
+
+define("getCurrentTime", getCurrentTime);
+
+                    })(3)</script></div><div class="preview-box-util"><span id="expand-3" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-3" class="preview-code false"><pre><code class="hljs"><span class="hljs-keyword">const</span> <span class="hljs-title function_">getCurrentTime</span> = (<span class="hljs-params"></span>) =&gt; performance.<span class="hljs-title function_">now</span>();
+
+<span class="hljs-title function_">define</span>(<span class="hljs-string">&quot;getCurrentTime&quot;</span>, getCurrentTime);
+</code></pre></div><script>const expandCode_3 = document.getElementById('expand-3');
+    const bindCode_3 = document.getElementById('code-3');
+    let flag_3 = true;
+    expandCode_3.onclick = function (){
+        if(flag_3){
+            bindCode_3.classList.add('preview-code-active')
+        }else{
+            bindCode_3.classList.remove('preview-code-active') 
+        }
+        flag_3 = !flag_3
+    }</script></div><div id="preview-4" class="preview"><div class="preview-box"><div id="draw-4">sleep<script type="module">(function(){
+                        const getCurrentTime = require("getCurrentTime");
+const sleep = (tm) => {
+  let startTime = getCurrentTime();
+
+  while (getCurrentTime() - startTime <= tm) {
+    // sleep
+  }
+};
+define("sleep", sleep);
+
+                    })(4)</script></div><div class="preview-box-util"><span id="expand-4" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-4" class="preview-code false"><pre><code class="hljs"><span class="hljs-keyword">const</span> getCurrentTime = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;getCurrentTime&quot;</span>);
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">sleep</span> = (<span class="hljs-params">tm</span>) =&gt; &#123;
+  <span class="hljs-keyword">let</span> startTime = <span class="hljs-title function_">getCurrentTime</span>();
+
+  <span class="hljs-keyword">while</span> (<span class="hljs-title function_">getCurrentTime</span>() - startTime &lt;= tm) &#123;
+    <span class="hljs-comment">// sleep</span>
+  &#125;
+&#125;;
+<span class="hljs-title function_">define</span>(<span class="hljs-string">&quot;sleep&quot;</span>, sleep);
+</code></pre></div><script>const expandCode_4 = document.getElementById('expand-4');
+    const bindCode_4 = document.getElementById('code-4');
+    let flag_4 = true;
+    expandCode_4.onclick = function (){
+        if(flag_4){
+            bindCode_4.classList.add('preview-code-active')
+        }else{
+            bindCode_4.classList.remove('preview-code-active') 
+        }
+        flag_4 = !flag_4
+    }</script></div><div id="preview-5" class="preview"><div class="preview-box"><div id="draw-5">TaskQueue<script type="module">(function(){
+                        class TaskQueue {
+  constructor() {
+    this.queue = [];
+  }
+  push(task) {
+    this.queue.unshift(task);
+  }
+  peek() {
+    return this.queue[this.queue.length - 1];
+  }
+  pop() {
+    return this.queue.pop();
+  }
+}
+define("TaskQueue", TaskQueue);
+
+                    })(5)</script></div><div class="preview-box-util"><span id="expand-5" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-5" class="preview-code false"><pre><code class="hljs"><span class="hljs-keyword">class</span> <span class="hljs-title class_">TaskQueue</span> &#123;
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">queue</span> = [];
+  &#125;
+  <span class="hljs-title function_">push</span>(<span class="hljs-params">task</span>) &#123;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">queue</span>.<span class="hljs-title function_">unshift</span>(task);
+  &#125;
+  <span class="hljs-title function_">peek</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">queue</span>[<span class="hljs-variable language_">this</span>.<span class="hljs-property">queue</span>.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>];
+  &#125;
+  <span class="hljs-title function_">pop</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">queue</span>.<span class="hljs-title function_">pop</span>();
+  &#125;
+&#125;
+<span class="hljs-title function_">define</span>(<span class="hljs-string">&quot;TaskQueue&quot;</span>, <span class="hljs-title class_">TaskQueue</span>);
+</code></pre></div><script>const expandCode_5 = document.getElementById('expand-5');
+    const bindCode_5 = document.getElementById('code-5');
+    let flag_5 = true;
+    expandCode_5.onclick = function (){
+        if(flag_5){
+            bindCode_5.classList.add('preview-code-active')
+        }else{
+            bindCode_5.classList.remove('preview-code-active') 
+        }
+        flag_5 = !flag_5
+    }</script></div><div id="preview-6" class="preview"><div class="preview-box"><div id="draw-6">Scheduler<script type="module">(function(){
+                        const getCurrentTime = require("getCurrentTime");
+const TaskQueue = require("TaskQueue");
+const frameInterval = 1000 / 60;
+
+class Scheduler {
+  constructor() {
+    this.taskQueue = new TaskQueue();
+    this.taskIdCounter = 0;
+
+    //
+    this.isHostCallbackScheduled = false;
+    this.isPerformingWork = false;
+
+    this.startTime = -1;
+
+    this.scheduledHostCallback = null;
+
+    this.isMessageLoopRunning = false;
+
+    this.cannel = new MessageChannel();
+
+    this.cannel.port1.onmessage = this.performWorkUntilDeadline.bind(this);
+  }
+
+  commitTask(callback) {
+    let currentTime = getCurrentTime();
+
+    const startTime = currentTime;
+
+    const timeout = 0; // ms
+
+    const newTask = {
+      id: this.taskIdCounter++,
+      callback,
+      startTime,
+    };
+
+    this.taskQueue.push(newTask);
+
+    if (!this.isHostCallbackScheduled && !this.isPerformingWork) {
+      this.isHostCallbackScheduled = true;
+      this.requestHostCallback(this.flushWork);
+    }
+  }
+
+  requestHostCallback(cb) {
+    this.scheduledHostCallback = cb;
+    if (!this.isMessageLoopRunning) {
+      this.isMessageLoopRunning = true;
+      this.schedulePerformWorkUntilDeadline();
+    }
+  }
+
+  // 发起事件开始执行
+  schedulePerformWorkUntilDeadline() {
+    this.cannel.port2.postMessage(null);
+  }
+
+  flushWork() {
+    this.isHostCallbackScheduled = false;
+    try {
+      return this.workLoop();
+    } finally {
+      this.currentTask = null;
+      this.isPerformingWork = false;
+    }
+  }
+
+  workLoop() {
+    this.currentTask = this.taskQueue.peek();
+    while (this.currentTask != null) {
+      const shouldCallTask = this.shouldYieldToHost();
+      if (shouldCallTask) {
+        break;
+      }
+      const callback = this.currentTask.callback;
+      if (typeof callback === "function") {
+        const continuationCallback = callback();
+
+        if (typeof continuationCallback === "function") {
+          this.currentTask.callback = continuationCallback;
+        } else {
+          if (this.currentTask === this.taskQueue.peek()) {
+            this.taskQueue.pop();
+          }
+        }
+      } else {
+        this.taskQueue.pop();
+      }
+      this.currentTask = this.taskQueue.peek();
+    }
+    if (this.currentTask != null) {
+      return true;
+    }
+    return false;
+  }
+
+  performWorkUntilDeadline() {
+    if (this.scheduledHostCallback !== null) {
+      const currentTime = getCurrentTime();
+      this.startTime = currentTime;
+
+      let hasMoreWork = true;
+      try {
+        hasMoreWork = this.scheduledHostCallback();
+      } finally {
+        if (hasMoreWork) {
+          this.schedulePerformWorkUntilDeadline();
+        } else {
+          this.isMessageLoopRunning = false;
+          this.scheduledHostCallback = null;
+        }
+      }
+    }
+  }
+
+  shouldYieldToHost() {
+    const timeElapsed = getCurrentTime() - this.startTime;
+    if (timeElapsed < frameInterval) {
+      return false;
+    }
+    return true;
+  }
+}
+define("scheduler", Scheduler);
+
+                    })(6)</script></div><div class="preview-box-util"><span id="expand-6" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-6" class="preview-code false"><pre><code class="hljs"><span class="hljs-keyword">const</span> getCurrentTime = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;getCurrentTime&quot;</span>);
+<span class="hljs-keyword">const</span> <span class="hljs-title class_">TaskQueue</span> = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;TaskQueue&quot;</span>);
+<span class="hljs-keyword">const</span> frameInterval = <span class="hljs-number">1000</span> / <span class="hljs-number">60</span>;
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Scheduler</span> &#123;
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">taskQueue</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TaskQueue</span>();
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">taskIdCounter</span> = <span class="hljs-number">0</span>;
+
+    <span class="hljs-comment">//</span>
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">isHostCallbackScheduled</span> = <span class="hljs-literal">false</span>;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">isPerformingWork</span> = <span class="hljs-literal">false</span>;
+
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">startTime</span> = -<span class="hljs-number">1</span>;
+
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">scheduledHostCallback</span> = <span class="hljs-literal">null</span>;
+
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">isMessageLoopRunning</span> = <span class="hljs-literal">false</span>;
+
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">cannel</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MessageChannel</span>();
+
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">cannel</span>.<span class="hljs-property">port1</span>.<span class="hljs-property">onmessage</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">performWorkUntilDeadline</span>.<span class="hljs-title function_">bind</span>(<span class="hljs-variable language_">this</span>);
+  &#125;
+
+  <span class="hljs-title function_">commitTask</span>(<span class="hljs-params">callback</span>) &#123;
+    <span class="hljs-keyword">let</span> currentTime = <span class="hljs-title function_">getCurrentTime</span>();
+
+    <span class="hljs-keyword">const</span> startTime = currentTime;
+
+    <span class="hljs-keyword">const</span> timeout = <span class="hljs-number">0</span>; <span class="hljs-comment">// ms</span>
+
+    <span class="hljs-keyword">const</span> newTask = &#123;
+      <span class="hljs-attr">id</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">taskIdCounter</span>++,
+      callback,
+      startTime,
+    &#125;;
+
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">taskQueue</span>.<span class="hljs-title function_">push</span>(newTask);
+
+    <span class="hljs-keyword">if</span> (!<span class="hljs-variable language_">this</span>.<span class="hljs-property">isHostCallbackScheduled</span> &amp;&amp; !<span class="hljs-variable language_">this</span>.<span class="hljs-property">isPerformingWork</span>) &#123;
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">isHostCallbackScheduled</span> = <span class="hljs-literal">true</span>;
+      <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">requestHostCallback</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">flushWork</span>);
+    &#125;
+  &#125;
+
+  <span class="hljs-title function_">requestHostCallback</span>(<span class="hljs-params">cb</span>) &#123;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">scheduledHostCallback</span> = cb;
+    <span class="hljs-keyword">if</span> (!<span class="hljs-variable language_">this</span>.<span class="hljs-property">isMessageLoopRunning</span>) &#123;
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">isMessageLoopRunning</span> = <span class="hljs-literal">true</span>;
+      <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">schedulePerformWorkUntilDeadline</span>();
+    &#125;
+  &#125;
+
+  <span class="hljs-comment">// 发起事件开始执行</span>
+  <span class="hljs-title function_">schedulePerformWorkUntilDeadline</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">cannel</span>.<span class="hljs-property">port2</span>.<span class="hljs-title function_">postMessage</span>(<span class="hljs-literal">null</span>);
+  &#125;
+
+  <span class="hljs-title function_">flushWork</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">isHostCallbackScheduled</span> = <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">try</span> &#123;
+      <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">workLoop</span>();
+    &#125; <span class="hljs-keyword">finally</span> &#123;
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">currentTask</span> = <span class="hljs-literal">null</span>;
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">isPerformingWork</span> = <span class="hljs-literal">false</span>;
+    &#125;
+  &#125;
+
+  <span class="hljs-title function_">workLoop</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">currentTask</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">taskQueue</span>.<span class="hljs-title function_">peek</span>();
+    <span class="hljs-keyword">while</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">currentTask</span> != <span class="hljs-literal">null</span>) &#123;
+      <span class="hljs-keyword">const</span> shouldCallTask = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">shouldYieldToHost</span>();
+      <span class="hljs-keyword">if</span> (shouldCallTask) &#123;
+        <span class="hljs-keyword">break</span>;
+      &#125;
+      <span class="hljs-keyword">const</span> callback = <span class="hljs-variable language_">this</span>.<span class="hljs-property">currentTask</span>.<span class="hljs-property">callback</span>;
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> callback === <span class="hljs-string">&quot;function&quot;</span>) &#123;
+        <span class="hljs-keyword">const</span> continuationCallback = <span class="hljs-title function_">callback</span>();
+
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> continuationCallback === <span class="hljs-string">&quot;function&quot;</span>) &#123;
+          <span class="hljs-variable language_">this</span>.<span class="hljs-property">currentTask</span>.<span class="hljs-property">callback</span> = continuationCallback;
+        &#125; <span class="hljs-keyword">else</span> &#123;
+          <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">currentTask</span> === <span class="hljs-variable language_">this</span>.<span class="hljs-property">taskQueue</span>.<span class="hljs-title function_">peek</span>()) &#123;
+            <span class="hljs-variable language_">this</span>.<span class="hljs-property">taskQueue</span>.<span class="hljs-title function_">pop</span>();
+          &#125;
+        &#125;
+      &#125; <span class="hljs-keyword">else</span> &#123;
+        <span class="hljs-variable language_">this</span>.<span class="hljs-property">taskQueue</span>.<span class="hljs-title function_">pop</span>();
+      &#125;
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">currentTask</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">taskQueue</span>.<span class="hljs-title function_">peek</span>();
+    &#125;
+    <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">currentTask</span> != <span class="hljs-literal">null</span>) &#123;
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+  &#125;
+
+  <span class="hljs-title function_">performWorkUntilDeadline</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">scheduledHostCallback</span> !== <span class="hljs-literal">null</span>) &#123;
+      <span class="hljs-keyword">const</span> currentTime = <span class="hljs-title function_">getCurrentTime</span>();
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">startTime</span> = currentTime;
+
+      <span class="hljs-keyword">let</span> hasMoreWork = <span class="hljs-literal">true</span>;
+      <span class="hljs-keyword">try</span> &#123;
+        hasMoreWork = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">scheduledHostCallback</span>();
+      &#125; <span class="hljs-keyword">finally</span> &#123;
+        <span class="hljs-keyword">if</span> (hasMoreWork) &#123;
+          <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">schedulePerformWorkUntilDeadline</span>();
+        &#125; <span class="hljs-keyword">else</span> &#123;
+          <span class="hljs-variable language_">this</span>.<span class="hljs-property">isMessageLoopRunning</span> = <span class="hljs-literal">false</span>;
+          <span class="hljs-variable language_">this</span>.<span class="hljs-property">scheduledHostCallback</span> = <span class="hljs-literal">null</span>;
+        &#125;
+      &#125;
+    &#125;
+  &#125;
+
+  <span class="hljs-title function_">shouldYieldToHost</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-keyword">const</span> timeElapsed = <span class="hljs-title function_">getCurrentTime</span>() - <span class="hljs-variable language_">this</span>.<span class="hljs-property">startTime</span>;
+    <span class="hljs-keyword">if</span> (timeElapsed &lt; frameInterval) &#123;
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+  &#125;
+&#125;
+<span class="hljs-title function_">define</span>(<span class="hljs-string">&quot;scheduler&quot;</span>, <span class="hljs-title class_">Scheduler</span>);
+</code></pre></div><script>const expandCode_6 = document.getElementById('expand-6');
+    const bindCode_6 = document.getElementById('code-6');
+    let flag_6 = true;
+    expandCode_6.onclick = function (){
+        if(flag_6){
+            bindCode_6.classList.add('preview-code-active')
+        }else{
+            bindCode_6.classList.remove('preview-code-active') 
+        }
+        flag_6 = !flag_6
+    }</script></div><div id="preview-7" class="preview"><div class="preview-box"><div id="draw-7"><script type="module">const Scheduler = require("scheduler");
+  const sleep = require("sleep");
+
+  const scheduler = new Scheduler();
+  const runTaskButton = document.getElementById("runTask");
+  const draw = document.getElementById("draw");
+  runTaskButton.onclick = () => {
+    console.log("提交任务");
+    scheduler.commitTask(() => {
+      console.log("hello world1");
+      sleep(200);
+      draw.innerHTML = "task1";
+    });
+    scheduler.commitTask(() => {
+      console.log("hello world2");
+      sleep(200);
+      draw.innerHTML = "task2";
+    });
+    scheduler.commitTask(() => {
+      console.log("hello world3");
+      sleep(200);
+      draw.innerHTML = "task3";
+    });
+    scheduler.commitTask(() => {
+      console.log("hello world4");
+      sleep(200);
+      draw.innerHTML = "task4";
+    });
+    scheduler.commitTask(() => {
+      console.log("hello world5");
+      sleep(200);
+      draw.innerHTML = "task5";
+    });
+  };</script><button id="runTask">运行任务</button><div id="draw"></div></div><div class="preview-box-util"><span id="expand-7" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-7" class="preview-code false"><pre><code class="hljs"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;module&quot;</span>&gt;</span><span class="language-javascript">
+  <span class="hljs-keyword">const</span> <span class="hljs-title class_">Scheduler</span> = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;scheduler&quot;</span>);
+  <span class="hljs-keyword">const</span> sleep = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;sleep&quot;</span>);
+
+  <span class="hljs-keyword">const</span> scheduler = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Scheduler</span>();
+  <span class="hljs-keyword">const</span> runTaskButton = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;runTask&quot;</span>);
+  <span class="hljs-keyword">const</span> draw = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;draw&quot;</span>);
+  runTaskButton.<span class="hljs-property">onclick</span> = <span class="hljs-function">() =&gt;</span> &#123;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;提交任务&quot;</span>);
+    scheduler.<span class="hljs-title function_">commitTask</span>(<span class="hljs-function">() =&gt;</span> &#123;
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;hello world1&quot;</span>);
+      <span class="hljs-title function_">sleep</span>(<span class="hljs-number">200</span>);
+      draw.<span class="hljs-property">innerHTML</span> = <span class="hljs-string">&quot;task1&quot;</span>;
+    &#125;);
+    scheduler.<span class="hljs-title function_">commitTask</span>(<span class="hljs-function">() =&gt;</span> &#123;
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;hello world2&quot;</span>);
+      <span class="hljs-title function_">sleep</span>(<span class="hljs-number">200</span>);
+      draw.<span class="hljs-property">innerHTML</span> = <span class="hljs-string">&quot;task2&quot;</span>;
+    &#125;);
+    scheduler.<span class="hljs-title function_">commitTask</span>(<span class="hljs-function">() =&gt;</span> &#123;
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;hello world3&quot;</span>);
+      <span class="hljs-title function_">sleep</span>(<span class="hljs-number">200</span>);
+      draw.<span class="hljs-property">innerHTML</span> = <span class="hljs-string">&quot;task3&quot;</span>;
+    &#125;);
+    scheduler.<span class="hljs-title function_">commitTask</span>(<span class="hljs-function">() =&gt;</span> &#123;
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;hello world4&quot;</span>);
+      <span class="hljs-title function_">sleep</span>(<span class="hljs-number">200</span>);
+      draw.<span class="hljs-property">innerHTML</span> = <span class="hljs-string">&quot;task4&quot;</span>;
+    &#125;);
+    scheduler.<span class="hljs-title function_">commitTask</span>(<span class="hljs-function">() =&gt;</span> &#123;
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;hello world5&quot;</span>);
+      <span class="hljs-title function_">sleep</span>(<span class="hljs-number">200</span>);
+      draw.<span class="hljs-property">innerHTML</span> = <span class="hljs-string">&quot;task5&quot;</span>;
+    &#125;);
+  &#125;;
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;runTask&quot;</span>&gt;</span>运行任务<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;draw&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre></div><script>const expandCode_7 = document.getElementById('expand-7');
+    const bindCode_7 = document.getElementById('code-7');
+    let flag_7 = true;
+    expandCode_7.onclick = function (){
+        if(flag_7){
+            bindCode_7.classList.add('preview-code-active')
+        }else{
+            bindCode_7.classList.remove('preview-code-active') 
+        }
+        flag_7 = !flag_7
+    }</script></div><script async>let codes = document.getElementsByClassName('hljs');
+            Array.from(codes).forEach(code => {
+                code.addEventListener('click', function copy(e) {
+                    const textContent = e.currentTarget.textContent;
+                    e.currentTarget.focus()
+                    const node = e.currentTarget;
+                    navigator.clipboard.writeText(textContent).then(()=>{
+                        alert('复制成功')
+                        node.blur()
+                    });
+                   
+                })
+            })</script><script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script><script>window.mermaid&&mermaid.initialize({startOnLoad:!0})</script></div></main><footer><p>Copyright © 2019-2022 suxin2017</p><p class="icp"><span><img src="/imgs/icp.png" width="17px" height="17px" alt="icp"> </span><a href="http://beian.miit.gov.cn" class="icp-link"><span>京ICP备2020041991号</span></a></p><p><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></p></footer></div></body></html>
