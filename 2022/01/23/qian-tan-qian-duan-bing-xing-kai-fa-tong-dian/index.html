@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><link rel="icon" sizes="any" type="image/svg+xml" href="/imgs/icon.svg"><link rel="stylesheet" href="/css/theme/color.variables.css"><link id="themeStyleVar" rel="stylesheet" href="/css/theme/default.variables.css"><script>const localStorageTheme = localStorage.getItem('theme');
+        function loadTheme(){
+            let themeLink = document.getElementById('themeStyleVar');
+            if(localStorageTheme){
+                themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${localStorageTheme}.variables.css`)
+            }
+        }
+        if(localStorage){
+            loadTheme()
+            setTimeout(()=>{
+                if(document.body){
+                    document.body.className = localStorageTheme ? localStorageTheme : 'dark'
+                }
+
+            },2)
+        }</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/css/post.css"><title>苏鑫2017</title><meta name="description" content="用于记录感悟，前端技术，编程技巧，各种奇奇怪怪的新的体会"><meta name="viewport" content="width=device-width,initial-scale=1"><script async>console.log(`%c真巧，你打开了devtool`,"color:#b58900")
+        console.log(`%c真巧，你看了我的文章`,"color:#859900")
+        console.log('%c简单介绍，道法自然，做人要顺其自然，不要有太多欲望',"color:#268bd2")
+        console.log('%c不要目的性太强,这就是我的主题想强调的',"color:#dc322f")</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-RFGTVED02M"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-RFGTVED02M")</script><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?ce46d6101f33ba04b74fbe8bbe509590";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><script>const moduleMap = new Map();
+            var define = (moduleName, module) => { moduleMap.set(moduleName, module) };
+            var require = (moduleName) => moduleMap.get(moduleName);</script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="苏鑫2017" type="application/atom+xml"></head><body><div class="body"><header class="header"><div class="header-icon-wrapper"><h2><a href="/">苏鑫2017</a></h2></div><div class="header-right"><nav class="header-menu-wrapper"><ul class="header-menu"><li class="header-menu-item"><a class="header-menu-item-link" href="/">首页</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/categories/weibo">微博</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/about">关于</a></li><li class="header-menu-item"><div id="switchThemeButton"><img src="/imgs/icon.svg" alt="switchThemeIcon" width="100%" height="100%"></div><style>#switchThemeButton{width:40px;height:26px;margin:0;border:0;background:0 0;outline:0;cursor:pointer;margin-top:6px}</style><script async>const btn = document.getElementById('switchThemeButton');
+    let darkTheme = false;
+    const themeStyleVarId = "themeStyleVar";
+    if(localStorageTheme === 'dark'){
+        darkTheme = true
+    }else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // dark mode
+        darkTheme = true;
+    }
+    function loadTheme() {
+        let themeLink = document.getElementById(themeStyleVarId);
+        if (!themeLink) {
+            themeLink = document.createElement('link')
+            themeLink.rel = "stylesheet"
+            themeLink.id = "themeStyleVar"
+        }
+        darkTheme = !darkTheme;
+        themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${darkTheme ? 'dark' : 'light'}.variables.css`)
+        document.head.appendChild(themeLink)
+        document.body.className = darkTheme?'dark':'light'
+        localStorage.setItem('theme',darkTheme?'dark':'light');
+    }
+
+    btn.onclick = function() {
+        loadTheme();
+        codeTheme();
+    }</script><script>function codeTheme(){
+            const localStorageTheme = localStorage.getItem('theme');
+            let codeThemeLink = document.getElementById("codeTheme");
+            if(!codeThemeLink){
+                codeThemeLink = document.createElement('link');
+                codeThemeLink.rel = "stylesheet"
+                codeThemeLink.id = "codeTheme"
+                document.head.appendChild(codeThemeLink)
+            }
+            if(localStorageTheme){
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${localStorageTheme}.css`
+            }else{
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${darkTheme ? 'dark': 'light'}.css`
+            }
+        }
+        codeTheme()</script></li></ul></nav></div></header><main class="main"><div class="post"><h2>浅谈前端并行开发痛点</h2><p>首先，我们先来看下 url 获取资源的本质，一般情况下一条 url 会请求到代理服务器（nginx）。</p><p>代理服务器会帮助我们选择目标资源，我将目标资源分为两类。</p><p>一类是静态的（变更频率低），静态的主要包括 html、js、css、图片、视频</p><p>一类是动态的（变更频率高），动态是可变的，最主要特点是两次请求返回结果可能不同，json、jsp、ssr、文件导出</p><p>当我们通过浏览器发出一个请求时候，一定是这两类中的一类，和前端相关的 80%以上都是在请求静态资源。</p><p>如下图</p><p><img src="/imgs/%E6%B5%81%E7%A8%8B.png" alt="markdown-it 中间件"></p><p>这是我们线上业务的一般态，在测试环境下我们面临的挑战比这个要多一些。</p><h3 id="测试环节静态资源与动态资源的关系">测试环节静态资源与动态资源的关系</h3><h4 id="n-0-关系">n - 0 关系</h4><p>纯静态类资源的前端场景</p><p>这类指的是无需请求动态数据的，这类站点通常是文档站，但是也有特殊的比如一些 playground 、正则校验等。</p><p>我们会根据需求切换不同分支，进行开发，这时候的版本是 功能预览版 ，在某种场景下 功能预览版 需要自己的站点。</p><p>面临的问题是，如果快速高效的部署自己的功能预览站点？</p><h4 id="1-n-关系">1 - n 关系</h4><p>这类指的是前端不变后端变化，后端需要一个和线上一致的测试环境去验证自己的修改是否正确。</p><p>面临的问题是，需要保证测试环境一直有一个稳定的线上前端环节。</p><h4 id="n-1-关系">n - 1 关系</h4><p>只是前端变动，后端无需变动，这个和 n - 0 关系面临的问题是一样的。</p><h4 id="n-m-关系">n - m 关系</h4><p>这是测试环境下最常见的，当一个需求开发时候，我们需要部署一份前端和一份后端，提供给测试同学检验。</p><p>这里面临的问题既包括 n - 0 的问题，还存在如何对应把前端与后端关联起来。</p><p>针对上面的关系我们总结出需要解决的两个问题点：</p><ol><li>如何快速部署新功能前端站点</li><li>如何绑定前端与后端</li></ol><h3 id="快熟部署新功能的前端站站点">快熟部署新功能的前端站站点</h3><p>正常情况下，我们部署前端站点，需要申请一台机器（容器节点），然后配置 ng，将请求指向对应静态资源目录。</p><p>这些动作是重复的，所以我们可以引入一个平台去帮我们做这些事情。</p><p>假设当前有一个项目 A，正在并行开发功能 A。</p><p>平台功能主要包括：</p><ol><li>资源隔离<br>对于项目 A 的功能 A，需要存放到资源目录 /项目_A/功能_A，这样只需要根据某些特征值发送这些文件就可以啦。</li><li>资源映射<br>两种资源映射操作，动态域名，特征路由<br>动态域名是指通过子域名进行区分，比如 <a target="_blank" rel="noopener" href="http://xn---A---A-ze4jr21vk6ssv7c.ci.com">项目-A--功能-A.ci.com</a><br>通过特种路由的方式，通过 header 进行标识要请求那个功能，比如在 header 添加 special-header：项目_A-功能_A</li></ol><table><thead><tr><th></th><th>动态域名</th><th>特征路由</th></tr></thead><tbody><tr><td>优点</td><td>相比于 header 方式用户更方便使用</td><td>全部场景覆盖</td></tr><tr><td>缺点</td><td>对于某些特定场景动态域名无法支持，比如只针对白名单域名进行权限校验等<br>需要配置接口代理，转发到指定后端</td><td>需要使用浏览器插件的方式手动注入 header</td></tr></tbody></table><ol start="3"><li>接口代理绑定前后端<br>如果使用动态域名的方式我们需要手动指定接口代理，如何搭建一个自己的代理服务？<br>目前可以有三种方案，nginx 拓展、http-proxy-middleware、whistle<br>对于前端最好上手的是 http-proxy-middleware 另外两个也可以实现但是相对成本高些。</li></ol><p>通过平台提供这些常用的能力就可以满足上面所有场景啦。</p><p>好了上面就是如何针对前端并行开发的场景，需要做的一切了，下面是一些个人思考。</p><h4 id="一些思考">一些思考</h4><ol><li>容器化前端场景测试环境是否适用？<br>不可否认容器技术带来的便利，动态扩容，环境隔离等优势，但是针对测试环境的前端这些优势显然无用武之地。<br>测试环境的前端没那么大的压力，基本上无需扩容，需要资源极低，更需要的是快速交付给测试同学校验。<br>然后使用容器，需要启停，打包镜像，显然拉长了这一过程。</li><li>一个产品能否打到100%完美？<br>不可能，没有一个产品能达到100%的完美，无论这个产品用户量多大，都是不可能的，原因在于屁股决定脑袋，每个人的屁股是不一样的。</li></ol><script async>let codes = document.getElementsByClassName('hljs');
+            Array.from(codes).forEach(code => {
+                code.addEventListener('click', function copy(e) {
+                    const textContent = e.currentTarget.textContent;
+                    e.currentTarget.focus()
+                    const node = e.currentTarget;
+                    navigator.clipboard.writeText(textContent).then(()=>{
+                        alert('复制成功')
+                        node.blur()
+                    });
+                   
+                })
+            })</script><script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script><script>window.mermaid&&mermaid.initialize({startOnLoad:!0})</script></div></main><footer><p>Copyright © 2019-2022 suxin2017</p><p class="icp"><span><img src="/imgs/icp.png" width="17px" height="17px" alt="icp"> </span><a href="http://beian.miit.gov.cn" class="icp-link"><span>京ICP备2020041991号</span></a></p><p><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></p></footer></div></body></html>

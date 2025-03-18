@@ -1,0 +1,411 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><link rel="icon" sizes="any" type="image/svg+xml" href="/imgs/icon.svg"><link rel="stylesheet" href="/css/theme/color.variables.css"><link id="themeStyleVar" rel="stylesheet" href="/css/theme/default.variables.css"><script>const localStorageTheme = localStorage.getItem('theme');
+        function loadTheme(){
+            let themeLink = document.getElementById('themeStyleVar');
+            if(localStorageTheme){
+                themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${localStorageTheme}.variables.css`)
+            }
+        }
+        if(localStorage){
+            loadTheme()
+            setTimeout(()=>{
+                if(document.body){
+                    document.body.className = localStorageTheme ? localStorageTheme : 'dark'
+                }
+
+            },2)
+        }</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/css/post.css"><title>苏鑫2017</title><meta name="description" content="用于记录感悟，前端技术，编程技巧，各种奇奇怪怪的新的体会"><meta name="viewport" content="width=device-width,initial-scale=1"><script async>console.log(`%c真巧，你打开了devtool`,"color:#b58900")
+        console.log(`%c真巧，你看了我的文章`,"color:#859900")
+        console.log('%c简单介绍，道法自然，做人要顺其自然，不要有太多欲望',"color:#268bd2")
+        console.log('%c不要目的性太强,这就是我的主题想强调的',"color:#dc322f")</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-RFGTVED02M"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-RFGTVED02M")</script><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?ce46d6101f33ba04b74fbe8bbe509590";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><script>const moduleMap = new Map();
+            var define = (moduleName, module) => { moduleMap.set(moduleName, module) };
+            var require = (moduleName) => moduleMap.get(moduleName);</script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="苏鑫2017" type="application/atom+xml"></head><body><div class="body"><header class="header"><div class="header-icon-wrapper"><h2><a href="/">苏鑫2017</a></h2></div><div class="header-right"><nav class="header-menu-wrapper"><ul class="header-menu"><li class="header-menu-item"><a class="header-menu-item-link" href="/">首页</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/categories/weibo">微博</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/about">关于</a></li><li class="header-menu-item"><div id="switchThemeButton"><img src="/imgs/icon.svg" alt="switchThemeIcon" width="100%" height="100%"></div><style>#switchThemeButton{width:40px;height:26px;margin:0;border:0;background:0 0;outline:0;cursor:pointer;margin-top:6px}</style><script async>const btn = document.getElementById('switchThemeButton');
+    let darkTheme = false;
+    const themeStyleVarId = "themeStyleVar";
+    if(localStorageTheme === 'dark'){
+        darkTheme = true
+    }else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // dark mode
+        darkTheme = true;
+    }
+    function loadTheme() {
+        let themeLink = document.getElementById(themeStyleVarId);
+        if (!themeLink) {
+            themeLink = document.createElement('link')
+            themeLink.rel = "stylesheet"
+            themeLink.id = "themeStyleVar"
+        }
+        darkTheme = !darkTheme;
+        themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${darkTheme ? 'dark' : 'light'}.variables.css`)
+        document.head.appendChild(themeLink)
+        document.body.className = darkTheme?'dark':'light'
+        localStorage.setItem('theme',darkTheme?'dark':'light');
+    }
+
+    btn.onclick = function() {
+        loadTheme();
+        codeTheme();
+    }</script><script>function codeTheme(){
+            const localStorageTheme = localStorage.getItem('theme');
+            let codeThemeLink = document.getElementById("codeTheme");
+            if(!codeThemeLink){
+                codeThemeLink = document.createElement('link');
+                codeThemeLink.rel = "stylesheet"
+                codeThemeLink.id = "codeTheme"
+                document.head.appendChild(codeThemeLink)
+            }
+            if(localStorageTheme){
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${localStorageTheme}.css`
+            }else{
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${darkTheme ? 'dark': 'light'}.css`
+            }
+        }
+        codeTheme()</script></li></ul></nav></div></header><main class="main"><div class="post"><h2>hook原理</h2><div id="preview-0" class="preview"><div class="preview-box"><div id="draw-0">hook的使用，实现了useState，useReduce，useEffect<div id="app"></div></div><div class="preview-box-util"><span id="expand-0" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-0" class="preview-code false"><pre><code class="hljs"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre></div><script>const expandCode_0 = document.getElementById('expand-0');
+    const bindCode_0 = document.getElementById('code-0');
+    let flag_0 = true;
+    expandCode_0.onclick = function (){
+        if(flag_0){
+            bindCode_0.classList.add('preview-code-active')
+        }else{
+            bindCode_0.classList.remove('preview-code-active') 
+        }
+        flag_0 = !flag_0
+    }</script></div><div id="preview-1" class="preview"><div class="preview-box"><div id="draw-1">代码<script type="module">(function(){
+                        let currentComponent;
+let currentIndex;
+const components = [];
+
+class Component {
+  __hooks = {
+    _hookList: [],
+    _effectHookList: [],
+    _cleanEffectHookList: [],
+    _layoutHookList: [],
+  };
+  diff() {}
+  // 更新函数
+  update() {
+    this.render();
+  }
+  beforeRender() {
+    currentIndex = 0;
+    currentComponent = this;
+  }
+  afterRender() {
+    this.__hooks._cleanEffectHookList.forEach((fn) => {
+      fn();
+    });
+    this.__hooks._cleanEffectHookList = [];
+    this.__hooks._effectHookList.forEach((fn) => {
+      const clean = fn();
+      if (typeof clean === "function") {
+        this.__hooks._cleanEffectHookList.push(clean);
+      }
+    });
+    this.__hooks._effectHookList = [];
+  }
+
+  afterDomRender() {
+    this.__hooks._layoutHookList.forEach((fn) => {
+      fn();
+    });
+    this.__hooks._layoutHookList = [];
+  }
+  render() {
+    this.beforeRender();
+    const [state, setState] = useState(0);
+
+    useEffect(() => {
+      console.log("useEffect mount");
+      return () => {
+        console.log("useEffect clear");
+      };
+    }, [state]);
+
+    useLayoutEffect(() => {
+      console.log("useLayout Render");
+    }, []);
+
+    this.afterRender();
+
+    const dom = document.getElementById("app");
+    let text;
+    if (!(text = document.getElementById("text"))) {
+      text = document.createElement("h1");
+      text.id = "text";
+      dom.appendChild(text);
+    }
+    let button;
+    if (!(button = document.getElementById("button"))) {
+      button = document.createElement("button");
+      button.id = "button";
+      button.textContent = "add";
+      dom.appendChild(button);
+    }
+    let subButton;
+    if (!(subButton = document.getElementById("button1"))) {
+      subButton = document.createElement("button");
+      subButton.id = "button1";
+      subButton.textContent = "sub";
+      dom.appendChild(subButton);
+    }
+    subButton.onclick = () => {
+      setState(state - 1);
+    };
+    button.onclick = () => {
+      setState(state + 1);
+    };
+    text.textContent = state;
+
+    this.afterDomRender();
+  }
+}
+new Component().render();
+
+function getHookState(index) {
+  const hooks = currentComponent.__hooks;
+
+  // 加入的
+  // []
+  // [useState,useState,useState]...
+  if (index >= hooks._hookList.length) {
+    // 每种类型的hook的属性是不同的
+    hooks._hookList.push({});
+  }
+  return hooks._hookList[index];
+}
+
+function useState(initState) {
+  return useReducer((initState, action) => action, initState);
+}
+
+function useReducer(reducer, initState) {
+  const hookState = getHookState(currentIndex++);
+  // hook 是否初始化
+  if (!hookState.__value) {
+    hookState.__value = [
+      // value
+      initState,
+      // dispatch
+      (action) => {
+        const nextValue = reducer(hookState.__value[0], action);
+        hookState.__value[0] = nextValue;
+        hookState._component.update();
+      },
+    ];
+    if (!hookState._component) {
+      hookState._component = currentComponent;
+    }
+  }
+
+  return hookState.__value;
+}
+function useEffect(cb, deps) {
+  const hookState = getHookState(currentIndex++);
+
+  if (!hookState._value || isChange(deps, hookState.__value[1])) {
+    hookState.__value = [];
+    hookState.__value[0] = cb;
+    hookState.__value[1] = deps;
+    currentComponent.__hooks._effectHookList.push(hookState.__value[0]);
+  }
+}
+function useLayoutEffect(cb, deps) {
+  const hookState = getHookState(currentIndex++);
+
+  if (!hookState._value || isChange(deps, hookState.__value[1])) {
+    hookState.__value = [];
+    hookState.__value[0] = cb;
+    hookState.__value[1] = deps;
+    currentComponent.__hooks._layoutHookList.push(hookState.__value[0]);
+  }
+}
+
+function isChange(oldArgs, newArgs) {
+  return (
+    !oldArgs ||
+    oldArgs.length !== newArgs.length ||
+    newArgs.some((arg, index) => arg !== oldArgs[index])
+  );
+}
+
+                    })(1)</script></div><div class="preview-box-util"><span id="expand-1" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-1" class="preview-code false"><pre><code class="hljs"><span class="hljs-keyword">let</span> currentComponent;
+<span class="hljs-keyword">let</span> currentIndex;
+<span class="hljs-keyword">const</span> components = [];
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Component</span> &#123;
+  __hooks = &#123;
+    <span class="hljs-attr">_hookList</span>: [],
+    <span class="hljs-attr">_effectHookList</span>: [],
+    <span class="hljs-attr">_cleanEffectHookList</span>: [],
+    <span class="hljs-attr">_layoutHookList</span>: [],
+  &#125;;
+  <span class="hljs-title function_">diff</span>(<span class="hljs-params"></span>) &#123;&#125;
+  <span class="hljs-comment">// 更新函数</span>
+  <span class="hljs-title function_">update</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">render</span>();
+  &#125;
+  <span class="hljs-title function_">beforeRender</span>(<span class="hljs-params"></span>) &#123;
+    currentIndex = <span class="hljs-number">0</span>;
+    currentComponent = <span class="hljs-variable language_">this</span>;
+  &#125;
+  <span class="hljs-title function_">afterRender</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">__hooks</span>.<span class="hljs-property">_cleanEffectHookList</span>.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">fn</span>) =&gt;</span> &#123;
+      <span class="hljs-title function_">fn</span>();
+    &#125;);
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">__hooks</span>.<span class="hljs-property">_cleanEffectHookList</span> = [];
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">__hooks</span>.<span class="hljs-property">_effectHookList</span>.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">fn</span>) =&gt;</span> &#123;
+      <span class="hljs-keyword">const</span> clean = <span class="hljs-title function_">fn</span>();
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> clean === <span class="hljs-string">&quot;function&quot;</span>) &#123;
+        <span class="hljs-variable language_">this</span>.<span class="hljs-property">__hooks</span>.<span class="hljs-property">_cleanEffectHookList</span>.<span class="hljs-title function_">push</span>(clean);
+      &#125;
+    &#125;);
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">__hooks</span>.<span class="hljs-property">_effectHookList</span> = [];
+  &#125;
+
+  <span class="hljs-title function_">afterDomRender</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">__hooks</span>.<span class="hljs-property">_layoutHookList</span>.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">fn</span>) =&gt;</span> &#123;
+      <span class="hljs-title function_">fn</span>();
+    &#125;);
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">__hooks</span>.<span class="hljs-property">_layoutHookList</span> = [];
+  &#125;
+  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">beforeRender</span>();
+    <span class="hljs-keyword">const</span> [state, setState] = <span class="hljs-title function_">useState</span>(<span class="hljs-number">0</span>);
+
+    <span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> &#123;
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;useEffect mount&quot;</span>);
+      <span class="hljs-keyword">return</span> <span class="hljs-function">() =&gt;</span> &#123;
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;useEffect clear&quot;</span>);
+      &#125;;
+    &#125;, [state]);
+
+    <span class="hljs-title function_">useLayoutEffect</span>(<span class="hljs-function">() =&gt;</span> &#123;
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;useLayout Render&quot;</span>);
+    &#125;, []);
+
+    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">afterRender</span>();
+
+    <span class="hljs-keyword">const</span> dom = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;app&quot;</span>);
+    <span class="hljs-keyword">let</span> text;
+    <span class="hljs-keyword">if</span> (!(text = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;text&quot;</span>))) &#123;
+      text = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">&quot;h1&quot;</span>);
+      text.<span class="hljs-property">id</span> = <span class="hljs-string">&quot;text&quot;</span>;
+      dom.<span class="hljs-title function_">appendChild</span>(text);
+    &#125;
+    <span class="hljs-keyword">let</span> button;
+    <span class="hljs-keyword">if</span> (!(button = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;button&quot;</span>))) &#123;
+      button = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">&quot;button&quot;</span>);
+      button.<span class="hljs-property">id</span> = <span class="hljs-string">&quot;button&quot;</span>;
+      button.<span class="hljs-property">textContent</span> = <span class="hljs-string">&quot;add&quot;</span>;
+      dom.<span class="hljs-title function_">appendChild</span>(button);
+    &#125;
+    <span class="hljs-keyword">let</span> subButton;
+    <span class="hljs-keyword">if</span> (!(subButton = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;button1&quot;</span>))) &#123;
+      subButton = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">&quot;button&quot;</span>);
+      subButton.<span class="hljs-property">id</span> = <span class="hljs-string">&quot;button1&quot;</span>;
+      subButton.<span class="hljs-property">textContent</span> = <span class="hljs-string">&quot;sub&quot;</span>;
+      dom.<span class="hljs-title function_">appendChild</span>(subButton);
+    &#125;
+    subButton.<span class="hljs-property">onclick</span> = <span class="hljs-function">() =&gt;</span> &#123;
+      <span class="hljs-title function_">setState</span>(state - <span class="hljs-number">1</span>);
+    &#125;;
+    button.<span class="hljs-property">onclick</span> = <span class="hljs-function">() =&gt;</span> &#123;
+      <span class="hljs-title function_">setState</span>(state + <span class="hljs-number">1</span>);
+    &#125;;
+    text.<span class="hljs-property">textContent</span> = state;
+
+    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">afterDomRender</span>();
+  &#125;
+&#125;
+<span class="hljs-keyword">new</span> <span class="hljs-title class_">Component</span>().<span class="hljs-title function_">render</span>();
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">getHookState</span>(<span class="hljs-params">index</span>) &#123;
+  <span class="hljs-keyword">const</span> hooks = currentComponent.<span class="hljs-property">__hooks</span>;
+
+  <span class="hljs-comment">// 加入的</span>
+  <span class="hljs-comment">// []</span>
+  <span class="hljs-comment">// [useState,useState,useState]...</span>
+  <span class="hljs-keyword">if</span> (index &gt;= hooks.<span class="hljs-property">_hookList</span>.<span class="hljs-property">length</span>) &#123;
+    <span class="hljs-comment">// 每种类型的hook的属性是不同的</span>
+    hooks.<span class="hljs-property">_hookList</span>.<span class="hljs-title function_">push</span>(&#123;&#125;);
+  &#125;
+  <span class="hljs-keyword">return</span> hooks.<span class="hljs-property">_hookList</span>[index];
+&#125;
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">useState</span>(<span class="hljs-params">initState</span>) &#123;
+  <span class="hljs-keyword">return</span> <span class="hljs-title function_">useReducer</span>(<span class="hljs-function">(<span class="hljs-params">initState, action</span>) =&gt;</span> action, initState);
+&#125;
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">useReducer</span>(<span class="hljs-params">reducer, initState</span>) &#123;
+  <span class="hljs-keyword">const</span> hookState = <span class="hljs-title function_">getHookState</span>(currentIndex++);
+  <span class="hljs-comment">// hook 是否初始化</span>
+  <span class="hljs-keyword">if</span> (!hookState.<span class="hljs-property">__value</span>) &#123;
+    hookState.<span class="hljs-property">__value</span> = [
+      <span class="hljs-comment">// value</span>
+      initState,
+      <span class="hljs-comment">// dispatch</span>
+      <span class="hljs-function">(<span class="hljs-params">action</span>) =&gt;</span> &#123;
+        <span class="hljs-keyword">const</span> nextValue = <span class="hljs-title function_">reducer</span>(hookState.<span class="hljs-property">__value</span>[<span class="hljs-number">0</span>], action);
+        hookState.<span class="hljs-property">__value</span>[<span class="hljs-number">0</span>] = nextValue;
+        hookState.<span class="hljs-property">_component</span>.<span class="hljs-title function_">update</span>();
+      &#125;,
+    ];
+    <span class="hljs-keyword">if</span> (!hookState.<span class="hljs-property">_component</span>) &#123;
+      hookState.<span class="hljs-property">_component</span> = currentComponent;
+    &#125;
+  &#125;
+
+  <span class="hljs-keyword">return</span> hookState.<span class="hljs-property">__value</span>;
+&#125;
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">useEffect</span>(<span class="hljs-params">cb, deps</span>) &#123;
+  <span class="hljs-keyword">const</span> hookState = <span class="hljs-title function_">getHookState</span>(currentIndex++);
+
+  <span class="hljs-keyword">if</span> (!hookState.<span class="hljs-property">_value</span> || <span class="hljs-title function_">isChange</span>(deps, hookState.<span class="hljs-property">__value</span>[<span class="hljs-number">1</span>])) &#123;
+    hookState.<span class="hljs-property">__value</span> = [];
+    hookState.<span class="hljs-property">__value</span>[<span class="hljs-number">0</span>] = cb;
+    hookState.<span class="hljs-property">__value</span>[<span class="hljs-number">1</span>] = deps;
+    currentComponent.<span class="hljs-property">__hooks</span>.<span class="hljs-property">_effectHookList</span>.<span class="hljs-title function_">push</span>(hookState.<span class="hljs-property">__value</span>[<span class="hljs-number">0</span>]);
+  &#125;
+&#125;
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">useLayoutEffect</span>(<span class="hljs-params">cb, deps</span>) &#123;
+  <span class="hljs-keyword">const</span> hookState = <span class="hljs-title function_">getHookState</span>(currentIndex++);
+
+  <span class="hljs-keyword">if</span> (!hookState.<span class="hljs-property">_value</span> || <span class="hljs-title function_">isChange</span>(deps, hookState.<span class="hljs-property">__value</span>[<span class="hljs-number">1</span>])) &#123;
+    hookState.<span class="hljs-property">__value</span> = [];
+    hookState.<span class="hljs-property">__value</span>[<span class="hljs-number">0</span>] = cb;
+    hookState.<span class="hljs-property">__value</span>[<span class="hljs-number">1</span>] = deps;
+    currentComponent.<span class="hljs-property">__hooks</span>.<span class="hljs-property">_layoutHookList</span>.<span class="hljs-title function_">push</span>(hookState.<span class="hljs-property">__value</span>[<span class="hljs-number">0</span>]);
+  &#125;
+&#125;
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">isChange</span>(<span class="hljs-params">oldArgs, newArgs</span>) &#123;
+  <span class="hljs-keyword">return</span> (
+    !oldArgs ||
+    oldArgs.<span class="hljs-property">length</span> !== newArgs.<span class="hljs-property">length</span> ||
+    newArgs.<span class="hljs-title function_">some</span>(<span class="hljs-function">(<span class="hljs-params">arg, index</span>) =&gt;</span> arg !== oldArgs[index])
+  );
+&#125;
+</code></pre></div><script>const expandCode_1 = document.getElementById('expand-1');
+    const bindCode_1 = document.getElementById('code-1');
+    let flag_1 = true;
+    expandCode_1.onclick = function (){
+        if(flag_1){
+            bindCode_1.classList.add('preview-code-active')
+        }else{
+            bindCode_1.classList.remove('preview-code-active') 
+        }
+        flag_1 = !flag_1
+    }</script></div><script async>let codes = document.getElementsByClassName('hljs');
+            Array.from(codes).forEach(code => {
+                code.addEventListener('click', function copy(e) {
+                    const textContent = e.currentTarget.textContent;
+                    e.currentTarget.focus()
+                    const node = e.currentTarget;
+                    navigator.clipboard.writeText(textContent).then(()=>{
+                        alert('复制成功')
+                        node.blur()
+                    });
+                   
+                })
+            })</script><script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script><script>window.mermaid&&mermaid.initialize({startOnLoad:!0})</script></div></main><footer><p>Copyright © 2019-2022 suxin2017</p><p class="icp"><span><img src="/imgs/icp.png" width="17px" height="17px" alt="icp"> </span><a href="http://beian.miit.gov.cn" class="icp-link"><span>京ICP备2020041991号</span></a></p><p><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></p></footer></div></body></html>

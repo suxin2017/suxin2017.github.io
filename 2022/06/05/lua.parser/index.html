@@ -1,0 +1,933 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><link rel="icon" sizes="any" type="image/svg+xml" href="/imgs/icon.svg"><link rel="stylesheet" href="/css/theme/color.variables.css"><link id="themeStyleVar" rel="stylesheet" href="/css/theme/default.variables.css"><script>const localStorageTheme = localStorage.getItem('theme');
+        function loadTheme(){
+            let themeLink = document.getElementById('themeStyleVar');
+            if(localStorageTheme){
+                themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${localStorageTheme}.variables.css`)
+            }
+        }
+        if(localStorage){
+            loadTheme()
+            setTimeout(()=>{
+                if(document.body){
+                    document.body.className = localStorageTheme ? localStorageTheme : 'dark'
+                }
+
+            },2)
+        }</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/css/post.css"><title>苏鑫2017</title><meta name="description" content="用于记录感悟，前端技术，编程技巧，各种奇奇怪怪的新的体会"><meta name="viewport" content="width=device-width,initial-scale=1"><script async>console.log(`%c真巧，你打开了devtool`,"color:#b58900")
+        console.log(`%c真巧，你看了我的文章`,"color:#859900")
+        console.log('%c简单介绍，道法自然，做人要顺其自然，不要有太多欲望',"color:#268bd2")
+        console.log('%c不要目的性太强,这就是我的主题想强调的',"color:#dc322f")</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-RFGTVED02M"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-RFGTVED02M")</script><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?ce46d6101f33ba04b74fbe8bbe509590";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><script>const moduleMap = new Map();
+            var define = (moduleName, module) => { moduleMap.set(moduleName, module) };
+            var require = (moduleName) => moduleMap.get(moduleName);</script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="苏鑫2017" type="application/atom+xml"></head><body><div class="body"><header class="header"><div class="header-icon-wrapper"><h2><a href="/">苏鑫2017</a></h2></div><div class="header-right"><nav class="header-menu-wrapper"><ul class="header-menu"><li class="header-menu-item"><a class="header-menu-item-link" href="/">首页</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/categories/weibo">微博</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/about">关于</a></li><li class="header-menu-item"><div id="switchThemeButton"><img src="/imgs/icon.svg" alt="switchThemeIcon" width="100%" height="100%"></div><style>#switchThemeButton{width:40px;height:26px;margin:0;border:0;background:0 0;outline:0;cursor:pointer;margin-top:6px}</style><script async>const btn = document.getElementById('switchThemeButton');
+    let darkTheme = false;
+    const themeStyleVarId = "themeStyleVar";
+    if(localStorageTheme === 'dark'){
+        darkTheme = true
+    }else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // dark mode
+        darkTheme = true;
+    }
+    function loadTheme() {
+        let themeLink = document.getElementById(themeStyleVarId);
+        if (!themeLink) {
+            themeLink = document.createElement('link')
+            themeLink.rel = "stylesheet"
+            themeLink.id = "themeStyleVar"
+        }
+        darkTheme = !darkTheme;
+        themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${darkTheme ? 'dark' : 'light'}.variables.css`)
+        document.head.appendChild(themeLink)
+        document.body.className = darkTheme?'dark':'light'
+        localStorage.setItem('theme',darkTheme?'dark':'light');
+    }
+
+    btn.onclick = function() {
+        loadTheme();
+        codeTheme();
+    }</script><script>function codeTheme(){
+            const localStorageTheme = localStorage.getItem('theme');
+            let codeThemeLink = document.getElementById("codeTheme");
+            if(!codeThemeLink){
+                codeThemeLink = document.createElement('link');
+                codeThemeLink.rel = "stylesheet"
+                codeThemeLink.id = "codeTheme"
+                document.head.appendChild(codeThemeLink)
+            }
+            if(localStorageTheme){
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${localStorageTheme}.css`
+            }else{
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${darkTheme ? 'dark': 'light'}.css`
+            }
+        }
+        codeTheme()</script></li></ul></nav></div></header><main class="main"><div class="post"><h2>lua-parse</h2><p>动手写个词法解析器，词法解析非常简单其关键处理问题在于</p><ul><li>字符串</li><li>数字</li><li>关键字与符号</li></ul><h3 id="定义关键字及符号映射">定义关键字及符号映射</h3><div id="preview-23" class="preview"><div class="preview-box"><div id="draw-23">src=lua-lexer.js<script src="/js/lua-lexer.js"></script></div><div class="preview-box-util"><span id="expand-23" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-23" class="preview-code false"><pre><code class="hljs">
+</code></pre></div><script>const expandCode_23 = document.getElementById('expand-23');
+    const bindCode_23 = document.getElementById('code-23');
+    let flag_23 = true;
+    expandCode_23.onclick = function (){
+        if(flag_23){
+            bindCode_23.classList.add('preview-code-active')
+        }else{
+            bindCode_23.classList.remove('preview-code-active') 
+        }
+        flag_23 = !flag_23
+    }</script></div><div id="preview-24" class="preview"><div class="preview-box"><div id="draw-24">src=lua-token.js<script src="/js/lua-token.js"></script></div><div class="preview-box-util"><span id="expand-24" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-24" class="preview-code false"><pre><code class="hljs">
+</code></pre></div><script>const expandCode_24 = document.getElementById('expand-24');
+    const bindCode_24 = document.getElementById('code-24');
+    let flag_24 = true;
+    expandCode_24.onclick = function (){
+        if(flag_24){
+            bindCode_24.classList.add('preview-code-active')
+        }else{
+            bindCode_24.classList.remove('preview-code-active') 
+        }
+        flag_24 = !flag_24
+    }</script></div><div id="preview-25" class="preview"><div class="preview-box"><div id="draw-25">src=lua-parser.js<script src="/js/lua-parser.js"></script></div><div class="preview-box-util"><span id="expand-25" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-25" class="preview-code false"><pre><code class="hljs">
+</code></pre></div><script>const expandCode_25 = document.getElementById('expand-25');
+    const bindCode_25 = document.getElementById('code-25');
+    let flag_25 = true;
+    expandCode_25.onclick = function (){
+        if(flag_25){
+            bindCode_25.classList.add('preview-code-active')
+        }else{
+            bindCode_25.classList.remove('preview-code-active') 
+        }
+        flag_25 = !flag_25
+    }</script></div><style>.node{cursor:pointer}li{list-style-type:none;position:relative}.node::before{content:"\25B6";color:var(--color01);display:inline-block;margin-right:6px;font-size:small;position:absolute;left:-16px}.node[data-active=true]::before{transform:rotate(90deg)}[data-active=true]{display:block}[data-active=true] .mini{display:none}[data-active=false] ul{display:none}[data-active=false] .mini{display:inline}.box{display:flex;flex-wrap:wrap;max-height:400px;overflow:auto}</style><div id="preview-27" class="preview"><div class="preview-box"><div id="draw-27">drawJson<script type="module">(function(){
+                        function drawAttrs(attrs) {
+  let attrStr = "<ul class='attrs'>";
+  for (let { key, val } of attrs) {
+    attrStr += `<li class='attr'>${key}:${val}</li>`;
+  }
+  return attrStr + "</ul>";
+}
+function drawNode(node,idx) {
+  let name = "";
+  if (node?.constructor?.name) {
+    name = node.constructor.name;
+  }
+  let startTag = "";
+  let endName = "";
+  if (name === "Object") {
+    startTag = "{";
+    endName = "}";
+  }
+  if (name === "Array") {
+    startTag = "[";
+    endName = "]";
+  }
+  let mini = "";
+  if (endName !== "") {
+    mini = `<span class="mini"> ${Object.keys(node)} </span>`;
+    endName = `<span>${endName}</span>`;
+  }
+  if (node._n) {
+    name = `${node._n}:${name}`;
+  }
+
+  let keys = Object.keys(node);
+  let attrs = [];
+  let childrenToken = [];
+  for (let key of keys) {
+    if (typeof node[key] !== "object" || node[key] == null) {
+      attrs.push({ key, val: node[key] });
+    } else {
+      Object.defineProperty(node[key], "_n", {
+        enumerable: false,
+        value: key,
+      });
+      childrenToken.push(node[key]);
+    }
+  }
+  let attrStr = "";
+  if (attrs.length) {
+    attrStr = drawAttrs(attrs);
+  }
+  let childrenStr = "";
+  if (childrenToken.length) {
+    childrenStr = drawTree(childrenToken,idx);
+  }
+  const printLocation = (node) => {
+    if (node instanceof Node) {
+      return `onclick="selectCode(event,${idx})" data-start=${node.location?.start?.offset} data-end=${node.location?.end?.offset}`;
+    }
+  };
+
+  return `<li class='node' data-active="false"   ${printLocation(
+    node
+  )}>${name}${startTag}${attrStr}${childrenStr}${mini}${endName}</li>`;
+}
+
+function drawTree(nodes,idx) {
+  let children = [];
+  for (let node of nodes) {
+    children.push(drawNode(node,idx));
+  }
+  return `<ul class="tree"  >${children.join("\n")}</ul>`;
+}
+
+function toggle(e) {
+  if (e.dataset["active"] === "true") {
+    e.dataset["active"] = false;
+  } else {
+    e.dataset["active"] = true;
+  }
+}
+function drawJson(obj, dom, idx) {
+  let str = drawTree([obj], idx);
+  dom.addEventListener(
+    "click",
+    (e) => {
+      if (e.target.tagName === "LI") {
+        toggle(e.target);
+      }
+    },
+    false
+  );
+  dom.innerHTML = `<div>
+  <button onclick="expandAll(${idx})">展开所有</button>
+  <button onclick="foldAll(${idx})">折叠所有</button></div>
+  ${str}`;
+}
+window.drawJson = drawJson;
+
+                    })(27)</script></div><div class="preview-box-util"><span id="expand-27" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-27" class="preview-code false"><pre><code class="hljs"><span class="hljs-keyword">function</span> <span class="hljs-title function_">drawAttrs</span>(<span class="hljs-params">attrs</span>) &#123;
+  <span class="hljs-keyword">let</span> attrStr = <span class="hljs-string">&quot;&lt;ul class=&#x27;attrs&#x27;&gt;&quot;</span>;
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> &#123; key, val &#125; <span class="hljs-keyword">of</span> attrs) &#123;
+    attrStr += <span class="hljs-string">`&lt;li class=&#x27;attr&#x27;&gt;<span class="hljs-subst">$&#123;key&#125;</span>:<span class="hljs-subst">$&#123;val&#125;</span>&lt;/li&gt;`</span>;
+  &#125;
+  <span class="hljs-keyword">return</span> attrStr + <span class="hljs-string">&quot;&lt;/ul&gt;&quot;</span>;
+&#125;
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">drawNode</span>(<span class="hljs-params">node,idx</span>) &#123;
+  <span class="hljs-keyword">let</span> name = <span class="hljs-string">&quot;&quot;</span>;
+  <span class="hljs-keyword">if</span> (node?.<span class="hljs-property">constructor</span>?.<span class="hljs-property">name</span>) &#123;
+    name = node.<span class="hljs-property">constructor</span>.<span class="hljs-property">name</span>;
+  &#125;
+  <span class="hljs-keyword">let</span> startTag = <span class="hljs-string">&quot;&quot;</span>;
+  <span class="hljs-keyword">let</span> endName = <span class="hljs-string">&quot;&quot;</span>;
+  <span class="hljs-keyword">if</span> (name === <span class="hljs-string">&quot;Object&quot;</span>) &#123;
+    startTag = <span class="hljs-string">&quot;&#123;&quot;</span>;
+    endName = <span class="hljs-string">&quot;&#125;&quot;</span>;
+  &#125;
+  <span class="hljs-keyword">if</span> (name === <span class="hljs-string">&quot;Array&quot;</span>) &#123;
+    startTag = <span class="hljs-string">&quot;[&quot;</span>;
+    endName = <span class="hljs-string">&quot;]&quot;</span>;
+  &#125;
+  <span class="hljs-keyword">let</span> mini = <span class="hljs-string">&quot;&quot;</span>;
+  <span class="hljs-keyword">if</span> (endName !== <span class="hljs-string">&quot;&quot;</span>) &#123;
+    mini = <span class="hljs-string">`&lt;span class=&quot;mini&quot;&gt; <span class="hljs-subst">$&#123;<span class="hljs-built_in">Object</span>.keys(node)&#125;</span> &lt;/span&gt;`</span>;
+    endName = <span class="hljs-string">`&lt;span&gt;<span class="hljs-subst">$&#123;endName&#125;</span>&lt;/span&gt;`</span>;
+  &#125;
+  <span class="hljs-keyword">if</span> (node.<span class="hljs-property">_n</span>) &#123;
+    name = <span class="hljs-string">`<span class="hljs-subst">$&#123;node._n&#125;</span>:<span class="hljs-subst">$&#123;name&#125;</span>`</span>;
+  &#125;
+
+  <span class="hljs-keyword">let</span> keys = <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">keys</span>(node);
+  <span class="hljs-keyword">let</span> attrs = [];
+  <span class="hljs-keyword">let</span> childrenToken = [];
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> key <span class="hljs-keyword">of</span> keys) &#123;
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> node[key] !== <span class="hljs-string">&quot;object&quot;</span> || node[key] == <span class="hljs-literal">null</span>) &#123;
+      attrs.<span class="hljs-title function_">push</span>(&#123; key, <span class="hljs-attr">val</span>: node[key] &#125;);
+    &#125; <span class="hljs-keyword">else</span> &#123;
+      <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">defineProperty</span>(node[key], <span class="hljs-string">&quot;_n&quot;</span>, &#123;
+        <span class="hljs-attr">enumerable</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">value</span>: key,
+      &#125;);
+      childrenToken.<span class="hljs-title function_">push</span>(node[key]);
+    &#125;
+  &#125;
+  <span class="hljs-keyword">let</span> attrStr = <span class="hljs-string">&quot;&quot;</span>;
+  <span class="hljs-keyword">if</span> (attrs.<span class="hljs-property">length</span>) &#123;
+    attrStr = <span class="hljs-title function_">drawAttrs</span>(attrs);
+  &#125;
+  <span class="hljs-keyword">let</span> childrenStr = <span class="hljs-string">&quot;&quot;</span>;
+  <span class="hljs-keyword">if</span> (childrenToken.<span class="hljs-property">length</span>) &#123;
+    childrenStr = <span class="hljs-title function_">drawTree</span>(childrenToken,idx);
+  &#125;
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">printLocation</span> = (<span class="hljs-params">node</span>) =&gt; &#123;
+    <span class="hljs-keyword">if</span> (node <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">Node</span>) &#123;
+      <span class="hljs-keyword">return</span> <span class="hljs-string">`onclick=&quot;selectCode(event,<span class="hljs-subst">$&#123;idx&#125;</span>)&quot; data-start=<span class="hljs-subst">$&#123;node.location?.start?.offset&#125;</span> data-end=<span class="hljs-subst">$&#123;node.location?.end?.offset&#125;</span>`</span>;
+    &#125;
+  &#125;;
+
+  <span class="hljs-keyword">return</span> <span class="hljs-string">`&lt;li class=&#x27;node&#x27; data-active=&quot;false&quot;   <span class="hljs-subst">$&#123;printLocation(
+    node
+  )&#125;</span>&gt;<span class="hljs-subst">$&#123;name&#125;</span><span class="hljs-subst">$&#123;startTag&#125;</span><span class="hljs-subst">$&#123;attrStr&#125;</span><span class="hljs-subst">$&#123;childrenStr&#125;</span><span class="hljs-subst">$&#123;mini&#125;</span><span class="hljs-subst">$&#123;endName&#125;</span>&lt;/li&gt;`</span>;
+&#125;
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">drawTree</span>(<span class="hljs-params">nodes,idx</span>) &#123;
+  <span class="hljs-keyword">let</span> children = [];
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> node <span class="hljs-keyword">of</span> nodes) &#123;
+    children.<span class="hljs-title function_">push</span>(<span class="hljs-title function_">drawNode</span>(node,idx));
+  &#125;
+  <span class="hljs-keyword">return</span> <span class="hljs-string">`&lt;ul class=&quot;tree&quot;  &gt;<span class="hljs-subst">$&#123;children.join(<span class="hljs-string">&quot;\n&quot;</span>)&#125;</span>&lt;/ul&gt;`</span>;
+&#125;
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">toggle</span>(<span class="hljs-params">e</span>) &#123;
+  <span class="hljs-keyword">if</span> (e.<span class="hljs-property">dataset</span>[<span class="hljs-string">&quot;active&quot;</span>] === <span class="hljs-string">&quot;true&quot;</span>) &#123;
+    e.<span class="hljs-property">dataset</span>[<span class="hljs-string">&quot;active&quot;</span>] = <span class="hljs-literal">false</span>;
+  &#125; <span class="hljs-keyword">else</span> &#123;
+    e.<span class="hljs-property">dataset</span>[<span class="hljs-string">&quot;active&quot;</span>] = <span class="hljs-literal">true</span>;
+  &#125;
+&#125;
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">drawJson</span>(<span class="hljs-params">obj, dom, idx</span>) &#123;
+  <span class="hljs-keyword">let</span> str = <span class="hljs-title function_">drawTree</span>([obj], idx);
+  dom.<span class="hljs-title function_">addEventListener</span>(
+    <span class="hljs-string">&quot;click&quot;</span>,
+    <span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> &#123;
+      <span class="hljs-keyword">if</span> (e.<span class="hljs-property">target</span>.<span class="hljs-property">tagName</span> === <span class="hljs-string">&quot;LI&quot;</span>) &#123;
+        <span class="hljs-title function_">toggle</span>(e.<span class="hljs-property">target</span>);
+      &#125;
+    &#125;,
+    <span class="hljs-literal">false</span>
+  );
+  dom.<span class="hljs-property">innerHTML</span> = <span class="hljs-string">`&lt;div&gt;
+  &lt;button onclick=&quot;expandAll(<span class="hljs-subst">$&#123;idx&#125;</span>)&quot;&gt;展开所有&lt;/button&gt;
+  &lt;button onclick=&quot;foldAll(<span class="hljs-subst">$&#123;idx&#125;</span>)&quot;&gt;折叠所有&lt;/button&gt;&lt;/div&gt;
+  <span class="hljs-subst">$&#123;str&#125;</span>`</span>;
+&#125;
+<span class="hljs-variable language_">window</span>.<span class="hljs-property">drawJson</span> = drawJson;
+</code></pre></div><script>const expandCode_27 = document.getElementById('expand-27');
+    const bindCode_27 = document.getElementById('code-27');
+    let flag_27 = true;
+    expandCode_27.onclick = function (){
+        if(flag_27){
+            bindCode_27.classList.add('preview-code-active')
+        }else{
+            bindCode_27.classList.remove('preview-code-active') 
+        }
+        flag_27 = !flag_27
+    }</script></div><div id="preview-28" class="preview"><div class="preview-box"><div id="draw-28"><script type="module">(function(){
+                        function drawCode(code, dom, idx) {
+  let str = `<textarea id="code-${idx}" class="code" rows=6 cols=60 readonly>${code}</textarea>`;
+  dom.innerHTML = str;
+}
+function expandAll(idx) {
+  let nodes = document
+    .getElementById(`draw-${idx}`)
+    .querySelectorAll('[data-active="false"]');
+  Array.from(nodes).forEach((node) => {
+    node.dataset["active"] = true;
+  });
+}
+function selectCode(event,idx) {
+  let start = event.target.dataset["start"];
+  let end = event.target.dataset["end"];
+  let input = document.getElementById(`code-${idx}`);
+  input.focus();
+  input.setSelectionRange(start, end);
+}
+function foldAll(idx) {
+  let nodes = document
+    .getElementById(`draw-${idx}`)
+    .querySelectorAll('[data-active="true"]');
+  Array.from(nodes).forEach((node) => {
+    node.dataset["active"] = false;
+  });
+}
+window.drawCode = drawCode;
+window.expandAll = expandAll;
+window.foldAll = foldAll;
+window.selectCode = selectCode;
+
+                    })(28)</script></div><div class="preview-box-util"><span id="expand-28" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-28" class="preview-code false"><pre><code class="hljs"><span class="hljs-keyword">function</span> <span class="hljs-title function_">drawCode</span>(<span class="hljs-params">code, dom, idx</span>) &#123;
+  <span class="hljs-keyword">let</span> str = <span class="hljs-string">`&lt;textarea id=&quot;code-<span class="hljs-subst">$&#123;idx&#125;</span>&quot; class=&quot;code&quot; rows=6 cols=60 readonly&gt;<span class="hljs-subst">$&#123;code&#125;</span>&lt;/textarea&gt;`</span>;
+  dom.<span class="hljs-property">innerHTML</span> = str;
+&#125;
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">expandAll</span>(<span class="hljs-params">idx</span>) &#123;
+  <span class="hljs-keyword">let</span> nodes = <span class="hljs-variable language_">document</span>
+    .<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">`draw-<span class="hljs-subst">$&#123;idx&#125;</span>`</span>)
+    .<span class="hljs-title function_">querySelectorAll</span>(<span class="hljs-string">&#x27;[data-active=&quot;false&quot;]&#x27;</span>);
+  <span class="hljs-title class_">Array</span>.<span class="hljs-title function_">from</span>(nodes).<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">node</span>) =&gt;</span> &#123;
+    node.<span class="hljs-property">dataset</span>[<span class="hljs-string">&quot;active&quot;</span>] = <span class="hljs-literal">true</span>;
+  &#125;);
+&#125;
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">selectCode</span>(<span class="hljs-params">event,idx</span>) &#123;
+  <span class="hljs-keyword">let</span> start = event.<span class="hljs-property">target</span>.<span class="hljs-property">dataset</span>[<span class="hljs-string">&quot;start&quot;</span>];
+  <span class="hljs-keyword">let</span> end = event.<span class="hljs-property">target</span>.<span class="hljs-property">dataset</span>[<span class="hljs-string">&quot;end&quot;</span>];
+  <span class="hljs-keyword">let</span> input = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">`code-<span class="hljs-subst">$&#123;idx&#125;</span>`</span>);
+  input.<span class="hljs-title function_">focus</span>();
+  input.<span class="hljs-title function_">setSelectionRange</span>(start, end);
+&#125;
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">foldAll</span>(<span class="hljs-params">idx</span>) &#123;
+  <span class="hljs-keyword">let</span> nodes = <span class="hljs-variable language_">document</span>
+    .<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">`draw-<span class="hljs-subst">$&#123;idx&#125;</span>`</span>)
+    .<span class="hljs-title function_">querySelectorAll</span>(<span class="hljs-string">&#x27;[data-active=&quot;true&quot;]&#x27;</span>);
+  <span class="hljs-title class_">Array</span>.<span class="hljs-title function_">from</span>(nodes).<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">node</span>) =&gt;</span> &#123;
+    node.<span class="hljs-property">dataset</span>[<span class="hljs-string">&quot;active&quot;</span>] = <span class="hljs-literal">false</span>;
+  &#125;);
+&#125;
+<span class="hljs-variable language_">window</span>.<span class="hljs-property">drawCode</span> = drawCode;
+<span class="hljs-variable language_">window</span>.<span class="hljs-property">expandAll</span> = expandAll;
+<span class="hljs-variable language_">window</span>.<span class="hljs-property">foldAll</span> = foldAll;
+<span class="hljs-variable language_">window</span>.<span class="hljs-property">selectCode</span> = selectCode;
+</code></pre></div><script>const expandCode_28 = document.getElementById('expand-28');
+    const bindCode_28 = document.getElementById('code-28');
+    let flag_28 = true;
+    expandCode_28.onclick = function (){
+        if(flag_28){
+            bindCode_28.classList.add('preview-code-active')
+        }else{
+            bindCode_28.classList.remove('preview-code-active') 
+        }
+        flag_28 = !flag_28
+    }</script></div><div id="preview-29" class="preview"><div class="preview-box"><div id="draw-29"><script type="module">(function(){
+                        function draw(code, ast, idx) {
+  let e = document.getElementById(`draw-${idx}`);
+  e.classList.add("box");
+  let c = document.createElement("div");
+  let j = document.createElement("div");
+  c.classList.add("code");
+  j.classList.add("json");
+  e.appendChild(c);
+  e.appendChild(j);
+  drawJson(ast, j, idx);
+  drawCode(code, c, idx);
+}
+window.draw = draw;
+
+                    })(29)</script></div><div class="preview-box-util"><span id="expand-29" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-29" class="preview-code false"><pre><code class="hljs"><span class="hljs-keyword">function</span> <span class="hljs-title function_">draw</span>(<span class="hljs-params">code, ast, idx</span>) &#123;
+  <span class="hljs-keyword">let</span> e = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">`draw-<span class="hljs-subst">$&#123;idx&#125;</span>`</span>);
+  e.<span class="hljs-property">classList</span>.<span class="hljs-title function_">add</span>(<span class="hljs-string">&quot;box&quot;</span>);
+  <span class="hljs-keyword">let</span> c = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">&quot;div&quot;</span>);
+  <span class="hljs-keyword">let</span> j = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">&quot;div&quot;</span>);
+  c.<span class="hljs-property">classList</span>.<span class="hljs-title function_">add</span>(<span class="hljs-string">&quot;code&quot;</span>);
+  j.<span class="hljs-property">classList</span>.<span class="hljs-title function_">add</span>(<span class="hljs-string">&quot;json&quot;</span>);
+  e.<span class="hljs-title function_">appendChild</span>(c);
+  e.<span class="hljs-title function_">appendChild</span>(j);
+  <span class="hljs-title function_">drawJson</span>(ast, j, idx);
+  <span class="hljs-title function_">drawCode</span>(code, c, idx);
+&#125;
+<span class="hljs-variable language_">window</span>.<span class="hljs-property">draw</span> = draw;
+</code></pre></div><script>const expandCode_29 = document.getElementById('expand-29');
+    const bindCode_29 = document.getElementById('code-29');
+    let flag_29 = true;
+    expandCode_29.onclick = function (){
+        if(flag_29){
+            bindCode_29.classList.add('preview-code-active')
+        }else{
+            bindCode_29.classList.remove('preview-code-active') 
+        }
+        flag_29 = !flag_29
+    }</script></div><div id="preview-30" class="preview"><div class="preview-box"><div id="draw-30"><script type="module">(function(){
+                        let idx = arguments[0];
+let code = `
+...
+nil
+true
+false
+123
+1.123
+`;
+let lexer = new Lexer(code);
+let parser = new Parser(lexer);
+draw(
+  code,
+  [
+    parser.parseExp0(),
+    parser.parseExp0(),
+    parser.parseExp0(),
+    parser.parseExp0(),
+    parser.parseExp0(),
+    parser.parseExp0(),
+  ],
+  idx
+);
+
+                    })(30)</script></div><div class="preview-box-util"><span id="expand-30" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-30" class="preview-code false"><pre><code class="hljs"><span class="hljs-keyword">let</span> idx = <span class="hljs-variable language_">arguments</span>[<span class="hljs-number">0</span>];
+<span class="hljs-keyword">let</span> code = <span class="hljs-string">`
+...
+nil
+true
+false
+123
+1.123
+`</span>;
+<span class="hljs-keyword">let</span> lexer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Lexer</span>(code);
+<span class="hljs-keyword">let</span> parser = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Parser</span>(lexer);
+<span class="hljs-title function_">draw</span>(
+  code,
+  [
+    parser.<span class="hljs-title function_">parseExp0</span>(),
+    parser.<span class="hljs-title function_">parseExp0</span>(),
+    parser.<span class="hljs-title function_">parseExp0</span>(),
+    parser.<span class="hljs-title function_">parseExp0</span>(),
+    parser.<span class="hljs-title function_">parseExp0</span>(),
+    parser.<span class="hljs-title function_">parseExp0</span>(),
+  ],
+  idx
+);
+</code></pre></div><script>const expandCode_30 = document.getElementById('expand-30');
+    const bindCode_30 = document.getElementById('code-30');
+    let flag_30 = true;
+    expandCode_30.onclick = function (){
+        if(flag_30){
+            bindCode_30.classList.add('preview-code-active')
+        }else{
+            bindCode_30.classList.remove('preview-code-active') 
+        }
+        flag_30 = !flag_30
+    }</script></div><div id="preview-31" class="preview"><div class="preview-box"><div id="draw-31"><script type="module">(function(){
+                        let idx = arguments[0];
+let code = `
+function ()  end
+function (...) end
+function (a,b,c) end
+function (d,e,...) end
+`;
+let lexer = new Lexer(code);
+let parser = new Parser(lexer);
+draw(
+  code,
+  [
+    parser.parseExp0(),
+    parser.parseExp0(),
+    parser.parseExp0(),
+    parser.parseExp0(),
+  ],
+  idx
+);
+
+                    })(31)</script></div><div class="preview-box-util"><span id="expand-31" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-31" class="preview-code false"><pre><code class="hljs"><span class="hljs-keyword">let</span> idx = <span class="hljs-variable language_">arguments</span>[<span class="hljs-number">0</span>];
+<span class="hljs-keyword">let</span> code = <span class="hljs-string">`
+function ()  end
+function (...) end
+function (a,b,c) end
+function (d,e,...) end
+`</span>;
+<span class="hljs-keyword">let</span> lexer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Lexer</span>(code);
+<span class="hljs-keyword">let</span> parser = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Parser</span>(lexer);
+<span class="hljs-title function_">draw</span>(
+  code,
+  [
+    parser.<span class="hljs-title function_">parseExp0</span>(),
+    parser.<span class="hljs-title function_">parseExp0</span>(),
+    parser.<span class="hljs-title function_">parseExp0</span>(),
+    parser.<span class="hljs-title function_">parseExp0</span>(),
+  ],
+  idx
+);
+</code></pre></div><script>const expandCode_31 = document.getElementById('expand-31');
+    const bindCode_31 = document.getElementById('code-31');
+    let flag_31 = true;
+    expandCode_31.onclick = function (){
+        if(flag_31){
+            bindCode_31.classList.add('preview-code-active')
+        }else{
+            bindCode_31.classList.remove('preview-code-active') 
+        }
+        flag_31 = !flag_31
+    }</script></div><div id="preview-32" class="preview"><div class="preview-box"><div id="draw-32"><script type="module">(function(){
+                        let idx = arguments[0];
+let code = `
+{}
+{["a"]=123}
+{["a"]=123,["b"]=456,c=123}
+`;
+let lexer = new Lexer(code);
+let parser = new Parser(lexer);
+draw(code, [parser.parseExp0(), parser.parseExp0(), parser.parseExp0()], idx);
+
+                    })(32)</script></div><div class="preview-box-util"><span id="expand-32" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-32" class="preview-code false"><pre><code class="hljs"><span class="hljs-keyword">let</span> idx = <span class="hljs-variable language_">arguments</span>[<span class="hljs-number">0</span>];
+<span class="hljs-keyword">let</span> code = <span class="hljs-string">`
+&#123;&#125;
+&#123;[&quot;a&quot;]=123&#125;
+&#123;[&quot;a&quot;]=123,[&quot;b&quot;]=456,c=123&#125;
+`</span>;
+<span class="hljs-keyword">let</span> lexer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Lexer</span>(code);
+<span class="hljs-keyword">let</span> parser = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Parser</span>(lexer);
+<span class="hljs-title function_">draw</span>(code, [parser.<span class="hljs-title function_">parseExp0</span>(), parser.<span class="hljs-title function_">parseExp0</span>(), parser.<span class="hljs-title function_">parseExp0</span>()], idx);
+</code></pre></div><script>const expandCode_32 = document.getElementById('expand-32');
+    const bindCode_32 = document.getElementById('code-32');
+    let flag_32 = true;
+    expandCode_32.onclick = function (){
+        if(flag_32){
+            bindCode_32.classList.add('preview-code-active')
+        }else{
+            bindCode_32.classList.remove('preview-code-active') 
+        }
+        flag_32 = !flag_32
+    }</script></div><div id="preview-33" class="preview"><div class="preview-box"><div id="draw-33"><script type="module">(function(){
+                        let idx = arguments[0];
+let code = `
+
+a.b
+`;
+let lexer = new Lexer(code);
+let parser = new Parser(lexer);
+draw(code, [parser.parseExp0()], idx);
+
+                    })(33)</script></div><div class="preview-box-util"><span id="expand-33" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-33" class="preview-code false"><pre><code class="hljs"><span class="hljs-keyword">let</span> idx = <span class="hljs-variable language_">arguments</span>[<span class="hljs-number">0</span>];
+<span class="hljs-keyword">let</span> code = <span class="hljs-string">`
+
+a.b
+`</span>;
+<span class="hljs-keyword">let</span> lexer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Lexer</span>(code);
+<span class="hljs-keyword">let</span> parser = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Parser</span>(lexer);
+<span class="hljs-title function_">draw</span>(code, [parser.<span class="hljs-title function_">parseExp0</span>()], idx);
+</code></pre></div><script>const expandCode_33 = document.getElementById('expand-33');
+    const bindCode_33 = document.getElementById('code-33');
+    let flag_33 = true;
+    expandCode_33.onclick = function (){
+        if(flag_33){
+            bindCode_33.classList.add('preview-code-active')
+        }else{
+            bindCode_33.classList.remove('preview-code-active') 
+        }
+        flag_33 = !flag_33
+    }</script></div><div id="preview-34" class="preview"><div class="preview-box"><div id="draw-34"><script type="module">(function(){
+                        let idx = arguments[0];
+let code = `
+1 or 2 or 3
+1 ^ 2 ^ 3
+`;
+let lexer = new Lexer(code);
+let parser = new Parser(lexer);
+draw(code, [parser.parseExp(), parser.parseExp()], idx);
+
+                    })(34)</script></div><div class="preview-box-util"><span id="expand-34" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-34" class="preview-code false"><pre><code class="hljs"><span class="hljs-keyword">let</span> idx = <span class="hljs-variable language_">arguments</span>[<span class="hljs-number">0</span>];
+<span class="hljs-keyword">let</span> code = <span class="hljs-string">`
+1 or 2 or 3
+1 ^ 2 ^ 3
+`</span>;
+<span class="hljs-keyword">let</span> lexer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Lexer</span>(code);
+<span class="hljs-keyword">let</span> parser = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Parser</span>(lexer);
+<span class="hljs-title function_">draw</span>(code, [parser.<span class="hljs-title function_">parseExp</span>(), parser.<span class="hljs-title function_">parseExp</span>()], idx);
+</code></pre></div><script>const expandCode_34 = document.getElementById('expand-34');
+    const bindCode_34 = document.getElementById('code-34');
+    let flag_34 = true;
+    expandCode_34.onclick = function (){
+        if(flag_34){
+            bindCode_34.classList.add('preview-code-active')
+        }else{
+            bindCode_34.classList.remove('preview-code-active') 
+        }
+        flag_34 = !flag_34
+    }</script></div><div id="preview-35" class="preview"><div class="preview-box"><div id="draw-35"><script type="module">(function(){
+                        let idx = arguments[0];
+let code = `
+-- 注释
+;
+break
+::label::
+goto preLabel
+while 1 do end
+repeat until 1
+`;
+let lexer = new Lexer(code);
+let parser = new Parser(lexer);
+draw(
+  code,
+  [
+    parser.parseState(),
+    parser.parseState(),
+    parser.parseState(),
+    parser.parseState(),
+    parser.parseState(),
+    parser.parseState(),
+  ],
+  idx
+);
+
+                    })(35)</script></div><div class="preview-box-util"><span id="expand-35" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-35" class="preview-code false"><pre><code class="hljs"><span class="hljs-keyword">let</span> idx = <span class="hljs-variable language_">arguments</span>[<span class="hljs-number">0</span>];
+<span class="hljs-keyword">let</span> code = <span class="hljs-string">`
+-- 注释
+;
+break
+::label::
+goto preLabel
+while 1 do end
+repeat until 1
+`</span>;
+<span class="hljs-keyword">let</span> lexer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Lexer</span>(code);
+<span class="hljs-keyword">let</span> parser = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Parser</span>(lexer);
+<span class="hljs-title function_">draw</span>(
+  code,
+  [
+    parser.<span class="hljs-title function_">parseState</span>(),
+    parser.<span class="hljs-title function_">parseState</span>(),
+    parser.<span class="hljs-title function_">parseState</span>(),
+    parser.<span class="hljs-title function_">parseState</span>(),
+    parser.<span class="hljs-title function_">parseState</span>(),
+    parser.<span class="hljs-title function_">parseState</span>(),
+  ],
+  idx
+);
+</code></pre></div><script>const expandCode_35 = document.getElementById('expand-35');
+    const bindCode_35 = document.getElementById('code-35');
+    let flag_35 = true;
+    expandCode_35.onclick = function (){
+        if(flag_35){
+            bindCode_35.classList.add('preview-code-active')
+        }else{
+            bindCode_35.classList.remove('preview-code-active') 
+        }
+        flag_35 = !flag_35
+    }</script></div><div id="preview-36" class="preview"><div class="preview-box"><div id="draw-36"><script type="module">(function(){
+                        let idx = arguments[0];
+let code = `
+if true then end
+if true then  elseif true then end
+if true then  elseif true then  else  end
+`;
+let lexer = new Lexer(code);
+let parser = new Parser(lexer);
+draw(
+  code,
+  [parser.parseState(), parser.parseState(), parser.parseState()],
+  idx
+);
+
+                    })(36)</script></div><div class="preview-box-util"><span id="expand-36" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-36" class="preview-code false"><pre><code class="hljs"><span class="hljs-keyword">let</span> idx = <span class="hljs-variable language_">arguments</span>[<span class="hljs-number">0</span>];
+<span class="hljs-keyword">let</span> code = <span class="hljs-string">`
+if true then end
+if true then  elseif true then end
+if true then  elseif true then  else  end
+`</span>;
+<span class="hljs-keyword">let</span> lexer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Lexer</span>(code);
+<span class="hljs-keyword">let</span> parser = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Parser</span>(lexer);
+<span class="hljs-title function_">draw</span>(
+  code,
+  [parser.<span class="hljs-title function_">parseState</span>(), parser.<span class="hljs-title function_">parseState</span>(), parser.<span class="hljs-title function_">parseState</span>()],
+  idx
+);
+</code></pre></div><script>const expandCode_36 = document.getElementById('expand-36');
+    const bindCode_36 = document.getElementById('code-36');
+    let flag_36 = true;
+    expandCode_36.onclick = function (){
+        if(flag_36){
+            bindCode_36.classList.add('preview-code-active')
+        }else{
+            bindCode_36.classList.remove('preview-code-active') 
+        }
+        flag_36 = !flag_36
+    }</script></div><div id="preview-37" class="preview"><div class="preview-box"><div id="draw-37"><script type="module">(function(){
+                        let idx = arguments[0];
+let code = `
+for i=10,1 do end
+for i=10,1,2 do end
+for i,v in "a" do end
+`;
+let lexer = new Lexer(code);
+let parser = new Parser(lexer);
+draw(
+  code,
+  [parser.parseState(), parser.parseState(), parser.parseState()],
+  idx
+);
+
+                    })(37)</script></div><div class="preview-box-util"><span id="expand-37" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-37" class="preview-code false"><pre><code class="hljs"><span class="hljs-keyword">let</span> idx = <span class="hljs-variable language_">arguments</span>[<span class="hljs-number">0</span>];
+<span class="hljs-keyword">let</span> code = <span class="hljs-string">`
+for i=10,1 do end
+for i=10,1,2 do end
+for i,v in &quot;a&quot; do end
+`</span>;
+<span class="hljs-keyword">let</span> lexer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Lexer</span>(code);
+<span class="hljs-keyword">let</span> parser = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Parser</span>(lexer);
+<span class="hljs-title function_">draw</span>(
+  code,
+  [parser.<span class="hljs-title function_">parseState</span>(), parser.<span class="hljs-title function_">parseState</span>(), parser.<span class="hljs-title function_">parseState</span>()],
+  idx
+);
+</code></pre></div><script>const expandCode_37 = document.getElementById('expand-37');
+    const bindCode_37 = document.getElementById('code-37');
+    let flag_37 = true;
+    expandCode_37.onclick = function (){
+        if(flag_37){
+            bindCode_37.classList.add('preview-code-active')
+        }else{
+            bindCode_37.classList.remove('preview-code-active') 
+        }
+        flag_37 = !flag_37
+    }</script></div><div id="preview-38" class="preview"><div class="preview-box"><div id="draw-38"><script type="module">(function(){
+                        let idx = arguments[0];
+let code = `
+local a = 123
+local a,b=1,2
+local a
+local function f() end
+`;
+let lexer = new Lexer(code);
+let parser = new Parser(lexer);
+draw(
+  code,
+  [
+    parser.parseState(),
+    parser.parseState(),
+    parser.parseState(),
+    parser.parseState(),
+  ],
+  idx
+);
+
+                    })(38)</script></div><div class="preview-box-util"><span id="expand-38" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-38" class="preview-code false"><pre><code class="hljs"><span class="hljs-keyword">let</span> idx = <span class="hljs-variable language_">arguments</span>[<span class="hljs-number">0</span>];
+<span class="hljs-keyword">let</span> code = <span class="hljs-string">`
+local a = 123
+local a,b=1,2
+local a
+local function f() end
+`</span>;
+<span class="hljs-keyword">let</span> lexer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Lexer</span>(code);
+<span class="hljs-keyword">let</span> parser = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Parser</span>(lexer);
+<span class="hljs-title function_">draw</span>(
+  code,
+  [
+    parser.<span class="hljs-title function_">parseState</span>(),
+    parser.<span class="hljs-title function_">parseState</span>(),
+    parser.<span class="hljs-title function_">parseState</span>(),
+    parser.<span class="hljs-title function_">parseState</span>(),
+  ],
+  idx
+);
+</code></pre></div><script>const expandCode_38 = document.getElementById('expand-38');
+    const bindCode_38 = document.getElementById('code-38');
+    let flag_38 = true;
+    expandCode_38.onclick = function (){
+        if(flag_38){
+            bindCode_38.classList.add('preview-code-active')
+        }else{
+            bindCode_38.classList.remove('preview-code-active') 
+        }
+        flag_38 = !flag_38
+    }</script></div><div id="preview-39" class="preview"><div class="preview-box"><div id="draw-39"><script type="module">(function(){
+                        let idx = arguments[0];
+let code = `
+name[1]
+name.name1
+name:name1(1)(2)(3)
+("name")[1]
+("name").name1
+("name"):name(1)
+`;
+let lexer = new Lexer(code);
+let parser = new Parser(lexer);
+draw(
+  code,
+  [
+    parser.parseExp(),
+    parser.parseExp(),
+    parser.parseExp(),
+    parser.parseExp(),
+    parser.parseExp(),
+    parser.parseExp(),
+  ],
+  idx
+);
+
+                    })(39)</script></div><div class="preview-box-util"><span id="expand-39" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-39" class="preview-code false"><pre><code class="hljs"><span class="hljs-keyword">let</span> idx = <span class="hljs-variable language_">arguments</span>[<span class="hljs-number">0</span>];
+<span class="hljs-keyword">let</span> code = <span class="hljs-string">`
+name[1]
+name.name1
+name:name1(1)(2)(3)
+(&quot;name&quot;)[1]
+(&quot;name&quot;).name1
+(&quot;name&quot;):name(1)
+`</span>;
+<span class="hljs-keyword">let</span> lexer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Lexer</span>(code);
+<span class="hljs-keyword">let</span> parser = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Parser</span>(lexer);
+<span class="hljs-title function_">draw</span>(
+  code,
+  [
+    parser.<span class="hljs-title function_">parseExp</span>(),
+    parser.<span class="hljs-title function_">parseExp</span>(),
+    parser.<span class="hljs-title function_">parseExp</span>(),
+    parser.<span class="hljs-title function_">parseExp</span>(),
+    parser.<span class="hljs-title function_">parseExp</span>(),
+    parser.<span class="hljs-title function_">parseExp</span>(),
+  ],
+  idx
+);
+</code></pre></div><script>const expandCode_39 = document.getElementById('expand-39');
+    const bindCode_39 = document.getElementById('code-39');
+    let flag_39 = true;
+    expandCode_39.onclick = function (){
+        if(flag_39){
+            bindCode_39.classList.add('preview-code-active')
+        }else{
+            bindCode_39.classList.remove('preview-code-active') 
+        }
+        flag_39 = !flag_39
+    }</script></div><div id="preview-40" class="preview"><div class="preview-box"><div id="draw-40"><script type="module">(function(){
+                        let idx = arguments[0];
+let code = `
+;
+break
+::label::
+goto label
+do print('hello') end
+while true do print('hello') end
+repeat print('hello') until false
+`;
+let lexer = new Lexer(code);
+let parser = new Parser(lexer);
+let ast =  parser.parse();
+console.log(ast)
+draw(code,ast, idx);
+
+                    })(40)</script></div><div class="preview-box-util"><span id="expand-40" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-40" class="preview-code false"><pre><code class="hljs"><span class="hljs-keyword">let</span> idx = <span class="hljs-variable language_">arguments</span>[<span class="hljs-number">0</span>];
+<span class="hljs-keyword">let</span> code = <span class="hljs-string">`
+;
+break
+::label::
+goto label
+do print(&#x27;hello&#x27;) end
+while true do print(&#x27;hello&#x27;) end
+repeat print(&#x27;hello&#x27;) until false
+`</span>;
+<span class="hljs-keyword">let</span> lexer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Lexer</span>(code);
+<span class="hljs-keyword">let</span> parser = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Parser</span>(lexer);
+<span class="hljs-keyword">let</span> ast =  parser.<span class="hljs-title function_">parse</span>();
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(ast)
+<span class="hljs-title function_">draw</span>(code,ast, idx);
+</code></pre></div><script>const expandCode_40 = document.getElementById('expand-40');
+    const bindCode_40 = document.getElementById('code-40');
+    let flag_40 = true;
+    expandCode_40.onclick = function (){
+        if(flag_40){
+            bindCode_40.classList.add('preview-code-active')
+        }else{
+            bindCode_40.classList.remove('preview-code-active') 
+        }
+        flag_40 = !flag_40
+    }</script></div><div id="preview-41" class="preview"><div class="preview-box"><div id="draw-41"><script type="module">(function(){
+                        let idx = arguments[0];
+let code = `
+local function f() end
+`;
+let lexer = new Lexer(code);
+let parser = new Parser(lexer);
+let ast =  parser.parse();
+console.log(ast)
+draw(code,ast, idx);
+
+                    })(41)</script></div><div class="preview-box-util"><span id="expand-41" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-41" class="preview-code false"><pre><code class="hljs"><span class="hljs-keyword">let</span> idx = <span class="hljs-variable language_">arguments</span>[<span class="hljs-number">0</span>];
+<span class="hljs-keyword">let</span> code = <span class="hljs-string">`
+local function f() end
+`</span>;
+<span class="hljs-keyword">let</span> lexer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Lexer</span>(code);
+<span class="hljs-keyword">let</span> parser = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Parser</span>(lexer);
+<span class="hljs-keyword">let</span> ast =  parser.<span class="hljs-title function_">parse</span>();
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(ast)
+<span class="hljs-title function_">draw</span>(code,ast, idx);
+</code></pre></div><script>const expandCode_41 = document.getElementById('expand-41');
+    const bindCode_41 = document.getElementById('code-41');
+    let flag_41 = true;
+    expandCode_41.onclick = function (){
+        if(flag_41){
+            bindCode_41.classList.add('preview-code-active')
+        }else{
+            bindCode_41.classList.remove('preview-code-active') 
+        }
+        flag_41 = !flag_41
+    }</script></div><script async>let codes = document.getElementsByClassName('hljs');
+            Array.from(codes).forEach(code => {
+                code.addEventListener('click', function copy(e) {
+                    const textContent = e.currentTarget.textContent;
+                    e.currentTarget.focus()
+                    const node = e.currentTarget;
+                    navigator.clipboard.writeText(textContent).then(()=>{
+                        alert('复制成功')
+                        node.blur()
+                    });
+                   
+                })
+            })</script><script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script><script>window.mermaid&&mermaid.initialize({startOnLoad:!0})</script></div></main><footer><p>Copyright © 2019-2022 suxin2017</p><p class="icp"><span><img src="/imgs/icp.png" width="17px" height="17px" alt="icp"> </span><a href="http://beian.miit.gov.cn" class="icp-link"><span>京ICP备2020041991号</span></a></p><p><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></p></footer></div></body></html>

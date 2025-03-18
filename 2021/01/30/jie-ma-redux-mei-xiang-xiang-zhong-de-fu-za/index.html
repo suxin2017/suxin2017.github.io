@@ -1,0 +1,418 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><link rel="icon" sizes="any" type="image/svg+xml" href="/imgs/icon.svg"><link rel="stylesheet" href="/css/theme/color.variables.css"><link id="themeStyleVar" rel="stylesheet" href="/css/theme/default.variables.css"><script>const localStorageTheme = localStorage.getItem('theme');
+        function loadTheme(){
+            let themeLink = document.getElementById('themeStyleVar');
+            if(localStorageTheme){
+                themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${localStorageTheme}.variables.css`)
+            }
+        }
+        if(localStorage){
+            loadTheme()
+            setTimeout(()=>{
+                if(document.body){
+                    document.body.className = localStorageTheme ? localStorageTheme : 'dark'
+                }
+
+            },2)
+        }</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/css/post.css"><title>苏鑫2017</title><meta name="description" content="用于记录感悟，前端技术，编程技巧，各种奇奇怪怪的新的体会"><meta name="viewport" content="width=device-width,initial-scale=1"><script async>console.log(`%c真巧，你打开了devtool`,"color:#b58900")
+        console.log(`%c真巧，你看了我的文章`,"color:#859900")
+        console.log('%c简单介绍，道法自然，做人要顺其自然，不要有太多欲望',"color:#268bd2")
+        console.log('%c不要目的性太强,这就是我的主题想强调的',"color:#dc322f")</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-RFGTVED02M"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-RFGTVED02M")</script><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?ce46d6101f33ba04b74fbe8bbe509590";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><script>const moduleMap = new Map();
+            var define = (moduleName, module) => { moduleMap.set(moduleName, module) };
+            var require = (moduleName) => moduleMap.get(moduleName);</script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="苏鑫2017" type="application/atom+xml"></head><body><div class="body"><header class="header"><div class="header-icon-wrapper"><h2><a href="/">苏鑫2017</a></h2></div><div class="header-right"><nav class="header-menu-wrapper"><ul class="header-menu"><li class="header-menu-item"><a class="header-menu-item-link" href="/">首页</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/categories/weibo">微博</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/about">关于</a></li><li class="header-menu-item"><div id="switchThemeButton"><img src="/imgs/icon.svg" alt="switchThemeIcon" width="100%" height="100%"></div><style>#switchThemeButton{width:40px;height:26px;margin:0;border:0;background:0 0;outline:0;cursor:pointer;margin-top:6px}</style><script async>const btn = document.getElementById('switchThemeButton');
+    let darkTheme = false;
+    const themeStyleVarId = "themeStyleVar";
+    if(localStorageTheme === 'dark'){
+        darkTheme = true
+    }else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // dark mode
+        darkTheme = true;
+    }
+    function loadTheme() {
+        let themeLink = document.getElementById(themeStyleVarId);
+        if (!themeLink) {
+            themeLink = document.createElement('link')
+            themeLink.rel = "stylesheet"
+            themeLink.id = "themeStyleVar"
+        }
+        darkTheme = !darkTheme;
+        themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${darkTheme ? 'dark' : 'light'}.variables.css`)
+        document.head.appendChild(themeLink)
+        document.body.className = darkTheme?'dark':'light'
+        localStorage.setItem('theme',darkTheme?'dark':'light');
+    }
+
+    btn.onclick = function() {
+        loadTheme();
+        codeTheme();
+    }</script><script>function codeTheme(){
+            const localStorageTheme = localStorage.getItem('theme');
+            let codeThemeLink = document.getElementById("codeTheme");
+            if(!codeThemeLink){
+                codeThemeLink = document.createElement('link');
+                codeThemeLink.rel = "stylesheet"
+                codeThemeLink.id = "codeTheme"
+                document.head.appendChild(codeThemeLink)
+            }
+            if(localStorageTheme){
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${localStorageTheme}.css`
+            }else{
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${darkTheme ? 'dark': 'light'}.css`
+            }
+        }
+        codeTheme()</script></li></ul></nav></div></header><main class="main"><div class="post"><h2>解码:redux的奥秘</h2><h3 id="redux">redux</h3><p>redux 是一个函数式的数据流管理库，但是我一直都不了解其实现原理，之前一直用人家封装好的。</p><p>根据官网大致理解其运行方式是下图这样的。<strong>通过 store dispatch 传入 action 然后经由 reducer 进行数据处理返回新的 state。</strong></p><p><img src="/imgs/redux.png" alt="redux运行方式"></p><p>我觉得这像观察者模式，然后在内部绑定了一个数据。</p><h3 id="验证">验证</h3><p>为了验证我的想法我翻看了 redux 的源码，精简之后他的代码大概是这样的.</p><pre><code class="hljs"><span class="hljs-keyword">function</span> <span class="hljs-title function_">createState</span>(<span class="hljs-params">reducer, initState,</span>)
+  <span class="hljs-keyword">let</span> currentState = initState;
+  <span class="hljs-keyword">let</span> currentReducer = reducer;
+  <span class="hljs-keyword">let</span> currentListeners = [];
+
+  <span class="hljs-keyword">let</span> isDispatching = <span class="hljs-literal">false</span>;
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">dispatch</span>(<span class="hljs-params">action</span>) &#123;
+    <span class="hljs-keyword">try</span> &#123;
+      isDispatching = <span class="hljs-literal">true</span>;
+
+      currentState = <span class="hljs-title function_">currentReducer</span>(currentState, action);
+    &#125; <span class="hljs-keyword">finally</span> &#123;
+      isDispatching = <span class="hljs-literal">false</span>;
+    &#125;
+    <span class="hljs-keyword">const</span> listeners = currentListeners;
+    listeners.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">listener</span>) =&gt;</span> &#123;
+      <span class="hljs-title function_">listener</span>();
+    &#125;);
+  &#125;
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">getCurrentState</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-keyword">return</span> currentState;
+  &#125;
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">subscribe</span>(<span class="hljs-params">listener</span>) &#123;
+    <span class="hljs-keyword">if</span> (isDispatching) &#123;
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;正在触发事件不能添加新的监听器&quot;</span>);
+      <span class="hljs-keyword">return</span>;
+    &#125;
+    currentListeners.<span class="hljs-title function_">push</span>(listener);
+    <span class="hljs-keyword">let</span> isSubscribed = <span class="hljs-literal">true</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">unSubscribe</span>(<span class="hljs-params"></span>) &#123;
+      <span class="hljs-keyword">if</span> (!isSubscribed) &#123;
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;已经取消过了&quot;</span>);
+        <span class="hljs-keyword">return</span>;
+      &#125;
+      <span class="hljs-keyword">const</span> index = currentListeners.<span class="hljs-title function_">indexOf</span>(listener);
+      currentListeners.<span class="hljs-title function_">splice</span>(index, <span class="hljs-number">1</span>);
+    &#125;;
+  &#125;
+
+  <span class="hljs-title function_">dispatch</span>(&#123; <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;init&quot;</span> &#125;);
+
+  <span class="hljs-keyword">return</span> &#123;
+    <span class="hljs-attr">getState</span>: getCurrentState,
+    subscribe,
+    dispatch,
+  &#125;;
+&#125;
+</code></pre><h2 id="自己动手搞一个">自己动手搞一个</h2><p>跟我想的差不太多</p><p>首先创造一个观察者</p><pre><code class="hljs"><span class="hljs-keyword">function</span> <span class="hljs-title function_">createObserver</span>(<span class="hljs-params"></span>) &#123;
+  <span class="hljs-keyword">let</span> listeners = [];
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">dispatch</span>(<span class="hljs-params">eventType, data</span>) &#123;
+    listeners.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">listener</span>) =&gt;</span> &#123;
+      <span class="hljs-title function_">listener</span>(eventType, data);
+    &#125;);
+  &#125;
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">addEventListener</span>(<span class="hljs-params">eventType, listener</span>) &#123;
+    listeners.<span class="hljs-title function_">push</span>(listener);
+  &#125;
+  <span class="hljs-keyword">return</span> &#123;
+    <span class="hljs-attr">dispatch</span>: dispatch,
+    addEventListener,
+  &#125;;
+&#125;
+
+<span class="hljs-keyword">const</span> observer = <span class="hljs-title function_">createObserver</span>();
+
+observer.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&quot;add&quot;</span>, <span class="hljs-function">(<span class="hljs-params">type, data</span>) =&gt;</span> &#123;
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(data);
+&#125;);
+
+observer.<span class="hljs-title function_">dispatch</span>(<span class="hljs-string">&quot;add&quot;</span>, <span class="hljs-number">1</span>);
+</code></pre><p>通过创建一个可观察的对象，然后向对象发布事件，调用所有监听事件的方法。</p><p>这就是观察者模式，进一步改造，我们需要一个全局变量作为我们的 state;</p><p>那么在使用的时候需要做这件事。</p><pre><code class="hljs"><span class="hljs-keyword">let</span> state = <span class="hljs-number">0</span>;
+
+<span class="hljs-keyword">const</span> observer = <span class="hljs-title function_">createObserver</span>();
+
+observer.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&quot;add&quot;</span>, <span class="hljs-function">(<span class="hljs-params">type</span>) =&gt;</span> &#123;
+  state = state + <span class="hljs-number">1</span>;
+&#125;);
+
+observer.<span class="hljs-title function_">dispatch</span>(<span class="hljs-string">&quot;add&quot;</span>);
+</code></pre><p>这样就完成了对 state 的操作，通常情况下，对数据的操作和使用数据通常不在一起。</p><p>为了代码更好的复用，需要提取数据操作的部分作为一个单独的内容，只操作数据。</p><p>并且我们把 state 放到到 createObserver 中，作为 observer 的成员。</p><pre><code class="hljs"><span class="hljs-keyword">function</span> <span class="hljs-title function_">createObserver</span>(<span class="hljs-params"></span>) &#123;
+  <span class="hljs-comment">// 全局唯一</span>
+  <span class="hljs-keyword">let</span> state = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">let</span> operateDataFunc = [];
+
+  <span class="hljs-comment">// 发送事件</span>
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">dispatch</span>(<span class="hljs-params">eventType, data</span>) &#123;
+    <span class="hljs-comment">// 操作数据的方法</span>
+    state = operateDataFunc.<span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">data, operateFunc</span>) =&gt;</span> &#123;
+      <span class="hljs-keyword">return</span> <span class="hljs-title function_">operateFunc</span>(data, eventType);
+    &#125;, state);
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(state);
+  &#125;
+
+  <span class="hljs-comment">// 添加操作数据的方法</span>
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">addOperateFunc</span>(<span class="hljs-params">eventType, listener</span>) &#123;
+    operateDataFunc.<span class="hljs-title function_">push</span>(listener);
+  &#125;
+
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">getState</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-keyword">return</span> state;
+  &#125;
+
+  <span class="hljs-keyword">return</span> &#123;
+    <span class="hljs-attr">getState</span>: getState,
+    <span class="hljs-attr">dispatch</span>: dispatch,
+    <span class="hljs-attr">addOperateFunc</span>: addOperateFunc,
+  &#125;;
+&#125;
+
+<span class="hljs-keyword">const</span> observer = <span class="hljs-title function_">createObserver</span>();
+
+observer.<span class="hljs-title function_">addOperateFunc</span>(<span class="hljs-string">&quot;add&quot;</span>, <span class="hljs-function">(<span class="hljs-params">prevState</span>) =&gt;</span> &#123;
+  <span class="hljs-keyword">return</span> prevState + <span class="hljs-number">1</span>;
+&#125;);
+
+observer.<span class="hljs-title function_">dispatch</span>(<span class="hljs-string">&quot;add&quot;</span>);
+</code></pre><p>现在数据操作搞定了，接下来就是数据使用方了，需要对数据进行操作后通知所有的数据使用方，state 数据发生变动。</p><p>继续改造 dispatch 方法</p><pre><code class="hljs"><span class="hljs-keyword">function</span> <span class="hljs-title function_">createObserver</span>(<span class="hljs-params"></span>) &#123;
+  <span class="hljs-keyword">let</span> state = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">let</span> operateDataFunc = [];
+  <span class="hljs-keyword">let</span> users = [];
+
+  <span class="hljs-comment">// 发送事件</span>
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">dispatch</span>(<span class="hljs-params">eventType, data</span>) &#123;
+    <span class="hljs-comment">// 操作数据的方法</span>
+    state = operateDataFunc.<span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">data, operateFunc</span>) =&gt;</span> &#123;
+      <span class="hljs-keyword">return</span> <span class="hljs-title function_">operateFunc</span>(data, eventType);
+    &#125;, state);
+    <span class="hljs-title function_">notifyUser</span>();
+  &#125;
+
+  <span class="hljs-comment">// 添加操作数据的方法</span>
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">addOperateFunc</span>(<span class="hljs-params">eventType, listener</span>) &#123;
+    operateDataFunc.<span class="hljs-title function_">push</span>(listener);
+  &#125;
+
+  <span class="hljs-comment">// 通知使用数据的用户，数据改变了</span>
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">notifyUser</span>(<span class="hljs-params"></span>) &#123;
+    users.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">user</span>) =&gt;</span> <span class="hljs-title function_">user</span>());
+  &#125;
+
+  <span class="hljs-comment">// 添加数据使用者</span>
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">addUser</span>(<span class="hljs-params">user</span>) &#123;
+    users.<span class="hljs-title function_">push</span>(user);
+  &#125;
+
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">getState</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-keyword">return</span> state;
+  &#125;
+
+  <span class="hljs-keyword">return</span> &#123;
+    <span class="hljs-attr">getState</span>: getState,
+    <span class="hljs-attr">dispatch</span>: dispatch,
+    <span class="hljs-attr">addOperateFunc</span>: addOperateFunc,
+    <span class="hljs-attr">addUser</span>: addUser,
+  &#125;;
+&#125;
+
+<span class="hljs-keyword">const</span> observer = <span class="hljs-title function_">createObserver</span>();
+
+observer.<span class="hljs-title function_">addUser</span>(<span class="hljs-function">() =&gt;</span> &#123;
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;数据发生变化&quot;</span>, observer.<span class="hljs-title function_">getState</span>());
+&#125;);
+
+observer.<span class="hljs-title function_">addOperateFunc</span>(<span class="hljs-string">&quot;add&quot;</span>, <span class="hljs-function">(<span class="hljs-params">prevState</span>) =&gt;</span> &#123;
+  <span class="hljs-keyword">return</span> prevState + <span class="hljs-number">1</span>;
+&#125;);
+
+observer.<span class="hljs-title function_">dispatch</span>(<span class="hljs-string">&quot;add&quot;</span>);
+</code></pre><p>ok 到这里 mini-redux 完成一大半了，检验一下</p><pre><code class="hljs"><span class="hljs-keyword">function</span> <span class="hljs-title function_">createObserver</span>(<span class="hljs-params"></span>) &#123;
+  <span class="hljs-keyword">let</span> state = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">let</span> operateDataFunc = &#123;&#125;;
+  <span class="hljs-keyword">let</span> users = [];
+
+  <span class="hljs-comment">// 发送事件</span>
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">dispatch</span>(<span class="hljs-params">eventType, data</span>) &#123;
+    <span class="hljs-comment">// 操作数据的方法</span>
+    state = operateDataFunc[eventType].<span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">data, operateFunc</span>) =&gt;</span> &#123;
+      <span class="hljs-keyword">return</span> <span class="hljs-title function_">operateFunc</span>(data, eventType);
+    &#125;, state);
+    <span class="hljs-title function_">notifyUser</span>();
+  &#125;
+
+  <span class="hljs-comment">// 添加操作数据的方法</span>
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">addOperateFunc</span>(<span class="hljs-params">eventType, listener</span>) &#123;
+    <span class="hljs-keyword">if</span> (!operateDataFunc[eventType]) &#123;
+      operateDataFunc[eventType] = [];
+    &#125;
+    operateDataFunc[eventType].<span class="hljs-title function_">push</span>(listener);
+  &#125;
+
+  <span class="hljs-comment">// 通知使用数据的用户，数据改变了</span>
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">notifyUser</span>(<span class="hljs-params"></span>) &#123;
+    users.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">user</span>) =&gt;</span> <span class="hljs-title function_">user</span>());
+  &#125;
+
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">addUser</span>(<span class="hljs-params">user</span>) &#123;
+    users.<span class="hljs-title function_">push</span>(user);
+  &#125;
+
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">getState</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-keyword">return</span> state;
+  &#125;
+
+  <span class="hljs-keyword">return</span> &#123;
+    <span class="hljs-attr">getState</span>: getState,
+    <span class="hljs-attr">dispatch</span>: dispatch,
+    <span class="hljs-attr">addOperateFunc</span>: addOperateFunc,
+    <span class="hljs-attr">addUser</span>: addUser,
+  &#125;;
+&#125;
+
+<span class="hljs-keyword">const</span> observer = <span class="hljs-title function_">createObserver</span>();
+
+observer.<span class="hljs-title function_">addOperateFunc</span>(<span class="hljs-string">&quot;add&quot;</span>, <span class="hljs-function">(<span class="hljs-params">prevState</span>) =&gt;</span> &#123;
+  <span class="hljs-keyword">return</span> prevState + <span class="hljs-number">1</span>;
+&#125;);
+observer.<span class="hljs-title function_">addOperateFunc</span>(<span class="hljs-string">&quot;subtraction&quot;</span>, <span class="hljs-function">(<span class="hljs-params">prevState</span>) =&gt;</span> &#123;
+  <span class="hljs-keyword">return</span> prevState - <span class="hljs-number">1</span>;
+&#125;);
+
+<span class="hljs-keyword">let</span> result = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;result&quot;</span>);
+result.<span class="hljs-property">textContent</span> = <span class="hljs-string">&quot;result: &quot;</span> + observer.<span class="hljs-title function_">getState</span>();
+
+observer.<span class="hljs-title function_">addUser</span>(<span class="hljs-function">() =&gt;</span> &#123;
+  result.<span class="hljs-property">textContent</span> = <span class="hljs-string">&quot;result: &quot;</span> + observer.<span class="hljs-title function_">getState</span>();
+&#125;);
+
+<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;add&quot;</span>).<span class="hljs-property">onclick</span> = <span class="hljs-function">() =&gt;</span> &#123;
+  observer.<span class="hljs-title function_">dispatch</span>(<span class="hljs-string">&quot;add&quot;</span>);
+&#125;;
+
+<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;subtraction&quot;</span>).<span class="hljs-property">onclick</span> = <span class="hljs-function">() =&gt;</span> &#123;
+  observer.<span class="hljs-title function_">dispatch</span>(<span class="hljs-string">&quot;subtraction&quot;</span>);
+&#125;;
+</code></pre><p class="codepen" data-height="265" data-theme-id="light" data-default-tab="js,result" data-user="angelname" data-slug-hash="jOVOQMK" style="height:265px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;border:2px solid;margin:1em 0;padding:1em" data-pen-title="observer 模式"><span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/angelname/pen/jOVOQMK">observer 模式</a> by bxer (<a target="_blank" rel="noopener" href="https://codepen.io/angelname">@angelname</a>) on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span> 如果你看不到这个演示，说明当前网站不支持 codepen ，可以到 <a target="_blank" rel="noopener" href="https://www.suxin.2017.cn">苏鑫的博客</a></p><script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script><p>现在完成了无副作用的 redux，函数相同的参数返回值一定是相同的，但是前段经常通过请求来获取数据。</p><p>假设我们对 result 的操作，加 1 或者减 1，来至于服务器。</p><pre><code class="hljs"><span class="hljs-comment">// mock server</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">getOperate</span>(<span class="hljs-params"></span>) &#123;
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">r</span>) =&gt;</span> &#123;
+    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;
+      <span class="hljs-keyword">if</span> (<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>() &lt; <span class="hljs-number">0.5</span>) &#123;
+        <span class="hljs-title function_">r</span>(<span class="hljs-string">&quot;add&quot;</span>);
+      &#125; <span class="hljs-keyword">else</span> &#123;
+        <span class="hljs-title function_">r</span>(<span class="hljs-string">&quot;subtraction&quot;</span>);
+      &#125;
+    &#125;, <span class="hljs-number">500</span>);
+  &#125;);
+&#125;
+</code></pre><p>和同步代码一样，需要添加一个专门存放副作用函数的对象。<br>只需要发送给副作用事件的时候，把 dispatch 传给副作用的处理数据的函数就可以了。</p><p>最终结果</p><pre><code class="hljs"><span class="hljs-keyword">function</span> <span class="hljs-title function_">createObserver</span>(<span class="hljs-params"></span>) &#123;
+  <span class="hljs-keyword">let</span> state = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">let</span> operateDataFunc = &#123;&#125;;
+  <span class="hljs-keyword">let</span> users = [];
+  <span class="hljs-keyword">let</span> effectOperateDataFunc = &#123;&#125;;
+
+  <span class="hljs-comment">// 发送事件</span>
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">dispatch</span>(<span class="hljs-params">eventType, data</span>) &#123;
+    <span class="hljs-comment">// 操作数据的方法</span>
+    state = operateDataFunc[eventType].<span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">data, operateFunc</span>) =&gt;</span> &#123;
+      <span class="hljs-keyword">return</span> <span class="hljs-title function_">operateFunc</span>(data, eventType);
+    &#125;, state);
+    <span class="hljs-title function_">notifyUser</span>();
+  &#125;
+
+  <span class="hljs-comment">// 添加操作数据的方法</span>
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">addOperateFunc</span>(<span class="hljs-params">eventType, listener</span>) &#123;
+    <span class="hljs-keyword">if</span> (!operateDataFunc[eventType]) &#123;
+      operateDataFunc[eventType] = [];
+    &#125;
+    operateDataFunc[eventType].<span class="hljs-title function_">push</span>(listener);
+  &#125;
+
+  <span class="hljs-comment">// 添加存在副作用的函数</span>
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">addEffectOperateFunc</span>(<span class="hljs-params">eventType, listener</span>) &#123;
+    <span class="hljs-keyword">if</span> (!effectOperateDataFunc[eventType]) &#123;
+      effectOperateDataFunc[eventType] = [];
+    &#125;
+    effectOperateDataFunc[eventType].<span class="hljs-title function_">push</span>(listener);
+  &#125;
+
+  <span class="hljs-comment">// 发送给副作用函数的事件</span>
+  <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">dispatchEffect</span>(<span class="hljs-params">eventType, data</span>) &#123;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> operateFunc <span class="hljs-keyword">of</span> effectOperateDataFunc[eventType]) &#123;
+      <span class="hljs-keyword">await</span> <span class="hljs-title function_">operateFunc</span>(dispatch, state, data, eventType);
+    &#125;
+  &#125;
+
+  <span class="hljs-comment">// 通知使用数据的用户，数据改变了</span>
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">notifyUser</span>(<span class="hljs-params"></span>) &#123;
+    users.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">user</span>) =&gt;</span> <span class="hljs-title function_">user</span>());
+  &#125;
+
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">addUser</span>(<span class="hljs-params">user</span>) &#123;
+    users.<span class="hljs-title function_">push</span>(user);
+  &#125;
+
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">getState</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-keyword">return</span> state;
+  &#125;
+
+  <span class="hljs-keyword">return</span> &#123;
+    <span class="hljs-attr">getState</span>: getState,
+    <span class="hljs-attr">dispatch</span>: dispatch,
+    <span class="hljs-attr">addOperateFunc</span>: addOperateFunc,
+    <span class="hljs-attr">addUser</span>: addUser,
+    <span class="hljs-attr">addEffectOperateFunc</span>: addEffectOperateFunc,
+    <span class="hljs-attr">dispatchEffect</span>: dispatchEffect,
+  &#125;;
+&#125;
+
+<span class="hljs-keyword">const</span> observer = <span class="hljs-title function_">createObserver</span>();
+
+observer.<span class="hljs-title function_">addOperateFunc</span>(<span class="hljs-string">&quot;add&quot;</span>, <span class="hljs-function">(<span class="hljs-params">prevState</span>) =&gt;</span> &#123;
+  <span class="hljs-keyword">return</span> prevState + <span class="hljs-number">1</span>;
+&#125;);
+observer.<span class="hljs-title function_">addOperateFunc</span>(<span class="hljs-string">&quot;subtraction&quot;</span>, <span class="hljs-function">(<span class="hljs-params">prevState</span>) =&gt;</span> &#123;
+  <span class="hljs-keyword">return</span> prevState - <span class="hljs-number">1</span>;
+&#125;);
+
+observer.<span class="hljs-title function_">addEffectOperateFunc</span>(<span class="hljs-string">&quot;getOpereate&quot;</span>, <span class="hljs-function">(<span class="hljs-params">dispatch, prevState</span>) =&gt;</span> &#123;
+  <span class="hljs-keyword">return</span> <span class="hljs-title function_">getOperate</span>().<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">operateType</span>) =&gt;</span> &#123;
+    <span class="hljs-title function_">dispatch</span>(operateType);
+  &#125;);
+&#125;);
+
+<span class="hljs-keyword">let</span> result = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;result&quot;</span>);
+result.<span class="hljs-property">textContent</span> = <span class="hljs-string">&quot;result: &quot;</span> + observer.<span class="hljs-title function_">getState</span>();
+
+observer.<span class="hljs-title function_">addUser</span>(<span class="hljs-function">() =&gt;</span> &#123;
+  result.<span class="hljs-property">textContent</span> = <span class="hljs-string">&quot;result: &quot;</span> + observer.<span class="hljs-title function_">getState</span>();
+&#125;);
+
+<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;add&quot;</span>).<span class="hljs-property">onclick</span> = <span class="hljs-function">() =&gt;</span> &#123;
+  observer.<span class="hljs-title function_">dispatchEffect</span>(<span class="hljs-string">&quot;getOpereate&quot;</span>);
+&#125;;
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">getOperate</span>(<span class="hljs-params"></span>) &#123;
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">r</span>) =&gt;</span> &#123;
+    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;
+      <span class="hljs-keyword">if</span> (<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>() &lt; <span class="hljs-number">0.5</span>) &#123;
+        <span class="hljs-title function_">r</span>(<span class="hljs-string">&quot;add&quot;</span>);
+      &#125; <span class="hljs-keyword">else</span> &#123;
+        <span class="hljs-title function_">r</span>(<span class="hljs-string">&quot;subtraction&quot;</span>);
+      &#125;
+    &#125;, <span class="hljs-number">500</span>);
+  &#125;);
+&#125;
+</code></pre><p class="codepen" data-height="265" data-theme-id="light" data-default-tab="js,result" data-user="angelname" data-slug-hash="bGBGQvM" style="height:265px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;border:2px solid;margin:1em 0;padding:1em" data-pen-title="effect 模式"><span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/angelname/pen/bGBGQvM">effect 模式</a> by bxer (<a target="_blank" rel="noopener" href="https://codepen.io/angelname">@angelname</a>) on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span> 如果你看不到这个演示，说明当前网站不支持 codepen ，可以到 <a target="_blank" rel="noopener" href="https://www.suxin.2017.cn">苏鑫的博客</a></p><script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script><p>这样就完成了一个玩具 redux 喽。</p><p>redux 源码中还有一个方式是和 Observables 的 ECMAScript 提案相关的。</p><p>可以有序的处理这种副作用函数的执行，有兴趣可以看看。</p><p><a target="_blank" rel="noopener" href="https://ponyfoo.com/articles/observables-coming-to-ecmascript?utm_source=tuicool&amp;utm_medium=referral">observables-coming-to-ecmascript</a></p><p>顺便一提，关于函数式编程，函数式编程是一种思维方式，也许作为前端的你可能没研究过，但是你只要用上了 map，find，reduce，forEach，filter 其实你就已经用上了函数式编程，因为在语言方面就提供了这种 api，还有就是为什么函数式编程现在才流行，因为它慢。如果感兴趣可以留言，我看看要不要写一篇函数式编程的文章。</p><p>我是苏鑫，关注我，带你搞各种各样的小玩具哦。</p><script async>let codes = document.getElementsByClassName('hljs');
+            Array.from(codes).forEach(code => {
+                code.addEventListener('click', function copy(e) {
+                    const textContent = e.currentTarget.textContent;
+                    e.currentTarget.focus()
+                    const node = e.currentTarget;
+                    navigator.clipboard.writeText(textContent).then(()=>{
+                        alert('复制成功')
+                        node.blur()
+                    });
+                   
+                })
+            })</script><script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script><script>window.mermaid&&mermaid.initialize({startOnLoad:!0})</script></div></main><footer><p>Copyright © 2019-2022 suxin2017</p><p class="icp"><span><img src="/imgs/icp.png" width="17px" height="17px" alt="icp"> </span><a href="http://beian.miit.gov.cn" class="icp-link"><span>京ICP备2020041991号</span></a></p><p><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></p></footer></div></body></html>

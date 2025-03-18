@@ -1,0 +1,3 @@
+/* build time:Tue Mar 18 2025 05:45:52 GMT+0000 (Coordinated Universal Time)*/
+:root{--defaultColor:var(--base00,transparent);--emColor:var(--base01,transparent);--secondaryColor:var(--base1,transparent);--backgroundHighlightsColor:var(--base2,transparent);--backgroundColor:var(--base3,transparent);--shadowColor:var(--base4,transparent)}@media (prefers-color-scheme:dark){:root{--defaultColor:var(--base0,transparent);--emColor:var(--base1,transparent);--secondaryColor:var(--base01,transparent);--backgroundHighlightsColor:var(--base02,transparent);--backgroundColor:var(--base03,transparent);--shadowColor:var(--base04,transparent)}}
+/* rebuild by neat */

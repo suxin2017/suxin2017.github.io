@@ -1,0 +1,91 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><link rel="icon" sizes="any" type="image/svg+xml" href="/imgs/icon.svg"><link rel="stylesheet" href="/css/theme/color.variables.css"><link id="themeStyleVar" rel="stylesheet" href="/css/theme/default.variables.css"><script>const localStorageTheme = localStorage.getItem('theme');
+        function loadTheme(){
+            let themeLink = document.getElementById('themeStyleVar');
+            if(localStorageTheme){
+                themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${localStorageTheme}.variables.css`)
+            }
+        }
+        if(localStorage){
+            loadTheme()
+            setTimeout(()=>{
+                if(document.body){
+                    document.body.className = localStorageTheme ? localStorageTheme : 'dark'
+                }
+
+            },2)
+        }</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/css/post.css"><title>苏鑫2017</title><meta name="description" content="用于记录感悟，前端技术，编程技巧，各种奇奇怪怪的新的体会"><meta name="viewport" content="width=device-width,initial-scale=1"><script async>console.log(`%c真巧，你打开了devtool`,"color:#b58900")
+        console.log(`%c真巧，你看了我的文章`,"color:#859900")
+        console.log('%c简单介绍，道法自然，做人要顺其自然，不要有太多欲望',"color:#268bd2")
+        console.log('%c不要目的性太强,这就是我的主题想强调的',"color:#dc322f")</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-RFGTVED02M"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-RFGTVED02M")</script><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?ce46d6101f33ba04b74fbe8bbe509590";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><script>const moduleMap = new Map();
+            var define = (moduleName, module) => { moduleMap.set(moduleName, module) };
+            var require = (moduleName) => moduleMap.get(moduleName);</script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="苏鑫2017" type="application/atom+xml"></head><body><div class="body"><header class="header"><div class="header-icon-wrapper"><h2><a href="/">苏鑫2017</a></h2></div><div class="header-right"><nav class="header-menu-wrapper"><ul class="header-menu"><li class="header-menu-item"><a class="header-menu-item-link" href="/">首页</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/categories/weibo">微博</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/about">关于</a></li><li class="header-menu-item"><div id="switchThemeButton"><img src="/imgs/icon.svg" alt="switchThemeIcon" width="100%" height="100%"></div><style>#switchThemeButton{width:40px;height:26px;margin:0;border:0;background:0 0;outline:0;cursor:pointer;margin-top:6px}</style><script async>const btn = document.getElementById('switchThemeButton');
+    let darkTheme = false;
+    const themeStyleVarId = "themeStyleVar";
+    if(localStorageTheme === 'dark'){
+        darkTheme = true
+    }else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // dark mode
+        darkTheme = true;
+    }
+    function loadTheme() {
+        let themeLink = document.getElementById(themeStyleVarId);
+        if (!themeLink) {
+            themeLink = document.createElement('link')
+            themeLink.rel = "stylesheet"
+            themeLink.id = "themeStyleVar"
+        }
+        darkTheme = !darkTheme;
+        themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${darkTheme ? 'dark' : 'light'}.variables.css`)
+        document.head.appendChild(themeLink)
+        document.body.className = darkTheme?'dark':'light'
+        localStorage.setItem('theme',darkTheme?'dark':'light');
+    }
+
+    btn.onclick = function() {
+        loadTheme();
+        codeTheme();
+    }</script><script>function codeTheme(){
+            const localStorageTheme = localStorage.getItem('theme');
+            let codeThemeLink = document.getElementById("codeTheme");
+            if(!codeThemeLink){
+                codeThemeLink = document.createElement('link');
+                codeThemeLink.rel = "stylesheet"
+                codeThemeLink.id = "codeTheme"
+                document.head.appendChild(codeThemeLink)
+            }
+            if(localStorageTheme){
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${localStorageTheme}.css`
+            }else{
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${darkTheme ? 'dark': 'light'}.css`
+            }
+        }
+        codeTheme()</script></li></ul></nav></div></header><main class="main"><div class="post"><h2>基于next的全栈开发框架Blitz</h2><h3 id="目的">目的</h3><p>自从前端和后端分离之后，一个产品的实践好像变的不那么容易，因为你必须要找一个懂后端的人，通常是java PHP，这意味开发成本加大。</p><p>不过有人可能会说我能力强，node性能太垃圾，然而产品初期最关键的是快速验证想法的可行性（现在觉得vue在这方面做的比react更好）。但是在两个语言之间切换编程总是很别扭。</p><p>再谈ssr，刚开始一直不知道什么是ssr，因为想django,egg都会提供一个默认模版解析的模块，用来动态生成网页。</p><p>并且随着前端SPA崛起，更多的渲染逻辑都放在了客户端，就有了CSR（客户端渲染）。</p><p>让从现在开始直接写前端的人对ssr感到陌生。</p><p>SSR说白了就是在服务器端编译好静态页面，然后发送到客户端。</p><p>CSR的优点是跟视图相关的操作一股脑的放在了前端。</p><ul><li>优点<ul><li>页面切换不会打断用户体验，后面页面的变更也是通过数据更改视图，提高页面渲染速度。</li></ul></li><li>缺点<ul><li>没有了首页加载，也就是用户首次加载会很慢，出现长时间白屏等现象，对于seo不够友好。</li></ul></li></ul><p>纯粹的SSR的优点是对于seo友好，页面快速加载，这方面可以查看hero 生成博客。</p><ul><li>优点<ul><li>页面首次渲染快，对于seo友好</li></ul></li><li>缺点<ul><li>页面内容每次都需要全量变更，用户体验不好。</li></ul></li></ul><p><strong>那么现在流行的ssr的策略则是，首次加载ssr，后面的加载通过csr请求数据，部分变更完成。</strong></p><p><img src="/imgs/drawio1.png" alt="渲染过程"></p><h3 id="React-SSR-框架-NEXT">React SSR 框架 NEXT</h3><p>NEXT 提供了上面的首次加载SSR后面CSR的解决方案，并通过约定路由，混合SSG（构建时生成）和SSR（服务端渲染）等功能增强用户体验。</p><p>但是NEXT 仅仅是一个SSR解决方案，你可以用它搭建一个对于seo友好的前端页面。针对用户并不完全是全栈开发人员，虽然通过一系列配置改动，也可以做到全栈开发。</p><p>但仍要花费大量时间去寻找流行的orm框架，团队内约束文件目录命名，api开发规范等，还需要接入性能监控，这些虽然都可以做到，但是其实是很重复的工作，而且需要花费大量成本去做好。</p><h3 id="基于NEXT-的全栈开发框架Blitz">基于NEXT 的全栈开发框架Blitz</h3><p>Blitz 基于Next 所以便拥有了Next全部的优点。</p><p>并且默认集成了</p><ul><li>orm（对象关系映射）框架 <strong>prisma</strong></li><li>授权的 passport.js</li><li>一个<a target="_blank" rel="noopener" href="https://blitzjs.com/docs/cli-console">可交互的命令行界面</a>，可以交互当前各种api</li><li>一个可视化的数据库网页连接器（不用再找数据库操作软件了）</li></ul><p>文档的开篇介绍便说吸取了 Ruby on Rails （这是一个Ruby的web开发框架，崇尚约定优于配置。）</p><p>通过约定优于配置，就可以做许多的<a target="_blank" rel="noopener" href="https://blitzjs.com/docs/cli-generate">自动化生成代码</a>。</p><p>昨晚试水了一下。</p><h4 id="初始化项目">初始化项目</h4><p>首先是安装需要开代理，他会下载github的一些东西，不过生成文件后也可以直接取消，自己通过npm安装依赖,比他的要快。</p><pre><code class="hljs">blitz new <span class="hljs-built_in">test</span>  
+<span class="hljs-comment">## 生成文件后直接不用他的安装依赖,自己安装</span>
+<span class="hljs-comment">## npm install</span>
+
+<span class="hljs-comment">## 生成数据库结构</span>
+blitz db migrate
+</code></pre><p>然后我们就可以启动服务了</p><pre><code class="hljs"><span class="hljs-comment">## 在localhost:3000就可以看到应用了</span>
+npm start
+</code></pre><p><img src="/imgs/homepreview.png" alt="首页图片"></p><h3 id="Blitz-查看数据库">Blitz 查看数据库</h3><p>通常我们经常需要找一个数据库的gui产品来查看我们的数据，但是Blitz自带一个</p><pre><code class="hljs"><span class="hljs-comment">## 看数据库</span>
+npm run studio
+</code></pre><p><img src="/imgs/dbpreview.png" alt="数据库预览"></p><h3 id="生成代码">生成代码</h3><p>通过<code>blitz generate</code> 我们可以生成大量模版代码，提高开发效率</p><pre><code class="hljs">blitz <span class="hljs-keyword">generate</span> all project
+</code></pre><p>生成后需要改下 <code>db/schema.prisma</code></p><p>因为自动生成的模版会带一个name属性，很费解，不过blitz时刻提醒你这是alphe版本，也可以理解。</p><pre><code class="hljs">model Project &#123;
+  id        <span class="hljs-built_in">Int</span>      <span class="hljs-meta">@default(autoincrement())</span> <span class="hljs-meta">@id</span>
+  createdAt DateTime <span class="hljs-meta">@default(now())</span>
+  updatedAt DateTime <span class="hljs-meta">@updatedAt</span>
++  name      String?
+&#125;
+</code></pre><p>会自动帮我们生成表单组件，列表页面，详情页面等，也可以选择需要生成什么。</p><p>不过暂时没发现如何自定义生成模版，如果有这个表单就会更快。</p><h3 id="总结">总结</h3><p>Blitz 提供了一套开箱即用的全栈开发解决方案，优雅的文件目录约束，让人眼前一亮的交互终端，和数据库操作界面。</p><p>从开发成本上来说，极大的降低了开发人员技术选型的成本，快速进入业务开发阶段。</p><p>降低代码维护成本，通过约束，再也不用担心代码千人千面，不知道代码目录代表的意思了。</p><p>当然也有其不足之处，对于自定义服务支持文档不完善，<a target="_blank" rel="noopener" href="http://xn--Render-9b6jq5rd8efb377cmyi71pgnhpt0ionuc.com">支持国外多家部署平台Render.com</a>、Vercel<br>、Heroku,国内服务没有任何支持，不过国内对于前端部署这方面成型的产品好像确实比较少。</p><p>细节地方不够完善比如代码生成的模版代码有点死版，不过官方都说了这是 alpha 版本，也是可以接受的。</p><p>最后，这是一个未来可期的全栈开发框架，而且有 Ruby on Rails 已经对这种想法做了验证，相信后面的完善，也许Node 就此翻盘，小企业可直接用此降低人工成本，对产品进行快速验证，迭代。</p><script async>let codes = document.getElementsByClassName('hljs');
+            Array.from(codes).forEach(code => {
+                code.addEventListener('click', function copy(e) {
+                    const textContent = e.currentTarget.textContent;
+                    e.currentTarget.focus()
+                    const node = e.currentTarget;
+                    navigator.clipboard.writeText(textContent).then(()=>{
+                        alert('复制成功')
+                        node.blur()
+                    });
+                   
+                })
+            })</script><script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script><script>window.mermaid&&mermaid.initialize({startOnLoad:!0})</script></div></main><footer><p>Copyright © 2019-2022 suxin2017</p><p class="icp"><span><img src="/imgs/icp.png" width="17px" height="17px" alt="icp"> </span><a href="http://beian.miit.gov.cn" class="icp-link"><span>京ICP备2020041991号</span></a></p><p><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></p></footer></div></body></html>

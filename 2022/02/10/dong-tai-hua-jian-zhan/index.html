@@ -1,0 +1,125 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><link rel="icon" sizes="any" type="image/svg+xml" href="/imgs/icon.svg"><link rel="stylesheet" href="/css/theme/color.variables.css"><link id="themeStyleVar" rel="stylesheet" href="/css/theme/default.variables.css"><script>const localStorageTheme = localStorage.getItem('theme');
+        function loadTheme(){
+            let themeLink = document.getElementById('themeStyleVar');
+            if(localStorageTheme){
+                themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${localStorageTheme}.variables.css`)
+            }
+        }
+        if(localStorage){
+            loadTheme()
+            setTimeout(()=>{
+                if(document.body){
+                    document.body.className = localStorageTheme ? localStorageTheme : 'dark'
+                }
+
+            },2)
+        }</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/css/post.css"><title>苏鑫2017</title><meta name="description" content="用于记录感悟，前端技术，编程技巧，各种奇奇怪怪的新的体会"><meta name="viewport" content="width=device-width,initial-scale=1"><script async>console.log(`%c真巧，你打开了devtool`,"color:#b58900")
+        console.log(`%c真巧，你看了我的文章`,"color:#859900")
+        console.log('%c简单介绍，道法自然，做人要顺其自然，不要有太多欲望',"color:#268bd2")
+        console.log('%c不要目的性太强,这就是我的主题想强调的',"color:#dc322f")</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-RFGTVED02M"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-RFGTVED02M")</script><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?ce46d6101f33ba04b74fbe8bbe509590";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><script>const moduleMap = new Map();
+            var define = (moduleName, module) => { moduleMap.set(moduleName, module) };
+            var require = (moduleName) => moduleMap.get(moduleName);</script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="苏鑫2017" type="application/atom+xml"></head><body><div class="body"><header class="header"><div class="header-icon-wrapper"><h2><a href="/">苏鑫2017</a></h2></div><div class="header-right"><nav class="header-menu-wrapper"><ul class="header-menu"><li class="header-menu-item"><a class="header-menu-item-link" href="/">首页</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/categories/weibo">微博</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/about">关于</a></li><li class="header-menu-item"><div id="switchThemeButton"><img src="/imgs/icon.svg" alt="switchThemeIcon" width="100%" height="100%"></div><style>#switchThemeButton{width:40px;height:26px;margin:0;border:0;background:0 0;outline:0;cursor:pointer;margin-top:6px}</style><script async>const btn = document.getElementById('switchThemeButton');
+    let darkTheme = false;
+    const themeStyleVarId = "themeStyleVar";
+    if(localStorageTheme === 'dark'){
+        darkTheme = true
+    }else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // dark mode
+        darkTheme = true;
+    }
+    function loadTheme() {
+        let themeLink = document.getElementById(themeStyleVarId);
+        if (!themeLink) {
+            themeLink = document.createElement('link')
+            themeLink.rel = "stylesheet"
+            themeLink.id = "themeStyleVar"
+        }
+        darkTheme = !darkTheme;
+        themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${darkTheme ? 'dark' : 'light'}.variables.css`)
+        document.head.appendChild(themeLink)
+        document.body.className = darkTheme?'dark':'light'
+        localStorage.setItem('theme',darkTheme?'dark':'light');
+    }
+
+    btn.onclick = function() {
+        loadTheme();
+        codeTheme();
+    }</script><script>function codeTheme(){
+            const localStorageTheme = localStorage.getItem('theme');
+            let codeThemeLink = document.getElementById("codeTheme");
+            if(!codeThemeLink){
+                codeThemeLink = document.createElement('link');
+                codeThemeLink.rel = "stylesheet"
+                codeThemeLink.id = "codeTheme"
+                document.head.appendChild(codeThemeLink)
+            }
+            if(localStorageTheme){
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${localStorageTheme}.css`
+            }else{
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${darkTheme ? 'dark': 'light'}.css`
+            }
+        }
+        codeTheme()</script></li></ul></nav></div></header><main class="main"><div class="post"><h2>动态化建站</h2><p>本文对建站做了一种 demo 实现，并不代表能够应对真正生产环境的复杂场景</p><p>调研大量建站平台，发现大部分建站界面长的几乎一致，数据结构层也基本一致，那么就想到一个问题，能不能把通用的数据层/视图层抽离,作为基础，通过动态加载组件的方式满足不同的页面搭建场景。</p><p>最开始的想法是通过 rollup + systemjs 的方式，编译组件，然后动态加载组件，但是会有一些问题，比如依赖库共享问题，组件间相互引用问题，一时间没什么头绪就没继续搞。</p><p>后来发现 webpack 的模块联邦完美解决了上面的问题，然后开始一顿折腾终于成功完成了demo。</p><p>最终效果</p><p><img src="/imgs/editor.png" alt="效果"></p><p>注意图中红线的部分都是远端的组件。</p><h3 id="实现">实现</h3><h4 id="结构划分">结构划分</h4><p>通过 mobx 将数据层抽离，所以我的建站是一个 monorepo 的项目，项目结构如下</p><pre><code class="hljs">.
+├── basicComponents <span class="hljs-regexp">//</span> 动态组件
+├── render <span class="hljs-regexp">//</span> 渲染器
+├── store <span class="hljs-regexp">//</span> 数据层
+└── website <span class="hljs-regexp">//</span> 建站站点
+</code></pre><p>数据层负责组件库，历史记录，编辑器的数据，渲染器的数据，每次数据层的变更都会触发相关数据依赖的组件更新。</p><p>渲染器负责初始化渲染器，hoc 注入，组件生命周期回调，提供不同场景下的初始化不同渲染</p><p>建站站点就是一个 demo 页面了，主要是视图布局</p><p>动态组件是远端组件</p><h4 id="动态加载">动态加载</h4><p>远端组件库代码入口非常简单</p><pre><code class="hljs"><span class="hljs-keyword">import</span> <span class="hljs-title class_">Button</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./components/Button&quot;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">Page</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./components/Page&quot;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">Image</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./components/Image&quot;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;
+  <span class="hljs-attr">components</span>: [<span class="hljs-title class_">Button</span>, <span class="hljs-title class_">Page</span>, <span class="hljs-title class_">Image</span>],
+&#125;;
+</code></pre><p>只是暴露组件列表即可</p><p>编辑器初始化 render 时，动态导入组件</p><pre><code class="hljs"><span class="hljs-comment">// 这里代码有点不合理 remote/Button 指的是远端的组件库后面没来得及改。</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title class_">AButton</span> = <span class="hljs-keyword">await</span> <span class="hljs-title function_">import</span>(<span class="hljs-string">&quot;remote/Button&quot;</span>);
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> <span class="hljs-title class_">Com</span> <span class="hljs-keyword">of</span> <span class="hljs-title class_">AButton</span>.<span class="hljs-property">default</span>.<span class="hljs-property">components</span>) &#123;
+  <span class="hljs-keyword">if</span> (<span class="hljs-title class_">Com</span>.<span class="hljs-property">name</span> === <span class="hljs-string">&quot;container&quot;</span>) &#123;
+    <span class="hljs-title class_">Page</span> = <span class="hljs-title class_">Com</span>;
+  &#125;
+  editorStore.<span class="hljs-property">componentList</span>?.<span class="hljs-title function_">addEditorComponent</span>(<span class="hljs-title class_">Com</span>);
+&#125;
+</code></pre><p>因为篇幅有限就不介绍对于初始化 render 的一些操作了。</p><p>这样我们就把远端的组件库通过动态 import 的方式导入到项目中了。</p><p>达到我们最开始的预期，动态加载远端组件库的目的了。</p><h3 id="拓展">拓展</h3><p>实际上现在我们动态加载还处于需要通过静态配置去请求对应远端组件代码。</p><pre><code class="hljs"><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = &#123;
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;host&quot;</span>,
+  <span class="hljs-attr">remotes</span>: &#123;
+    <span class="hljs-attr">remote</span>: <span class="hljs-string">&quot;remote@http://localhost:3001/remoteEntry.js&quot;</span>,
+  &#125;,
+  <span class="hljs-attr">shared</span>: &#123;
+    <span class="hljs-comment">// ...dependencies,</span>
+    <span class="hljs-attr">react</span>: &#123;
+      <span class="hljs-attr">singleton</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-comment">// requiredVersion: dependencies[&#x27;react&#x27;],</span>
+    &#125;,
+    <span class="hljs-string">&quot;react-dom&quot;</span>: &#123;
+      <span class="hljs-attr">singleton</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-comment">// requiredVersion: dependencies[&#x27;react-dom&#x27;],</span>
+    &#125;,
+  &#125;,
+&#125;;
+</code></pre><p>也就是这部分代码，虽然我们把编辑器和组件之间的关系解耦了，但是并不是是真正意义的揭耦。</p><p>我们可以通过动态加载组件的方式进行远端组件的加载。</p><p>具体配置可以看这个</p><pre><code class="hljs"><span class="hljs-keyword">function</span> <span class="hljs-title function_">loadComponent</span>(<span class="hljs-params">scope, <span class="hljs-variable language_">module</span></span>) &#123;
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">async</span> () =&gt; &#123;
+    <span class="hljs-comment">// Initializes the shared scope. Fills it with known provided modules from this build and all remotes</span>
+    <span class="hljs-keyword">await</span> <span class="hljs-title function_">__webpack_init_sharing__</span>(<span class="hljs-string">&#x27;default&#x27;</span>);
+    <span class="hljs-keyword">const</span> container = <span class="hljs-variable language_">window</span>[scope]; <span class="hljs-comment">// or get the container somewhere else</span>
+    <span class="hljs-comment">// Initialize the container, it may provide shared modules</span>
+    <span class="hljs-keyword">await</span> container.<span class="hljs-title function_">init</span>(__webpack_share_scopes__.<span class="hljs-property">default</span>);
+    <span class="hljs-keyword">const</span> factory = <span class="hljs-keyword">await</span> <span class="hljs-variable language_">window</span>[scope].<span class="hljs-title function_">get</span>(<span class="hljs-variable language_">module</span>);
+    <span class="hljs-keyword">const</span> <span class="hljs-title class_">Module</span> = <span class="hljs-title function_">factory</span>();
+    <span class="hljs-keyword">return</span> <span class="hljs-title class_">Module</span>;
+  &#125;;
+&#125;
+
+<span class="hljs-title function_">loadComponent</span>(<span class="hljs-string">&#x27;abtests&#x27;</span>, <span class="hljs-string">&#x27;test123&#x27;</span>);
+</code></pre><p><a target="_blank" rel="noopener" href="https://webpack.js.org/concepts/module-federation/#dynamic-remote-containers">https://webpack.js.org/concepts/module-federation/#dynamic-remote-containers</a></p><p>那么有了这个功能以后，我们可以想象一下，编辑器和组件之间的关系突然从 1 - 1 变成了 1 - n。</p><p>我可以从 <a target="_blank" rel="noopener" href="http://www.abc.com/components.js">www.abc.com/components.js</a> 加载组件列表<br>还可以从 <a target="_blank" rel="noopener" href="http://www.cdf.com/components.js">www.cdf.com/components.js</a> 加载组件列表</p><p>这样就可以不用每个建站都搞一套自己的建站代码和组件库代码了，可以一套建站代码多套组件库代码，当然这只是我的假象，现实世界可能远比这个复杂，满足不了这个需求。</p><p>在进一步我甚至可以做个服务器动态吐组件列表给用户，瞬间解决组件白名单问题，还可以做组件的版本管理…</p><h3 id="最后">最后</h3><p>上述的代码仓库在这里<br><a target="_blank" rel="noopener" href="https://github.com/suxin2017/pixel-editor">https://github.com/suxin2017/pixel-editor</a></p><script async>let codes = document.getElementsByClassName('hljs');
+            Array.from(codes).forEach(code => {
+                code.addEventListener('click', function copy(e) {
+                    const textContent = e.currentTarget.textContent;
+                    e.currentTarget.focus()
+                    const node = e.currentTarget;
+                    navigator.clipboard.writeText(textContent).then(()=>{
+                        alert('复制成功')
+                        node.blur()
+                    });
+                   
+                })
+            })</script><script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script><script>window.mermaid&&mermaid.initialize({startOnLoad:!0})</script></div></main><footer><p>Copyright © 2019-2022 suxin2017</p><p class="icp"><span><img src="/imgs/icp.png" width="17px" height="17px" alt="icp"> </span><a href="http://beian.miit.gov.cn" class="icp-link"><span>京ICP备2020041991号</span></a></p><p><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></p></footer></div></body></html>

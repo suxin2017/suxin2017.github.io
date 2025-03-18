@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><link rel="icon" sizes="any" type="image/svg+xml" href="/imgs/icon.svg"><link rel="stylesheet" href="/css/theme/color.variables.css"><link id="themeStyleVar" rel="stylesheet" href="/css/theme/default.variables.css"><script>const localStorageTheme = localStorage.getItem('theme');
+        function loadTheme(){
+            let themeLink = document.getElementById('themeStyleVar');
+            if(localStorageTheme){
+                themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${localStorageTheme}.variables.css`)
+            }
+        }
+        if(localStorage){
+            loadTheme()
+            setTimeout(()=>{
+                if(document.body){
+                    document.body.className = localStorageTheme ? localStorageTheme : 'dark'
+                }
+
+            },2)
+        }</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/css/post.css"><title>苏鑫2017</title><meta name="description" content="用于记录感悟，前端技术，编程技巧，各种奇奇怪怪的新的体会"><meta name="viewport" content="width=device-width,initial-scale=1"><script async>console.log(`%c真巧，你打开了devtool`,"color:#b58900")
+        console.log(`%c真巧，你看了我的文章`,"color:#859900")
+        console.log('%c简单介绍，道法自然，做人要顺其自然，不要有太多欲望',"color:#268bd2")
+        console.log('%c不要目的性太强,这就是我的主题想强调的',"color:#dc322f")</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-RFGTVED02M"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-RFGTVED02M")</script><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?ce46d6101f33ba04b74fbe8bbe509590";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><script>const moduleMap = new Map();
+            var define = (moduleName, module) => { moduleMap.set(moduleName, module) };
+            var require = (moduleName) => moduleMap.get(moduleName);</script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="苏鑫2017" type="application/atom+xml"></head><body><div class="body"><header class="header"><div class="header-icon-wrapper"><h2><a href="/">苏鑫2017</a></h2></div><div class="header-right"><nav class="header-menu-wrapper"><ul class="header-menu"><li class="header-menu-item"><a class="header-menu-item-link" href="/">首页</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/categories/weibo">微博</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/about">关于</a></li><li class="header-menu-item"><div id="switchThemeButton"><img src="/imgs/icon.svg" alt="switchThemeIcon" width="100%" height="100%"></div><style>#switchThemeButton{width:40px;height:26px;margin:0;border:0;background:0 0;outline:0;cursor:pointer;margin-top:6px}</style><script async>const btn = document.getElementById('switchThemeButton');
+    let darkTheme = false;
+    const themeStyleVarId = "themeStyleVar";
+    if(localStorageTheme === 'dark'){
+        darkTheme = true
+    }else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // dark mode
+        darkTheme = true;
+    }
+    function loadTheme() {
+        let themeLink = document.getElementById(themeStyleVarId);
+        if (!themeLink) {
+            themeLink = document.createElement('link')
+            themeLink.rel = "stylesheet"
+            themeLink.id = "themeStyleVar"
+        }
+        darkTheme = !darkTheme;
+        themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${darkTheme ? 'dark' : 'light'}.variables.css`)
+        document.head.appendChild(themeLink)
+        document.body.className = darkTheme?'dark':'light'
+        localStorage.setItem('theme',darkTheme?'dark':'light');
+    }
+
+    btn.onclick = function() {
+        loadTheme();
+        codeTheme();
+    }</script><script>function codeTheme(){
+            const localStorageTheme = localStorage.getItem('theme');
+            let codeThemeLink = document.getElementById("codeTheme");
+            if(!codeThemeLink){
+                codeThemeLink = document.createElement('link');
+                codeThemeLink.rel = "stylesheet"
+                codeThemeLink.id = "codeTheme"
+                document.head.appendChild(codeThemeLink)
+            }
+            if(localStorageTheme){
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${localStorageTheme}.css`
+            }else{
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${darkTheme ? 'dark': 'light'}.css`
+            }
+        }
+        codeTheme()</script></li></ul></nav></div></header><main class="main"><div class="post"><h2>node进程管理集群</h2><style>.dark .post img{filter:contrast(0)}</style><blockquote><p>有人的地方就有江湖，有江湖的地方就有包工头<br>                   --尼古拉斯张三</p></blockquote><h3 id="单机进程管理的缺点">单机进程管理的缺点</h3><p>一个人的力量毕竟是有限的，单机进程管理像下图这样。</p><p><img src="/imgs/%E5%8D%95%E6%9C%BA%E5%AE%9E%E4%BE%8B.png" alt="image" width="150"></p><p>看这个图会发现两个问题：</p><ol><li>任务分发和进程管理两个服务放在一块耦合过于严重，一上线某一个功能就需要重启所有进程</li><li>单机资源是有限的，随着进程增加，就会出现资源不够用的情况</li></ol><h3 id="进程管理集群">进程管理集群</h3><p>为了解决上面两个问题，应该引入集群思维，一个主机管理下面其他进程管理机器，这样主机上线不会影响 node 服务，而且集群资源是丰富的配合 docker 还是可以动态扩容的。</p><p>具体架构应该是这样的</p><p><img src="/imgs/%E9%9B%86%E7%BE%A4%E6%9E%B6%E6%9E%84.png" alt="image"></p><ul><li><p>启动</p><ul><li>当集群 B 的工作节点启动时候，会向任务分配节点注册机器信息，并按分钟发送心跳（机器信息）。</li><li>集群 A 会保存这些节点信息，供后面任务分发使用。</li></ul></li><li><p>启动服务</p><ul><li>当一个进程需要启动时候，会检查当前节点信息，分配给相对空闲的机器。</li><li>此时将 node 进程和工作节点进行绑定，以供后续重启暂停操作。</li></ul></li><li><p>上线管理节点</p><ul><li>上线管理节点时候我们无需重启 node 进程节点，各节点均可正常访问</li></ul></li><li><p>上线工作节点</p><ul><li>工作节点会不再发送心跳，管理节点认为工作节点挂掉。</li><li>并向新一轮的注册节点进行新一轮的任务分配，并重启对应 node 进程</li></ul></li></ul><p>这样就解决了单机实例的问题，并且服务高可用，工作职责明确。</p><h4 id="node-进程高可用谁来管理？">node 进程高可用谁来管理？</h4><p>也可整合到节点服务中，那么可能节点分配可能是这样的</p><p><img src="/imgs/%E5%A4%9A%E8%BF%9B%E7%A8%8B%E7%BB%84.png" alt="image"></p><p>可以看到每个工作节点都会存在进程 1，为什么有的进程是单个有的进程是多个节点都存在呢。</p><p>这部分是因为进程功能不相同</p><p>对于业务节点比如 ssr，node 测试服务可能只需要一个进程就够了。</p><p>但是对于想要把 gitlab runner 的能力也搞过来，就需要多个工作节点干一样的活了。</p><h4 id="总结">总结</h4><p>单节点还是很脆弱的，集群与其对比优势展现的十分明显，不过需要维护节点信息，分发任务等细节的处理，实现起来相对复杂些。</p><script async>let codes = document.getElementsByClassName('hljs');
+            Array.from(codes).forEach(code => {
+                code.addEventListener('click', function copy(e) {
+                    const textContent = e.currentTarget.textContent;
+                    e.currentTarget.focus()
+                    const node = e.currentTarget;
+                    navigator.clipboard.writeText(textContent).then(()=>{
+                        alert('复制成功')
+                        node.blur()
+                    });
+                   
+                })
+            })</script><script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script><script>window.mermaid&&mermaid.initialize({startOnLoad:!0})</script></div></main><footer><p>Copyright © 2019-2022 suxin2017</p><p class="icp"><span><img src="/imgs/icp.png" width="17px" height="17px" alt="icp"> </span><a href="http://beian.miit.gov.cn" class="icp-link"><span>京ICP备2020041991号</span></a></p><p><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></p></footer></div></body></html>

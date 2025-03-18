@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><link rel="icon" sizes="any" type="image/svg+xml" href="/imgs/icon.svg"><link rel="stylesheet" href="/css/theme/color.variables.css"><link id="themeStyleVar" rel="stylesheet" href="/css/theme/default.variables.css"><script>const localStorageTheme = localStorage.getItem('theme');
+        function loadTheme(){
+            let themeLink = document.getElementById('themeStyleVar');
+            if(localStorageTheme){
+                themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${localStorageTheme}.variables.css`)
+            }
+        }
+        if(localStorage){
+            loadTheme()
+            setTimeout(()=>{
+                if(document.body){
+                    document.body.className = localStorageTheme ? localStorageTheme : 'dark'
+                }
+
+            },2)
+        }</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/css/post.css"><title>苏鑫2017</title><meta name="description" content="用于记录感悟，前端技术，编程技巧，各种奇奇怪怪的新的体会"><meta name="viewport" content="width=device-width,initial-scale=1"><script async>console.log(`%c真巧，你打开了devtool`,"color:#b58900")
+        console.log(`%c真巧，你看了我的文章`,"color:#859900")
+        console.log('%c简单介绍，道法自然，做人要顺其自然，不要有太多欲望',"color:#268bd2")
+        console.log('%c不要目的性太强,这就是我的主题想强调的',"color:#dc322f")</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-RFGTVED02M"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-RFGTVED02M")</script><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?ce46d6101f33ba04b74fbe8bbe509590";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><script>const moduleMap = new Map();
+            var define = (moduleName, module) => { moduleMap.set(moduleName, module) };
+            var require = (moduleName) => moduleMap.get(moduleName);</script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="苏鑫2017" type="application/atom+xml"></head><body><div class="body"><header class="header"><div class="header-icon-wrapper"><h2><a href="/">苏鑫2017</a></h2></div><div class="header-right"><nav class="header-menu-wrapper"><ul class="header-menu"><li class="header-menu-item"><a class="header-menu-item-link" href="/">首页</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/categories/weibo">微博</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/about">关于</a></li><li class="header-menu-item"><div id="switchThemeButton"><img src="/imgs/icon.svg" alt="switchThemeIcon" width="100%" height="100%"></div><style>#switchThemeButton{width:40px;height:26px;margin:0;border:0;background:0 0;outline:0;cursor:pointer;margin-top:6px}</style><script async>const btn = document.getElementById('switchThemeButton');
+    let darkTheme = false;
+    const themeStyleVarId = "themeStyleVar";
+    if(localStorageTheme === 'dark'){
+        darkTheme = true
+    }else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // dark mode
+        darkTheme = true;
+    }
+    function loadTheme() {
+        let themeLink = document.getElementById(themeStyleVarId);
+        if (!themeLink) {
+            themeLink = document.createElement('link')
+            themeLink.rel = "stylesheet"
+            themeLink.id = "themeStyleVar"
+        }
+        darkTheme = !darkTheme;
+        themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${darkTheme ? 'dark' : 'light'}.variables.css`)
+        document.head.appendChild(themeLink)
+        document.body.className = darkTheme?'dark':'light'
+        localStorage.setItem('theme',darkTheme?'dark':'light');
+    }
+
+    btn.onclick = function() {
+        loadTheme();
+        codeTheme();
+    }</script><script>function codeTheme(){
+            const localStorageTheme = localStorage.getItem('theme');
+            let codeThemeLink = document.getElementById("codeTheme");
+            if(!codeThemeLink){
+                codeThemeLink = document.createElement('link');
+                codeThemeLink.rel = "stylesheet"
+                codeThemeLink.id = "codeTheme"
+                document.head.appendChild(codeThemeLink)
+            }
+            if(localStorageTheme){
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${localStorageTheme}.css`
+            }else{
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${darkTheme ? 'dark': 'light'}.css`
+            }
+        }
+        codeTheme()</script></li></ul></nav></div></header><main class="main"><div class="post"><h2>2020年，我对人生的感悟</h2><h2 id="2020年的不平凡">2020年的不平凡</h2><h3 id="错过了回家那趟火车">错过了回家那趟火车</h3><p>2020年从2019年的春节开始，就似乎注定不那么平凡。</p><p>我错过了回家的火车，那时候疫情初现，事情的一切仿佛不是那么清晰。</p><p>我在做好严密的保护工作下，拿着我的行李箱，伴随着行李箱摩擦地面的低吼声，去往火车站。</p><p>正当我坐地铁到火车站行程的一半的时候，看着地铁的到站灯，偶然间我又重新看了以下我的火车信息，我发现我的已经错过我的火车一整天。</p><p>在这之前我是多么理想化的想着我回家的旅程多么顺利，但现实的回家的过程好像《人在囧途》。</p><p>先是通过qq搜群找到了回家的拼车群，那时候心慌手颤，然后拼车群的大哥还忽悠我到了拼车地点就能出发，等我到了却那里原来一车人还没凑齐。</p><p>勉勉强强天快黑的时候应该是4-5点，人终于凑齐了，我也在寒冷的街头站了大半天，身上冷的不行，也许这是对我马虎的惩罚吧。</p><p><strong>人生就是这样，没什么是预料之中，充满无尽或好或坏</strong></p><p>和一车奇奇怪怪的人挤在一起，一个看起来很社会穿貂的养猫男，一家子来京看病的，还有一个司机的朋友，车子很挤，挤得人动弹不得，就这样我挤了4个多小时，到了晚上才到了家，我记得那一晚，空气很冷，有雾。</p><p>曾以为这种乌龙事件会离我很远，因为我前些天还嘲笑朋友抢到的火车票是相反方向的，今日我就完美错过了我的火车。</p><p><strong>那些看似离你很远的事情，有时候会突然来到你的身边，这操蛋的命运啊</strong></p><h3 id="隔离的黑暗">隔离的黑暗</h3><p>疫情期间的小插曲<strong>隔离</strong>，回京我被隔离了，14天里我没出过我的屋子，我问公寓前台我吃饭怎么办啊，她说让我朋友给我买好了。</p><p>所以我吃的东西都是朋友从超市给我买的零食，这14天大概是我最黑暗的时光了。</p><p>后来我发现别人都可以定外卖，那个前台只是知道我有个朋友在这里住，所以不让我定外卖，这样她就不用接触我了，让我朋友承担这个危险的责任，世间险恶啊。</p><p>房子里面有窗户，但是只能打开一条缝隙，每天的光源仅仅是几个低度数的led灯。那时候一整天都觉得外面是黑色的，屋里是黑色的，心里也是。</p><p>我觉得那段期间我特别怕黑，房间不大，可用大概有10多平，虽然有网有电视，但是谁说的有网能过一辈子，反正我亲身体验，结果是<strong>不能</strong>，如果没有清新的空气，没有阳光，时间一长了你会憋疯。</p><p>从那时候发誓我下一个房子一定要带窗户。</p><p><strong>人生总是充满苦难，熬过去就好了，熬不过去就死了</strong></p><h2 id="2020年的转机">2020年的转机</h2><p>2020年也不完全是苦难的一年，上半年我的收入微薄，我很快面临一个社会给我出的难题。<strong>买房</strong>。</p><p>凭我那时候的月薪我根本买不起房，我本不想离职，因为人一旦熟悉了一个环境就不想动，从新建立一个新的社交圈需要时间的打磨才行，我讨厌破圈。</p><p>那时候我的业余时间很多，可以做很多我喜欢的事,比如那时候我自己写了一套组件库（<a target="_blank" rel="noopener" href="https://suxin2017.github.io/bxer-ui/">bxer-ui</a>），还给umi-request提了一个<a target="_blank" rel="noopener" href="https://github.com/umijs/umi-request/pull/90">提交</a>，对于一个刚毕业半年来说的我也算是充满挑战的了。</p><p>没办法，我不跳槽我就买不起房，虽然跳了也买不起，但是可以缩短这个过程的时间。</p><p>我开始进行这场战役的战前准备了，设置战略，从农村包围城市，从小公司积累经验，然后在面大厂，老实讲在面试前，我没面试过前端职业，因为我进入公司的身份是java开发。</p><p>我发现我又天真了，小厂战役虽然全胜（谈钱就蹦，技术全过），但是我根本没资格面试大厂，因为一没资质过浅，二没好的学校背景，投递给大厂的简历仿佛沉入死海一般。</p><p>不过从战略上来讲农村包围城市是成功的，<strong>机会总是留给有准备的人</strong>，虽然大厂没有回音，但是天并没有杀了我，终于有一家大厂hr给我发面试邀请，我一度以为那是个骗子，直到面试前。</p><p>我前面的战略在这时一下子就变得意义非凡，我已经不惧怕面试了，我顺利通过了面试进入了大厂，薪资翻倍。</p><p><strong>生死有命，富贵在天</strong></p><h2 id="2020年的成就">2020年的成就</h2><p>进入大厂后，我并没有就此泄气，对于技术的追求我依然快马加鞭，在公司内网发布多篇文章。</p><p>不仅仅是这样，我搭建起自己的站点（<a target="_blank" rel="noopener" href="https://www.suxin2017.cc">suxin2017.cc</a>），买服务器，域名，备案。</p><p>大概三个月的时间，我发布了10篇文章在博客上，今年应该写了得有<strong>20 - 30</strong>多篇文章吧</p><p>还搞出了一套文章编写的工作流，因为我的文章可能会发布到掘金，公众号。</p><p>通过有道云存贮文章，然后对于支持markdown的网站直接用markdown。 不支持的通过自己写的<a target="_blank" rel="noopener" href="https://suxin2017.github.io/markdown-website/com/">马克在线排版</a>复制文章，粘贴到网站的富文本编辑器中实现文章快速同步，比如微信公众号，头条号。</p><p>周末没事干还搞了一个<a target="_blank" rel="noopener" href="https://suxin2017.github.io/gradient-online/">渐变色代码生成</a>的在线小工具。</p><p>还在头条号完成兴趣认证。</p><p>上面的这一切都是我想做的，什么都不涂只是图个爱好，那时候的我想成为一名技术匠人。</p><p><strong>别人笑我太疯癫，我笑他人看不穿</strong></p><h2 id="2020年的认识">2020年的认识</h2><p>昨天（ 元旦前一天 ）我发现我现在在几年内能付起房的首付了，但是我依旧面临的还是没钱的问题，因为还得装修，后面结婚什么的各种花钱。</p><p>也许有人疑问你为什么不靠长辈啊，我这人从小就不会把靠别人当成我自己计划的一部分，别人叫解耦，我这叫 0 依赖，不过这样的后果就是活的累。</p><p>于是我2021的关键词变成了，健康、自律、赚钱，不在有兴趣了，因为兴趣固然重要，但是现阶段现实的社会教育我的是向钱看。</p><p>记得大学的时候，写个小工具，小爬虫自己开心的不得了，不过和别人炫耀别人也不叼我，但是自己真的很开心，也还好我时至今日还没忘记我对于热爱计算机的初心。</p><p>当前的现实是我为了可持续的发展，我必须要放弃些什么，我不能一如既往再搞自己喜欢的，我要在社会上活下去。</p><p>人生就是这样无限的挑战，无限的选择，2021年的我面对人生依旧乐观，2021年的我不再是中二，2021年的再健康的前提下依旧会热爱技术。</p><p>我是苏鑫，2020年让我成长。</p><script async>let codes = document.getElementsByClassName('hljs');
+            Array.from(codes).forEach(code => {
+                code.addEventListener('click', function copy(e) {
+                    const textContent = e.currentTarget.textContent;
+                    e.currentTarget.focus()
+                    const node = e.currentTarget;
+                    navigator.clipboard.writeText(textContent).then(()=>{
+                        alert('复制成功')
+                        node.blur()
+                    });
+                   
+                })
+            })</script><script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script><script>window.mermaid&&mermaid.initialize({startOnLoad:!0})</script></div></main><footer><p>Copyright © 2019-2022 suxin2017</p><p class="icp"><span><img src="/imgs/icp.png" width="17px" height="17px" alt="icp"> </span><a href="http://beian.miit.gov.cn" class="icp-link"><span>京ICP备2020041991号</span></a></p><p><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></p></footer></div></body></html>

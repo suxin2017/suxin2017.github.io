@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>苏鑫2017</title>
+  
+  <subtitle>苏鑫的个人博客</subtitle>
+  <link href="https://suxin2017.cc/atom.xml" rel="self"/>
+  
+  <link href="https://suxin2017.cc/"/>
+  <updated>2025-03-18T05:45:38.933Z</updated>
+  <id>https://suxin2017.cc/</id>
+  
+  <author>
+    <name>suxin2017</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>企业中的前端开发</title>
+    <link href="https://suxin2017.cc/2022/11/14/qi-ye-zhong-de-qian-duan-kai-fa/"/>
+    <id>https://suxin2017.cc/2022/11/14/qi-ye-zhong-de-qian-duan-kai-fa/</id>
+    <published>2022-11-14T00:19:53.000Z</published>
+    <updated>2025-03-18T05:45:38.933Z</updated>
+    
+    
+    <summary type="html">如今从事前端开发将近四年，经手大概 6-7 个项目了，发现目前仍然存在的一些前端问题。
+
+ * 数据（模型）问题
+ * 代码约束问题
+
+
+数据（模型）问题
+
+前端开发过程中，不可避免的两个问题点视图&amp;数据，视图负责展示，数据负责填充视图。
+
+数据测分为两种类型
+
+ * 自有数据
+ * 三方数据
+
+在我开发的项目中，前后端联调主要凭借，文档约束，口头约束，信任约束。
+
+而这三种约束基本没一个是靠谱的...</summary>
+    
+    
+    
+    <category term="post" scheme="https://suxin2017.cc/categories/post/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>nginx管理平台</title>
+    <link href="https://suxin2017.cc/2022/09/02/nginx-guan-li-ping-tai/"/>
+    <id>https://suxin2017.cc/2022/09/02/nginx-guan-li-ping-tai/</id>
+    <published>2022-09-02T10:16:08.000Z</published>
+    <updated>2025-03-18T05:45:38.933Z</updated>
+    
+    
+    <summary type="html">想做一个 nginx 管理平台，以高可拓展性作为战略方向。
+
+由此需要设计一个非常非常灵活的可拓展界面，以及插件系统。
+
+为什么要搞这件事？
+
+ * nginx 配置麻烦
+ * 中小型公司一般就几台或者一台 nginx 处理前后端资源，不易于管理
+ * 对外可生产环境使用，对内可测试开发使用，通过njs进行拓展(一个小型网关？)
+
+
+目录结构
+
+ * 插件市场
+ * 编写插件模块
+ * 管理插件模...</summary>
+    
+    
+    
+    <category term="post" scheme="https://suxin2017.cc/categories/post/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://suxin2017.cc/2022/08/31/v2022-08-31-15-15/"/>
+    <id>https://suxin2017.cc/2022/08/31/v2022-08-31-15-15/</id>
+    <published>2022-08-31T15:15:58.000Z</published>
+    <updated>2025-03-18T05:45:38.933Z</updated>
+    
+    
+    <summary type="html">看来没什么好的发展方向，不如从别的方面提升自己，比如减少bug数量，提高代码质量。...</summary>
+    
+    
+    
+    <category term="weibo" scheme="https://suxin2017.cc/categories/weibo/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>发展方向</title>
+    <link href="https://suxin2017.cc/2022/08/31/qian-duan-fa-zhan-fang-xiang-qian-xi/"/>
+    <id>https://suxin2017.cc/2022/08/31/qian-duan-fa-zhan-fang-xiang-qian-xi/</id>
+    <published>2022-08-31T08:53:39.000Z</published>
+    <updated>2025-03-18T05:45:38.934Z</updated>
+    
+    
+    <summary type="html">长期更新
+
+更新时间：20220831
+
+从目前看前端大致分为，传统意义的前端，辅助传统意义的前端的工具层，纯后端。
+
+flowchart BT
+纯后端--&gt;node工具层--&gt;前端
+
+
+
+前端
+
+前端就是传统意义的界面，这部分包含
+
+flowchart TB
+前端--&gt;监控埋点 &amp; 组件库 &amp; 开发框架 &amp; 样式框架 &amp; 工具库
+
+
+ * 监控埋点
+   * 来说b端可有可无，但是仍需要请求层监...</summary>
+    
+    
+    
+    <category term="post" scheme="https://suxin2017.cc/categories/post/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>lua-geneator</title>
+    <link href="https://suxin2017.cc/2022/06/18/lua-geneator/"/>
+    <id>https://suxin2017.cc/2022/06/18/lua-geneator/</id>
+    <published>2022-06-18T11:43:57.000Z</published>
+    <updated>2025-03-18T05:45:38.933Z</updated>
+    
+    
+    <summary type="html">代码生成
+
+
+定义关键字及符号映射
+
+src=lua-lexer.js
+
+
+
+
+
+src=lua-token.js
+
+
+
+
+
+src=lua-parser.js
+
+
+
+
+
+src=lua-gen-js.js
+
+
+
+
+
+drawCode
+
+
+function drawCode(code, dom, idx) {
+  let str = `&lt;textarea id=&quot;code-${idx}&quot; clas...</summary>
+    
+    
+    
+    <category term="post" scheme="https://suxin2017.cc/categories/post/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://suxin2017.cc/2022/06/10/v2022-06-10-15-24/"/>
+    <id>https://suxin2017.cc/2022/06/10/v2022-06-10-15-24/</id>
+    <published>2022-06-10T15:24:14.000Z</published>
+    <updated>2025-03-18T05:45:38.933Z</updated>
+    
+    
+    <summary type="html">随机想到要写些什么，但是手摸到键盘又不知道写些什么。近来一位同事离职了，本身与我交集甚少，但其记录的一些事情，对我感触颇深，内容大多为工作中的见解，文字淳朴自然，能够感觉到他从每件事中获得的收获，最近听书说：古人对于智商的判断分3阶段，一阶段是12岁前，记忆力是判断标准；二阶段是12-33或者36（记不太清楚了），理解力是判断标准，随后是判断力，决策力。惊讶于同事对每件事情都有自己的见解，每件事都...</summary>
+    
+    
+    
+    <category term="weibo" scheme="https://suxin2017.cc/categories/weibo/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://suxin2017.cc/2022/06/06/v2022-06-06-11-17/"/>
+    <id>https://suxin2017.cc/2022/06/06/v2022-06-06-11-17/</id>
+    <published>2022-06-06T11:17:32.000Z</published>
+    <updated>2025-03-18T05:45:38.933Z</updated>
+    
+    
+    <summary type="html">今天看到白鹭公司老总的一封信，相信一个运营10多年来的公司，想必一定也曾风光过，没想到就此陨落，不知道能否东山再起，就像罗永浩那样起起伏伏，只能说人生无常，事事并非如愿。...</summary>
+    
+    
+    
+    <category term="weibo" scheme="https://suxin2017.cc/categories/weibo/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>lua-parse</title>
+    <link href="https://suxin2017.cc/2022/06/05/lua.parser/"/>
+    <id>https://suxin2017.cc/2022/06/05/lua.parser/</id>
+    <published>2022-06-05T12:00:00.000Z</published>
+    <updated>2025-03-18T05:45:38.933Z</updated>
+    
+    
+    <summary type="html">动手写个词法解析器，词法解析非常简单其关键处理问题在于
+
+ * 字符串
+ * 数字
+ * 关键字与符号
+
+
+定义关键字及符号映射
+
+src=lua-lexer.js
+
+
+
+
+
+src=lua-token.js
+
+
+
+
+
+src=lua-parser.js
+
+
+
+
+
+drawJson
+
+
+function drawAttrs(attrs) {
+  let attrStr = &quot;&lt;ul class=&#39;...</summary>
+    
+    
+    
+    <category term="post" scheme="https://suxin2017.cc/categories/post/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>lua-token</title>
+    <link href="https://suxin2017.cc/2022/06/02/lua-token/"/>
+    <id>https://suxin2017.cc/2022/06/02/lua-token/</id>
+    <published>2022-06-02T10:09:28.000Z</published>
+    <updated>2025-03-18T05:45:38.933Z</updated>
+    
+    
+    <summary type="html">一个变成语言基本分为 4 部分，入口，块，语句，表达式
+
+其中入口便是程序开始部分
+
+约定 :: 代表定义， {} 代表 0 次或者多次, [] 代表 0 - 1 次
+
+人类自己制造的编程语言，不同于自然语言，相对简单的多，基本就是一个有穷状态机。
+
+gammer ::= block
+block ::= {stat} [retStat]
+// 返回
+retStat ::= return [expL...</summary>
+    
+    
+    
+    <category term="post" scheme="https://suxin2017.cc/categories/post/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>lua-lexer</title>
+    <link href="https://suxin2017.cc/2022/05/28/lua-lexer/"/>
+    <id>https://suxin2017.cc/2022/05/28/lua-lexer/</id>
+    <published>2022-05-28T19:56:22.000Z</published>
+    <updated>2025-03-18T05:45:38.933Z</updated>
+    
+    
+    <summary type="html">动手写个词法解析器，词法解析非常简单其关键处理问题在于
+
+ * 字符串
+ * 数字
+ * 关键字与符号
+
+
+定义关键字及符号映射
+
+src=lua-lexer.js
+
+
+
+
+
+&#39;\u{1f481}&#39; &#39;\x61&#39; &#39;\97&#39; &#39;a&#39; [[a]] 1 1.1 1.1e-1 1.1e+1 .1 local abc = 123; if(abc=&quot;123&quot;){ print(abc) } string=&#39;1...</summary>
+    
+    
+    
+    <category term="post" scheme="https://suxin2017.cc/categories/post/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://suxin2017.cc/2022/03/18/v2022-03-18-11-57/"/>
+    <id>https://suxin2017.cc/2022/03/18/v2022-03-18-11-57/</id>
+    <published>2022-03-18T11:57:03.000Z</published>
+    <updated>2025-03-18T05:45:38.933Z</updated>
+    
+    
+    <summary type="html">明明是差异化的东西存在强大竞争力为啥总有人劝我做同质化的东西呢？看不清形势吗...</summary>
+    
+    
+    
+    <category term="weibo" scheme="https://suxin2017.cc/categories/weibo/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>scheduler</title>
+    <link href="https://suxin2017.cc/2022/03/08/scheduler/"/>
+    <id>https://suxin2017.cc/2022/03/08/scheduler/</id>
+    <published>2022-03-08T19:12:10.000Z</published>
+    <updated>2025-03-18T05:45:38.933Z</updated>
+    
+    
+    <summary type="html">内容
+
+getCurrentTime
+
+
+const getCurrentTime = () =&gt; performance.now();
+
+define(&quot;getCurrentTime&quot;, getCurrentTime);
+
+
+sleep
+
+
+const getCurrentTime = require(&quot;getCurrentTime&quot;);
+const sleep = (tm) =&gt; {
+  le...</summary>
+    
+    
+    
+    <category term="post" scheme="https://suxin2017.cc/categories/post/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>hook原理</title>
+    <link href="https://suxin2017.cc/2022/02/27/hook-yuan-li/"/>
+    <id>https://suxin2017.cc/2022/02/27/hook-yuan-li/</id>
+    <published>2022-02-27T20:40:22.000Z</published>
+    <updated>2025-03-18T05:45:38.932Z</updated>
+    
+    
+    <summary type="html">hook的使用，实现了useState，useReduce，useEffect
+
+
+
+&lt;div id=&quot;app&quot;&gt;&lt;/div&gt;
+
+
+代码
+
+
+let currentComponent;
+let currentIndex;
+const components = [];
+
+class Component {
+  __hooks = {
+    _hookList: [],
+    _effectHoo...</summary>
+    
+    
+    
+    <category term="post" scheme="https://suxin2017.cc/categories/post/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>动态化建站</title>
+    <link href="https://suxin2017.cc/2022/02/10/dong-tai-hua-jian-zhan/"/>
+    <id>https://suxin2017.cc/2022/02/10/dong-tai-hua-jian-zhan/</id>
+    <published>2022-02-10T10:47:47.000Z</published>
+    <updated>2025-03-18T05:45:38.934Z</updated>
+    
+    
+    <summary type="html">本文对建站做了一种 demo 实现，并不代表能够应对真正生产环境的复杂场景
+
+调研大量建站平台，发现大部分建站界面长的几乎一致，数据结构层也基本一致，那么就想到一个问题，能不能把通用的数据层/视图层抽离,作为基础，通过动态加载组件的方式满足不同的页面搭建场景。
+
+最开始的想法是通过 rollup + systemjs 的方式，编译组件，然后动态加载组件，但是会有一些问题，比如依赖库共享问题，组件间...</summary>
+    
+    
+    
+    <category term="post" scheme="https://suxin2017.cc/categories/post/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>浅谈前端并行开发痛点</title>
+    <link href="https://suxin2017.cc/2022/01/23/qian-tan-qian-duan-bing-xing-kai-fa-tong-dian/"/>
+    <id>https://suxin2017.cc/2022/01/23/qian-tan-qian-duan-bing-xing-kai-fa-tong-dian/</id>
+    <published>2022-01-23T10:14:13.000Z</published>
+    <updated>2025-03-18T05:45:38.934Z</updated>
+    
+    
+    <summary type="html">首先，我们先来看下 url 获取资源的本质，一般情况下一条 url 会请求到代理服务器（nginx）。
+
+代理服务器会帮助我们选择目标资源，我将目标资源分为两类。
+
+一类是静态的（变更频率低），静态的主要包括 html、js、css、图片、视频
+
+一类是动态的（变更频率高），动态是可变的，最主要特点是两次请求返回结果可能不同，json、jsp、ssr、文件导出
+
+当我们通过浏览器发出一个请求时候，...</summary>
+    
+    
+    
+    <category term="post" scheme="https://suxin2017.cc/categories/post/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://suxin2017.cc/2022/01/05/v2022-01-05-10-43/"/>
+    <id>https://suxin2017.cc/2022/01/05/v2022-01-05-10-43/</id>
+    <published>2022-01-05T10:43:52.000Z</published>
+    <updated>2025-03-18T05:45:38.933Z</updated>
+    
+    
+    <summary type="html">从概率上来说会有从0到100的范围，但是从个体上来说只有0和100两种情况...</summary>
+    
+    
+    
+    <category term="weibo" scheme="https://suxin2017.cc/categories/weibo/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>国际化方案</title>
+    <link href="https://suxin2017.cc/2021/12/31/guo-ji-hua-fang-an/"/>
+    <id>https://suxin2017.cc/2021/12/31/guo-ji-hua-fang-an/</id>
+    <published>2021-12-31T10:04:26.000Z</published>
+    <updated>2025-03-18T05:45:38.934Z</updated>
+    
+    
+    <summary type="html">前端 i18n 库的选择
+
+市面上比较流行的只有两种，两者功能差不太多。
+
+i18n-next
+
+ * 可支持插件拓展
+ * 不支持编译自动生成 key （但是可以直接用文案当作 key）
+
+react-intl
+
+ * 不支持插件拓展，但支持高阶 hoc 的拓展
+ * 支持编译时自动生成 key
+
+
+i18n 的本质
+
+key - value 映射
+不管哪种方案都是 key - value 的映...</summary>
+    
+    
+    
+    <category term="post" scheme="https://suxin2017.cc/categories/post/"/>
+    
+    <category term="i18n" scheme="https://suxin2017.cc/categories/post/i18n/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://suxin2017.cc/2021/12/30/v2021-12-30-14-51/"/>
+    <id>https://suxin2017.cc/2021/12/30/v2021-12-30-14-51/</id>
+    <published>2021-12-30T14:51:25.000Z</published>
+    <updated>2025-03-18T05:45:38.933Z</updated>
+    
+    
+    <summary type="html">原来产品与设计，和我是平等的以前觉得他们咋说咋搞，看来不见得非得这样...</summary>
+    
+    
+    
+    <category term="weibo" scheme="https://suxin2017.cc/categories/weibo/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>浅谈前端项目协作</title>
+    <link href="https://suxin2017.cc/2021/12/03/qian-tan-qian-duan-xiang-mu-xie-zuo/"/>
+    <id>https://suxin2017.cc/2021/12/03/qian-tan-qian-duan-xiang-mu-xie-zuo/</id>
+    <published>2021-12-03T15:04:10.000Z</published>
+    <updated>2025-03-18T05:45:38.934Z</updated>
+    
+    
+    <summary type="html">&gt; 我思故我在。——笛卡尔
+
+
+目的
+
+为什么要谈前端协作，在企业开发中一个个项目往往都是多人合作的，参与人数从 2-n 人不等。
+如果你是一个新人，你是否经历过加入新项目时候问东问西，各种骚操作，花式小技巧，只能从前辈那里以嘴的方式获取。
+如果你是一个老人，是否经历过新来的人完全不按你的套路写代码，代码乱放，各种组件cv制造，最终堆成一座崭新的屎山。
+如何解决这两个问题呢？
+作为新人我希望有个文...</summary>
+    
+    
+    
+    <category term="post" scheme="https://suxin2017.cc/categories/post/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://suxin2017.cc/2021/11/28/v2021-11-28-10-48/"/>
+    <id>https://suxin2017.cc/2021/11/28/v2021-11-28-10-48/</id>
+    <published>2021-11-28T10:48:40.000Z</published>
+    <updated>2025-03-18T05:45:38.933Z</updated>
+    
+    
+    <summary type="html">主题整体字号从14px升级到16px，之前觉得小点页面承载的内容就会多些。
+后来发现小的文字实际上不利于阅读，太过紧凑容易产生视觉疲劳。...</summary>
+    
+    
+    
+    <category term="weibo" scheme="https://suxin2017.cc/categories/weibo/"/>
+    
+    
+  </entry>
+  
+</feed>

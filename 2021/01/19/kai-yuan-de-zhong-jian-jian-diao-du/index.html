@@ -1,0 +1,189 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><link rel="icon" sizes="any" type="image/svg+xml" href="/imgs/icon.svg"><link rel="stylesheet" href="/css/theme/color.variables.css"><link id="themeStyleVar" rel="stylesheet" href="/css/theme/default.variables.css"><script>const localStorageTheme = localStorage.getItem('theme');
+        function loadTheme(){
+            let themeLink = document.getElementById('themeStyleVar');
+            if(localStorageTheme){
+                themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${localStorageTheme}.variables.css`)
+            }
+        }
+        if(localStorage){
+            loadTheme()
+            setTimeout(()=>{
+                if(document.body){
+                    document.body.className = localStorageTheme ? localStorageTheme : 'dark'
+                }
+
+            },2)
+        }</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/css/post.css"><title>苏鑫2017</title><meta name="description" content="用于记录感悟，前端技术，编程技巧，各种奇奇怪怪的新的体会"><meta name="viewport" content="width=device-width,initial-scale=1"><script async>console.log(`%c真巧，你打开了devtool`,"color:#b58900")
+        console.log(`%c真巧，你看了我的文章`,"color:#859900")
+        console.log('%c简单介绍，道法自然，做人要顺其自然，不要有太多欲望',"color:#268bd2")
+        console.log('%c不要目的性太强,这就是我的主题想强调的',"color:#dc322f")</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-RFGTVED02M"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-RFGTVED02M")</script><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?ce46d6101f33ba04b74fbe8bbe509590";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><script>const moduleMap = new Map();
+            var define = (moduleName, module) => { moduleMap.set(moduleName, module) };
+            var require = (moduleName) => moduleMap.get(moduleName);</script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="苏鑫2017" type="application/atom+xml"></head><body><div class="body"><header class="header"><div class="header-icon-wrapper"><h2><a href="/">苏鑫2017</a></h2></div><div class="header-right"><nav class="header-menu-wrapper"><ul class="header-menu"><li class="header-menu-item"><a class="header-menu-item-link" href="/">首页</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/categories/weibo">微博</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/about">关于</a></li><li class="header-menu-item"><div id="switchThemeButton"><img src="/imgs/icon.svg" alt="switchThemeIcon" width="100%" height="100%"></div><style>#switchThemeButton{width:40px;height:26px;margin:0;border:0;background:0 0;outline:0;cursor:pointer;margin-top:6px}</style><script async>const btn = document.getElementById('switchThemeButton');
+    let darkTheme = false;
+    const themeStyleVarId = "themeStyleVar";
+    if(localStorageTheme === 'dark'){
+        darkTheme = true
+    }else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // dark mode
+        darkTheme = true;
+    }
+    function loadTheme() {
+        let themeLink = document.getElementById(themeStyleVarId);
+        if (!themeLink) {
+            themeLink = document.createElement('link')
+            themeLink.rel = "stylesheet"
+            themeLink.id = "themeStyleVar"
+        }
+        darkTheme = !darkTheme;
+        themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${darkTheme ? 'dark' : 'light'}.variables.css`)
+        document.head.appendChild(themeLink)
+        document.body.className = darkTheme?'dark':'light'
+        localStorage.setItem('theme',darkTheme?'dark':'light');
+    }
+
+    btn.onclick = function() {
+        loadTheme();
+        codeTheme();
+    }</script><script>function codeTheme(){
+            const localStorageTheme = localStorage.getItem('theme');
+            let codeThemeLink = document.getElementById("codeTheme");
+            if(!codeThemeLink){
+                codeThemeLink = document.createElement('link');
+                codeThemeLink.rel = "stylesheet"
+                codeThemeLink.id = "codeTheme"
+                document.head.appendChild(codeThemeLink)
+            }
+            if(localStorageTheme){
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${localStorageTheme}.css`
+            }else{
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${darkTheme ? 'dark': 'light'}.css`
+            }
+        }
+        codeTheme()</script></li></ul></nav></div></header><main class="main"><div class="post"><h2>开源的中间件调度</h2><p>当下流行的轮子库，都会提供强大拓展能力。</p><p>通常这种拓展能力以调度中间件或者拦截器的形式存在。</p><p>为了方便下面统称这类拓展程序能力的代码叫做中间件。</p><p>如何能写出一个拓展性强的轮子？</p><p>通过学习开源库的代码来学习如何写一个符合自己轮子的中间件。</p><h2 id="核心概念">核心概念</h2><p>计算机的本质就是进行数据输入和输出，千百年来这个本质一直没有变过，通过中间对数据的处理，获取到想要的数据结果。</p><p><img src="/imgs/%E6%95%B0%E6%8D%AE%E6%B5%81.png" alt="数据输入与输出"></p><p>比如传入的数据可能是 <code>&#123;a:'hello'&#125;</code> 通过中间件的层层作用，就可能变成 <code>&#123;a:'h_e_l_l_o'&#125;</code></p><p>或者对于<code>koa</code>的``context`提供访问数据库的能力。</p><p>这些都是对中间过程进行了拓展，掌握中间件的思维方式能够让我们的程序可拓展性更强。</p><p>下面将介绍以下两种中间件。</p><ul><li>直接对核心对象或者数据进行拓展。</li><li>中间件去控制下一个中间件的执行（洋葱模型）。</li></ul><h3 id="对于核心数据拓展">对于核心数据拓展</h3><h4 id="axios-拦截器调度机制">axios 拦截器调度机制</h4><p>axios 拦截器就是典型的修改数据的中间件</p><p>它的拦截器对请求前的数据和请求后的数据分别做了处理。</p><p>来看看下面的代码吧。</p><pre><code class="hljs"><span class="hljs-comment">// 为了方便讲解摘取其核心逻辑</span>
+<span class="hljs-comment">// 具体代码位置</span>
+<span class="hljs-comment">// https://github.com/axios/axios/blob/master/lib/core/Axios.js#L27</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">request</span>(<span class="hljs-params">config</span>) &#123;
+  <span class="hljs-comment">// 初始化中间件，dispatchRequest 就是把 request -&gt; response的过程</span>
+  <span class="hljs-comment">// 通过调用 xhr 或者 node 的http 把请求数据变更为 response</span>
+  <span class="hljs-keyword">var</span> chain = [dispatchRequest, <span class="hljs-literal">undefined</span>];
+  <span class="hljs-keyword">var</span> promise = <span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">resolve</span>(config);
+
+  <span class="hljs-comment">// 把 request 的拦截器，插入到 chain 队头，把 response 的拦截器插入到队尾</span>
+  <span class="hljs-comment">// 最后生成这样的数组 [requestInterceptor,...., dispatchRequest , .... responseInterceptor]</span>
+  <span class="hljs-variable language_">this</span>.<span class="hljs-property">interceptors</span>.<span class="hljs-property">request</span>.<span class="hljs-title function_">forEach</span>(<span class="hljs-keyword">function</span> <span class="hljs-title function_">unshiftRequestInterceptors</span>(<span class="hljs-params">
+    interceptor
+  </span>) &#123;
+    chain.<span class="hljs-title function_">unshift</span>(interceptor.<span class="hljs-property">fulfilled</span>, interceptor.<span class="hljs-property">rejected</span>);
+  &#125;);
+
+  <span class="hljs-variable language_">this</span>.<span class="hljs-property">interceptors</span>.<span class="hljs-property">response</span>.<span class="hljs-title function_">forEach</span>(<span class="hljs-keyword">function</span> <span class="hljs-title function_">pushResponseInterceptors</span>(<span class="hljs-params">
+    interceptor
+  </span>) &#123;
+    chain.<span class="hljs-title function_">push</span>(interceptor.<span class="hljs-property">fulfilled</span>, interceptor.<span class="hljs-property">rejected</span>);
+  &#125;);
+
+  <span class="hljs-comment">// 从 requestInterceptor 执行到 responseInterceptor</span>
+  <span class="hljs-keyword">while</span> (chain.<span class="hljs-property">length</span>) &#123;
+    promise = promise.<span class="hljs-title function_">then</span>(chain.<span class="hljs-title function_">shift</span>(), chain.<span class="hljs-title function_">shift</span>());
+  &#125;
+
+  <span class="hljs-keyword">return</span> promise;
+&#125;
+</code></pre><p>图解执行流程</p><p><img src="/imgs/axios%E6%8B%A6%E6%88%AA%E5%99%A8.png" alt="axios 拦截器执行"></p><p>可以看出 axios 的中间件机制，是通过处理 request config 的数据，（可以修改所有的请求类型为 post，为所以的请求添加请求前缀，还可以根据请求配置设置全局 spinning）修改返回的 response 数据 （可以完成请求的数据 mock，变更字段名等）完成的。</p><p>当到用户手中的时候，经历层层中间件对数据的处理。</p><p>我们再来看看下一个针对数据进行拓展的开源库。</p><h4 id="markdown-it-的中间件调度机制">markdown-it 的中间件调度机制</h4><p>markdown-it 的中间件相对于 axios 不那么相同，它具备认领机制，如果当前中间件对数据进行认领就代表当下的数据归这个中间件进行处理，进而跳过其他中间件的处理。相同点是把所有的中间件注册一个数组中。</p><p>我们了解 markdown-it 的中间件，我们无需详细了解 markdown-it 的 token 是怎么工作的，我们只需要知道 token 会渲染成不同的 html 标签就可以。</p><p>markdown-it 对文本进行 行 处理，对每行文本都会对中间件数组进行遍历，比如 遇见 <code>##</code> 会被 heading 中间件进行处理，然后 heading 对这个<code>#</code>进行认领，并返回 <code>true</code> ，其他数组就不会处理这行文字了。</p><p><img src="/imgs/markdown-it%E6%8B%93%E5%B1%95.png" alt="markdown-it 中间件"></p><pre><code class="hljs"><span class="hljs-comment">//https://github.com/markdown-it/markdown-it/blob/master/lib/parser_block.js#L48</span>
+<span class="hljs-comment">// Generate tokens for input range</span>
+<span class="hljs-title class_">ParserBlock</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">tokenize</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params">state, startLine, endLine</span>) &#123;
+ <span class="hljs-keyword">var</span> ok, i,
+     rules = <span class="hljs-variable language_">this</span>.<span class="hljs-property">ruler</span>.<span class="hljs-title function_">getRules</span>(<span class="hljs-string">&#x27;&#x27;</span>),
+     len = rules.<span class="hljs-property">length</span>,
+     line = startLine,
+
+ <span class="hljs-keyword">while</span> (line &lt; endLine) &#123;
+
+   <span class="hljs-keyword">if</span> (line &gt;= endLine) &#123; <span class="hljs-keyword">break</span>; &#125;
+
+   <span class="hljs-comment">// 每行都会重复遍历所有规则，如果规则认领，就会跳过其他规则处理。</span>
+   <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; len; i++) &#123;
+     ok = rules[i](state, line, endLine, <span class="hljs-literal">false</span>);
+     <span class="hljs-comment">// 当规则返回true的时候，会跳过其他规则</span>
+     <span class="hljs-keyword">if</span> (ok) &#123; <span class="hljs-keyword">break</span>; &#125;
+   &#125;
+
+   <span class="hljs-comment">// 对line操作不当可能会导致死循环。</span>
+   line = state.<span class="hljs-property">line</span>;
+
+ &#125;
+&#125;;
+</code></pre><p>通过上面的展示可以看出我们对于数据的拓展，都是传入核心数据，对核心数据进行增删改查操作。</p><p>这种主要针对数据做处理的方式可以应用在：请求库、文本处理库（编译模板的插件），图片处理库（可以对图片上传前文件信息水印处理等偏重于数据处理的轮子上。</p><h3 id="中间件实战">中间件实战</h3><p>了解了这些我们可以用一行代码写出我们自己的中间件拓展。</p><p>首先我们知道我们的输入是一个数据，中间经过层层过滤，下一个中间件的输入是上一个中间件的输出。</p><p>js 中的 reduce 是一个会接受前面输入产生新的输出的函数，我们可以用它做中间件调度的载体，设置初始数据，遍历每个中间件对数据进行处理。</p><p>有了这个思路之后代码就浮现在脑子里了。大家来看。</p><pre><code class="hljs"><span class="hljs-keyword">const</span> middleware = [<span class="hljs-function"><span class="hljs-params">v</span>=&gt;</span>v+<span class="hljs-number">1</span>,<span class="hljs-function"><span class="hljs-params">v</span>=&gt;</span>v+<span class="hljs-number">2</span>,<span class="hljs-function"><span class="hljs-params">v</span>=&gt;</span>(&#123;<span class="hljs-attr">message</span>:<span class="hljs-string">`v 的值是 <span class="hljs-subst">$&#123;v&#125;</span>)`</span>&#125;)]
+
+<span class="hljs-keyword">const</span> result = middleware.<span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">res,fn</span>)=&gt;</span><span class="hljs-title function_">fn</span>(res),<span class="hljs-number">0</span>);
+
+<span class="hljs-comment">// output</span>
+<span class="hljs-comment">// &#123;message: &quot;v 的值是 3&quot;&#125;</span>
+</code></pre><p>通过 reduce 我们快速的实现了对于数据处理了中间件拓展功能，其核心思想就是<strong>中间件对层层数据进行操作，最后输出想要的结果。</strong></p><h2 id="中间件去控制下一个中间件的执行">中间件去控制下一个中间件的执行</h2><p>这种中间件通过调用下一个中间件进行拓展，是否放过当前请求到下一个中间件，取决于当前的中间件是否通过 next 方法调用下一个中间件。</p><p>koa 就是这样实现其中间件的，对于 node 的 http 进行拓展，对全局对象 context 进行拓展，挂载其他常用对象（request，response）到全局对象上，我们也可以通过这种方式把日志对象和数据库对象挂载到全局对象中进行对 koa 功能的拓展。</p><h3 id="koa-中间件的调度机制">koa 中间件的调度机制</h3><p>那么他是怎么做到的呢？</p><p><img src="/imgs/koa%E6%89%A7%E8%A1%8C.png" alt="koa中间件调度"></p><p>从图中可以看到只有调用 next 才会调用下一个中间件对数据进行处理，如果不调用那么就不会请求下一个中间件的执行。</p><p>但是这种方式也是存在缺点的，因为这样套娃的方式调用，会影响垃圾回收，因为下一个<code>next</code>不执行完毕就不会释放<code>next()</code> 之前的代码</p><p>最后来看它的代码吧</p><pre><code class="hljs"><span class="hljs-comment">// https://github.com/koajs/compose/blob/master/index.js#L19</span>
+<span class="hljs-comment">// 首先传入中间件数组 [middleware...]</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">compose</span>(<span class="hljs-params">middleware</span>) &#123;
+  <span class="hljs-comment">// 返回一个新的方法，调用这个方法就会执行所有中间件。</span>
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">function</span> (<span class="hljs-params">context, next</span>) &#123;
+    <span class="hljs-comment">// last called middleware #</span>
+    <span class="hljs-keyword">let</span> index = -<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-title function_">dispatch</span>(<span class="hljs-number">0</span>);
+
+    <span class="hljs-keyword">function</span> <span class="hljs-title function_">dispatch</span>(<span class="hljs-params">i</span>) &#123;
+      <span class="hljs-comment">// 如果一个中间件内调用 next 多次就会导致多次 i+1</span>
+      <span class="hljs-keyword">if</span> (i &lt;= index)
+        <span class="hljs-keyword">return</span> <span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">reject</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&quot;next() called multiple times&quot;</span>));
+      index = i;
+      <span class="hljs-comment">// 当前中间件</span>
+      <span class="hljs-keyword">let</span> fn = middleware[i];
+      <span class="hljs-comment">// 如果是中间件遍历到了最后一个</span>
+      <span class="hljs-keyword">if</span> (i === middleware.<span class="hljs-property">length</span>) fn = next;
+      <span class="hljs-comment">// 最后的next</span>
+      <span class="hljs-keyword">if</span> (!fn) <span class="hljs-keyword">return</span> <span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">resolve</span>();
+      <span class="hljs-keyword">try</span> &#123;
+        <span class="hljs-comment">// 调用当前中间件，并传入context和下一个中间件</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">resolve</span>(<span class="hljs-title function_">fn</span>(context, dispatch.<span class="hljs-title function_">bind</span>(<span class="hljs-literal">null</span>, i + <span class="hljs-number">1</span>)));
+      &#125; <span class="hljs-keyword">catch</span> (err) &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">reject</span>(err);
+      &#125;
+    &#125;
+  &#125;;
+&#125;
+
+<span class="hljs-comment">// 使用</span>
+
+<span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">demo</span>(<span class="hljs-params"></span>) &#123;
+  <span class="hljs-keyword">const</span> middleware = [
+    <span class="hljs-function">(<span class="hljs-params">c, n</span>) =&gt;</span> &#123;
+      c.<span class="hljs-property">v</span> += <span class="hljs-number">1</span>;
+      <span class="hljs-keyword">return</span> <span class="hljs-title function_">n</span>();
+    &#125;,
+    <span class="hljs-function">(<span class="hljs-params">c, n</span>) =&gt;</span> &#123;
+      c.<span class="hljs-property">v</span> += <span class="hljs-number">2</span>;
+      <span class="hljs-keyword">return</span> <span class="hljs-title function_">n</span>();
+    &#125;,
+    <span class="hljs-function">(<span class="hljs-params">c, n</span>) =&gt;</span> &#123;
+      <span class="hljs-keyword">return</span> &#123; <span class="hljs-attr">message</span>: <span class="hljs-string">`v 的值是 <span class="hljs-subst">$&#123;c.v&#125;</span>`</span> &#125;;
+    &#125;,
+  ];
+
+  <span class="hljs-keyword">const</span> start = <span class="hljs-title function_">compose</span>(middleware);
+
+  <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> <span class="hljs-title function_">start</span>(&#123; <span class="hljs-attr">v</span>: <span class="hljs-number">0</span> &#125;);
+
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(result);
+&#125;
+
+<span class="hljs-title function_">demo</span>();
+</code></pre><p>上面就是现在流行的三个开源库对于中间件的写法喽，你学会了吗？</p><script async>let codes = document.getElementsByClassName('hljs');
+            Array.from(codes).forEach(code => {
+                code.addEventListener('click', function copy(e) {
+                    const textContent = e.currentTarget.textContent;
+                    e.currentTarget.focus()
+                    const node = e.currentTarget;
+                    navigator.clipboard.writeText(textContent).then(()=>{
+                        alert('复制成功')
+                        node.blur()
+                    });
+                   
+                })
+            })</script><script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script><script>window.mermaid&&mermaid.initialize({startOnLoad:!0})</script></div></main><footer><p>Copyright © 2019-2022 suxin2017</p><p class="icp"><span><img src="/imgs/icp.png" width="17px" height="17px" alt="icp"> </span><a href="http://beian.miit.gov.cn" class="icp-link"><span>京ICP备2020041991号</span></a></p><p><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></p></footer></div></body></html>

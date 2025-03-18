@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><link rel="icon" sizes="any" type="image/svg+xml" href="/imgs/icon.svg"><link rel="stylesheet" href="/css/theme/color.variables.css"><link id="themeStyleVar" rel="stylesheet" href="/css/theme/default.variables.css"><script>const localStorageTheme = localStorage.getItem('theme');
+        function loadTheme(){
+            let themeLink = document.getElementById('themeStyleVar');
+            if(localStorageTheme){
+                themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${localStorageTheme}.variables.css`)
+            }
+        }
+        if(localStorage){
+            loadTheme()
+            setTimeout(()=>{
+                if(document.body){
+                    document.body.className = localStorageTheme ? localStorageTheme : 'dark'
+                }
+
+            },2)
+        }</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/css/home.css"><title>苏鑫2017</title><meta name="description" content="用于记录感悟，前端技术，编程技巧，各种奇奇怪怪的新的体会"><meta name="viewport" content="width=device-width,initial-scale=1"><script async>console.log(`%c真巧，你打开了devtool`,"color:#b58900")
+        console.log(`%c真巧，你看了我的文章`,"color:#859900")
+        console.log('%c简单介绍，道法自然，做人要顺其自然，不要有太多欲望',"color:#268bd2")
+        console.log('%c不要目的性太强,这就是我的主题想强调的',"color:#dc322f")</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-RFGTVED02M"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-RFGTVED02M")</script><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?ce46d6101f33ba04b74fbe8bbe509590";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="苏鑫2017" type="application/atom+xml"></head><body><div class="body"><header class="header"><div class="header-icon-wrapper"><h2><a href="/">苏鑫2017</a></h2></div><div class="header-right"><nav class="header-menu-wrapper"><ul class="header-menu"><li class="header-menu-item"><a class="header-menu-item-link" href="/">首页</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/categories/weibo">微博</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/about">关于</a></li><li class="header-menu-item"><div id="switchThemeButton"><img src="/imgs/icon.svg" alt="switchThemeIcon" width="100%" height="100%"></div><style>#switchThemeButton{width:40px;height:26px;margin:0;border:0;background:0 0;outline:0;cursor:pointer;margin-top:6px}</style><script async>const btn = document.getElementById('switchThemeButton');
+    let darkTheme = false;
+    const themeStyleVarId = "themeStyleVar";
+    if(localStorageTheme === 'dark'){
+        darkTheme = true
+    }else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // dark mode
+        darkTheme = true;
+    }
+    function loadTheme() {
+        let themeLink = document.getElementById(themeStyleVarId);
+        if (!themeLink) {
+            themeLink = document.createElement('link')
+            themeLink.rel = "stylesheet"
+            themeLink.id = "themeStyleVar"
+        }
+        darkTheme = !darkTheme;
+        themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${darkTheme ? 'dark' : 'light'}.variables.css`)
+        document.head.appendChild(themeLink)
+        document.body.className = darkTheme?'dark':'light'
+        localStorage.setItem('theme',darkTheme?'dark':'light');
+    }
+
+    btn.onclick = function() {
+        loadTheme();
+        codeTheme();
+    }</script></li></ul></nav></div></header><main class="main"><div class="page-list"><div class="page-list-item"><div class="page-item-title"><a href="/2020/12/11/cheng-wei-zui-hao-de-cheng-xu-yuan-de-mi-mang/"><h3>成为最好的程序员的迷茫</h3></a></div><div class="page-list-item-create-date"><span>发表于：2020-12-11 </span><span>| </span><span>分类： <span><span class="tag">人生</span></span></span></div><div class="page-list-item-excerpt"><p>去年的 10 月份我写了致迷茫的我，去年的这个时候我就很迷茫。 似乎一到年底我就很迷茫 :neckbeard: 不过去年的迷茫是没有方向，不知前方的灯塔在何方，今年的迷茫是虽见迷雾中的亮光，却不知道怎样前行。 去年心想如果进大厂就好了，今年如愿进入了大厂。 很高兴从事一个能让我喜欢的职业，我喜欢编程。 我觉得写代码的时候就好像再玩我的世界一样，成为了这个世界的造物主，每一个细节自己都可创...</p></div><div class="page-list-item-info"><span><a href="/2020/12/11/cheng-wei-zui-hao-de-cheng-xu-yuan-de-mi-mang/">查看更多 »</a></span></div></div><div class="page-list-item"><div class="page-item-title"><a href="/2020/11/18/hello-world/"><h3>序幕</h3></a></div><div class="page-list-item-create-date"><span>发表于：2020-11-18 </span><span>| </span><span>分类： <span><span class="tag">人生</span></span></span></div><div class="page-list-item-excerpt"><p>&gt; 代码是一种生活方式 今年终于忍心花钱买下一个自己的服务器了，离成为真正程序员的又第一步。 名字起源 本想起名叫做苏鑫，因为名字重名率太高了，改名为苏鑫 2017。 2017 年可以算做我的编程元年了吧，大概是自己算的理解代码的一年（瞎猫碰见了死耗子）。 也是这一年加入了 github，正好还能和 github 一个名字。 恰巧刚好 suxin2017.cc 这个域名也没被别人注册过...</p></div><div class="page-list-item-info"><span><a href="/2020/11/18/hello-world/">查看更多 »</a></span></div></div></div><div class="pagination"><div class="pagination-prev"></div><div class="pagination-content">1/1</div><div class="pagination-next"></div></div></main><footer><p>Copyright © 2019-2022 suxin2017</p><p class="icp"><span><img src="/imgs/icp.png" width="17px" height="17px" alt="icp"> </span><a href="http://beian.miit.gov.cn" class="icp-link"><span>京ICP备2020041991号</span></a></p><p><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></p></footer></div></body></html>

@@ -1,0 +1,400 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><link rel="icon" sizes="any" type="image/svg+xml" href="/imgs/icon.svg"><link rel="stylesheet" href="/css/theme/color.variables.css"><link id="themeStyleVar" rel="stylesheet" href="/css/theme/default.variables.css"><script>const localStorageTheme = localStorage.getItem('theme');
+        function loadTheme(){
+            let themeLink = document.getElementById('themeStyleVar');
+            if(localStorageTheme){
+                themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${localStorageTheme}.variables.css`)
+            }
+        }
+        if(localStorage){
+            loadTheme()
+            setTimeout(()=>{
+                if(document.body){
+                    document.body.className = localStorageTheme ? localStorageTheme : 'dark'
+                }
+
+            },2)
+        }</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/css/post.css"><title>苏鑫2017</title><meta name="description" content="用于记录感悟，前端技术，编程技巧，各种奇奇怪怪的新的体会"><meta name="viewport" content="width=device-width,initial-scale=1"><script async>console.log(`%c真巧，你打开了devtool`,"color:#b58900")
+        console.log(`%c真巧，你看了我的文章`,"color:#859900")
+        console.log('%c简单介绍，道法自然，做人要顺其自然，不要有太多欲望',"color:#268bd2")
+        console.log('%c不要目的性太强,这就是我的主题想强调的',"color:#dc322f")</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-RFGTVED02M"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-RFGTVED02M")</script><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?ce46d6101f33ba04b74fbe8bbe509590";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><script>const moduleMap = new Map();
+            var define = (moduleName, module) => { moduleMap.set(moduleName, module) };
+            var require = (moduleName) => moduleMap.get(moduleName);</script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="苏鑫2017" type="application/atom+xml"></head><body><div class="body"><header class="header"><div class="header-icon-wrapper"><h2><a href="/">苏鑫2017</a></h2></div><div class="header-right"><nav class="header-menu-wrapper"><ul class="header-menu"><li class="header-menu-item"><a class="header-menu-item-link" href="/">首页</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/categories/weibo">微博</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/about">关于</a></li><li class="header-menu-item"><div id="switchThemeButton"><img src="/imgs/icon.svg" alt="switchThemeIcon" width="100%" height="100%"></div><style>#switchThemeButton{width:40px;height:26px;margin:0;border:0;background:0 0;outline:0;cursor:pointer;margin-top:6px}</style><script async>const btn = document.getElementById('switchThemeButton');
+    let darkTheme = false;
+    const themeStyleVarId = "themeStyleVar";
+    if(localStorageTheme === 'dark'){
+        darkTheme = true
+    }else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // dark mode
+        darkTheme = true;
+    }
+    function loadTheme() {
+        let themeLink = document.getElementById(themeStyleVarId);
+        if (!themeLink) {
+            themeLink = document.createElement('link')
+            themeLink.rel = "stylesheet"
+            themeLink.id = "themeStyleVar"
+        }
+        darkTheme = !darkTheme;
+        themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${darkTheme ? 'dark' : 'light'}.variables.css`)
+        document.head.appendChild(themeLink)
+        document.body.className = darkTheme?'dark':'light'
+        localStorage.setItem('theme',darkTheme?'dark':'light');
+    }
+
+    btn.onclick = function() {
+        loadTheme();
+        codeTheme();
+    }</script><script>function codeTheme(){
+            const localStorageTheme = localStorage.getItem('theme');
+            let codeThemeLink = document.getElementById("codeTheme");
+            if(!codeThemeLink){
+                codeThemeLink = document.createElement('link');
+                codeThemeLink.rel = "stylesheet"
+                codeThemeLink.id = "codeTheme"
+                document.head.appendChild(codeThemeLink)
+            }
+            if(localStorageTheme){
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${localStorageTheme}.css`
+            }else{
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${darkTheme ? 'dark': 'light'}.css`
+            }
+        }
+        codeTheme()</script></li></ul></nav></div></header><main class="main"><div class="post"><h2>html解析</h2><div id="preview-0" class="preview"><div class="preview-box"><div id="draw-0"><script type="module">(function(){
+                        var string = `
+<div >
+	fff ddd
+	<span style="123 fff"
+	data-size=12 data-width='20px' >123</span>
+	<br style="fff" />
+	ddd
+</div>
+`;
+var offset = 0;
+// <div> or </div> or <div > 
+function getTagName(str) {
+    var start = offset;
+    var reg = /[a-zA-Z]/;
+    while (reg.test(str[offset]) && offset < str.length) {
+        offset++;
+    }
+    return str.substring(start, offset);
+}
+function parse(str) {
+    var stack = [{
+            tagName: 'root',
+            children: []
+        }];
+    var root;
+    while (offset < str.length) {
+        switch (str[offset]) {
+            case '<':
+                offset++;
+                if (str[offset] === '/') {
+                    var node = stack.pop();
+                    if (stack.length === 0) {
+                        root = node;
+                    }
+                    offset++;
+                    var tagName = getTagName(str);
+                    if (tagName !== (node === null || node === void 0 ? void 0 : node.tagName)) {
+                        console.error(tagName + "\u4E0D\u5339\u914D");
+                    }
+                    else {
+                        while (str[offset] !== '>') {
+                            offset++;
+                        }
+                        node.end = offset;
+                    }
+                }
+                else {
+                    var node = {
+                        start: offset
+                    };
+                    var tagName = getTagName(str);
+                    node.tagName = tagName;
+                    if (stack[stack.length - 1]) {
+                        if (!stack[stack.length - 1].children) {
+                            stack[stack.length - 1].children = [];
+                        }
+                        stack[stack.length - 1].children.push(node);
+                    }
+                    while (str[offset] !== '/' && str[offset] !== '>') {
+                        if (!node.attrSource) {
+                            node.attrSource = '';
+                        }
+                        node.attrSource += str[offset];
+                        offset++;
+                    }
+                    node.attr = parseAttribute(node.attrSource);
+                    node.end = offset;
+                    stack.push(node);
+                }
+                break;
+            case '>':
+                if (str[offset - 1] === '/') {
+                    var node = stack.pop();
+                    if (stack.length === 0) {
+                        root = node;
+                    }
+                    node.end = offset;
+                }
+                break;
+            default:
+                if (stack.length > 0) {
+                    stack.push({
+                        tagName: 'text',
+                        value: ''
+                    });
+                    var start = offset;
+                    while (!/[<>]/.test(str[offset]) && offset < str.length) {
+                        offset++;
+                    }
+                    var textNode = stack.pop();
+                    textNode.value = str.substring(start, offset);
+                    if (!stack[stack.length - 1].children) {
+                        stack[stack.length - 1].children = [];
+                    }
+                    stack[stack.length - 1].children.push(textNode);
+                    offset--;
+                }
+        }
+        offset++;
+    }
+    console.log(stack);
+}
+// parseAttribute(' style= "123 1ff" data-v = 123')
+function parseAttribute(str) {
+    var index = 0;
+    var open = false;
+    var qOpen = false;
+    var stack = [];
+    while (index < (str === null || str === void 0 ? void 0 : str.length)) {
+        var currentCode = str[index];
+        if (!/\s/.test(currentCode)) {
+            if (!open) {
+                var start = index;
+                while (currentCode !== '=' && index < str.length) {
+                    index++;
+                    currentCode = str[index];
+                }
+                var key = str.substring(start, index);
+                stack.push({
+                    key: key,
+                    value: ''
+                });
+                open = true;
+            }
+            else {
+                var start = index;
+                if (/["']/.test(currentCode)) {
+                    qOpen = true;
+                    index++;
+                    currentCode = str[index];
+                }
+                if (qOpen) {
+                    while (!/["']/.test(currentCode) && index < str.length) {
+                        index++;
+                        currentCode = str[index];
+                    }
+                    qOpen = false;
+                }
+                else {
+                    // number
+                    while (!/\s/.test(currentCode) && index < str.length) {
+                        index++;
+                        currentCode = str[index];
+                    }
+                }
+                var node = stack[stack.length - 1];
+                node.value = str.substring(start, index);
+                open = false;
+            }
+        }
+        index++;
+    }
+    // console.log(stack)
+    return stack;
+}
+parse(string);
+
+
+                    })(0)</script></div><div class="preview-box-util"><span id="expand-0" class="preview-box-util-code" style="background-image:url(/imgs/code.svg)"></span></div></div><div id="code-0" class="preview-code preview-code-active"><pre><code class="hljs"><span class="hljs-keyword">var</span> string = <span class="hljs-string">`
+&lt;div &gt;
+	fff ddd
+	&lt;span style=&quot;123 fff&quot;
+	data-size=12 data-width=&#x27;20px&#x27; &gt;123&lt;/span&gt;
+	&lt;br style=&quot;fff&quot; /&gt;
+	ddd
+&lt;/div&gt;
+`</span>;
+<span class="hljs-keyword">var</span> offset = <span class="hljs-number">0</span>;
+<span class="hljs-comment">// &lt;div&gt; or &lt;/div&gt; or &lt;div &gt; </span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">getTagName</span>(<span class="hljs-params">str</span>) &#123;
+    <span class="hljs-keyword">var</span> start = offset;
+    <span class="hljs-keyword">var</span> reg = <span class="hljs-regexp">/[a-zA-Z]/</span>;
+    <span class="hljs-keyword">while</span> (reg.<span class="hljs-title function_">test</span>(str[offset]) &amp;&amp; offset &lt; str.<span class="hljs-property">length</span>) &#123;
+        offset++;
+    &#125;
+    <span class="hljs-keyword">return</span> str.<span class="hljs-title function_">substring</span>(start, offset);
+&#125;
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">parse</span>(<span class="hljs-params">str</span>) &#123;
+    <span class="hljs-keyword">var</span> stack = [&#123;
+            <span class="hljs-attr">tagName</span>: <span class="hljs-string">&#x27;root&#x27;</span>,
+            <span class="hljs-attr">children</span>: []
+        &#125;];
+    <span class="hljs-keyword">var</span> root;
+    <span class="hljs-keyword">while</span> (offset &lt; str.<span class="hljs-property">length</span>) &#123;
+        <span class="hljs-keyword">switch</span> (str[offset]) &#123;
+            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;&lt;&#x27;</span>:
+                offset++;
+                <span class="hljs-keyword">if</span> (str[offset] === <span class="hljs-string">&#x27;/&#x27;</span>) &#123;
+                    <span class="hljs-keyword">var</span> node = stack.<span class="hljs-title function_">pop</span>();
+                    <span class="hljs-keyword">if</span> (stack.<span class="hljs-property">length</span> === <span class="hljs-number">0</span>) &#123;
+                        root = node;
+                    &#125;
+                    offset++;
+                    <span class="hljs-keyword">var</span> tagName = <span class="hljs-title function_">getTagName</span>(str);
+                    <span class="hljs-keyword">if</span> (tagName !== (node === <span class="hljs-literal">null</span> || node === <span class="hljs-keyword">void</span> <span class="hljs-number">0</span> ? <span class="hljs-keyword">void</span> <span class="hljs-number">0</span> : node.<span class="hljs-property">tagName</span>)) &#123;
+                        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(tagName + <span class="hljs-string">&quot;\u4E0D\u5339\u914D&quot;</span>);
+                    &#125;
+                    <span class="hljs-keyword">else</span> &#123;
+                        <span class="hljs-keyword">while</span> (str[offset] !== <span class="hljs-string">&#x27;&gt;&#x27;</span>) &#123;
+                            offset++;
+                        &#125;
+                        node.<span class="hljs-property">end</span> = offset;
+                    &#125;
+                &#125;
+                <span class="hljs-keyword">else</span> &#123;
+                    <span class="hljs-keyword">var</span> node = &#123;
+                        <span class="hljs-attr">start</span>: offset
+                    &#125;;
+                    <span class="hljs-keyword">var</span> tagName = <span class="hljs-title function_">getTagName</span>(str);
+                    node.<span class="hljs-property">tagName</span> = tagName;
+                    <span class="hljs-keyword">if</span> (stack[stack.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>]) &#123;
+                        <span class="hljs-keyword">if</span> (!stack[stack.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>].<span class="hljs-property">children</span>) &#123;
+                            stack[stack.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>].<span class="hljs-property">children</span> = [];
+                        &#125;
+                        stack[stack.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>].<span class="hljs-property">children</span>.<span class="hljs-title function_">push</span>(node);
+                    &#125;
+                    <span class="hljs-keyword">while</span> (str[offset] !== <span class="hljs-string">&#x27;/&#x27;</span> &amp;&amp; str[offset] !== <span class="hljs-string">&#x27;&gt;&#x27;</span>) &#123;
+                        <span class="hljs-keyword">if</span> (!node.<span class="hljs-property">attrSource</span>) &#123;
+                            node.<span class="hljs-property">attrSource</span> = <span class="hljs-string">&#x27;&#x27;</span>;
+                        &#125;
+                        node.<span class="hljs-property">attrSource</span> += str[offset];
+                        offset++;
+                    &#125;
+                    node.<span class="hljs-property">attr</span> = <span class="hljs-title function_">parseAttribute</span>(node.<span class="hljs-property">attrSource</span>);
+                    node.<span class="hljs-property">end</span> = offset;
+                    stack.<span class="hljs-title function_">push</span>(node);
+                &#125;
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;&gt;&#x27;</span>:
+                <span class="hljs-keyword">if</span> (str[offset - <span class="hljs-number">1</span>] === <span class="hljs-string">&#x27;/&#x27;</span>) &#123;
+                    <span class="hljs-keyword">var</span> node = stack.<span class="hljs-title function_">pop</span>();
+                    <span class="hljs-keyword">if</span> (stack.<span class="hljs-property">length</span> === <span class="hljs-number">0</span>) &#123;
+                        root = node;
+                    &#125;
+                    node.<span class="hljs-property">end</span> = offset;
+                &#125;
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-attr">default</span>:
+                <span class="hljs-keyword">if</span> (stack.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) &#123;
+                    stack.<span class="hljs-title function_">push</span>(&#123;
+                        <span class="hljs-attr">tagName</span>: <span class="hljs-string">&#x27;text&#x27;</span>,
+                        <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;&#x27;</span>
+                    &#125;);
+                    <span class="hljs-keyword">var</span> start = offset;
+                    <span class="hljs-keyword">while</span> (!<span class="hljs-regexp">/[&lt;&gt;]/</span>.<span class="hljs-title function_">test</span>(str[offset]) &amp;&amp; offset &lt; str.<span class="hljs-property">length</span>) &#123;
+                        offset++;
+                    &#125;
+                    <span class="hljs-keyword">var</span> textNode = stack.<span class="hljs-title function_">pop</span>();
+                    textNode.<span class="hljs-property">value</span> = str.<span class="hljs-title function_">substring</span>(start, offset);
+                    <span class="hljs-keyword">if</span> (!stack[stack.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>].<span class="hljs-property">children</span>) &#123;
+                        stack[stack.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>].<span class="hljs-property">children</span> = [];
+                    &#125;
+                    stack[stack.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>].<span class="hljs-property">children</span>.<span class="hljs-title function_">push</span>(textNode);
+                    offset--;
+                &#125;
+        &#125;
+        offset++;
+    &#125;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(stack);
+&#125;
+<span class="hljs-comment">// parseAttribute(&#x27; style= &quot;123 1ff&quot; data-v = 123&#x27;)</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">parseAttribute</span>(<span class="hljs-params">str</span>) &#123;
+    <span class="hljs-keyword">var</span> index = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">var</span> open = <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">var</span> qOpen = <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">var</span> stack = [];
+    <span class="hljs-keyword">while</span> (index &lt; (str === <span class="hljs-literal">null</span> || str === <span class="hljs-keyword">void</span> <span class="hljs-number">0</span> ? <span class="hljs-keyword">void</span> <span class="hljs-number">0</span> : str.<span class="hljs-property">length</span>)) &#123;
+        <span class="hljs-keyword">var</span> currentCode = str[index];
+        <span class="hljs-keyword">if</span> (!<span class="hljs-regexp">/\s/</span>.<span class="hljs-title function_">test</span>(currentCode)) &#123;
+            <span class="hljs-keyword">if</span> (!open) &#123;
+                <span class="hljs-keyword">var</span> start = index;
+                <span class="hljs-keyword">while</span> (currentCode !== <span class="hljs-string">&#x27;=&#x27;</span> &amp;&amp; index &lt; str.<span class="hljs-property">length</span>) &#123;
+                    index++;
+                    currentCode = str[index];
+                &#125;
+                <span class="hljs-keyword">var</span> key = str.<span class="hljs-title function_">substring</span>(start, index);
+                stack.<span class="hljs-title function_">push</span>(&#123;
+                    <span class="hljs-attr">key</span>: key,
+                    <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;&#x27;</span>
+                &#125;);
+                open = <span class="hljs-literal">true</span>;
+            &#125;
+            <span class="hljs-keyword">else</span> &#123;
+                <span class="hljs-keyword">var</span> start = index;
+                <span class="hljs-keyword">if</span> (<span class="hljs-regexp">/[&quot;&#x27;]/</span>.<span class="hljs-title function_">test</span>(currentCode)) &#123;
+                    qOpen = <span class="hljs-literal">true</span>;
+                    index++;
+                    currentCode = str[index];
+                &#125;
+                <span class="hljs-keyword">if</span> (qOpen) &#123;
+                    <span class="hljs-keyword">while</span> (!<span class="hljs-regexp">/[&quot;&#x27;]/</span>.<span class="hljs-title function_">test</span>(currentCode) &amp;&amp; index &lt; str.<span class="hljs-property">length</span>) &#123;
+                        index++;
+                        currentCode = str[index];
+                    &#125;
+                    qOpen = <span class="hljs-literal">false</span>;
+                &#125;
+                <span class="hljs-keyword">else</span> &#123;
+                    <span class="hljs-comment">// number</span>
+                    <span class="hljs-keyword">while</span> (!<span class="hljs-regexp">/\s/</span>.<span class="hljs-title function_">test</span>(currentCode) &amp;&amp; index &lt; str.<span class="hljs-property">length</span>) &#123;
+                        index++;
+                        currentCode = str[index];
+                    &#125;
+                &#125;
+                <span class="hljs-keyword">var</span> node = stack[stack.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>];
+                node.<span class="hljs-property">value</span> = str.<span class="hljs-title function_">substring</span>(start, index);
+                open = <span class="hljs-literal">false</span>;
+            &#125;
+        &#125;
+        index++;
+    &#125;
+    <span class="hljs-comment">// console.log(stack)</span>
+    <span class="hljs-keyword">return</span> stack;
+&#125;
+<span class="hljs-title function_">parse</span>(string);
+
+</code></pre></div><script>const expandCode_0 = document.getElementById('expand-0');
+    const bindCode_0 = document.getElementById('code-0');
+    let flag_0 = false;
+    expandCode_0.onclick = function (){
+        if(flag_0){
+            bindCode_0.classList.add('preview-code-active')
+        }else{
+            bindCode_0.classList.remove('preview-code-active') 
+        }
+        flag_0 = !flag_0
+    }</script></div><script async>let codes = document.getElementsByClassName('hljs');
+            Array.from(codes).forEach(code => {
+                code.addEventListener('click', function copy(e) {
+                    const textContent = e.currentTarget.textContent;
+                    e.currentTarget.focus()
+                    const node = e.currentTarget;
+                    navigator.clipboard.writeText(textContent).then(()=>{
+                        alert('复制成功')
+                        node.blur()
+                    });
+                   
+                })
+            })</script><script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script><script>window.mermaid&&mermaid.initialize({startOnLoad:!0})</script></div></main><footer><p>Copyright © 2019-2022 suxin2017</p><p class="icp"><span><img src="/imgs/icp.png" width="17px" height="17px" alt="icp"> </span><a href="http://beian.miit.gov.cn" class="icp-link"><span>京ICP备2020041991号</span></a></p><p><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></p></footer></div></body></html>

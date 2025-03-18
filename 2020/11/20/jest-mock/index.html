@@ -1,0 +1,148 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><link rel="icon" sizes="any" type="image/svg+xml" href="/imgs/icon.svg"><link rel="stylesheet" href="/css/theme/color.variables.css"><link id="themeStyleVar" rel="stylesheet" href="/css/theme/default.variables.css"><script>const localStorageTheme = localStorage.getItem('theme');
+        function loadTheme(){
+            let themeLink = document.getElementById('themeStyleVar');
+            if(localStorageTheme){
+                themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${localStorageTheme}.variables.css`)
+            }
+        }
+        if(localStorage){
+            loadTheme()
+            setTimeout(()=>{
+                if(document.body){
+                    document.body.className = localStorageTheme ? localStorageTheme : 'dark'
+                }
+
+            },2)
+        }</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/css/post.css"><title>苏鑫2017</title><meta name="description" content="用于记录感悟，前端技术，编程技巧，各种奇奇怪怪的新的体会"><meta name="viewport" content="width=device-width,initial-scale=1"><script async>console.log(`%c真巧，你打开了devtool`,"color:#b58900")
+        console.log(`%c真巧，你看了我的文章`,"color:#859900")
+        console.log('%c简单介绍，道法自然，做人要顺其自然，不要有太多欲望',"color:#268bd2")
+        console.log('%c不要目的性太强,这就是我的主题想强调的',"color:#dc322f")</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-RFGTVED02M"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-RFGTVED02M")</script><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?ce46d6101f33ba04b74fbe8bbe509590";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><script>const moduleMap = new Map();
+            var define = (moduleName, module) => { moduleMap.set(moduleName, module) };
+            var require = (moduleName) => moduleMap.get(moduleName);</script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="苏鑫2017" type="application/atom+xml"></head><body><div class="body"><header class="header"><div class="header-icon-wrapper"><h2><a href="/">苏鑫2017</a></h2></div><div class="header-right"><nav class="header-menu-wrapper"><ul class="header-menu"><li class="header-menu-item"><a class="header-menu-item-link" href="/">首页</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/categories/weibo">微博</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/about">关于</a></li><li class="header-menu-item"><div id="switchThemeButton"><img src="/imgs/icon.svg" alt="switchThemeIcon" width="100%" height="100%"></div><style>#switchThemeButton{width:40px;height:26px;margin:0;border:0;background:0 0;outline:0;cursor:pointer;margin-top:6px}</style><script async>const btn = document.getElementById('switchThemeButton');
+    let darkTheme = false;
+    const themeStyleVarId = "themeStyleVar";
+    if(localStorageTheme === 'dark'){
+        darkTheme = true
+    }else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // dark mode
+        darkTheme = true;
+    }
+    function loadTheme() {
+        let themeLink = document.getElementById(themeStyleVarId);
+        if (!themeLink) {
+            themeLink = document.createElement('link')
+            themeLink.rel = "stylesheet"
+            themeLink.id = "themeStyleVar"
+        }
+        darkTheme = !darkTheme;
+        themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${darkTheme ? 'dark' : 'light'}.variables.css`)
+        document.head.appendChild(themeLink)
+        document.body.className = darkTheme?'dark':'light'
+        localStorage.setItem('theme',darkTheme?'dark':'light');
+    }
+
+    btn.onclick = function() {
+        loadTheme();
+        codeTheme();
+    }</script><script>function codeTheme(){
+            const localStorageTheme = localStorage.getItem('theme');
+            let codeThemeLink = document.getElementById("codeTheme");
+            if(!codeThemeLink){
+                codeThemeLink = document.createElement('link');
+                codeThemeLink.rel = "stylesheet"
+                codeThemeLink.id = "codeTheme"
+                document.head.appendChild(codeThemeLink)
+            }
+            if(localStorageTheme){
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${localStorageTheme}.css`
+            }else{
+                codeThemeLink.href = `//cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/solarized-${darkTheme ? 'dark': 'light'}.css`
+            }
+        }
+        codeTheme()</script></li></ul></nav></div></header><main class="main"><div class="post"><h2>jest mock XMLHttpRequest</h2><h2 id="场景">场景</h2><p>要开发一个sdk需要请求网络，需要在本地连接远端sdk，这时候有两种方式去模拟这种行为。</p><ul><li>测试时候通过本地代理，做接口转发</li><li>通过jest直接mock xhr对象，让其返回一定是那个数据格式</li></ul><p>对于第一种来说，还需要更多的接口信息，依赖后端的逻辑判断，为了sdk依赖更小，我选择直接使用mock的方式。</p><h2 id="jest-mock一个实例">jest mock一个实例</h2><p>jest</p><pre><code class="hljs"><span class="hljs-comment">// jest.mock(implementation)是 jest.fn().mockImplementation(implementation)</span>
+<span class="hljs-comment">// 缩写</span>
+<span class="hljs-variable language_">global</span>.<span class="hljs-property">XMLHttpRequest</span> = jest.<span class="hljs-title function_">fn</span>().<span class="hljs-title function_">mockImplementation</span>(<span class="hljs-function">()=&gt;</span>&#123;
+    <span class="hljs-keyword">return</span> &#123;
+        <span class="hljs-attr">open</span>:jest.<span class="hljs-title function_">fn</span>(),
+        <span class="hljs-attr">send</span>:<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;
+            <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">()=&gt;</span>&#123;
+                <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">this</span>);
+                <span class="hljs-variable language_">this</span>.<span class="hljs-property">response</span> = <span class="hljs-string">&quot;ok&quot;</span>
+                <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">onload</span>()
+            &#125;)
+        &#125;,
+    &#125;
+&#125;)
+<span class="hljs-title function_">describe</span>(<span class="hljs-string">&#x27;xhr mock&#x27;</span>, <span class="hljs-function">() =&gt;</span> &#123;
+    <span class="hljs-comment">/**
+     * <span class="hljs-doctag">@type</span> &#123;<span class="hljs-type">XMLHttpRequest</span>&#125;
+     */</span>
+    <span class="hljs-keyword">let</span> xhr;
+    <span class="hljs-title function_">beforeEach</span>(<span class="hljs-function">() =&gt;</span> &#123;
+        xhr = <span class="hljs-keyword">new</span> <span class="hljs-title class_">XMLHttpRequest</span>();
+    &#125;);
+    <span class="hljs-title function_">it</span>(<span class="hljs-string">&#x27;should get ok&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">done</span>) =&gt;</span> &#123;
+        xhr.<span class="hljs-title function_">open</span>(<span class="hljs-string">&quot;http://test.com/rest/abc&quot;</span>);
+        xhr.<span class="hljs-property">onload</span>= <span class="hljs-function">()=&gt;</span>&#123;
+            <span class="hljs-title function_">expect</span>(xhr.<span class="hljs-property">response</span>).<span class="hljs-title function_">toBe</span>(<span class="hljs-string">&quot;ok&quot;</span>)
+            <span class="hljs-title function_">done</span>();
+        &#125;
+        xhr.<span class="hljs-title function_">send</span>();
+    &#125;);
+&#125;);
+</code></pre><p>这样我们就成功mock一个xhr接口了，不过现在还是存在问题，不能根据路径返回不同的数据，那么我们继续修改下我们的方法</p><pre><code class="hljs"><span class="hljs-keyword">let</span> mockCache = &#123;&#125;;
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">mockApi</span>(<span class="hljs-params">path,data</span>)&#123;
+    mockCache[path] = data;
+&#125;
+<span class="hljs-comment">// jest.mock(implementation)是 jest.fn().mockImplementation(implementation)</span>
+<span class="hljs-comment">// 缩写</span>
+<span class="hljs-variable language_">global</span>.<span class="hljs-property">XMLHttpRequest</span> = jest.<span class="hljs-title function_">fn</span>().<span class="hljs-title function_">mockImplementation</span>(<span class="hljs-function">()=&gt;</span>&#123;
+    <span class="hljs-keyword">return</span> &#123;
+        <span class="hljs-attr">open</span>:<span class="hljs-keyword">function</span>(<span class="hljs-params">type,path</span>)&#123;
+            <span class="hljs-variable language_">this</span>.<span class="hljs-property">response</span> = mockCache[path]
+        &#125;,
+        <span class="hljs-attr">send</span>:<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;
+            <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">onload</span>()
+        &#125;,
+    &#125;
+&#125;)
+<span class="hljs-title function_">describe</span>(<span class="hljs-string">&#x27;xhr mock&#x27;</span>, <span class="hljs-function">() =&gt;</span> &#123;
+    <span class="hljs-comment">/**
+     * <span class="hljs-doctag">@type</span> &#123;<span class="hljs-type">XMLHttpRequest</span>&#125;
+     */</span>
+    <span class="hljs-keyword">let</span> xhr;
+    <span class="hljs-title function_">beforeEach</span>(<span class="hljs-function">() =&gt;</span> &#123;
+        xhr = <span class="hljs-keyword">new</span> <span class="hljs-title class_">XMLHttpRequest</span>();
+    &#125;);
+    <span class="hljs-title function_">it</span>(<span class="hljs-string">&#x27;should get ok&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">done</span>) =&gt;</span> &#123;
+        <span class="hljs-title function_">mockApi</span>(<span class="hljs-string">&quot;http://test.com/rest/abc&quot;</span>,<span class="hljs-string">&quot;ok&quot;</span>)
+        xhr.<span class="hljs-title function_">open</span>(<span class="hljs-string">&quot;get&quot;</span>,<span class="hljs-string">&quot;http://test.com/rest/abc&quot;</span>);
+        xhr.<span class="hljs-property">onload</span>= <span class="hljs-function">()=&gt;</span>&#123;
+            <span class="hljs-title function_">expect</span>(xhr.<span class="hljs-property">response</span>).<span class="hljs-title function_">toBe</span>(<span class="hljs-string">&quot;ok&quot;</span>)
+            <span class="hljs-title function_">done</span>();
+        &#125;
+        xhr.<span class="hljs-title function_">send</span>();
+    &#125;);
+    <span class="hljs-title function_">it</span>(<span class="hljs-string">&#x27;should get &#123;abc: 123&#125;&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">done</span>) =&gt;</span> &#123;
+        <span class="hljs-title function_">mockApi</span>(<span class="hljs-string">&quot;http://test.com/rest/abc&quot;</span>,&#123;<span class="hljs-attr">abc</span>:<span class="hljs-number">123</span>&#125;)
+        xhr.<span class="hljs-title function_">open</span>(<span class="hljs-string">&quot;get&quot;</span>,<span class="hljs-string">&quot;http://test.com/rest/abc&quot;</span>);
+        xhr.<span class="hljs-property">onload</span>= <span class="hljs-function">()=&gt;</span>&#123;
+            <span class="hljs-title function_">expect</span>(xhr.<span class="hljs-property">response</span>).<span class="hljs-title function_">toStrictEqual</span>(&#123;<span class="hljs-attr">abc</span>:<span class="hljs-number">123</span>&#125;)
+            <span class="hljs-title function_">done</span>();
+        &#125;
+        xhr.<span class="hljs-title function_">send</span>();
+    &#125;);
+&#125;);
+</code></pre><p>剩下的还可以继续扩充，但是到了这部分就够我的需求用了。</p><p>简单的轮子自己搞，代码简洁又明了。</p><script async>let codes = document.getElementsByClassName('hljs');
+            Array.from(codes).forEach(code => {
+                code.addEventListener('click', function copy(e) {
+                    const textContent = e.currentTarget.textContent;
+                    e.currentTarget.focus()
+                    const node = e.currentTarget;
+                    navigator.clipboard.writeText(textContent).then(()=>{
+                        alert('复制成功')
+                        node.blur()
+                    });
+                   
+                })
+            })</script><script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script><script>window.mermaid&&mermaid.initialize({startOnLoad:!0})</script></div></main><footer><p>Copyright © 2019-2022 suxin2017</p><p class="icp"><span><img src="/imgs/icp.png" width="17px" height="17px" alt="icp"> </span><a href="http://beian.miit.gov.cn" class="icp-link"><span>京ICP备2020041991号</span></a></p><p><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></p></footer></div></body></html>

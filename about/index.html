@@ -1,0 +1,46 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><link rel="icon" sizes="any" type="image/svg+xml" href="/imgs/icon.svg"><link rel="stylesheet" href="/css/theme/color.variables.css"><link id="themeStyleVar" rel="stylesheet" href="/css/theme/default.variables.css"><script>const localStorageTheme = localStorage.getItem('theme');
+        function loadTheme(){
+            let themeLink = document.getElementById('themeStyleVar');
+            if(localStorageTheme){
+                themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${localStorageTheme}.variables.css`)
+            }
+        }
+        if(localStorage){
+            loadTheme()
+            setTimeout(()=>{
+                if(document.body){
+                    document.body.className = localStorageTheme ? localStorageTheme : 'dark'
+                }
+
+            },2)
+        }</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/css/about.css"><title>苏鑫2017</title><meta name="description" content="用于记录感悟，前端技术，编程技巧，各种奇奇怪怪的新的体会"><meta name="viewport" content="width=device-width,initial-scale=1"><script async>console.log(`%c真巧，你打开了devtool`,"color:#b58900")
+        console.log(`%c真巧，你看了我的文章`,"color:#859900")
+        console.log('%c简单介绍，道法自然，做人要顺其自然，不要有太多欲望',"color:#268bd2")
+        console.log('%c不要目的性太强,这就是我的主题想强调的',"color:#dc322f")</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-RFGTVED02M"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-RFGTVED02M")</script><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?ce46d6101f33ba04b74fbe8bbe509590";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="苏鑫2017" type="application/atom+xml"></head><body><div class="body"><header class="header"><div class="header-icon-wrapper"><h2><a href="/">苏鑫2017</a></h2></div><div class="header-right"><nav class="header-menu-wrapper"><ul class="header-menu"><li class="header-menu-item"><a class="header-menu-item-link" href="/">首页</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/categories/weibo">微博</a></li><li class="header-menu-item"><a class="header-menu-item-link" href="/about">关于</a></li><li class="header-menu-item"><div id="switchThemeButton"><img src="/imgs/icon.svg" alt="switchThemeIcon" width="100%" height="100%"></div><style>#switchThemeButton{width:40px;height:26px;margin:0;border:0;background:0 0;outline:0;cursor:pointer;margin-top:6px}</style><script async>const btn = document.getElementById('switchThemeButton');
+    let darkTheme = false;
+    const themeStyleVarId = "themeStyleVar";
+    if(localStorageTheme === 'dark'){
+        darkTheme = true
+    }else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // dark mode
+        darkTheme = true;
+    }
+    function loadTheme() {
+        let themeLink = document.getElementById(themeStyleVarId);
+        if (!themeLink) {
+            themeLink = document.createElement('link')
+            themeLink.rel = "stylesheet"
+            themeLink.id = "themeStyleVar"
+        }
+        darkTheme = !darkTheme;
+        themeLink.href = themeLink.href.replace(/\/css\/theme.*/,`/css/theme/${darkTheme ? 'dark' : 'light'}.variables.css`)
+        document.head.appendChild(themeLink)
+        document.body.className = darkTheme?'dark':'light'
+        localStorage.setItem('theme',darkTheme?'dark':'light');
+    }
+
+    btn.onclick = function() {
+        loadTheme();
+        codeTheme();
+    }</script></li></ul></nav></div></header><main class="main"><div class="about"><div class="about-me"><div class="about-me-avatar"><img src="/imgs/avatar.jpeg" width="128" height="128" alt="头像"></div><div class="about-me-desc"><div class="about-me-desc-name"><p>suxin2017</p></div><div class="about-me-desc-desc"><p>用于记录感悟，前端技术，编程技巧，各种奇奇怪怪的新的体会</p></div><div class="about-me-desc-keywords"><p>码农，搬砖工</p></div><div class="about-me-code-age"><p>码龄: <span id="age"></span>天</p><script>const age = document.getElementById('age');
+                    age.textContent = Math.floor((Date.now() - new Date(2017, 0)) / (24 * 3600 * 1000))</script></div><div class="about-me-desc-icon-group"><div class="about-me-desc-github about-me-desc-icon"><a href="https://github.com/suxin2017" target="_blank" rel="noreferrer"><img src="/imgs/github.svg" width="20" height="20" alt="github"> <span>github</span></a></div><div class="about-me-desc-github about-me-desc-icon"><a href="mailto:1107178482@qq.com"><img src="/imgs/email.svg" width="20" height="20" alt="github"> <span>email</span></a></div></div></div></div><div class="about-content"><h2 id="关于">关于</h2><p>终于花了几天搞好这个主题了。</p><p>极其简洁，性能也好，具有响应式。</p><p>但不兼容ie(👻 ),其他应该还好。</p><p>灵感来自与道德经，道法自然。</p><p>所以我也不想宣传，如果你能看到这个关于，即使你我有缘。</p><p>配色来自代码高亮主题 solarized，自己美术水平实在很牵强，要我选阴阳两色估计只有黑和白…</p><h3 id="本心">本心</h3><p>本心是什么？本我想学习linux然后在选择linux发行版的道路上渐行渐远。</p><p>那么我觉得这就是走火入魔？总之上了贼船，其实我只是想学linux缺从没看到它真正的面容。</p><p>博客也是，选了n个主题，殊不知哪些功能其实我根本用不到，或者可有可无，没必要追求这些基本之外的东西。</p><p>做人做事可以有目标，但是不可以有太大的欲望，欲望太大便反噬自己。</p><h3 id="最后">最后</h3><p>文字写的烂也好，写的美也好；浮夸也好，平淡也好；总之都是出自自己之手。</p><p>顺其自然就好。</p></div></div></main><footer><p>Copyright © 2019-2022 suxin2017</p><p class="icp"><span><img src="/imgs/icp.png" width="17px" height="17px" alt="icp"> </span><a href="http://beian.miit.gov.cn" class="icp-link"><span>京ICP备2020041991号</span></a></p><p><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></p></footer></div></body></html>
