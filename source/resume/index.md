@@ -34,17 +34,9 @@ layout: "resume"
                 学校: 华北理工大学轻工学院
             </p>
         </div>
-        <div class="about-me-code-age">
+            <div class="about-me-code-age">
             <p>
-                工龄: <span id="age1"></span>年
-            </p>
-            <script>
-                const age1 = document.getElementById('age1');
-                age1.textContent = Math.floor((Date.now() - new Date(2019, 0)) / (24 * 3600 * 1000 * 365))
-            </script>
-        </div>
-        <div class="about-me-code-age">
-            <p>
+                phone: 13833568436
             </p>
         </div>
         <div class="about-me-code-age">
@@ -54,7 +46,8 @@ layout: "resume"
         </div>
            <div class="about-me-code-age">
             <p>
-                github: https://github.com/suxin2017
+                github:<a href="https://github.com/suxin2017">
+                 https://github.com/suxin2017</a>
             </p>
         </div>
     </div>
@@ -220,13 +213,14 @@ layout: "resume"
     技能
 </h3>
 
-<p>熟悉 React 开发框架</p>
-<p>熟悉 antd 组件使用方法</p>
-<p>熟悉 JS,CSS.网络请求方式,浏览器工作过程.</p>
-<p>熟悉 Less css 编译库. 熟悉 echart 图形库的使用</p>
-<p>熟练操作 git 进行规范提交,代码合并. 掌握 nginx 基础配置,掌握 linux 命令</p>
-<p>掌握nodejs及其后端框架，koa 有实际应用的经验</p>
-<p>了解golang，rust，java等后端开发,对Java 与 NodeJs 有实际落地项目</p>
+<p>前端开发</p>
+<p>熟悉 react 框架，以及周边生态，antd、react query、redux等</p>
+<p>熟悉 HTML,JS,CSS 等前端开发技能</p>
+<p>熟悉前端工程化建设，包括规范，搭建，mr管理等</p>
+<p>后端开发</p>
+<p>了解golang，rust，java等后端开发, Java 与 NodeJs 在公司有实际落地项目</p>
+<p>业务领域</p>
+<p>熟悉广告管理平台，建站平台业务领域</p>
 
 <h3>
     工作经历&项目经历
@@ -329,16 +323,22 @@ layout: "resume"
     </div>
 </div>
 
-
-<h3>个人项目</h3>
+<h3>个人觉得比较有特点的个人项目</h3>
 
 <ul class="private">
-    <li><a href="https://github.com/suxin2017/css-tutorial">
+    <li><a href="https://github.com/suxin2017/lynx">
+           rust 基于Hyper写的代理工具</a></li>
+    <li><a href="https://suxin2017.cc/css-tutorial/wasm.html">
            rust 写的css ast解析器</a></li>
+    <li><a href="https://github.com/suxin2017/slow">
+           slow 一个类spring的koa框架，快速node服务端开发</a></li>
     <li><a href="https://github.com/suxin2017/ng-m">
            golang 实现的ng配置管理平台</a></li>
-    <li><a href="https://github.com/biomejs/biome">
-           biome的贡献者，在prettier挑战赛中获得400奖励</a></li>  
+    <li><a href="https://github.com/biomejs/biome/pulls?q=is%3Apr+author%3Asuxin2017+is%3Aclosed">
+           biome的贡献者，在prettier挑战赛中获得400$奖励</a></li>  
+    <li><a href="https://suxin2017.cc/bxer-ui/?path=/docs/*">
+           bxer-ui 一个基于React的组件库</a></li>  
+    
 </ul>
 
 <h3>个人自评</h3>
